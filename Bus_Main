@@ -1,0 +1,145 @@
+/******************************************/
+/* USER DESCRIPTION SECTION 			  */
+/* OLIVIA DIAS				   			  */
+/* FINAL PROJECT 		   	  			  */
+/* PROGRAM 12							  */
+/* FEBRUARY 10, 2020		   			  */
+/******************************************/
+
+//FIX THE USER DESCRIPTION SECTION
+/*********************************************/
+/* THIS IS A PROGRAM TO HAVE USER SCHEDULE 	 */
+/* A SKI TRIP. USER WILL HAVE TO INPUT NAME, */
+/* DATE, AND WILL BE GIVEN TRIP FEES OR  	 */
+/* REFUNDS IF THE BUS IS FULL. USER WILL BE	 */
+/* ALLOWED TO REMOVE OR ADD MEMBERS TO THEIR */
+/* SKI TRIP. 								 */
+/*********************************************/
+
+
+/******************/
+/* IMPORT SECTION */
+/******************/
+import java.util.*;					// IMPORTS ARRAYLIST
+import javax.swing.*;				// IMPORTS SWING
+import java.text.DecimalFormat;		// IMPORTS DECIMAL FORMAT
+
+public class Bus_Main 
+{
+	/*****************/
+	/* FINAL SECTION */
+	/*****************/
+	final static String message1 = "";
+	final static String heading1 = "";
+	final static String error1 = "";
+	
+	public static void main(String[]args)
+	{
+		/********************/
+		/* VARIABLE SECTION */
+		/********************/
+		int runAgain;		//
+		/*******************************/
+		/* PROGRAM DESCRIPTION SECTION */
+		/*******************************/
+		
+		/**************************/
+		/* LOOP TO RE-RUN PROGRAM */
+		/**************************/
+		do
+		{
+			/*************************/
+			/* INSTANTIATION SECTION */
+			/*************************/
+			
+			/*****************/
+			/* INPUT SECTION */
+			/*****************/
+		
+			runAgain = runAgain();
+		}
+		while(runAgain == 0);
+	}
+	/******************************************************************************/
+	/* 								FUNCTION SECTION 							  */
+	/******************************************************************************/
+	public static void errorMessage(String str)
+	/*********************************************************************/
+	/* PRECONDITION - NEEDS ERROR MESSAGE FOR INPUTS OF NEGATIVE NUMBERS */
+	/* POSTCONDITION - CREATES WIMDOW TO SHOW THE ERROR THE USER MADE 	 */
+	/*********************************************************************/
+	{
+		/******************************/
+		/* MAKES ERROR MESSAGE WINDOW */
+		/******************************/
+		JOptionPane.showMessageDialog(
+				null,
+				str,
+				"Error Message",
+				JOptionPane.ERROR_MESSAGE);
+	}
+	
+	public static int inputInt(String str, String hdstr)
+	
+	{
+		/********************/
+		/* VARIABLE SECTION */
+		/********************/
+		String inum;		// REUSABLE STRING INPUT
+		int num;			// REUSABLE INT VALUE
+		
+		do
+		{
+			inum = JOptionPane.showInputDialog(
+					null,
+					str,
+					hdstr,
+					JOptionPane.QUESTION_MESSAGE);
+			num = Integer.parseInt(inum);
+			
+			if(num < 0)
+			{
+				errorMessage(error1);
+			}
+		}
+		while(num < 0);
+		return num;
+	}
+	
+	
+	public static String optionMenu()
+	{
+		String str;
+		str = "Hello";
+		
+		return str;
+	}
+	
+	public static int runAgain()
+	/************************************************/
+	/* PRECONDITION - NEEDS CONFIRM DIALOG BOX		*/
+	/* POSTCONDITION - CREATES WINDOW TO CONFIRM IF	*/
+	/* 				   USER WANTS TO RE-RUN PROGRAM	*/
+	/************************************************/
+	{
+		/********************/
+		/* VARIABLE SECTION */
+		/********************/
+		int num;			// INTEGER ANSWER TO RE-RUN PROGRAM
+		
+		/*******************************/
+		/* MAKES CONFIRM DIALOG WINDOW */
+		/*******************************/ 
+		num = JOptionPane.showConfirmDialog(
+				null,
+				"Do you want to re-run the ski trip program?",
+				"Re-run Ski Trip Program",
+				JOptionPane.YES_NO_OPTION,
+				JOptionPane.QUESTION_MESSAGE);
+		
+		/******************/
+		/* RETURN SECTION */
+		/******************/
+		return num;			// RETURNS NUM
+	}
+}
