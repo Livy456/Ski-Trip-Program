@@ -106,6 +106,19 @@ public class Bus_Main
 		return num;
 	}
 	
+	public static String inputString(String str, String hdstr)
+	
+	{
+		String str;
+		
+		str = JOptionPane.showInputDialog(
+				null,
+				str,
+				hdstr,
+				JOptionPane.QUESTION_MESSAGE);
+				
+		return str;
+	}
 	
 	public static String optionMenu()
 	{
