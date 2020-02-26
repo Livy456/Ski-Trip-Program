@@ -1,0 +1,38 @@
+/******************************************/
+/* USER DESCRIPTION SECTION 			  */
+/* OLIVIA 				   			  */
+/* FINAL PROJECT			   	  		  */
+/* PROGRAM 12							  */
+/* FEBRUARY 10, 2020		   			  */
+/******************************************/
+/******************************************/
+/* THIS IS A PROGRAM TO MAKE AN OBJECT	  */
+/* HAVE INSTANCE VARIABLES, CONSTRUCTORS, */
+/* AND METHODS SO THE CLIENT CAN INPUT	  */
+/* THEIR CUSTOMER INFORMATION  */
+/******************************************/
+
+/******************/
+/* IMPORT SECTION */
+/******************/
+import java.awt.*;					// IMPORTS AWT
+import java.awt.event.*;			// IMPORTS EVENTS
+import javax.swing.*;				// IMPORTS SWING
+import java.text.DecimalFormat;		// IMPORTS DECIMAL FORMAT
+
+public class Customer 
+{
+	/*****************************/
+	/* INSTANCE VARIABLE SECTION */
+	/*****************************/
+	private String name;		
+	private String date;
+	private int id;
+	private int grpsize;
+	private double cost;
+	
+	public Customer()
+	{
+		
+	}
+}
