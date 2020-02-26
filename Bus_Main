@@ -1,6 +1,6 @@
 /******************************************/
 /* USER DESCRIPTION SECTION 			  */
-/* OLIVIA DIAS				   			  */
+/* OLIVIA 				   			  */
 /* FINAL PROJECT 		   	  			  */
 /* PROGRAM 12							  */
 /* FEBRUARY 10, 2020		   			  */
@@ -38,10 +38,12 @@ public class Bus_Main
 		/********************/
 		/* VARIABLE SECTION */
 		/********************/
-		int runAgain;		//
+		int runAgain;		// INT RESPONSE TO RE-RUNNING PROGRAM
+		
 		/*******************************/
 		/* PROGRAM DESCRIPTION SECTION */
 		/*******************************/
+		programDescription();
 		
 		/**************************/
 		/* LOOP TO RE-RUN PROGRAM */
@@ -51,6 +53,9 @@ public class Bus_Main
 			/*************************/
 			/* INSTANTIATION SECTION */
 			/*************************/
+			Customer customer = new Customer();
+			
+			optionMenu();
 			
 			/*****************/
 			/* INPUT SECTION */
@@ -80,7 +85,10 @@ public class Bus_Main
 	}
 	
 	public static int inputInt(String str, String hdstr)
-	
+	/*************************************************/
+	/* PRECONDITION - NEEDS INTEGER VALUE	 		 */
+	/* POSTCONDITION - GETS INTEGER VALUE			 */
+	/*************************************************/
 	{
 		/********************/
 		/* VARIABLE SECTION */
@@ -88,44 +96,94 @@ public class Bus_Main
 		String inum;		// REUSABLE STRING INPUT
 		int num;			// REUSABLE INT VALUE
 		
+		/*****************************/
+		/* LOOP UNTIL VALUE IS VALID */
+		/*****************************/
 		do
 		{
+			/*****************************/
+			/* MAKES INPUT DIALOG WINDOW */
+			/*****************************/
 			inum = JOptionPane.showInputDialog(
 					null,
 					str,
 					hdstr,
 					JOptionPane.QUESTION_MESSAGE);
-			num = Integer.parseInt(inum);
+			num = Integer.parseInt(inum);		// ASSIGNS THE STRING INUM 
+												// TO THE INTEGER NUM
 			
+			/*******************************/
+			/* IF STATEMENT TO ERROR CHECK */
+			/*******************************/
 			if(num < 0)
 			{
-				errorMessage(error1);
+				errorMessage(error1);		// CALL TO ERROR MESSAGE
 			}
 		}
 		while(num < 0);
-		return num;
-	}
-	
-	public static String inputString(String str, String hdstr)
-	
-	{
-		String str;
 		
-		str = JOptionPane.showInputDialog(
-				null,
-				str,
-				hdstr,
-				JOptionPane.QUESTION_MESSAGE);
-				
-		return str;
+		/******************/
+		/* RETURN SECTION */
+		/******************/
+		return num;			// RETURNS NUM
 	}
+	
 	
 	public static String optionMenu()
+	/*******************************************************/
+	/* PRECONDITION - NEEDS TO CHOOSE TYPE OF BANK ACCOUNT */
+	/* POSTCONDITION - GETS TO CHOOSE TYPE OF BANK ACCOUNT */
+	/*******************************************************/
 	{
-		String str;
-		str = "Hello";
+		/********************/
+		/* VARIABLE SECTION */
+		/********************/
+		String str;			// REUSUABLE STRING INPUT 
 		
-		return str;
+		/*************************************/
+		/* MAKES AN ARRAY FOR DROP-DOWN MENU */
+		/*************************************/
+		Object[] options = {"Insert Customer", "Remove Customer", "Modify Customer",
+							"Print Customer", "Number of Buses", "Cost of Trip"};
+		
+		/*****************************/
+		/* MAKES INPUT DIALOG WINDOW */
+		/*****************************/ 
+		str = (String)JOptionPane.showInputDialog(
+				new JDialog(),
+				"This is the Ski Trip",
+				"Ski Trip Menu",
+				JOptionPane.INFORMATION_MESSAGE,
+				null,
+				options,
+				"");
+
+		/******************/
+		/* RETURN SECTION */
+		/******************/
+		return str;			// RETURNS STR
+	}
+	
+	public static void programDescription()
+	/************************************************/
+	/* PRECONDITION - NEEDS PROGRAM DESCRIPTION		*/
+	/* POSTCONDITION - CREATES WINDOW TO DESCRIBE	*/
+	/* 					WHAT THE PROGRAM DOES 		*/
+	/************************************************/
+	{
+		/************************************/
+		/* MAKES PROGRAM DESCRIPTION WINDOW */
+		/************************************/
+		JOptionPane.showMessageDialog(
+				null,
+				"This program is a program to schedule a ski trip." + "\n" +
+				"The user will input the name of their ski group, the" + "\n" +
+				"date, the group ID, and the number of people going in their group." + "\n" +
+				"The program will output the name, date, group ID, number of" + "\n" +
+				"people, cost or refunds, and number of buses sorted. The customer will" + "\n" +
+				"allowed to remove, add, or modify their input information.",
+				"Program Description for Final Project",
+				JOptionPane.INFORMATION_MESSAGE);
 	}
 	
 	public static int runAgain()
