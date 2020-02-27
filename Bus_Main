@@ -29,15 +29,17 @@ public class Bus_Main
 	/*****************/
 	/* FINAL SECTION */
 	/*****************/
-	final static String message1 = "";
-	final static String heading1 = "";
-	final static String error1 = "";
+	final static String message1 = "Input the name of your Ski trip: ";
+	final static String heading1 = "Input Name of Ski Group";
+	final static String error2 = "ERROR!!!Number must be greater than 0!!!";
 	
 	public static void main(String[]args)
 	{
 		/********************/
 		/* VARIABLE SECTION */
 		/********************/
+		String name;		// NAME OF SKI TRIP GROUP
+		String option;		// RESPONSE FOR MENU OPTION
 		int runAgain;		// INT RESPONSE TO RE-RUNNING PROGRAM
 		
 		/*******************************/
@@ -55,13 +57,70 @@ public class Bus_Main
 			/*************************/
 			Customer customer = new Customer();
 			
-			optionMenu();
-			
 			/*****************/
 			/* INPUT SECTION */
 			/*****************/
+			
+			/***************/
+			/* INPUTS NAME */
+			/***************/
+			name = inputString(message1, heading1);		// CALL TO INPUT STRING
+			customer.setName(name);		// CALL TO SET NAME
+			
+			/**********************/
+			/* INPUTS MENU CHOICE */
+			/**********************/
+			option = optionMenu();		// CALL TO OPTIONS MENU
+			
+			/***********************************/
+			/* IF STATEMENT TO INSERT CUSTOMER */
+			/***********************************/
+			if (option == "Insert Customer")
+			{
+				underConstruction();
+			}
+			
+			/****************************************/
+			/* ELSE IF STATEMENT TO REMOVE CUSTOMER */
+			/****************************************/
+			else if (option == "Remove Customer")
+			{
+				underConstruction();
+			}
+			
+			/****************************************/
+			/* ELSE IF STATEMENT TO MODIFY CUSTOMER */
+			/****************************************/
+			else if (option == "Modify Customer")
+			{
+				underConstruction();
+			}
+			
+			/***************************************/
+			/* ELSE IF STATEMENT TO PRINT CUSTOMER */
+			/***************************************/
+			else if(option == "Print Customer")
+			{
+				underConstruction();
+			}
+			
+			/***********************************************/
+			/* ELSE IF STATEMENT TO OUTPUT NUMBER OF BUSES */
+			/***********************************************/
+			else if (option == "Number of Buses")
+			{
+				underConstruction();
+			}
+			
+			/*****************************************/
+			/* ELSE STATEMENT TO OUTPUT COST OF TRIP */
+			/*****************************************/
+			else 
+			{
+				underConstruction();
+			}
 		
-			runAgain = runAgain();
+			runAgain = runAgain();		// CALL TO RUN PROGRAM AGAIN
 		}
 		while(runAgain == 0);
 	}
@@ -117,7 +176,7 @@ public class Bus_Main
 			/*******************************/
 			if(num < 0)
 			{
-				errorMessage(error1);		// CALL TO ERROR MESSAGE
+				errorMessage(error2);		// CALL TO ERROR MESSAGE
 			}
 		}
 		while(num < 0);
@@ -128,6 +187,31 @@ public class Bus_Main
 		return num;			// RETURNS NUM
 	}
 	
+	public static String inputString(String str, String hdstr)
+	/*************************************************/
+	/* PRECONDITION - NEEDS STRING VALUE FOR NAME	 */
+	/* POSTCONDITION - GETS STRING VALUE FOR NAME	 */
+	/*************************************************/
+	{
+		/********************/
+		/* VARIABLE SECTION */
+		/********************/
+		String nm;		// INPUTS NUMBER AS A STRING
+		
+		/*****************************/
+		/* MAKES INPUT DIALOG WINDOW */
+		/*****************************/
+		nm = JOptionPane.showInputDialog(
+				null,
+				str,
+				hdstr,
+				JOptionPane.QUESTION_MESSAGE);
+		
+		/******************/
+		/* RETURN SECTION */
+		/******************/
+		return nm;		// RETURNS NUM
+	}
 	
 	public static String optionMenu()
 	/*******************************************************/
@@ -151,7 +235,7 @@ public class Bus_Main
 		/*****************************/ 
 		str = (String)JOptionPane.showInputDialog(
 				new JDialog(),
-				"This is the Ski Trip",
+				"Ski Trip Option Menu",
 				"Ski Trip Menu",
 				JOptionPane.INFORMATION_MESSAGE,
 				null,
@@ -212,5 +296,23 @@ public class Bus_Main
 		/* RETURN SECTION */
 		/******************/
 		return num;			// RETURNS NUM
+	}
+	
+	public static void underConstruction()
+	/****************************************************/
+	/* PRECONDITION - NEEDS UNDER CONSTRUCTION WINDOW 	*/
+	/* POSTCONDITION - CREATES WINDOW TO TELL USER		*/
+	/* 				   THAT THE SECTION THEY ARE TRYING */
+	/*  			   TO USE IS UNDER CONSTRUCTION 	*/
+	/****************************************************/
+	{
+		/***********************/
+		/* MAKES DIALOG WINDOW */
+		/***********************/ 
+		JOptionPane.showMessageDialog(
+				null,
+				"This part of the option menu is under construction",
+				"Under construction menu",
+				JOptionPane.INFORMATION_MESSAGE);
 	}
 }
