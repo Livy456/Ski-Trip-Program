@@ -25,14 +25,42 @@ public class Customer
 	/*****************************/
 	/* INSTANCE VARIABLE SECTION */
 	/*****************************/
-	private String name;		
-	private String date;
-	private int id;
-	private int grpsize;
-	private double cost;
+	private String name;		// INSTANCE VARIABLE FOR USER'S NAME	
+	private String date;		// INSTANCE VARIABLE FOR DATE OF SKI TRIP
+	private int id;				// INSTANCE VARIABLE FOR USER'S ID
+	private int grpsize;		// INSTANCE VARIABLE FOR USER'S GROUP SIZE
+	private int bus;			// INSTANCE VARIABLE FOR NUMBER OF BUSES
+	private double cost;		// INSTANCE VARIABLE FOR USER'S COST
 	
 	public Customer()
+	/**************************************************/
+	/* DEFAULT CONSTRUCTOR - IT SETS ALL THE INSTANCE */
+	/* VARIABLE VALUES TO AN EMPTY STRING AND ZERO 	  */
+	/**************************************************/
+	{
+		name = "";			// INTIALIZES NAME TO AN EMPTY STRING
+		date = "";			// INTIALIZES DATE TO AN EMPTY STRING
+		id = 0;				// INTIALIZES ID TO ZERO
+		grpsize = 0;		// INTIALIZES GRPSIZE TO ZERO
+		bus = 0;			// INTIALIZES BUS TO ZERO
+		cost = 0.00;		// INTIALIZES COST TO ZERO
+	}
+	
+	public Customer(String nm, String dt, int i,int grp, double ct)
+	/*********************************************************/
+	/* INITIALIZING CONSTRUCTOR - INITIALIZES NAME, BALANCE, */
+	/* DEPOSIT, AND WITHDRAW 	  			     			 */
+	/*********************************************************/
 	{
 		
+	}
+	
+	public void setName(String nm)
+	/**************************************************/
+	/* DEFAULT CONSTRUCTOR - IT SETS ALL THE INSTANCE */
+	/* VARIABLE VALUES TO AN EMPTY STRING AND ZERO 	  */
+	/**************************************************/
+	{
+		name = nm;		// INTIALIZES NAME TO AN EMPTY STRING
 	}
 }
