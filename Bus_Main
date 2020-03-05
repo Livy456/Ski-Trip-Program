@@ -30,8 +30,13 @@ public class Bus_Main
 	/* FINAL SECTION */
 	/*****************/
 	final static String message1 = "Input the name of your Ski trip: ";
+	final static String message2 = "Input the group ID number(three digit number between 100 - 999): ";
+	final static String message3 = "Input the number of people in your group (must be greater than 0): ";
 	final static String heading1 = "Input Name of Ski Group";
-	final static String error2 = "ERROR!!!Number must be greater than 0!!!";
+	final static String heading2 = "Input Group ID";
+	final static String heading3 = "Input Group Size";
+	final static String error2 = "ERROR!!! Number must be between 100 and 999";
+	final static String error3 = "ERROR!!!Number must be greater than 0!!!";
 	
 	public static void main(String[]args)
 	{
@@ -40,6 +45,10 @@ public class Bus_Main
 		/********************/
 		String name;		// NAME OF SKI TRIP GROUP
 		String option;		// RESPONSE FOR MENU OPTION
+		int id;				// NUMBER FOR THE GROUP ID 
+		int grpsize;		// NUMBER OF PEOPLE GOING ON SKI TRIP
+		int bus;			// NUMBER OF BUSES NEEDED FOR SKI TRIP
+		int remainder;		// NUMBER OF REMAINING SEATS
 		int runAgain;		// INT RESPONSE TO RE-RUNNING PROGRAM
 		
 		/*******************************/
@@ -52,6 +61,11 @@ public class Bus_Main
 		/**************************/
 		do
 		{
+			/**************************/
+			/* INITIALIZATION SECTION */
+			/**************************/
+			remainder = 0;
+			
 			/*************************/
 			/* INSTANTIATION SECTION */
 			/*************************/
@@ -65,12 +79,27 @@ public class Bus_Main
 			/* INPUTS NAME */
 			/***************/
 			name = inputString(message1, heading1);		// CALL TO INPUT STRING
-			customer.setName(name);		// CALL TO SET NAME
+			customer.setName(name);			// CALL TO SET NAME
+			
+			/*********************/
+			/* INPUTS GROUP ID */
+			/*********************/
+			id = inputInt2(message2, heading2);			// CALL TO INPUT INT 2
+			customer.setID(id);				// CALL TO SET ID
+			
+			/*********************/
+			/* INPUTS GROUP SIZE */
+			/*********************/
+			grpsize = inputInt(message3, heading3);		// CALL TO INPUT INT
+			customer.setGroup(grpsize);		// CALL TO SET GROUP
+			
+			bus = customer.getBus();
+			remainder = customer.getRemain();
 			
 			/**********************/
 			/* INPUTS MENU CHOICE */
 			/**********************/
-			option = optionMenu();		// CALL TO OPTIONS MENU
+			option = optionMenu();			// CALL TO OPTIONS MENU
 			
 			/***********************************/
 			/* IF STATEMENT TO INSERT CUSTOMER */
@@ -176,10 +205,54 @@ public class Bus_Main
 			/*******************************/
 			if(num < 0)
 			{
-				errorMessage(error2);		// CALL TO ERROR MESSAGE
+				errorMessage(error3);		// CALL TO ERROR MESSAGE
 			}
 		}
 		while(num < 0);
+		
+		/******************/
+		/* RETURN SECTION */
+		/******************/
+		return num;			// RETURNS NUM
+	}
+	
+	public static int inputInt2(String str, String hdstr)
+	/*************************************************/
+	/* PRECONDITION - NEEDS INTEGER VALUE	 		 */
+	/* POSTCONDITION - GETS INTEGER VALUE			 */
+	/*************************************************/
+	{
+		/********************/
+		/* VARIABLE SECTION */
+		/********************/
+		String inum;		// REUSABLE STRING INPUT
+		int num;			// REUSABLE INT VALUE
+		
+		/*****************************/
+		/* LOOP UNTIL VALUE IS VALID */
+		/*****************************/
+		do
+		{
+			/*****************************/
+			/* MAKES INPUT DIALOG WINDOW */
+			/*****************************/
+			inum = JOptionPane.showInputDialog(
+					null,
+					str,
+					hdstr,
+					JOptionPane.QUESTION_MESSAGE);
+			num = Integer.parseInt(inum);	// ASSIGNS THE STRING INUM 
+											// TO THE INTEGER NUM
+			
+			/*******************************/
+			/* IF STATEMENT TO ERROR CHECK */
+			/*******************************/
+			if ((num < 100) || (num > 999))
+			{
+				errorMessage(error2);		// CALL TO ERROR MESSAGE
+			}
+		}
+		while((num < 100) || (num > 999));
 		
 		/******************/
 		/* RETURN SECTION */
