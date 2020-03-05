@@ -1,21 +1,21 @@
 /******************************************/
 /* USER DESCRIPTION SECTION 			  */
-/* OLIVIA 				   			  */
+/* OLIVIA				   			  */
 /* FINAL PROJECT 		   	  			  */
 /* PROGRAM 12							  */
 /* FEBRUARY 10, 2020		   			  */
 /******************************************/
 
-//FIX THE USER DESCRIPTION SECTION
-/*********************************************/
-/* THIS IS A PROGRAM TO HAVE USER SCHEDULE 	 */
-/* A SKI TRIP. USER WILL HAVE TO INPUT NAME, */
-/* DATE, AND WILL BE GIVEN TRIP FEES OR  	 */
-/* REFUNDS IF THE BUS IS FULL. USER WILL BE	 */
-/* ALLOWED TO REMOVE OR ADD MEMBERS TO THEIR */
-/* SKI TRIP. 								 */
-/*********************************************/
-
+/**********************************************/
+/* THIS IS A PROGRAM TO HAVE USER SCHEDULE	  */
+/* A SKI TRIP. USER WILL HAVE TO INPUT NAME,  */
+/* DATE, GROUP ID, AND NUMBER OF PEOPLE IN	  */
+/* THEIR GROUP. IT WILL CALCULATE THE COST	  */
+/* AND THE NUMBER OF BUSES NEEDED. IF NOT 	  */
+/* ENOUGH SEATS ON THE BUS, REFUNDS WILL BE   */
+/* GIVEN. USER WILL BE ALLOWED TO REMOVE, ADD,*/ 
+/* OR MODIFY MEMBERS OF THEIR SKI TRIP. 	  */
+/**********************************************/
 
 /******************/
 /* IMPORT SECTION */
