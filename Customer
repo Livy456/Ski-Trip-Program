@@ -1,9 +1,9 @@
 /******************************************/
-/* USER DESCRIPTION SECTION 			  */
-/* OLIVIA 				   			  */
-/* FINAL PROJECT			   	  		  */
-/* PROGRAM 12							  */
-/* FEBRUARY 10, 2020		   			  */
+/* USER DESCRIPTION SECTION 		  */
+/* OLIVIA 				  */
+/* FINAL PROJECT			  */
+/* PROGRAM 12				  */
+/* FEBRUARY 10, 2020		   	  */
 /******************************************/
 /******************************************/
 /* THIS IS A PROGRAM TO MAKE AN OBJECT	  */
@@ -30,6 +30,7 @@ public class Customer
 	private int id;				// INSTANCE VARIABLE FOR USER'S ID
 	private int grpsize;		// INSTANCE VARIABLE FOR USER'S GROUP SIZE
 	private int bus;			// INSTANCE VARIABLE FOR NUMBER OF BUSES
+	int remainder;				// INSTANCE VARIABLE FOR NUMBER OF EXTRA SKIERS
 	private double cost;		// INSTANCE VARIABLE FOR USER'S COST
 	
 	public Customer()
@@ -41,26 +42,204 @@ public class Customer
 		name = "";			// INTIALIZES NAME TO AN EMPTY STRING
 		date = "";			// INTIALIZES DATE TO AN EMPTY STRING
 		id = 0;				// INTIALIZES ID TO ZERO
-		grpsize = 0;		// INTIALIZES GRPSIZE TO ZERO
+		grpsize = 0;		// INTIALIZES GROUPSIZE TO ZERO
 		bus = 0;			// INTIALIZES BUS TO ZERO
+		remainder = 0;		// INTIALIZES REMAINDER TO ZERO
 		cost = 0.00;		// INTIALIZES COST TO ZERO
 	}
 	
-	public Customer(String nm, String dt, int i,int grp, double ct)
-	/*********************************************************/
-	/* INITIALIZING CONSTRUCTOR - INITIALIZES NAME, BALANCE, */
-	/* DEPOSIT, AND WITHDRAW 	  			     			 */
-	/*********************************************************/
+	public Customer(String nm, String dt, int i,int grp, int b, int r, double ct)
+	/*********************************************************************/
+	/* INITIALIZING CONSTRUCTOR - INITIALIZES NAME, DATE, ID, GROUPSIZE, */
+	/* 							  BUS, REMAINDER, AND COST 	  			 */
+	/*********************************************************************/
 	{
-		
+		name = nm;			// INITIALIZES NAME TO VALUE INPUTTED BY CLIENT
+		date = dt;			// INITIALIZES DATE TO VALUE INPUTTED BY CLIENT
+		id = i;				// INITIALIZES ID TO VALUE INPUTTED BY CLIENT
+		grpsize = grp;		// INITIALIZES GROUPSIZE TO VALUE INPUTTED BY CLIENT
+		bus = b;			// INITIALIZES BUS TO VALUE INPUTTED BY CLIENT
+		remainder = r;		// INITIALIZES REMAINDER TO VALUE INPUTTEED BY CLIENT
+		cost = ct;			// INITIALIZES COST TO VALUE INPUTTED BY CLIENT
+	}
+	
+	public Customer(Customer cm)
+	/****************************************************/
+	/* COPY CONSTRUCTOR - USES AN OBJECT TO INITIALIZES */
+	/* NAME, DATE, ID, GROUPSIZE, BUS, AND COST 	  	*/
+	/****************************************************/
+	{
+		name = cm.name;			// INITIALIZES NAME TO COPY OF OBJECT NAME VALUE
+		date = cm.date;			// INITIALIZES DATE TO COPY OF OBJECT NAME VALUE
+		id = cm.id;				// INITIALIZES ID TO COPY OF OBJECT NAME VALUE
+		grpsize = cm.grpsize;	// INITIALIZES GROUPSIZE TO COPY OF OBJECT NAME VALUE
+		bus = cm.bus;			// INITIALIZES BUS TO COPY OF OBJECT NAME VALUE
+		cost = cm.cost;			// INITIALIZES COST TO COPY OF OBJECT NAME VALUE
 	}
 	
 	public void setName(String nm)
+	/************************************************/
+	/* PRECONDITION - PROGRAM HAS A NAME			*/
+	/* POSTCONDITION - FUNCTION SETS VALUE OF NAME	*/
+	/************************************************/	
+	{
+		name = nm;		// SETS NAME TO NAME VALUE INPUTTED FROM CLIENT
+	}
+	
+	public String getName()
+	/************************************************/
+	/* PRECONDITION - PROGRAM HAS A NAME			*/
+	/* POSTCONDITION - FUNCTION RETURNS NAME		*/
+	/************************************************/
+	{
+		/******************/
+		/* RETURN SECTION */
+		/******************/
+		return name;		// RETURNS NAME
+	}
+	
+	public void setDate(String dt)
+	/************************************************/
+	/* PRECONDITION - PROGRAM HAS A DATE			*/
+	/* POSTCONDITION - FUNCTION SETS VALUE OF DATE	*/
+	/************************************************/	
+	{
+		date = dt;		// SETS DATE TO DATE VALUE INPUTTED FROM CLIENT
+	}
+	
+	public String getDate()
+	/************************************************/
+	/* PRECONDITION - PROGRAM HAS A NAME			*/
+	/* POSTCONDITION - FUNCTION RETURNS NAME		*/
+	/************************************************/
+	{
+		/******************/
+		/* RETURN SECTION */
+		/******************/
+		return date;		// RETURNS DATE
+	}
+	
+	public void setID(int i)
+	/************************************************/
+	/* PRECONDITION - PROGRAM HAS A ID				*/
+	/* POSTCONDITION - FUNCTION SETS VALUE OF ID	*/
+	/************************************************/
+	{
+		id = i;			// SETS ID TO ID VALUE INPUTTED FROM CLIENT
+	}
+	
+	public int getID()
+	/************************************************/
+	/* PRECONDITION - PROGRAM HAS A ID				*/
+	/* POSTCONDITION - FUNCTION RETURNS ID			*/
+	/************************************************/
+	{
+		/******************/
+		/* RETURN SECTION */
+		/******************/
+		return id;			// RETURNS ID
+	}
+	
+	public void setGroup(int grp)
+	/****************************************************/
+	/* PRECONDITION - PROGRAM HAS A GROUPSIZE			*/
+	/* POSTCONDITION - FUNCTION SETS VALUE OF GROUPSIZE	*/
+	/****************************************************/
+	{
+		grpsize = grp;	// SETS GROUPSIZE TO GROUPSIZE VALUE INPUTTED FROM CLIENT
+	}
+	
+	public int getGroup()
+	/************************************************/
+	/* PRECONDITION - PROGRAM HAS A GROUPSIZE		*/
+	/* POSTCONDITION - FUNCTION RETURNS GROUPSIZE	*/
+	/************************************************/
+	{
+		/******************/
+		/* RETURN SECTION */
+		/******************/
+		return grpsize;		// RETURNS GROUPSIZE
+	}
+	
+	public int getBus()
 	/**************************************************/
-	/* DEFAULT CONSTRUCTOR - IT SETS ALL THE INSTANCE */
-	/* VARIABLE VALUES TO AN EMPTY STRING AND ZERO 	  */
+	/* PRECONDITION - PROGRAM HAS A GROUPSIZE AND 	  */
+	/* 				  NEEDS THE BUS AMOUNT		  	  */
+	/* POSTCONDITION - FUNCTION RETURNS BUS   	  	  */
+	/**************************************************/
+	{		
+		/*******************************************/
+		/* CALCULATION SECTION FOR NUMBER OF BUSES */
+		/*******************************************/
+		
+		/***************************************************/
+		/* IF STATEMENT TO CALCULATE IF ALL BUSES ARE FULL */
+		/***************************************************/
+		if (grpsize % 20 == 0)
+		{
+			bus = grpsize / 20;		// NUMBER OF FULL BUSES FOR SKI TRIP
+		}
+		
+		/*********************************************************/
+		/* ELSE STATEMENT TO CALCULATE IF ALL BUSES ARE NOT FULL */
+		/*********************************************************/
+		else 
+		{
+			remainder = getRemain();		// CALL TO GET REMAINDER	
+		}
+		
+		/******************/
+		/* RETURN SECTION */
+		/******************/
+		return bus;			// RETURNS BUS
+	}
+	
+	public int getRemain()
+	/**************************************************/
+	/* PRECONDITION - PROGRAM HAS A GROUPSIZE AND 	  */
+	/* 				  NEEDS THE REMAINDER OF SEATS	  */
+	/* POSTCONDITION - FUNCTION RETURNS REMAINDER     */
 	/**************************************************/
 	{
-		name = nm;		// INTIALIZES NAME TO AN EMPTY STRING
+		/*********************************/
+		/* CALCULATES REMAINDER OF SEATS */
+		/*********************************/
+		remainder = grpsize % 20;
+
+		/***************************************************/
+		/* IF STATEMENT TO CALCULATE IF ALL BUSES ARE FULL */	
+		/***************************************************/
+		if (remainder > 10)
+		{	
+			bus+=1;		// ADDS ANOTHER BUS FOR THE TEN OR MORE SKIERS
+		}
+	
+		/******************/
+		/* RETURN SECTION */
+		/******************/
+		return remainder;		// RETURNS REMAINDER
+	}
+	
+	public String toString()
+	/******************************************************/
+	/* OVERRIDES THE TOSTRING IN THE PARENT CLASS OBJECT  */
+	/* AND CREATES A STRING REPRESENTATION OF THIS OBJECT */
+	/******************************************************/
+	{
+		/********************/
+		/* VARIABLE SECTION */
+		/********************/
+		String str; 	// STRING REPRESENTATION OF OBJECT
+		
+		/*****************************************/
+		/* MAKES STRING REPRESENTATION OF OBJECT */
+		/*****************************************/
+		str = "" + id + "/t" + name + "/t" + date + "/t" +  
+			  grpsize + "/t" + cost;
+		
+		/******************/
+		/* RETURN SECTION */
+		/******************/
+		return str;			// RETURNS STRING REPRESENTATION OF OBJECT
 	}
 }
