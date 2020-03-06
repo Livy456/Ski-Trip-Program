@@ -1,0 +1,28 @@
+/******************************************/
+/* USER DESCRIPTION SECTION 			  */
+/* OLIVIA 				   			  */
+/* FINAL PROJECT			   	  		  */
+/* PROGRAM 12							  */
+/* MARCH 4, 2020		   			  	  */
+/******************************************/
+/******************************************/
+/* THIS IS A PROGRAM TO MAKE AN INTERFACE */
+/* THAT HAS METHODS FOR THE SERVER TO 	  */
+/* IMPLEMENT AND DEFINE   				  */
+/******************************************/
+
+/******************/
+/* IMPORT SECTION */
+/******************/
+import java.awt.*;					// IMPORTS AWT
+import java.awt.event.*;			// IMPORTS EVENTS
+import javax.swing.*;				// IMPORTS SWING
+import java.text.DecimalFormat;		// IMPORTS DECIMAL FORMAT
+
+public interface Ski_Interface 
+{
+	public int getBus();
+	public int getRemain();
+	public double getCost();
+	public Customer modify();
+}
