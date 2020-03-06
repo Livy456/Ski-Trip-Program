@@ -1,0 +1,128 @@
+/******************************************/
+/* USER DESCRIPTION SECTION 			  */
+/* OLIVIA 				   			  */
+/* FINAL PROJECT		   	 			  */
+/* PROGRAM 12							  */
+/* FEBRUARY 10, 2020		   			  */
+/******************************************/
+/******************************************/
+/* THIS IS A PROGRAM TO MAKE AN OBJECT	  */
+/* HAVE INSTANCE VARIABLES, CONSTRUCTORS, */
+/* AND METHODS SO THE CLIENT CAN HAVE A   */
+/* SWING GUI  							  */
+/******************************************/
+
+/******************/
+/* IMPORT SECTION */
+/******************/
+import java.awt.*;					// IMPORTS AWT
+import java.awt.event.*;			// IMPORTS EVENTS
+import javax.swing.*;				// IMPORTS SWING
+import java.text.DecimalFormat;		// IMPORTS DECIMAL FORMAT
+
+public class BusGUI extends JFrame implements ActionListener
+{
+	private static final long serialVersionUID = 1L;	// SERIALIZES OBJECT
+	
+	public BusGUI()
+	/************************************************/
+	/* DEFAULT CONSTRUCTOR - IT CREATES A FRAME FOR */
+	/*						 CONTENT PANE			*/
+	/************************************************/
+	{
+		/*********************************/
+		/* CREATES FRAME AND SETS LAYOUT */
+		/*********************************/
+		this.getContentPane().setLayout(new FlowLayout());
+	
+		/*************************/
+		/* INSTANTIATION SECTION */
+		/*************************/
+		JButton nameB = new JButton("Name");
+		JButton dateB = new JButton("Date");
+		JButton grpIDB = new JButton("Group ID");
+		JButton grpSzB = new JButton("Group Size");
+		
+		/**********************************************/
+		/* ADDS LISTENER TO BUTTON TO PERFORM ACTIONS */
+		/**********************************************/
+		nameB.addActionListener(this);
+		dateB.addActionListener(this);
+		grpIDB.addActionListener(this);
+		grpSzB.addActionListener(this);
+	}
+	
+	public void actionPerformed(ActionEvent event)
+	/************************************************/
+	/* PRECONDITION - PROGRAM HAS A BUTTON			*/
+	/* POSTCONDITION - FUNCTION CREATES AN ACTION 	*/
+	/* 				   EVENT FOR BUTTON				*/
+	/************************************************/
+	{
+		/********************/
+		/* VARIABLE SECTION */
+		/********************/
+		String action; 		// STRING TO REPRESENT WHICH BUTTON WAS PRESSED
+		
+		/************************************/
+		/* ASSIGNS BUTTON PRESSED TO ACTION */
+		/************************************/
+		action = event.getActionCommand();	// CALL TO GET ACTION COMMAND
+		
+		/****************************************************/
+		/* IF STATEMENT TO CHECK IF NAME BUTTON WAS PRESSED */	
+		/****************************************************/
+		if (action.equals("Name"))
+		{
+			String str;
+			
+			str = JOptionPane.showInputDialog(
+					null,
+					"Input the name of your ski group: ",
+					"Input Name",
+					JOptionPane.QUESTION_MESSAGE);
+		}
+		
+		/*********************************************************/
+		/* ELSE IF STATEMENT TO CHECK IF DATE BUTTON WAS PRESSED */	
+		/*********************************************************/
+		else if (action.equals("Date"))
+		{
+			System.out.print("Successful date implementation");
+		}
+		
+		/*************************************************************/
+		/* ELSE IF STATEMENT TO CHECK IF GROUP ID BUTTON WAS PRESSED */	
+		/*************************************************************/
+		else if(action.equals("Group ID"))
+		{
+			System.out.print("Successful Group ID implementation");
+		}
+		
+		/***************************************************************/
+		/* ELSE IF STATEMENT TO CHECK IF GROUP SIZE BUTTON WAS PRESSED */	
+		/***************************************************************/
+		else if (action.equals("Group Size"))
+		{
+			System.out.print("Successful Group Size implementation");
+		}
+	}
+	
+	
+	public static void createGUI()
+	/************************************************/
+	/* DEFAULT CONSTRUCTOR - IT CREATES A DEFAULT	*/
+	/* 						 JFRAME  				*/
+	/************************************************/
+	{
+		JFrame frame =  new BusGUI();
+		
+		frame.pack();
+		
+		frame.setVisible(true);
+		
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	}
+	
+}
+	
