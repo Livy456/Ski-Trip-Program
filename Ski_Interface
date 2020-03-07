@@ -21,8 +21,17 @@ import java.text.DecimalFormat;		// IMPORTS DECIMAL FORMAT
 
 public interface Ski_Interface 
 {
+	public void setName(String nm);
+	public String getName();
+	public void setDate(String dt);
+	public String getDate();
+	public void setID(int i);
+	public int getID();
+	public void setGroup(int grp);
+	public int getGroup();
 	public int getBus();
 	public int getRemain();
 	public double getCost();
-	public Customer modify();
+	public double getRefund();
+	public String toString();
 }
