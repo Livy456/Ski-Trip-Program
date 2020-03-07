@@ -1,15 +1,15 @@
 /******************************************/
-/* USER DESCRIPTION SECTION 		  */
-/* OLIVIA 				  */
-/* FINAL PROJECT			  */
-/* PROGRAM 12				  */
-/* FEBRUARY 10, 2020		   	  */
+/* USER DESCRIPTION SECTION 			  */
+/* OLIVIA 				   			  */
+/* FINAL PROJECT			   	  		  */
+/* PROGRAM 12							  */
+/* FEBRUARY 10, 2020		   			  */
 /******************************************/
 /******************************************/
 /* THIS IS A PROGRAM TO MAKE AN OBJECT	  */
 /* HAVE INSTANCE VARIABLES, CONSTRUCTORS, */
 /* AND METHODS SO THE CLIENT CAN INPUT	  */
-/* THEIR CUSTOMER INFORMATION  */
+/* THEIR CUSTOMER INFORMATION  			  */
 /******************************************/
 
 /******************/
@@ -20,7 +20,7 @@ import java.awt.event.*;			// IMPORTS EVENTS
 import javax.swing.*;				// IMPORTS SWING
 import java.text.DecimalFormat;		// IMPORTS DECIMAL FORMAT
 
-public class Customer 
+public class Customer implements Ski_Interface
 {
 	/*****************************/
 	/* INSTANCE VARIABLE SECTION */
@@ -30,8 +30,9 @@ public class Customer
 	private int id;				// INSTANCE VARIABLE FOR USER'S ID
 	private int grpsize;		// INSTANCE VARIABLE FOR USER'S GROUP SIZE
 	private int bus;			// INSTANCE VARIABLE FOR NUMBER OF BUSES
-	int remainder;				// INSTANCE VARIABLE FOR NUMBER OF EXTRA SKIERS
+	private int remainder;		// INSTANCE VARIABLE FOR NUMBER OF EXTRA SKIERS
 	private double cost;		// INSTANCE VARIABLE FOR USER'S COST
+	private double refund;		// INSTANE VARIABLE FOR REFUNDS
 	
 	public Customer()
 	/**************************************************/
@@ -171,21 +172,22 @@ public class Customer
 		/*******************************************/
 		/* CALCULATION SECTION FOR NUMBER OF BUSES */
 		/*******************************************/
+		bus = grpsize / 20;		// NUMBER OF FULL BUSES FOR SKI TRIP
 		
-		/***************************************************/
-		/* IF STATEMENT TO CALCULATE IF ALL BUSES ARE FULL */
-		/***************************************************/
-		if (grpsize % 20 == 0)
+		/*********************************************/
+		/* IF STATEMENT TO CALCULATE REMAINING SEATS */	
+		/*********************************************/
+		if (grpsize % 20 != 0)
 		{
-			bus = grpsize / 20;		// NUMBER OF FULL BUSES FOR SKI TRIP
-		}
-		
-		/*********************************************************/
-		/* ELSE STATEMENT TO CALCULATE IF ALL BUSES ARE NOT FULL */
-		/*********************************************************/
-		else 
-		{
-			remainder = getRemain();		// CALL TO GET REMAINDER	
+			remainder = grpsize % 20; 	// CALCULATES REMAINING SEATS 
+			
+			/***************************************************/
+			/* IF STATEMENT TO CALCULATE IF ALL BUSES ARE FULL */	
+			/***************************************************/
+			if (remainder > 10)
+			{	
+				bus+=1;		// ADDS ANOTHER BUS FOR THE TEN OR MORE SKIERS
+			}
 		}
 		
 		/******************/
@@ -205,19 +207,73 @@ public class Customer
 		/* CALCULATES REMAINDER OF SEATS */
 		/*********************************/
 		remainder = grpsize % 20;
-
-		/***************************************************/
-		/* IF STATEMENT TO CALCULATE IF ALL BUSES ARE FULL */	
-		/***************************************************/
-		if (remainder > 10)
-		{	
-			bus+=1;		// ADDS ANOTHER BUS FOR THE TEN OR MORE SKIERS
-		}
 	
 		/******************/
 		/* RETURN SECTION */
 		/******************/
 		return remainder;		// RETURNS REMAINDER
+	}
+	
+	public double getCost()
+	/**************************************************/
+	/* PRECONDITION - PROGRAM HAS BUS AND REMAINDER	  */
+	/* 				  NEEDS THE COST OF THE SKI TRIP  */
+	/* POSTCONDITION - FUNCTION RETURNS COST    	  */
+	/**************************************************/
+	{
+		/***********************************/
+		/* CALCULATES COST OF THE SKI TRIP */
+		/***********************************/
+		
+		/***************************************************/
+		/* IF STATEMENT TO CALCULATE IF REFUNDS ARE NEEDED */	
+		/***************************************************/
+		if (remainder >= 10)
+		{
+			cost = 49.99 * grpsize;		// CALCULATES COST WITHOUT REFUNDS
+		}
+		
+		/***************************************************/
+		/* ELSE STATEMENT TO CALCULATE IF REFUNDS ARE NEEDED */	
+		/***************************************************/
+		else
+		{
+			cost = 49.99 * (grpsize - remainder);	// CALCULATES COST WITH REFUNDS
+		}
+		
+		/******************/
+		/* RETURN SECTION */
+		/******************/
+		return cost;			// RETURNS COST
+	}
+	
+	public double getRefund()
+	/**************************************************/
+	/* PRECONDITION - PROGRAM HAS BUS AND REMAINDER	  */
+	/* 				  NEEDS THE REFUNDS FOR SKI TRIP  */
+	/* POSTCONDITION - FUNCTION RETURNS REFUNDS    	  */
+	/**************************************************/
+	{
+		/***************************************************/
+		/* IF STATEMENT TO CALCULATE IF REFUNDS ARE NEEDED */	
+		/***************************************************/
+		if (remainder >= 10)
+		{
+			refund = 0.00;		// CALCULATES COST WITHOUT REFUNDS
+		}
+		
+		/***************************************/
+		/* ELSE STATEMENT TO CALCULATE REFUNDS */	
+		/***************************************/
+		else
+		{
+			refund = 49.99 * remainder;	// CALCULATES REFUNDS
+		}
+		
+		/******************/
+		/* RETURN SECTION */
+		/******************/
+		return refund;			// RETURNS REFUND
 	}
 	
 	public String toString()
