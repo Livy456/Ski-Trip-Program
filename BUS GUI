@@ -3,7 +3,7 @@
 /* OLIVIA 				   			  */
 /* FINAL PROJECT		   	 			  */
 /* PROGRAM 12							  */
-/* FEBRUARY 10, 2020		   			  */
+/* MARCH 2, 2020		   			  	  */
 /******************************************/
 /******************************************/
 /* THIS IS A PROGRAM TO MAKE AN OBJECT	  */
@@ -115,12 +115,16 @@ public class BusGUI extends JFrame implements ActionListener
 	/* 						 JFRAME  				*/
 	/************************************************/
 	{
+		// CREATES JFRAME 
 		JFrame frame =  new BusGUI();
 		
+		// SIZE OF THE FRAME
 		frame.pack();
 		
+		// ALLOWS THE JFRAME TO BE VISIBLE
 		frame.setVisible(true);
 		
+		// ALLOWS THE JFRAME TO BE CLOSED
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 	
