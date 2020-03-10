@@ -22,6 +22,18 @@ import java.text.DecimalFormat;		// IMPORTS DECIMAL FORMAT
 
 public class BusGUI extends JFrame
 {	
+	/*****************/
+	/* FINAL SECTION */
+	/*****************/
+	final static String message1 = "Input your Group Name: ";
+	final static String message2 = "Input the group ID number(three digit number between 100 - 999): ";
+	final static String message3 = "Input the number of people in your group (must be greater than 0): ";
+	final static String heading1= "Input Name";
+	final static String heading2 = "Input Group ID";
+	final static String heading3 = "Input Group Size";
+	final static String error2 = "ERROR!!! Number must be between 100 and 999";
+	final static String error3 = "ERROR!!!Number must be greater than 0!!!";
+	
 	public BusGUI()
 	/************************************************/
 	/* DEFAULT CONSTRUCTOR - IT CREATES A FRAME FOR */
@@ -31,12 +43,14 @@ public class BusGUI extends JFrame
 		/*************************/
 		/* INSTANTIATION SECTION */
 		/*************************/
-		JFrame frame =  new JFrame();				// INSTANTIATES A BLANK JFRAME 
-		JButton nameB = new JButton("Name");		// CREATES A BUTTON FOR NAME
-		JButton dateB = new JButton("Date");		// CREATES A BUTTON FOR DATE
-		JButton grpIDB = new JButton("Group ID");	// CREATES A BUTTON FOR GROUP ID
-		JButton grpSzB = new JButton("Group Size");	// CREATES A BUTTON FOR GROUP SIZE
-		
+		JFrame frame =  new JFrame();					// INSTANTIATES A BLANK JFRAME 
+		JButton nameB = new JButton("Name");			// CREATES A BUTTON FOR NAME
+		JButton dateB = new JButton("Date");			// CREATES A BUTTON FOR DATE
+		JButton grpIDB = new JButton("Group ID");		// CREATES A BUTTON FOR GROUP ID
+		JButton grpSzB = new JButton("Group Size");		// CREATES A BUTTON FOR GROUP SIZE
+		DecimalFormat df = new DecimalFormat("0.00");	// INSTANTIATES DECIMALFORMAT
+		Customer customer = new Customer();				// INSTANTIATES CUSTOMER
+				
 		/**************************/
 		/* CREATES A BLANK JFRAME */
 		/**************************/
@@ -45,29 +59,30 @@ public class BusGUI extends JFrame
 		frame.setSize(200, 200);	// SETS SIZE OF THE JFRAME
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	// ALLOWS THE JFRAME TO BE CLOSED
 		
-		
-		
-		nameB.setBounds(50, 50, 100, 50);
-		dateB.setBounds(160, 50, 100, 50);
-		grpIDB.setBounds(50, 120, 100, 50);
-		grpSzB.setBounds(160, 120, 100, 50);
+		/***************************/
+		/* SETS BOUNDS FOR BUTTONS */
+		/***************************/
+		nameB.setBounds(50, 50, 100, 50);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		dateB.setBounds(160, 50, 100, 50);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		grpIDB.setBounds(50, 120, 100, 50);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		grpSzB.setBounds(160, 120, 100, 50);// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		
 		
 		/**********************************************/
 		/* ADDS LISTENER TO BUTTON TO PERFORM ACTIONS */
 		/**********************************************/
-		nameB.addActionListener((ActionListener) this);
-		dateB.addActionListener((ActionListener) this);
-		grpIDB.addActionListener((ActionListener) this);
-		grpSzB.addActionListener((ActionListener)this);
+		nameB.addActionListener((ActionListener) this);	// ADDS ACTIONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED
+		dateB.addActionListener((ActionListener) this);	// ADDS ACTIONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED
+		grpIDB.addActionListener((ActionListener) this);// ADDS ACTIONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED
+		grpSzB.addActionListener((ActionListener)this);	// ADDS ACTIONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED
 		
 		/*************************/
 		/* ADDS BUTTONS TO FRAME */
 		/*************************/
-		frame.add(nameB);
-		frame.add(dateB);
-		frame.add(grpIDB);
-		frame.add(grpSzB);
+		frame.add(nameB);	// ADDS NAME BUTTON TO FRAME
+		frame.add(dateB);	// ADDS DATE BUTTON TO FRAME
+		frame.add(grpIDB);	// ADDS GROUP ID BUTTON TO FRAME
+		frame.add(grpSzB);	// ADDS GROUP SIZE BUTTON TO FRAME
 				
 	}
 	
@@ -93,8 +108,8 @@ public class BusGUI extends JFrame
 		/****************************************************/
 		if (action.equals("Name"))
 		{
-			
-			frame.setVisible(false);
+			frame.setVisible(false);	// HIDES FRAME FROM USER
+			name = inputString(message1, heading1);
 			
 			
 		}
