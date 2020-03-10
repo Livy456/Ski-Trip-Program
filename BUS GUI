@@ -20,39 +20,58 @@ import java.awt.event.*;			// IMPORTS EVENTS
 import javax.swing.*;				// IMPORTS SWING
 import java.text.DecimalFormat;		// IMPORTS DECIMAL FORMAT
 
-public class BusGUI extends JFrame implements ActionListener
-{
-	private static final long serialVersionUID = 1L;	// SERIALIZES OBJECT
-	
+public class BusGUI extends JFrame
+{	
 	public BusGUI()
 	/************************************************/
 	/* DEFAULT CONSTRUCTOR - IT CREATES A FRAME FOR */
 	/*						 CONTENT PANE			*/
 	/************************************************/
 	{
-		/*********************************/
-		/* CREATES FRAME AND SETS LAYOUT */
-		/*********************************/
-		this.getContentPane().setLayout(new FlowLayout());
-	
 		/*************************/
 		/* INSTANTIATION SECTION */
 		/*************************/
-		JButton nameB = new JButton("Name");
-		JButton dateB = new JButton("Date");
-		JButton grpIDB = new JButton("Group ID");
-		JButton grpSzB = new JButton("Group Size");
+		JFrame frame =  new JFrame();				// INSTANTIATES A BLANK JFRAME 
+		JButton nameB = new JButton("Name");		// CREATES A BUTTON FOR NAME
+		JButton dateB = new JButton("Date");		// CREATES A BUTTON FOR DATE
+		JButton grpIDB = new JButton("Group ID");	// CREATES A BUTTON FOR GROUP ID
+		JButton grpSzB = new JButton("Group Size");	// CREATES A BUTTON FOR GROUP SIZE
+		
+		/**************************/
+		/* CREATES A BLANK JFRAME */
+		/**************************/
+		frame.pack();				// SIZE OF THE FRAME
+		frame.setVisible(true);		// ALLOWS THE JFRAME TO BE VISIBLE
+		frame.setSize(200, 200);	// SETS SIZE OF THE JFRAME
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	// ALLOWS THE JFRAME TO BE CLOSED
+		
+		
+		
+		nameB.setBounds(50, 50, 100, 50);
+		dateB.setBounds(160, 50, 100, 50);
+		grpIDB.setBounds(50, 120, 100, 50);
+		grpSzB.setBounds(160, 120, 100, 50);
+		
 		
 		/**********************************************/
 		/* ADDS LISTENER TO BUTTON TO PERFORM ACTIONS */
 		/**********************************************/
-		nameB.addActionListener(this);
-		dateB.addActionListener(this);
-		grpIDB.addActionListener(this);
-		grpSzB.addActionListener(this);
+		nameB.addActionListener((ActionListener) this);
+		dateB.addActionListener((ActionListener) this);
+		grpIDB.addActionListener((ActionListener) this);
+		grpSzB.addActionListener((ActionListener)this);
+		
+		/*************************/
+		/* ADDS BUTTONS TO FRAME */
+		/*************************/
+		frame.add(nameB);
+		frame.add(dateB);
+		frame.add(grpIDB);
+		frame.add(grpSzB);
+				
 	}
 	
-	public void actionPerformed(ActionEvent event)
+	public void actionPerformed(ActionEvent event, JFrame frame)
 	/************************************************/
 	/* PRECONDITION - PROGRAM HAS A BUTTON			*/
 	/* POSTCONDITION - FUNCTION CREATES AN ACTION 	*/
@@ -74,13 +93,10 @@ public class BusGUI extends JFrame implements ActionListener
 		/****************************************************/
 		if (action.equals("Name"))
 		{
-			String str;
 			
-			str = JOptionPane.showInputDialog(
-					null,
-					"Input the name of your ski group: ",
-					"Input Name",
-					JOptionPane.QUESTION_MESSAGE);
+			frame.setVisible(false);
+			
+			
 		}
 		
 		/*********************************************************/
@@ -107,25 +123,166 @@ public class BusGUI extends JFrame implements ActionListener
 			System.out.print("Successful Group Size implementation");
 		}
 	}
+	/******************************************************************************/
+	/* 								FUNCTION SECTION 							  */
+	/******************************************************************************/
+	public static void errorMessage(String str)
+	/*********************************************************************/
+	/* PRECONDITION - NEEDS ERROR MESSAGE FOR INPUTS OF NEGATIVE NUMBERS */
+	/* POSTCONDITION - CREATES WIMDOW TO SHOW THE ERROR THE USER MADE 	 */
+	/*********************************************************************/
+	{
+		/******************************/
+		/* MAKES ERROR MESSAGE WINDOW */
+		/******************************/
+		JOptionPane.showMessageDialog(
+				null,
+				str,
+				"Error Message",
+				JOptionPane.ERROR_MESSAGE);
+	}
 	
+	public static int inputInt(String str, String hdstr)
+	/*************************************************/
+	/* PRECONDITION - NEEDS INTEGER VALUE	 		 */
+	/* POSTCONDITION - GETS INTEGER VALUE			 */
+	/*************************************************/
+	{
+		/********************/
+		/* VARIABLE SECTION */
+		/********************/
+		String inum;		// REUSABLE STRING INPUT
+		int num;			// REUSABLE INT VALUE
+		
+		/********************* ********/
+		/* LOOP UNTIL VALUE IS VALID */
+		/*****************************/
+		do
+		{
+			/*****************************/
+			/* MAKES INPUT DIALOG WINDOW */
+			/*****************************/
+			inum = JOptionPane.showInputDialog(
+					null,
+					str,
+					hdstr,
+					JOptionPane.QUESTION_MESSAGE);
+			num = Integer.parseInt(inum);		// ASSIGNS THE STRING INUM 
+												// TO THE INTEGER NUM
+			
+			/*******************************/
+			/* IF STATEMENT TO ERROR CHECK */
+			/*******************************/
+			if(num < 0)
+			{
+				errorMessage(error3);		// CALL TO ERROR MESSAGE
+			}
+		}
+		while(num < 0);
+		
+		/******************/
+		/* RETURN SECTION */
+		/******************/
+		return num;			// RETURNS NUM
+	}
 	
-	public static void createGUI()
+	public static int inputInt2(String str, String hdstr)
+	/*************************************************/
+	/* PRECONDITION - NEEDS INTEGER VALUE	 		 */
+	/* POSTCONDITION - GETS INTEGER VALUE			 */
+	/*************************************************/
+	{
+		/********************/
+		/* VARIABLE SECTION */
+		/********************/
+		String inum;		// REUSABLE STRING INPUT
+		int num;			// REUSABLE INT VALUE
+		
+		/*****************************/
+		/* LOOP UNTIL VALUE IS VALID */
+		/*****************************/
+		do
+		{
+			/*****************************/
+			/* MAKES INPUT DIALOG WINDOW */
+			/*****************************/
+			inum = JOptionPane.showInputDialog(
+					null,
+					str,
+					hdstr,
+					JOptionPane.QUESTION_MESSAGE);
+			num = Integer.parseInt(inum);	// ASSIGNS THE STRING INUM 
+											// TO THE INTEGER NUM
+			
+			/*******************************/
+			/* IF STATEMENT TO ERROR CHECK */
+			/*******************************/
+			if ((num < 100) || (num > 999))
+			{
+				errorMessage(error2);		// CALL TO ERROR MESSAGE
+			}
+		}
+		while((num < 100) || (num > 999));
+		
+		/******************/
+		/* RETURN SECTION */
+		/******************/
+		return num;			// RETURNS NUM
+	}
+	
+	public static String inputString(String str, String hdstr)
+	/*************************************************/
+	/* PRECONDITION - NEEDS STRING VALUE FOR NAME	 */
+	/* POSTCONDITION - GETS STRING VALUE FOR NAME	 */
+	/*************************************************/
+	{
+		/********************/
+		/* VARIABLE SECTION */
+		/********************/
+		String nm;		// INPUTS NUMBER AS A STRING
+		
+		/*****************************/
+		/* MAKES INPUT DIALOG WINDOW */
+		/*****************************/
+		nm = JOptionPane.showInputDialog(
+				null,
+				str,
+				hdstr,
+				JOptionPane.QUESTION_MESSAGE);
+		
+		/******************/
+		/* RETURN SECTION */
+		/******************/
+		return nm;		// RETURNS NM
+	}
+	
+	public static int confirmWindow()
 	/************************************************/
-	/* DEFAULT CONSTRUCTOR - IT CREATES A DEFAULT	*/
-	/* 						 JFRAME  				*/
+	/* PRECONDITION - NEEDS CONFIRM DIALOG BOX		*/
+	/* POSTCONDITION - CREATES WINDOW TO CONFIRM IF	*/
+	/* 				   USER WANTS TO CONFIRM ACTION	*/
 	/************************************************/
 	{
-		// CREATES JFRAME 
-		JFrame frame =  new BusGUI();
+		/********************/
+		/* VARIABLE SECTION */
+		/********************/
+		int num;		// INTEGER ANSWER TO MODIFY PROGRAM
 		
-		// SIZE OF THE FRAME
-		frame.pack();
+		/*******************************/
+		/* MAKES CONFIRM DIALOG WINDOW */
+		/*******************************/
+		num = JOptionPane.showConfirmDialog(
+				null,
+				"Do you really want to do this? Once you do this" + "\n" + 
+				"you cannot undo this action.",
+				"Confirm Window",
+				JOptionPane.YES_NO_OPTION,
+				JOptionPane.QUESTION_MESSAGE);
 		
-		// ALLOWS THE JFRAME TO BE VISIBLE
-		frame.setVisible(true);
-		
-		// ALLOWS THE JFRAME TO BE CLOSED
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		/******************/
+		/* RETURN SECTION */
+		/******************/
+		return num;		// RETURNS NUM
 	}
 	
 }
