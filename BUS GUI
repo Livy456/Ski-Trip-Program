@@ -1,6 +1,6 @@
 /******************************************/
 /* USER DESCRIPTION SECTION 			  */
-/* OLIVIA DIAS				   			  */
+/* OLIVIA 				   			  */
 /* FINAL PROJECT		   	 			  */
 /* PROGRAM 12							  */
 /* MARCH 2, 2020		   			  	  */
@@ -48,7 +48,8 @@ public class BusGUI extends JFrame
 		JButton dateB = new JButton("Date");				// CREATES A BUTTON FOR DATE
 		JButton grpIDB = new JButton("Group ID");			// CREATES A BUTTON FOR GROUP ID
 		JButton grpSzB = new JButton("Group Size");			// CREATES A BUTTON FOR GROUP SIZE
-		JButton returnB = new JButton("Return Home Menu");	// CREATES A BUTTON FOR REUTNRING TO HOME MENU
+		JButton returnB = new JButton("Return");			// CREATES A BUTTON FOR REUTNRING TO HOME MENU
+		JButton enterB = new JButton("Enter");				// CREATES A BUTTON FOR ENTERING INFORMATION FOR PROGRAM	
 		DecimalFormat df = new DecimalFormat("0.00");		// INSTANTIATES DECIMALFORMAT
 		Customer customer = new Customer();					// INSTANTIATES CUSTOMER
 				
@@ -67,7 +68,8 @@ public class BusGUI extends JFrame
 		dateB.setBounds(160, 50, 100, 50);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		grpIDB.setBounds(50, 120, 100, 50);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		grpSzB.setBounds(160, 120, 100, 50);// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		
+		returnB.setBounds(200, 200, 75, 25);// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		enterB.setBounds(100, 200, 75, 25);	// SETS (X POSITIION, Y POSITION, LENGTH, WIDTH)
 		
 		/**********************************************/
 		/* ADDS LISTENER TO BUTTON TO PERFORM ACTIONS */
@@ -76,6 +78,7 @@ public class BusGUI extends JFrame
 		dateB.addActionListener((ActionListener) this);	// ADDS ACTIONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED
 		grpIDB.addActionListener((ActionListener) this);// ADDS ACTIONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED
 		grpSzB.addActionListener((ActionListener)this);	// ADDS ACTIONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED
+		returnB.addActionListener((ActionListener) this);// ADDS ACTIONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED
 		
 		/*************************/
 		/* ADDS BUTTONS TO FRAME */
@@ -88,7 +91,8 @@ public class BusGUI extends JFrame
 	/******************************************************************************/
 	/* 								FUNCTION SECTION 							  */
 	/******************************************************************************/
-	public void actionPerformed(ActionEvent event, JFrame frame, Customer customer)
+	public void actionPerformed(ActionEvent event, JFrame frame, JFrame returnB, 
+								JButton enterB, Customer customer)
 	/************************************************/
 	/* PRECONDITION - PROGRAM HAS A BUTTON			*/
 	/* POSTCONDITION - FUNCTION CREATES AN ACTION 	*/
@@ -100,7 +104,7 @@ public class BusGUI extends JFrame
 		/********************/
 		String action; 		// STRING TO REPRESENT WHICH BUTTON WAS PRESSED
 		String name;		// REUSUABLE STRING INPUT FOR NAME 
-		String num;			// REUSUABLE STRING INPUT
+		String num;		// REUSUABLE STRING INPUT
 		String date;		// REUSUABLE STRING INPUT FOR DATE
 		int groupID;		// REUSUABLE STRING INPUT FOR GROUP ID
 		int groupSz;		// REUSUABLE STRING INPUT FOR GROUP SIZE
@@ -121,6 +125,20 @@ public class BusGUI extends JFrame
 			JFrame frame2 = new JFrame();
 			
 			frame.setVisible(false);	// HIDES FRAME FROM USER
+			
+			/**************************/
+			/* CREATES A BLANK JFRAME */
+			/**************************/
+			frame2.pack();				// SIZE OF THE FRAME
+			frame2.setVisible(true);	// ALLOWS THE JFRAME TO BE VISIBLE
+			frame2.setSize(220, 220);	// SETS SIZE OF THE JFRAME
+			frame2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);// ALLOWS THE JFRAME TO BE CLOSED
+			
+			/*************************/
+			/* ADDS BUTTONS TO FRAME */
+			/*************************/
+			frame2.add(returnB);	// ADDS RETURN BUTTON TO FRAME2
+			frame2.add(enterB);		// ADDS ENTER BUTTON TO FRAME2
 			
 			/***************/
 			/* INPUTS NAME */
@@ -316,3 +334,4 @@ public class BusGUI extends JFrame
 	}
 	
 }
+	
