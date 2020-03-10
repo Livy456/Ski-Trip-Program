@@ -1,6 +1,6 @@
 /******************************************/
 /* USER DESCRIPTION SECTION 			  */
-/* OLIVIA 				   			  */
+/* OLIVIA DIAS				   			  */
 /* FINAL PROJECT		   	 			  */
 /* PROGRAM 12							  */
 /* MARCH 2, 2020		   			  	  */
@@ -43,13 +43,14 @@ public class BusGUI extends JFrame
 		/*************************/
 		/* INSTANTIATION SECTION */
 		/*************************/
-		JFrame frame =  new JFrame();					// INSTANTIATES A BLANK JFRAME 
-		JButton nameB = new JButton("Name");			// CREATES A BUTTON FOR NAME
-		JButton dateB = new JButton("Date");			// CREATES A BUTTON FOR DATE
-		JButton grpIDB = new JButton("Group ID");		// CREATES A BUTTON FOR GROUP ID
-		JButton grpSzB = new JButton("Group Size");		// CREATES A BUTTON FOR GROUP SIZE
-		DecimalFormat df = new DecimalFormat("0.00");	// INSTANTIATES DECIMALFORMAT
-		Customer customer = new Customer();				// INSTANTIATES CUSTOMER
+		JFrame frame =  new JFrame();						// INSTANTIATES A BLANK JFRAME 
+		JButton nameB = new JButton("Name");				// CREATES A BUTTON FOR NAME
+		JButton dateB = new JButton("Date");				// CREATES A BUTTON FOR DATE
+		JButton grpIDB = new JButton("Group ID");			// CREATES A BUTTON FOR GROUP ID
+		JButton grpSzB = new JButton("Group Size");			// CREATES A BUTTON FOR GROUP SIZE
+		JButton returnB = new JButton("Return Home Menu");	// CREATES A BUTTON FOR REUTNRING TO HOME MENU
+		DecimalFormat df = new DecimalFormat("0.00");		// INSTANTIATES DECIMALFORMAT
+		Customer customer = new Customer();					// INSTANTIATES CUSTOMER
 				
 		/**************************/
 		/* CREATES A BLANK JFRAME */
@@ -57,7 +58,7 @@ public class BusGUI extends JFrame
 		frame.pack();				// SIZE OF THE FRAME
 		frame.setVisible(true);		// ALLOWS THE JFRAME TO BE VISIBLE
 		frame.setSize(200, 200);	// SETS SIZE OF THE JFRAME
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	// ALLOWS THE JFRAME TO BE CLOSED
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);// ALLOWS THE JFRAME TO BE CLOSED
 		
 		/***************************/
 		/* SETS BOUNDS FOR BUTTONS */
@@ -82,11 +83,12 @@ public class BusGUI extends JFrame
 		frame.add(nameB);	// ADDS NAME BUTTON TO FRAME
 		frame.add(dateB);	// ADDS DATE BUTTON TO FRAME
 		frame.add(grpIDB);	// ADDS GROUP ID BUTTON TO FRAME
-		frame.add(grpSzB);	// ADDS GROUP SIZE BUTTON TO FRAME
-				
+		frame.add(grpSzB);	// ADDS GROUP SIZE BUTTON TO FRAME		
 	}
-	
-	public void actionPerformed(ActionEvent event, JFrame frame)
+	/******************************************************************************/
+	/* 								FUNCTION SECTION 							  */
+	/******************************************************************************/
+	public void actionPerformed(ActionEvent event, JFrame frame, Customer customer)
 	/************************************************/
 	/* PRECONDITION - PROGRAM HAS A BUTTON			*/
 	/* POSTCONDITION - FUNCTION CREATES AN ACTION 	*/
@@ -97,6 +99,11 @@ public class BusGUI extends JFrame
 		/* VARIABLE SECTION */
 		/********************/
 		String action; 		// STRING TO REPRESENT WHICH BUTTON WAS PRESSED
+		String name;		// REUSUABLE STRING INPUT FOR NAME 
+		String num;			// REUSUABLE STRING INPUT
+		String date;		// REUSUABLE STRING INPUT FOR DATE
+		int groupID;		// REUSUABLE STRING INPUT FOR GROUP ID
+		int groupSz;		// REUSUABLE STRING INPUT FOR GROUP SIZE
 		
 		/************************************/
 		/* ASSIGNS BUTTON PRESSED TO ACTION */
@@ -108,10 +115,20 @@ public class BusGUI extends JFrame
 		/****************************************************/
 		if (action.equals("Name"))
 		{
+			/*************************/
+			/* INSTANTIATION SECTION */
+			/*************************/
+			JFrame frame2 = new JFrame();
+			
 			frame.setVisible(false);	// HIDES FRAME FROM USER
-			name = inputString(message1, heading1);
 			
-			
+			/***************/
+			/* INPUTS NAME */
+			/***************/
+			name = inputString(message1, heading1);		// CALL TO INPUT STRING
+
+			customer.setName(name);		// CALL TO SET NAME
+			frame.setVisible(true);		// MAKES FRAME VISIBLE
 		}
 		
 		/*********************************************************/
@@ -138,9 +155,7 @@ public class BusGUI extends JFrame
 			System.out.print("Successful Group Size implementation");
 		}
 	}
-	/******************************************************************************/
-	/* 								FUNCTION SECTION 							  */
-	/******************************************************************************/
+	
 	public static void errorMessage(String str)
 	/*********************************************************************/
 	/* PRECONDITION - NEEDS ERROR MESSAGE FOR INPUTS OF NEGATIVE NUMBERS */
@@ -301,4 +316,3 @@ public class BusGUI extends JFrame
 	}
 	
 }
-	
