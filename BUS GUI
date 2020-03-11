@@ -196,23 +196,27 @@ public class BusGUI extends JFrame
 		/* INPUTS NAME */
 		/***************/
 		name = nameTF.getText();			// CALL TO GET TEXT INPUTTED BY USER
+		customer.setName(name);				// CALL TO SET NAME
 		
 		/*******************/
 		/* INPUTS GROUP ID */
 		/*******************/
 		groupID = grpIDTF.getText();		// CALL TO GET TEXT INPUTTED BY USER
 		grpID = Integer.parseInt(groupID);	// PARSES STRING TO AN INTEGER
+		customer.setID(grpID);				// CALL TO SET ID
 		
 		/*********************/
 		/* INPUTS GROUP SIZE */
 		/*********************/
 		groupSz = grpSzTF.getText();		// CALL TO GET TEXT INPUTTED BY USER
 		grpSz = Integer.parseInt(groupSz);	// PARSES STRING TO AN INTEGER
+		customer.setGroup(grpSz);			// CALL TO SET SIZE
 		
 		/***************/
 		/* INPUTS DATE */
 		/***************/
 		date = dateTF.getText();			// CALL TO GET TEXT INPUTTED BY USER
+		customer.setDate(date);				// CALL TO SET DATE
 		
 		/****************************************************/
 		/* IF STATEMENT TO CHECK IF QUIT BUTTON WAS PRESSED */	
