@@ -1,6 +1,6 @@
 /******************************************/
 /* USER DESCRIPTION SECTION 			  */
-/* OLIVIA DIAS				   			  */
+/* OLIVIA 				   			  */
 /* FINAL PROJECT		   	 			  */
 /* PROGRAM 12							  */
 /* MARCH 2, 2020		   			  	  */
@@ -15,13 +15,16 @@
 /******************/
 /* IMPORT SECTION */
 /******************/
-import java.awt.*;					// IMPORTS AWT
-import java.awt.event.*;			// IMPORTS EVENTS
-import javax.swing.*;				// IMPORTS SWING
-import java.text.DecimalFormat;		// IMPORTS DECIMAL FORMAT
+import java.awt.*;						// IMPORTS AWT
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;	// IMPORTS ACTION LISTENER
+import javax.swing.*;					// IMPORTS SWING
+import java.text.DecimalFormat;			// IMPORTS DECIMAL FORMAT
 
-public class BusGUI extends JFrame
+public class BusGUI extends JFrame implements ActionListener
 {	
+	private static final long serialVersionUID = 1L;	// SERIALIZES CLASS
+	
 	/*****************/
 	/* FINAL SECTION */
 	/*****************/
@@ -158,16 +161,15 @@ public class BusGUI extends JFrame
 		/* CREATES A BLANK JFRAME */
 		/**************************/
 		frame.pack();				// SIZE OF THE FRAME
-		frame.setVisible(true);		// ALLOWS THE JFRAME TO BE VISIBLE
 		frame.setSize(300, 300);	// SETS SIZE OF THE JFRAME
+		frame.setVisible(true);		// ALLOWS THE JFRAME TO BE VISIBLE
 		frame.setLayout(null);		// SETS THE LAYOUT FOR THE JFRAME
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);// ALLOWS THE JFRAME TO BE CLOSED
 	}
 	/******************************************************************************/
 	/* 								FUNCTION SECTION 							  */
 	/******************************************************************************/
-	public void actionPerformed(ActionEvent event, JFrame frame, JFrame returnB, 
-								JButton enterB, Customer customer)
+	public void actionPerformed1(ActionEvent event)
 	/************************************************/
 	/* PRECONDITION - PROGRAM HAS A BUTTON			*/
 	/* POSTCONDITION - FUNCTION CREATES AN ACTION 	*/
@@ -177,6 +179,7 @@ public class BusGUI extends JFrame
 		/********************/
 		/* VARIABLE SECTION */
 		/********************/
+		Customer customer;	// REUSUABLE OBJECT FOR CUSTOMER
 		String action; 		// STRING TO REPRESENT WHICH BUTTON WAS PRESSED
 		String name;		// REUSUABLE STRING INPUT FOR NAME 
 		String num;			// REUSUABLE STRING INPUT
@@ -257,6 +260,10 @@ public class BusGUI extends JFrame
 		{
 			System.out.print("Successful Group Size implementation");
 		}
+	}
+	public static void main(String[]args)
+	{
+		new BusGUI();
 	}
 	
 	public static void errorMessage(String str)
@@ -417,6 +424,12 @@ public class BusGUI extends JFrame
 		/******************/
 		return num;		// RETURNS NUM
 	}
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }
+
+
 	
