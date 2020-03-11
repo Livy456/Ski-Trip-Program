@@ -59,6 +59,7 @@ public class BusGUI extends JFrame
 	private Label grpIDL;			// CREATES A LABEL FOR GROUP ID
 	private Label grpSzL;			// CREATES A LABEL FOR GROUP SIZE
 	private Label dateL;			// CREATES A LABEL FOR DATE
+	private Label warningL;			// CREATES A LABEL FOR WARNINGS
 	
 	public BusGUI()
 	/************************************************/
@@ -76,7 +77,23 @@ public class BusGUI extends JFrame
 		enterB = new JButton("Enter");					// INSTANTIATES A JBUTTON 
 		modifyB = new JButton("Modify");				// INSTANTIATES A JBUTTON 
 		quitB = new JButton("Quit");					// INSTANTIATES A JBUTTON 
-		nameTF = new JTextField();						// INSTANTIATES A JTEXTFIELD 
+		costB = new JButton("Cost");					// INSTANTIATES A JBUTTON 
+		busDtB = new JButton("Sorting by Bus Date");	// INSTANTIATES A JBUTTON 
+		profitDtB = new JButton("Profit by Date");		// INSTANTIATES A JBUTTON 
+		profitB = new JButton("Total Profit");			// INSTANTIATES A JBUTTON 
+		alphB = new JButton("Sorting Alphabetically");	// INSTANTIATES A JBUTTON 
+		numB = new JButton("Sorting Numerically");		// INSTANTIATES A JBUTTON 
+		grpB = new JButton("Sorting by Group Size");	// INSTANTIATES A JBUTTON 
+		confirmB = new JButton("Confirm");				// INSTANTIATES A JBUTTON 
+		nameTF = new JTextField("Input Name of Group");	// INSTANTIATES A JTEXTFIELD
+		grpIDTF = new JTextField("Input Group Size(must be greater than 0)");	// INSTANTIATES A JTEXTFIELD 
+		grpSzTF = new JTextField("Input Group ID(must be three digit number)");	// INSTANTIATES A JTEXTFIELD 
+		dateTF = new JTextField("Input Date of Trip");	// INSTANTIATES A JTEXTFIELD
+		nameL = new Label("Name");						// INSTANTIATES A LABEL
+		grpIDL = new Label("Group ID");					// INSTANTIATES A LABEL
+		grpSzL = new Label("Group ID");					// INSTANTIATES A LABEL
+		dateL = new Label("Date");						// INSTANTIATES A LABEL
+		warningL = new Label("Warning");				// INSTANTIATES A LABEL
 		DecimalFormat df = new DecimalFormat("0.00");	// INSTANTIATES DECIMALFORMAT
 		Customer customer = new Customer();				// INSTANTIATES CUSTOMER
 				
@@ -85,36 +102,64 @@ public class BusGUI extends JFrame
 		/**************************/
 		frame.pack();				// SIZE OF THE FRAME
 		frame.setVisible(true);		// ALLOWS THE JFRAME TO BE VISIBLE
-		frame.setSize(200, 200);	// SETS SIZE OF THE JFRAME
+		frame.setSize(300, 300);	// SETS SIZE OF THE JFRAME
+		frame.setLayout(null);		// SETS THE LAYOUT FOR THE JFRAME
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);// ALLOWS THE JFRAME TO BE CLOSED
 		
-		/***************************/
-		/* SETS BOUNDS FOR BUTTONS */
-		/***************************/
-		insertB.setBounds(50, 50, 100, 50);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		/**********************************************/
+		/* SETS BOUNDS FOR BUTTONS, JTEXTFIELD, LABEL */
+		/**********************************************/
+		insertB.setBounds(50, 50, 100, 50);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		removeB.setBounds(160, 50, 100, 50);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		grpIDB.setBounds(50, 120, 100, 50);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		grpSzB.setBounds(160, 120, 100, 50);// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		returnB.setBounds(200, 200, 75, 25);// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		enterB.setBounds(100, 200, 75, 25);	// SETS (X POSITIION, Y POSITION, LENGTH, WIDTH)
-		
+		returnB.setBounds(50, 120, 100, 50);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		enterB.setBounds(160, 120, 100, 50);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		modifyB.setBounds(200, 200, 75, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		quitB.setBounds(100, 200, 75, 25);		// SETS (X POSITIION, Y POSITION, LENGTH, WIDTH)
+		costB.setBounds(200, 200, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		busDtB.setBounds(200, 200, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		profitDtB.setBounds(200, 200, 75, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		profitB.setBounds(200, 200, 75, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		alphB.setBounds(200, 200, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		numB.setBounds(200, 200, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		grpB.setBounds(200, 200, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		confirmB.setBounds(200, 200, 75, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		nameTF.setBounds(200, 200, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		grpIDTF.setBounds(200, 200, 75, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		grpSzL.setBounds(200, 200, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		dateL.setBounds(200, 200, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		warningL.setBounds(200, 200, 75, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+
 		/**********************************************/
 		/* ADDS LISTENER TO BUTTON TO PERFORM ACTIONS */
 		/**********************************************/
-		insertB.addActionListener((ActionListener) this);		// ADDS ACTIONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED
-		removeB.addActionListener((ActionListener) this);		// ADDS ACTIONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED
-		grpIDB.addActionListener((ActionListener) this);	// ADDS ACTIONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED
-		grpSzB.addActionListener((ActionListener)this);		// ADDS ACTIONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED
+		insertB.addActionListener((ActionListener) this);	// ADDS ACTIONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED
+		removeB.addActionListener((ActionListener) this);	// ADDS ACTIONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED
 		returnB.addActionListener((ActionListener) this);	// ADDS ACTIONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED
-		enterB.addActionListener((ActionListener) this);	// ADDS ACITONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED
+		enterB.addActionListener((ActionListener)this);		// ADDS ACTIONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED
+		modifyB.addActionListener((ActionListener) this);	// ADDS ACTIONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED
+		quitB.addActionListener((ActionListener) this);		// ADDS ACITONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED
+		costB.addActionListener((ActionListener) this);		// ADDS ACITONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED
+		busDtB.addActionListener((ActionListener) this);	// ADDS ACITONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED
+		profitDtB.addActionListener((ActionListener) this);	// ADDS ACITONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED
+		profitB.addActionListener((ActionListener) this);	// ADDS ACITONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED
+		alphB.addActionListener((ActionListener) this);		// ADDS ACITONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED
+		numB.addActionListener((ActionListener) this);		// ADDS ACITONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED
+		grpB.addActionListener((ActionListener) this);		// ADDS ACITONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED
+		confirmB.addActionListener((ActionListener) this);	// ADDS ACITONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED
+		nameTF.addActionListener((ActionListener) this);	// ADDS ACITONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED
+		grpIDTF.addActionListener((ActionListener) this);	// ADDS ACITONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED
 
 		/*************************/
 		/* ADDS BUTTONS TO FRAME */
 		/*************************/
-		frame.add();	// ADDS NAME BUTTON TO FRAME
-		frame.add();	// ADDS DATE BUTTON TO FRAME
-		frame.add();	// ADDS GROUP ID BUTTON TO FRAME
-		frame.add();	// ADDS GROUP SIZE BUTTON TO FRAME		
+		frame.add(nameTF);		// ADDS NAME TEXT FIELD TO FRAME
+		frame.add(grpIDTF);		// ADDS GROUP ID TEXT FIELD TO FRAME
+		frame.add(grpSzTF);		// ADDS GROUP SIZE TEXT FIELD TO FRAME
+		frame.add(dateTF);		// ADDS DATE TEXT FIELD TO FRAME
+		frame.add(nameL);		// ADDS NAME LABEL TO FRAME
+		frame.add(grpIDL);		// ADDS GROUP ID LABEL TO FRAME
+		frame.add(grpSzL);		// ADDS GROUP SIZE LABEL TO FRAME
+		frame.add(dateL);		// ADDS DATE LABEL TO FRAME
 	}
 	/******************************************************************************/
 	/* 								FUNCTION SECTION 							  */
