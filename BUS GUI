@@ -34,6 +34,32 @@ public class BusGUI extends JFrame
 	final static String error2 = "ERROR!!! Number must be between 100 and 999";
 	final static String error3 = "ERROR!!!Number must be greater than 0!!!";
 	
+	/*****************************/
+	/* INSTANCE VARIABLE SECTION */
+	/*****************************/
+	private JButton insertB;		// CREATES A BUTTON FOR INSERT
+	private JButton removeB;		// CREATES A BUTTON FOR REMOVE
+	private JButton returnB;		// CREATES A BUTTON FOR REUTNRING TO HOME MENU
+	private JButton enterB;			// CREATES A BUTTON FOR ENTERING INFORMATION FOR PROGRAM	
+	private JButton modifyB;		// CREATES A BUTTON TO MODIFY CUSTOMER  
+	private JButton quitB;			// CREATES A BUTTON TO QUIT PROGRAM 
+	private JButton costB;			// CREATES A BUTTON FOR COST OF SKI TRIP 
+	private JButton busDtB;			// CREATES A BUTTON FOR SORTING BY NUM OF BUS FOR SPECIFIC DATE
+	private JButton profitDtB;		// CREATES A BUTTON FOR PROFIT BY DATE
+	private JButton profitB;		// CREATES A BUTTON FOR TOTAL PROFIT 
+	private JButton alphB;			// CREATES A BUTTON FOR SORTING ALPHABETICALLY
+	private JButton numB;			// CREATES A BUTTON FOR SORTING NUMERICALLY
+	private JButton grpB;			// CREATES A BUTTON FOR SORTING BY GROUP SIZE
+	private JButton confirmB;		// CREATES A BUTTON FOR CONFIRMING CHANGE IN INFO
+	private JTextField nameTF;		// CREATES A TEXT FIELD FOR NAME 
+	private JTextField grpIDTF;		// CREATES A TEXT FIELD FOR GROUP ID
+	private JTextField grpSzTF;		// CREATES A TEXT FIELD FOR GROUP SIZE
+	private JTextField dateTF;		// CREATES A TEXT FIELD FOR DATE
+	private Label nameL;			// CREATES A LABEL FOR NAME
+	private Label grpIDL;			// CREATES A LABEL FOR GROUP ID
+	private Label grpSzL;			// CREATES A LABEL FOR GROUP SIZE
+	private Label dateL;			// CREATES A LABEL FOR DATE
+	
 	public BusGUI()
 	/************************************************/
 	/* DEFAULT CONSTRUCTOR - IT CREATES A FRAME FOR */
@@ -43,15 +69,16 @@ public class BusGUI extends JFrame
 		/*************************/
 		/* INSTANTIATION SECTION */
 		/*************************/
-		JFrame frame =  new JFrame();						// INSTANTIATES A BLANK JFRAME 
-		JButton nameB = new JButton("Name");				// CREATES A BUTTON FOR NAME
-		JButton dateB = new JButton("Date");				// CREATES A BUTTON FOR DATE
-		JButton grpIDB = new JButton("Group ID");			// CREATES A BUTTON FOR GROUP ID
-		JButton grpSzB = new JButton("Group Size");			// CREATES A BUTTON FOR GROUP SIZE
-		JButton returnB = new JButton("Return");			// CREATES A BUTTON FOR REUTNRING TO HOME MENU
-		JButton enterB = new JButton("Enter");				// CREATES A BUTTON FOR ENTERING INFORMATION FOR PROGRAM	
-		DecimalFormat df = new DecimalFormat("0.00");		// INSTANTIATES DECIMALFORMAT
-		Customer customer = new Customer();					// INSTANTIATES CUSTOMER
+		JFrame frame =  new JFrame();					// INSTANTIATES A BLANK JFRAME
+		insertB = new JButton("Insert");				// INSTANTIATES A JBUTTON
+		removeB = new JButton("Remove");				// INSTANTIATES A JBUTTON 
+		returnB = new JButton("Return");				// INSTANTIATES A JBUTTON 
+		enterB = new JButton("Enter");					// INSTANTIATES A JBUTTON 
+		modifyB = new JButton("Modify");				// INSTANTIATES A JBUTTON 
+		quitB = new JButton("Quit");					// INSTANTIATES A JBUTTON 
+		nameTF = new JTextField();						// INSTANTIATES A JTEXTFIELD 
+		DecimalFormat df = new DecimalFormat("0.00");	// INSTANTIATES DECIMALFORMAT
+		Customer customer = new Customer();				// INSTANTIATES CUSTOMER
 				
 		/**************************/
 		/* CREATES A BLANK JFRAME */
@@ -64,8 +91,8 @@ public class BusGUI extends JFrame
 		/***************************/
 		/* SETS BOUNDS FOR BUTTONS */
 		/***************************/
-		nameB.setBounds(50, 50, 100, 50);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		dateB.setBounds(160, 50, 100, 50);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		insertB.setBounds(50, 50, 100, 50);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		removeB.setBounds(160, 50, 100, 50);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		grpIDB.setBounds(50, 120, 100, 50);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		grpSzB.setBounds(160, 120, 100, 50);// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		returnB.setBounds(200, 200, 75, 25);// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
@@ -74,19 +101,20 @@ public class BusGUI extends JFrame
 		/**********************************************/
 		/* ADDS LISTENER TO BUTTON TO PERFORM ACTIONS */
 		/**********************************************/
-		nameB.addActionListener((ActionListener) this);	// ADDS ACTIONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED
-		dateB.addActionListener((ActionListener) this);	// ADDS ACTIONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED
-		grpIDB.addActionListener((ActionListener) this);// ADDS ACTIONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED
-		grpSzB.addActionListener((ActionListener)this);	// ADDS ACTIONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED
-		returnB.addActionListener((ActionListener) this);// ADDS ACTIONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED
-		
+		insertB.addActionListener((ActionListener) this);		// ADDS ACTIONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED
+		removeB.addActionListener((ActionListener) this);		// ADDS ACTIONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED
+		grpIDB.addActionListener((ActionListener) this);	// ADDS ACTIONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED
+		grpSzB.addActionListener((ActionListener)this);		// ADDS ACTIONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED
+		returnB.addActionListener((ActionListener) this);	// ADDS ACTIONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED
+		enterB.addActionListener((ActionListener) this);	// ADDS ACITONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED
+
 		/*************************/
 		/* ADDS BUTTONS TO FRAME */
 		/*************************/
-		frame.add(nameB);	// ADDS NAME BUTTON TO FRAME
-		frame.add(dateB);	// ADDS DATE BUTTON TO FRAME
-		frame.add(grpIDB);	// ADDS GROUP ID BUTTON TO FRAME
-		frame.add(grpSzB);	// ADDS GROUP SIZE BUTTON TO FRAME		
+		frame.add();	// ADDS NAME BUTTON TO FRAME
+		frame.add();	// ADDS DATE BUTTON TO FRAME
+		frame.add();	// ADDS GROUP ID BUTTON TO FRAME
+		frame.add();	// ADDS GROUP SIZE BUTTON TO FRAME		
 	}
 	/******************************************************************************/
 	/* 								FUNCTION SECTION 							  */
@@ -104,7 +132,7 @@ public class BusGUI extends JFrame
 		/********************/
 		String action; 		// STRING TO REPRESENT WHICH BUTTON WAS PRESSED
 		String name;		// REUSUABLE STRING INPUT FOR NAME 
-		String num;		// REUSUABLE STRING INPUT
+		String num;			// REUSUABLE STRING INPUT
 		String date;		// REUSUABLE STRING INPUT FOR DATE
 		int groupID;		// REUSUABLE STRING INPUT FOR GROUP ID
 		int groupSz;		// REUSUABLE STRING INPUT FOR GROUP SIZE
