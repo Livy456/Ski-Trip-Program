@@ -70,7 +70,7 @@ public class BusGUI extends JFrame
 		/*************************/
 		/* INSTANTIATION SECTION */
 		/*************************/
-		JFrame frame =  new JFrame();					// INSTANTIATES A BLANK JFRAME
+		JFrame frame =  new JFrame("Ski Trip");			// INSTANTIATES A BLANK JFRAME
 		insertB = new JButton("Insert");				// INSTANTIATES A JBUTTON
 		removeB = new JButton("Remove");				// INSTANTIATES A JBUTTON 
 		returnB = new JButton("Return");				// INSTANTIATES A JBUTTON 
@@ -109,25 +109,25 @@ public class BusGUI extends JFrame
 		/**********************************************/
 		/* SETS BOUNDS FOR BUTTONS, JTEXTFIELD, LABEL */
 		/**********************************************/
-		insertB.setBounds(50, 50, 100, 50);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		removeB.setBounds(160, 50, 100, 50);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		returnB.setBounds(50, 120, 100, 50);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		enterB.setBounds(160, 120, 100, 50);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		modifyB.setBounds(200, 200, 75, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		quitB.setBounds(100, 200, 75, 25);		// SETS (X POSITIION, Y POSITION, LENGTH, WIDTH)
-		costB.setBounds(200, 200, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		busDtB.setBounds(200, 200, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		profitDtB.setBounds(200, 200, 75, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		profitB.setBounds(200, 200, 75, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		alphB.setBounds(200, 200, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		numB.setBounds(200, 200, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		grpB.setBounds(200, 200, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		confirmB.setBounds(200, 200, 75, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		nameTF.setBounds(200, 200, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		grpIDTF.setBounds(200, 200, 75, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		grpSzL.setBounds(200, 200, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		dateL.setBounds(200, 200, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		warningL.setBounds(200, 200, 75, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		insertB.setBounds(50, 50, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		removeB.setBounds(150, 50, 75, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		returnB.setBounds(250, 50, 75, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		enterB.setBounds(50, 80, 75, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		modifyB.setBounds(150, 80, 75, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		quitB.setBounds(250, 80, 75, 25);		// SETS (X POSITIION, Y POSITION, LENGTH, WIDTH)
+		costB.setBounds(50, 110, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		busDtB.setBounds(150, 110, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		profitDtB.setBounds(250, 110, 75, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		profitB.setBounds(50, 145, 75, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		alphB.setBounds(150, 145, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		numB.setBounds(250, 145, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		grpB.setBounds(50, 175, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		confirmB.setBounds(150, 175, 75, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		nameTF.setBounds(250, 175, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		grpIDTF.setBounds(50, 200, 75, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		grpSzL.setBounds(150, 200, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		dateL.setBounds(250, 200, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		warningL.setBounds(50, 230, 75, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 
 		/**********************************************/
 		/* ADDS LISTENER TO BUTTON TO PERFORM ACTIONS */
