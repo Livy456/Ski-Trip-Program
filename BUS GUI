@@ -1,6 +1,6 @@
 /******************************************/
 /* USER DESCRIPTION SECTION 			  */
-/* OLIVIA 				   			  */
+/* OLIVIA DIAS				   			  */
 /* FINAL PROJECT		   	 			  */
 /* PROGRAM 12							  */
 /* MARCH 2, 2020		   			  	  */
@@ -96,15 +96,6 @@ public class BusGUI extends JFrame
 		warningL = new Label("Warning");				// INSTANTIATES A LABEL
 		DecimalFormat df = new DecimalFormat("0.00");	// INSTANTIATES DECIMALFORMAT
 		Customer customer = new Customer();				// INSTANTIATES CUSTOMER
-				
-		/**************************/
-		/* CREATES A BLANK JFRAME */
-		/**************************/
-		frame.pack();				// SIZE OF THE FRAME
-		frame.setVisible(true);		// ALLOWS THE JFRAME TO BE VISIBLE
-		frame.setSize(300, 300);	// SETS SIZE OF THE JFRAME
-		frame.setLayout(null);		// SETS THE LAYOUT FOR THE JFRAME
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);// ALLOWS THE JFRAME TO BE CLOSED
 		
 		/**********************************************/
 		/* SETS BOUNDS FOR BUTTONS, JTEXTFIELD, LABEL */
@@ -162,6 +153,15 @@ public class BusGUI extends JFrame
 		frame.add(grpIDL);		// ADDS GROUP ID LABEL TO FRAME
 		frame.add(grpSzL);		// ADDS GROUP SIZE LABEL TO FRAME
 		frame.add(dateL);		// ADDS DATE LABEL TO FRAME
+	
+		/**************************/
+		/* CREATES A BLANK JFRAME */
+		/**************************/
+		frame.pack();				// SIZE OF THE FRAME
+		frame.setVisible(true);		// ALLOWS THE JFRAME TO BE VISIBLE
+		frame.setSize(300, 300);	// SETS SIZE OF THE JFRAME
+		frame.setLayout(null);		// SETS THE LAYOUT FOR THE JFRAME
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);// ALLOWS THE JFRAME TO BE CLOSED
 	}
 	/******************************************************************************/
 	/* 								FUNCTION SECTION 							  */
