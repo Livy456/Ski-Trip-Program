@@ -152,6 +152,8 @@ public class BusGUI extends JFrame
 		/*************************/
 		/* ADDS BUTTONS TO FRAME */
 		/*************************/
+		frame.add(enterB);		// ADDS ENTER BUTTON TO FRAME
+		frame.add(quitB);		// ADDS QUIT BUTTON TO FRAME
 		frame.add(nameTF);		// ADDS NAME TEXT FIELD TO FRAME
 		frame.add(grpIDTF);		// ADDS GROUP ID TEXT FIELD TO FRAME
 		frame.add(grpSzTF);		// ADDS GROUP SIZE TEXT FIELD TO FRAME
@@ -179,53 +181,59 @@ public class BusGUI extends JFrame
 		String name;		// REUSUABLE STRING INPUT FOR NAME 
 		String num;			// REUSUABLE STRING INPUT
 		String date;		// REUSUABLE STRING INPUT FOR DATE
-		int groupID;		// REUSUABLE STRING INPUT FOR GROUP ID
-		int groupSz;		// REUSUABLE STRING INPUT FOR GROUP SIZE
+		String groupID;		// REUSUABLE STRING INPUT FOR GROUP ID
+		String groupSz;		// REUSUABLE STRING INPUT FOR GROUP SIZE
+		int grpID;			// REUSUABLE INT INPUT FOR GROUP ID
+		int grpSz;			// REUSUABLE INT INPUT FOR GROUP SIZE
+		int confirm; 		// REUSUABLE INT INPUT FOR CONFIRMING AN ACTION
 		
 		/************************************/
 		/* ASSIGNS BUTTON PRESSED TO ACTION */
 		/************************************/
 		action = event.getActionCommand();	// CALL TO GET ACTION COMMAND
 		
+		/***************/
+		/* INPUTS NAME */
+		/***************/
+		name = nameTF.getText();			// CALL TO GET TEXT INPUTTED BY USER
+		
+		/*******************/
+		/* INPUTS GROUP ID */
+		/*******************/
+		groupID = grpIDTF.getText();		// CALL TO GET TEXT INPUTTED BY USER
+		grpID = Integer.parseInt(groupID);	// PARSES STRING TO AN INTEGER
+		
+		/*********************/
+		/* INPUTS GROUP SIZE */
+		/*********************/
+		groupSz = grpSzTF.getText();		// CALL TO GET TEXT INPUTTED BY USER
+		grpSz = Integer.parseInt(groupSz);	// PARSES STRING TO AN INTEGER
+		
+		/***************/
+		/* INPUTS DATE */
+		/***************/
+		date = dateTF.getText();			// CALL TO GET TEXT INPUTTED BY USER
+		
 		/****************************************************/
-		/* IF STATEMENT TO CHECK IF NAME BUTTON WAS PRESSED */	
+		/* IF STATEMENT TO CHECK IF QUIT BUTTON WAS PRESSED */	
 		/****************************************************/
-		if (action.equals("Name"))
+		if (action.equals("Quit"))
 		{
-			/*************************/
-			/* INSTANTIATION SECTION */
-			/*************************/
-			JFrame frame2 = new JFrame();
+			confirm = confirmWindow();
 			
-			frame.setVisible(false);	// HIDES FRAME FROM USER
-			
-			/**************************/
-			/* CREATES A BLANK JFRAME */
-			/**************************/
-			frame2.pack();				// SIZE OF THE FRAME
-			frame2.setVisible(true);	// ALLOWS THE JFRAME TO BE VISIBLE
-			frame2.setSize(220, 220);	// SETS SIZE OF THE JFRAME
-			frame2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);// ALLOWS THE JFRAME TO BE CLOSED
-			
-			/*************************/
-			/* ADDS BUTTONS TO FRAME */
-			/*************************/
-			frame2.add(returnB);	// ADDS RETURN BUTTON TO FRAME2
-			frame2.add(enterB);		// ADDS ENTER BUTTON TO FRAME2
-			
-			/***************/
-			/* INPUTS NAME */
-			/***************/
-			name = inputString(message1, heading1);		// CALL TO INPUT STRING
-
-			customer.setName(name);		// CALL TO SET NAME
-			frame.setVisible(true);		// MAKES FRAME VISIBLE
+			/******************************************************/
+			/* IF STATEMENT TO CONFIRM ACTION OF QUITTING PROGRAM */	
+			/******************************************************/
+			if(confirm == 0)
+			{
+				return;
+			}
 		}
 		
 		/*********************************************************/
 		/* ELSE IF STATEMENT TO CHECK IF DATE BUTTON WAS PRESSED */	
 		/*********************************************************/
-		else if (action.equals("Date"))
+		else if (action.equals("Enter"))
 		{
 			System.out.print("Successful date implementation");
 		}
