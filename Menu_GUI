@@ -1,0 +1,259 @@
+/******************************************/
+/* USER DESCRIPTION SECTION 			  */
+/* OLIVIA 				   			  */
+/* FINAL PROJECT		   	 			  */
+/* PROGRAM 12							  */
+/* MARCH 8, 2020		   			  	  */
+/******************************************/
+/******************************************/
+/* THIS IS A PROGRAM TO MAKE AN OBJECT	  */
+/* HAVE INSTANCE VARIABLES, CONSTRUCTORS, */
+/* AND METHODS SO THE CLIENT CAN HAVE A   */
+/* SWING GUI  							  */
+/******************************************/
+
+/******************/
+/* IMPORT SECTION */
+/******************/
+import javax.swing.*;					// IMPORTS SWING
+import java.awt.*;						// IMPORTS AWT
+import java.awt.event.ActionEvent;		// IMPORTS ACTION EVENT
+import java.awt.event.ActionListener;	// IMPORTS ACTION LISTENER		
+import java.text.DecimalFormat;			// IMPORTS DECIMAL FORMAT
+import java.util.ArrayList;
+
+public class Menu_GUI implements ActionListener
+{
+	final static String error1 = "ERROR!!! Must be positive and greater than 0!!!";
+	
+	/*****************************/
+	/* INSTANCE VARIABLE SECTION */
+	/*****************************/
+	private JButton enterB;			// CREATES A BUTTON FOR ENTERING INFORMATION FOR PROGRAM	
+	private JButton insertB;		// CREATES A BUTTON FOR INSERT
+	private JButton removeB;		// CREATES A BUTTON FOR REMOVE
+	private JButton returnB;		// CREATES A BUTTON FOR REUTNRING TO HOME MENU
+	private JButton modifyB;		// CREATES A BUTTON TO MODIFY CUSTOMER  
+	private JButton quitB;			// CREATES A BUTTON TO QUIT PROGRAM 
+	private JButton costB;			// CREATES A BUTTON FOR COST OF SKI TRIP 
+	private JButton busDtB;			// CREATES A BUTTON FOR SORTING BY NUM OF BUS FOR SPECIFIC DATE
+	private JButton profitDtB;		// CREATES A BUTTON FOR PROFIT BY DATE
+	private JButton profitB;		// CREATES A BUTTON FOR TOTAL PROFIT 
+	private JButton alphB;			// CREATES A BUTTON FOR SORTING ALPHABETICALLY
+	private JButton numB;			// CREATES A BUTTON FOR SORTING NUMERICALLY
+	private JButton grpB;			// CREATES A BUTTON FOR SORTING BY GROUP SIZE
+	private JButton confirmB;		// CREATES A BUTTON FOR CONFIRMING CHANGE IN INFO
+	private Label warningL;			// CREATES A LABEL FOR WARNINGS
+	private JFrame frame;			// CREATES A JFRAME 
+	 
+	public Menu_GUI()
+	/************************************************/
+	/* DEFAULT CONSTRUCTOR - IT CREATES A FRAME FOR */
+	/*						 CONTENT PANE			*/
+	/************************************************/
+	{
+		/*************************/
+		/* INSTANTIATION SECTION */
+		/*************************/
+		enterB = new JButton("Enter");					// INSTANTIATES A JBUTTON 
+		insertB = new JButton("Insert");				// INSTANTIATES A JBUTTON
+		removeB = new JButton("Remove");				// INSTANTIATES A JBUTTON 
+		confirmB = new JButton("Confirm");				// INSTANTIATES A JBUTTON 
+		returnB = new JButton("Return");				// INSTANTIATES A JBUTTON 
+		frame = new JFrame("New Window");				// INSTANTIATES A NEW FRAME
+		modifyB = new JButton("Modify");				// INSTANTIATES A JBUTTON 
+		quitB = new JButton("Quit");					// INSTANTIATES A JBUTTON 
+		costB = new JButton("Cost");					// INSTANTIATES A JBUTTON 
+		busDtB = new JButton("Sorting by Bus Date");	// INSTANTIATES A JBUTTON 
+		profitDtB = new JButton("Profit by Date");		// INSTANTIATES A JBUTTON 
+		profitB = new JButton("Total Profit");			// INSTANTIATES A JBUTTON 
+		alphB = new JButton("Sorting Alphabetically");	// INSTANTIATES A JBUTTON 
+		numB = new JButton("Sorting Numerically");		// INSTANTIATES A JBUTTON 
+		grpB = new JButton("Sorting by Group Size");	// INSTANTIATES A JBUTTON 
+		confirmB = new JButton("Confirm");				// INSTANTIATES A JBUTTON 
+		warningL = new Label("Warning");				// INSTANTIATES A LABEL
+		DecimalFormat df = new DecimalFormat("0.00");	// INSTANTIATES DECIMALFORMAT
+		
+		/**********************************************/
+		/* SETS BOUNDS FOR BUTTONS, JTEXTFIELD, LABEL */
+		/**********************************************/
+		enterB.setBounds(150, 200, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		insertB.setBounds(50, 50, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		confirmB.setBounds(50, 500, 75, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		removeB.setBounds(150, 50, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		returnB.setBounds(250, 50, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		modifyB.setBounds(150, 80, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		quitB.setBounds(250, 200, 75, 25);		// SETS (X POSITIION, Y POSITION, LENGTH, WIDTH)
+		costB.setBounds(50, 110, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		busDtB.setBounds(150, 110, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		profitDtB.setBounds(250, 110, 75, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		profitB.setBounds(50, 145, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		alphB.setBounds(150, 145, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		numB.setBounds(250, 145, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		grpB.setBounds(50, 175, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		warningL.setBounds(50, 230, 75, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+
+		/**********************************************/
+		/* ADDS LISTENER TO BUTTON TO PERFORM ACTIONS */
+		/**********************************************/
+		insertB.addActionListener(this);	// ADDS ACTIONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED
+		removeB.addActionListener(this);	// ADDS ACTIONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED
+		returnB.addActionListener(this);	// ADDS ACTIONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED
+		confirmB.addActionListener(this);	// ADDS ACITONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED
+		modifyB.addActionListener(this);	// ADDS ACTIONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED
+		quitB.addActionListener(this);		// ADDS ACITONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED
+		costB.addActionListener(this);		// ADDS ACITONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED
+		busDtB.addActionListener(this);		// ADDS ACITONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED
+		profitDtB.addActionListener(this);	// ADDS ACITONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED
+		profitB.addActionListener(this);	// ADDS ACITONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED
+		alphB.addActionListener(this);		// ADDS ACITONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED
+		numB.addActionListener(this);		// ADDS ACITONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED
+		grpB.addActionListener(this);		// ADDS ACITONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED
+	}
+	
+	public void actionPerformed(ActionEvent event)
+	/************************************************/
+	/* PRECONDITION - PROGRAM HAS A BUTTON			*/
+	/* POSTCONDITION - FUNCTION CREATES AN ACTION 	*/
+	/* 				   EVENT FOR BUTTON				*/
+	/************************************************/
+	{
+		/********************/
+		/* VARIABLE SECTION */
+		/********************/
+		String action; 		// STRING TO REPRESENT WHICH BUTTON WAS PRESSED
+		String num;			// REUSUABLE STRING INPUT
+		String date;		// REUSUABLE STRING INPUT FOR DATE
+		String groupID;		// REUSUABLE STRING INPUT FOR GROUP ID
+		String groupSz;		// REUSUABLE STRING INPUT FOR GROUP SIZE
+		int grpID;			// REUSUABLE INT INPUT FOR GROUP ID
+		int grpSz;			// REUSUABLE INT INPUT FOR GROUP SIZE
+		int confirm; 		// REUSUABLE INT INPUT FOR CONFIRMING AN ACTION
+		
+		/***********************************************/
+		/* LOOP TO CHECK WHICH EVENT HAPPENS ON JFRAME */
+		/***********************************************/
+		do
+		{	
+			action = event.getActionCommand();
+			
+			/****************************************************/
+			/* IF STATEMENT TO CHECK IF QUIT BUTTON WAS PRESSED */	
+			/****************************************************/
+			if (action.equals("Quit"))
+			{
+				confirm = confirmWindow();		// CALL TO CONFIRM WINDOW
+			
+				/******************************************************/
+				/* IF STATEMENT TO CONFIRM ACTION OF QUITTING PROGRAM */	
+				/******************************************************/
+				if(confirm == 0)
+				{
+					System.exit(0);		// TERMINATES THE PROGRAM
+				}
+			}
+			
+			/****************************************************/
+			/* IF STATEMENT TO CHECK IF QUIT BUTTON WAS PRESSED */	
+			/****************************************************/
+			else if (action.equals("Insert"))
+			{
+				frame.setVisible(false);	// SETS VISIBILTY OF FRAME TO FALSE
+				
+			}
+			
+			frame.setVisible(true);			// SETS VISIBILTY OF FRAME TO TRUE
+		}
+		while(action != "Quit");
+	}
+	
+	public static int confirmWindow()
+	/************************************************/
+	/* PRECONDITION - NEEDS CONFIRM DIALOG BOX		*/
+	/* POSTCONDITION - CREATES WINDOW TO CONFIRM IF	*/
+	/* 				   USER WANTS TO CONFIRM ACTION	*/
+	/************************************************/
+	{
+		/********************/
+		/* VARIABLE SECTION */
+		/********************/
+		int num;		// INTEGER ANSWER TO MODIFY PROGRAM
+		
+		/*******************************/
+		/* MAKES CONFIRM DIALOG WINDOW */
+		/*******************************/
+		num = JOptionPane.showConfirmDialog(
+				null,
+				"Do you really want to do this? Once you do this" + "\n" + 
+				"you cannot undo this action.",
+				"Confirm Window",
+				JOptionPane.YES_NO_OPTION,
+				JOptionPane.QUESTION_MESSAGE);
+		
+		/******************/
+		/* RETURN SECTION */
+		/******************/
+		return num;		// RETURNS NUM
+	}
+	
+	public static void errorMessage(String str)
+	/*********************************************************************/
+	/* PRECONDITION - NEEDS ERROR MESSAGE FOR INPUTS OF NEGATIVE NUMBERS */
+	/* POSTCONDITION - CREATES WIMDOW TO SHOW THE ERROR THE USER MADE 	 */
+	/*********************************************************************/
+	{
+		/******************************/
+		/* MAKES ERROR MESSAGE WINDOW */
+		/******************************/
+		JOptionPane.showMessageDialog(
+				null,
+				str,
+				"Error Message",
+				JOptionPane.ERROR_MESSAGE);
+	}
+	
+	public static ArrayList insert(ArrayList<Integer>intArray, String str, String hdstr)
+	/*********************************************************************/
+	/* PRECONDITION - NEEDS TO INSERT INTEGER INTO ARRAYLIST OF INTEGERS */
+	/* POSTCONDITION - GETS INSERTED INTEGER INTO ARRAYLIST OF INTEGERS  */
+	/*********************************************************************/
+	{
+		/********************/
+		/* VARIABLE SECTION */
+		/********************/
+		String inum;		// INPUTS NUMBER AS A STRING
+		int num;			// USED FOR REUSEABLE INPUT
+		
+		/*****************************/
+		/* LOOP UNTIL VALUE IS VALID */
+		/*****************************/
+		do
+		{
+			/*****************************/
+			/* MAKES INPUT DIALOG WINDOW */
+			/*****************************/ 
+			inum = JOptionPane.showInputDialog(
+					null,
+					str,
+					hdstr,
+					JOptionPane.QUESTION_MESSAGE);
+			num = Integer.parseInt(inum);		// ASSIGNS THE STRING INUM 
+												// TO THE INTEGER NUM
+			/*******************************/
+			/* IF STATEMENT TO ERROR CHECK */
+			/*******************************/
+			if(num < 0)
+			{
+				errorMessage(error1);			// CALLS ERROR MESSAGE
+			}
+		}
+		while(num < 0);
+		
+		intArray.add(num);		// ADDS INTEGER TO ARRAYLIST
+		
+		/******************/
+		/* RETURN SECTION */
+		/******************/
+		return intArray;		// RETURNS NUM
+	}
+}
