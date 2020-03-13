@@ -20,7 +20,7 @@ import java.awt.*;						// IMPORTS AWT
 import java.awt.event.ActionEvent;		// IMPORTS ACTION EVENT
 import java.awt.event.ActionListener;	// IMPORTS ACTION LISTENER		
 import java.text.DecimalFormat;			// IMPORTS DECIMAL FORMAT
-import java.util.ArrayList;
+import java.util.ArrayList;				// IMPORTS ARRAYLIST
 
 public class Menu_GUI implements ActionListener
 {
@@ -45,6 +45,7 @@ public class Menu_GUI implements ActionListener
 	private JButton confirmB;		// CREATES A BUTTON FOR CONFIRMING CHANGE IN INFO
 	private Label warningL;			// CREATES A LABEL FOR WARNINGS
 	private JFrame frame;			// CREATES A JFRAME 
+	private ArrayList<Customer> custlist;	// CREATES AN ARRAYLIST OF CUSTOMER
 	 
 	public Menu_GUI()
 	/************************************************/
@@ -55,12 +56,12 @@ public class Menu_GUI implements ActionListener
 		/*************************/
 		/* INSTANTIATION SECTION */
 		/*************************/
+		frame = new JFrame("New Window");				// INSTANTIATES A NEW FRAME
 		enterB = new JButton("Enter");					// INSTANTIATES A JBUTTON 
 		insertB = new JButton("Insert");				// INSTANTIATES A JBUTTON
 		removeB = new JButton("Remove");				// INSTANTIATES A JBUTTON 
 		confirmB = new JButton("Confirm");				// INSTANTIATES A JBUTTON 
 		returnB = new JButton("Return");				// INSTANTIATES A JBUTTON 
-		frame = new JFrame("New Window");				// INSTANTIATES A NEW FRAME
 		modifyB = new JButton("Modify");				// INSTANTIATES A JBUTTON 
 		quitB = new JButton("Quit");					// INSTANTIATES A JBUTTON 
 		costB = new JButton("Cost");					// INSTANTIATES A JBUTTON 
@@ -77,11 +78,11 @@ public class Menu_GUI implements ActionListener
 		/**********************************************/
 		/* SETS BOUNDS FOR BUTTONS, JTEXTFIELD, LABEL */
 		/**********************************************/
-		enterB.setBounds(150, 200, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		enterB.setBounds(50, 300, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		insertB.setBounds(50, 50, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		confirmB.setBounds(50, 500, 75, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		removeB.setBounds(150, 50, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		returnB.setBounds(250, 50, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		confirmB.setBounds(50, 230, 75, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		removeB.setBounds(50, 150, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		returnB.setBounds(50, 50, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		modifyB.setBounds(150, 80, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		quitB.setBounds(250, 200, 75, 25);		// SETS (X POSITIION, Y POSITION, LENGTH, WIDTH)
 		costB.setBounds(50, 110, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
@@ -109,6 +110,22 @@ public class Menu_GUI implements ActionListener
 		alphB.addActionListener(this);		// ADDS ACITONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED
 		numB.addActionListener(this);		// ADDS ACITONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED
 		grpB.addActionListener(this);		// ADDS ACITONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED
+		
+		/*************************/
+		/* ADDS BUTTONS TO FRAME */
+		/*************************/
+		frame.add(insertB);			// ADDS INSERT BUTTON TO FRAME
+		frame.add(removeB);			// ADDS REMOVE BUTTON TO FRAME
+		frame.add(quitB);			// ADDS QUIT BUTTON TO FRAME
+		
+		/**************************/
+		/* CREATES A BLANK JFRAME */
+		/**************************/
+		frame.pack();				// SIZE OF THE FRAME
+		frame.setSize(400, 400);	// SETS SIZE OF THE JFRAME
+		frame.setVisible(true);		// ALLOWS THE JFRAME TO BE VISIBLE
+		frame.setLayout(null);		// SETS THE LAYOUT FOR THE JFRAME
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);// ALLOWS THE JFRAME TO BE CLOSED
 	}
 	
 	public void actionPerformed(ActionEvent event)
@@ -130,41 +147,36 @@ public class Menu_GUI implements ActionListener
 		int grpSz;			// REUSUABLE INT INPUT FOR GROUP SIZE
 		int confirm; 		// REUSUABLE INT INPUT FOR CONFIRMING AN ACTION
 		
-		/***********************************************/
-		/* LOOP TO CHECK WHICH EVENT HAPPENS ON JFRAME */
-		/***********************************************/
-		do
-		{	
-			action = event.getActionCommand();
+		action = event.getActionCommand();	// SETS VISIBILTY OF FRAME TO FALSE
+		
+		/****************************************************/
+		/* IF STATEMENT TO CHECK IF QUIT BUTTON WAS PRESSED */	
+		/****************************************************/
+		if (action.equals("Quit"))
+		{
+			confirm = confirmWindow();	// CALL TO CONFIRM WINDOW
 			
-			/****************************************************/
-			/* IF STATEMENT TO CHECK IF QUIT BUTTON WAS PRESSED */	
-			/****************************************************/
-			if (action.equals("Quit"))
+			/******************************************************/
+			/* IF STATEMENT TO CONFIRM ACTION OF QUITTING PROGRAM */	
+			/******************************************************/
+			if(confirm == 0)
 			{
-				confirm = confirmWindow();		// CALL TO CONFIRM WINDOW
-			
-				/******************************************************/
-				/* IF STATEMENT TO CONFIRM ACTION OF QUITTING PROGRAM */	
-				/******************************************************/
-				if(confirm == 0)
-				{
-					System.exit(0);		// TERMINATES THE PROGRAM
-				}
+				System.exit(0);			// TERMINATES THE PROGRAM
 			}
-			
-			/****************************************************/
-			/* IF STATEMENT TO CHECK IF QUIT BUTTON WAS PRESSED */	
-			/****************************************************/
-			else if (action.equals("Insert"))
-			{
-				frame.setVisible(false);	// SETS VISIBILTY OF FRAME TO FALSE
-				
-			}
-			
-			frame.setVisible(true);			// SETS VISIBILTY OF FRAME TO TRUE
 		}
-		while(action != "Quit");
+			
+		/****************************************************/
+		/* IF STATEMENT TO CHECK IF QUIT BUTTON WAS PRESSED */	
+		/****************************************************/
+		else if (action.equals("Insert"))
+		{
+			frame.setVisible(false);	// SETS VISIBILTY OF FRAME TO FALSE
+				
+			custlist = insert(custlist, "Hello", "Title");	// CALL TO INSERT
+				
+			frame.setVisible(true);		// SETS VISIBILTY OF FRAME TO TRUE
+		}
+		
 	}
 	
 	public static int confirmWindow()
@@ -212,7 +224,7 @@ public class Menu_GUI implements ActionListener
 				JOptionPane.ERROR_MESSAGE);
 	}
 	
-	public static ArrayList insert(ArrayList<Integer>intArray, String str, String hdstr)
+	public static ArrayList<Customer> insert(ArrayList<Customer>intArray, String str, String hdstr)
 	/*********************************************************************/
 	/* PRECONDITION - NEEDS TO INSERT INTEGER INTO ARRAYLIST OF INTEGERS */
 	/* POSTCONDITION - GETS INSERTED INTEGER INTO ARRAYLIST OF INTEGERS  */
@@ -222,35 +234,10 @@ public class Menu_GUI implements ActionListener
 		/* VARIABLE SECTION */
 		/********************/
 		String inum;		// INPUTS NUMBER AS A STRING
-		int num;			// USED FOR REUSEABLE INPUT
+		Customer num;		// USED FOR REUSEABLE INPUT
 		
-		/*****************************/
-		/* LOOP UNTIL VALUE IS VALID */
-		/*****************************/
-		do
-		{
-			/*****************************/
-			/* MAKES INPUT DIALOG WINDOW */
-			/*****************************/ 
-			inum = JOptionPane.showInputDialog(
-					null,
-					str,
-					hdstr,
-					JOptionPane.QUESTION_MESSAGE);
-			num = Integer.parseInt(inum);		// ASSIGNS THE STRING INUM 
-												// TO THE INTEGER NUM
-			/*******************************/
-			/* IF STATEMENT TO ERROR CHECK */
-			/*******************************/
-			if(num < 0)
-			{
-				errorMessage(error1);			// CALLS ERROR MESSAGE
-			}
-		}
-		while(num < 0);
-		
-		intArray.add(num);		// ADDS INTEGER TO ARRAYLIST
-		
+		new BusGUI();		// INSTANTIATES A NEW FRAME
+				
 		/******************/
 		/* RETURN SECTION */
 		/******************/
