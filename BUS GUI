@@ -16,12 +16,12 @@
 /* IMPORT SECTION */
 /******************/
 import java.awt.*;						// IMPORTS AWT
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;	// IMPORTS ACTION LISTENER
+import java.awt.event.ActionEvent;		// IMPORTS ACTION EVENT
+import java.awt.event.ActionListener;	// IMPORTS ACTION LISTENER		
 import javax.swing.*;					// IMPORTS SWING
 import java.text.DecimalFormat;			// IMPORTS DECIMAL FORMAT
 
-public class BusGUI extends JFrame implements ActionListener
+public class BusGUI implements ActionListener 
 {	
 	private static final long serialVersionUID = 1L;	// SERIALIZES CLASS
 	
@@ -36,24 +36,13 @@ public class BusGUI extends JFrame implements ActionListener
 	final static String heading3 = "Input Group Size";
 	final static String error2 = "ERROR!!! Number must be between 100 and 999";
 	final static String error3 = "ERROR!!!Number must be greater than 0!!!";
+	final static String error4 = "ERROR!!! You need to finish filling out information!!!";
 	
 	/*****************************/
 	/* INSTANCE VARIABLE SECTION */
 	/*****************************/
-	private JButton insertB;		// CREATES A BUTTON FOR INSERT
-	private JButton removeB;		// CREATES A BUTTON FOR REMOVE
-	private JButton returnB;		// CREATES A BUTTON FOR REUTNRING TO HOME MENU
 	private JButton enterB;			// CREATES A BUTTON FOR ENTERING INFORMATION FOR PROGRAM	
-	private JButton modifyB;		// CREATES A BUTTON TO MODIFY CUSTOMER  
 	private JButton quitB;			// CREATES A BUTTON TO QUIT PROGRAM 
-	private JButton costB;			// CREATES A BUTTON FOR COST OF SKI TRIP 
-	private JButton busDtB;			// CREATES A BUTTON FOR SORTING BY NUM OF BUS FOR SPECIFIC DATE
-	private JButton profitDtB;		// CREATES A BUTTON FOR PROFIT BY DATE
-	private JButton profitB;		// CREATES A BUTTON FOR TOTAL PROFIT 
-	private JButton alphB;			// CREATES A BUTTON FOR SORTING ALPHABETICALLY
-	private JButton numB;			// CREATES A BUTTON FOR SORTING NUMERICALLY
-	private JButton grpB;			// CREATES A BUTTON FOR SORTING BY GROUP SIZE
-	private JButton confirmB;		// CREATES A BUTTON FOR CONFIRMING CHANGE IN INFO
 	private JTextField nameTF;		// CREATES A TEXT FIELD FOR NAME 
 	private JTextField grpIDTF;		// CREATES A TEXT FIELD FOR GROUP ID
 	private JTextField grpSzTF;		// CREATES A TEXT FIELD FOR GROUP SIZE
@@ -62,7 +51,8 @@ public class BusGUI extends JFrame implements ActionListener
 	private Label grpIDL;			// CREATES A LABEL FOR GROUP ID
 	private Label grpSzL;			// CREATES A LABEL FOR GROUP SIZE
 	private Label dateL;			// CREATES A LABEL FOR DATE
-	private Label warningL;			// CREATES A LABEL FOR WARNINGS
+	private JFrame frame;			// CREATES A JFRAME 
+	private Customer customer;		// CREATES AN INSTANCE OF THE CUSTOMER CLASS
 	
 	public BusGUI()
 	/************************************************/
@@ -73,75 +63,39 @@ public class BusGUI extends JFrame implements ActionListener
 		/*************************/
 		/* INSTANTIATION SECTION */
 		/*************************/
-		JFrame frame =  new JFrame("Ski Trip");			// INSTANTIATES A BLANK JFRAME
-		insertB = new JButton("Insert");				// INSTANTIATES A JBUTTON
-		removeB = new JButton("Remove");				// INSTANTIATES A JBUTTON 
-		returnB = new JButton("Return");				// INSTANTIATES A JBUTTON 
-		enterB = new JButton("Enter");					// INSTANTIATES A JBUTTON 
-		modifyB = new JButton("Modify");				// INSTANTIATES A JBUTTON 
-		quitB = new JButton("Quit");					// INSTANTIATES A JBUTTON 
-		costB = new JButton("Cost");					// INSTANTIATES A JBUTTON 
-		busDtB = new JButton("Sorting by Bus Date");	// INSTANTIATES A JBUTTON 
-		profitDtB = new JButton("Profit by Date");		// INSTANTIATES A JBUTTON 
-		profitB = new JButton("Total Profit");			// INSTANTIATES A JBUTTON 
-		alphB = new JButton("Sorting Alphabetically");	// INSTANTIATES A JBUTTON 
-		numB = new JButton("Sorting Numerically");		// INSTANTIATES A JBUTTON 
-		grpB = new JButton("Sorting by Group Size");	// INSTANTIATES A JBUTTON 
-		confirmB = new JButton("Confirm");				// INSTANTIATES A JBUTTON 
-		nameTF = new JTextField("Input Name of Group");	// INSTANTIATES A JTEXTFIELD
-		grpIDTF = new JTextField("Input Group Size(must be greater than 0)");	// INSTANTIATES A JTEXTFIELD 
-		grpSzTF = new JTextField("Input Group ID(must be three digit number)");	// INSTANTIATES A JTEXTFIELD 
-		dateTF = new JTextField("Input Date of Trip");	// INSTANTIATES A JTEXTFIELD
-		nameL = new Label("Name");						// INSTANTIATES A LABEL
-		grpIDL = new Label("Group ID");					// INSTANTIATES A LABEL
-		grpSzL = new Label("Group ID");					// INSTANTIATES A LABEL
-		dateL = new Label("Date");						// INSTANTIATES A LABEL
-		warningL = new Label("Warning");				// INSTANTIATES A LABEL
-		DecimalFormat df = new DecimalFormat("0.00");	// INSTANTIATES DECIMALFORMAT
-		Customer customer = new Customer();				// INSTANTIATES CUSTOMER
+		frame =  new JFrame("Ski Trip");		// INSTANTIATES A BLANK JFRAME
+		enterB = new JButton("Enter");			// INSTANTIATES A JBUTTON 
+		nameTF = new JTextField();				// INSTANTIATES A JTEXTFIELD
+		grpIDTF = new JTextField();				// INSTANTIATES A JTEXTFIELD 
+		grpSzTF = new JTextField();				// INSTANTIATES A JTEXTFIELD 
+		dateTF = new JTextField();				// INSTANTIATES A JTEXTFIELD
+		nameL = new Label("Name");				// INSTANTIATES A LABEL
+		grpIDL = new Label("Group ID");			// INSTANTIATES A LABEL
+		grpSzL = new Label("Group Size");		// INSTANTIATES A LABEL
+		dateL = new Label("Date");				// INSTANTIATES A LABEL
+		customer = new Customer();				// INSTANTIATES CUSTOMER
 		
 		/**********************************************/
 		/* SETS BOUNDS FOR BUTTONS, JTEXTFIELD, LABEL */
 		/**********************************************/
-		insertB.setBounds(50, 50, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		removeB.setBounds(150, 50, 75, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		returnB.setBounds(250, 50, 75, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		enterB.setBounds(50, 80, 75, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		modifyB.setBounds(150, 80, 75, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		quitB.setBounds(250, 80, 75, 25);		// SETS (X POSITIION, Y POSITION, LENGTH, WIDTH)
-		costB.setBounds(50, 110, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		busDtB.setBounds(150, 110, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		profitDtB.setBounds(250, 110, 75, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		profitB.setBounds(50, 145, 75, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		alphB.setBounds(150, 145, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		numB.setBounds(250, 145, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		grpB.setBounds(50, 175, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		confirmB.setBounds(150, 175, 75, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		nameTF.setBounds(250, 175, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		grpIDTF.setBounds(50, 200, 75, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		grpSzL.setBounds(150, 200, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		dateL.setBounds(250, 200, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		warningL.setBounds(50, 230, 75, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		enterB.setBounds(150, 200, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		nameTF.setBounds(130, 80, 100, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		grpIDTF.setBounds(130, 110, 100, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		grpSzTF.setBounds(130, 140, 100, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		dateTF.setBounds(130, 170, 100, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		nameL.setBounds(50, 80, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		grpIDL.setBounds(50, 110, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		grpSzL.setBounds(50, 140, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		dateL.setBounds(100, 170, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 
 		/**********************************************/
 		/* ADDS LISTENER TO BUTTON TO PERFORM ACTIONS */
 		/**********************************************/
-		insertB.addActionListener((ActionListener) this);	// ADDS ACTIONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED
-		removeB.addActionListener((ActionListener) this);	// ADDS ACTIONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED
-		returnB.addActionListener((ActionListener) this);	// ADDS ACTIONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED
-		enterB.addActionListener((ActionListener)this);		// ADDS ACTIONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED
-		modifyB.addActionListener((ActionListener) this);	// ADDS ACTIONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED
-		quitB.addActionListener((ActionListener) this);		// ADDS ACITONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED
-		costB.addActionListener((ActionListener) this);		// ADDS ACITONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED
-		busDtB.addActionListener((ActionListener) this);	// ADDS ACITONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED
-		profitDtB.addActionListener((ActionListener) this);	// ADDS ACITONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED
-		profitB.addActionListener((ActionListener) this);	// ADDS ACITONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED
-		alphB.addActionListener((ActionListener) this);		// ADDS ACITONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED
-		numB.addActionListener((ActionListener) this);		// ADDS ACITONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED
-		grpB.addActionListener((ActionListener) this);		// ADDS ACITONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED
-		confirmB.addActionListener((ActionListener) this);	// ADDS ACITONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED
-		nameTF.addActionListener((ActionListener) this);	// ADDS ACITONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED
-		grpIDTF.addActionListener((ActionListener) this);	// ADDS ACITONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED
+		enterB.addActionListener(this);		// ADDS ACTIONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED
+		nameTF.addActionListener(this);		// ADDS ACITONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED
+		grpIDTF.addActionListener(this);	// ADDS ACITONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED
+		grpSzTF.addActionListener(this);	// ADDS ACITONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED
+		dateTF.addActionListener(this);		// ADDS ACITONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED
 
 		/*************************/
 		/* ADDS BUTTONS TO FRAME */
@@ -156,12 +110,12 @@ public class BusGUI extends JFrame implements ActionListener
 		frame.add(grpIDL);		// ADDS GROUP ID LABEL TO FRAME
 		frame.add(grpSzL);		// ADDS GROUP SIZE LABEL TO FRAME
 		frame.add(dateL);		// ADDS DATE LABEL TO FRAME
-	
+		
 		/**************************/
 		/* CREATES A BLANK JFRAME */
 		/**************************/
 		frame.pack();				// SIZE OF THE FRAME
-		frame.setSize(300, 300);	// SETS SIZE OF THE JFRAME
+		frame.setSize(400, 400);	// SETS SIZE OF THE JFRAME
 		frame.setVisible(true);		// ALLOWS THE JFRAME TO BE VISIBLE
 		frame.setLayout(null);		// SETS THE LAYOUT FOR THE JFRAME
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);// ALLOWS THE JFRAME TO BE CLOSED
@@ -169,7 +123,7 @@ public class BusGUI extends JFrame implements ActionListener
 	/******************************************************************************/
 	/* 								FUNCTION SECTION 							  */
 	/******************************************************************************/
-	public void actionPerformed1(ActionEvent event)
+	public void actionPerformed(ActionEvent event)
 	/************************************************/
 	/* PRECONDITION - PROGRAM HAS A BUTTON			*/
 	/* POSTCONDITION - FUNCTION CREATES AN ACTION 	*/
@@ -179,7 +133,6 @@ public class BusGUI extends JFrame implements ActionListener
 		/********************/
 		/* VARIABLE SECTION */
 		/********************/
-		Customer customer;	// REUSUABLE OBJECT FOR CUSTOMER
 		String action; 		// STRING TO REPRESENT WHICH BUTTON WAS PRESSED
 		String name;		// REUSUABLE STRING INPUT FOR NAME 
 		String num;			// REUSUABLE STRING INPUT
@@ -190,210 +143,94 @@ public class BusGUI extends JFrame implements ActionListener
 		int grpSz;			// REUSUABLE INT INPUT FOR GROUP SIZE
 		int confirm; 		// REUSUABLE INT INPUT FOR CONFIRMING AN ACTION
 		
-		/************************************/
-		/* ASSIGNS BUTTON PRESSED TO ACTION */
-		/************************************/
-		action = event.getActionCommand();	// CALL TO GET ACTION COMMAND
-		
-		/***************/
-		/* INPUTS NAME */
-		/***************/
-		name = nameTF.getText();			// CALL TO GET TEXT INPUTTED BY USER
-		customer.setName(name);				// CALL TO SET NAME
-		
-		/*******************/
-		/* INPUTS GROUP ID */
-		/*******************/
-		groupID = grpIDTF.getText();		// CALL TO GET TEXT INPUTTED BY USER
-		grpID = Integer.parseInt(groupID);	// PARSES STRING TO AN INTEGER
-		customer.setID(grpID);				// CALL TO SET ID
-		
-		/*********************/
-		/* INPUTS GROUP SIZE */
-		/*********************/
-		groupSz = grpSzTF.getText();		// CALL TO GET TEXT INPUTTED BY USER
-		grpSz = Integer.parseInt(groupSz);	// PARSES STRING TO AN INTEGER
-		customer.setGroup(grpSz);			// CALL TO SET SIZE
-		
-		/***************/
-		/* INPUTS DATE */
-		/***************/
-		date = dateTF.getText();			// CALL TO GET TEXT INPUTTED BY USER
-		customer.setDate(date);				// CALL TO SET DATE
-		
-		/****************************************************/
-		/* IF STATEMENT TO CHECK IF QUIT BUTTON WAS PRESSED */	
-		/****************************************************/
-		if (action.equals("Quit"))
-		{
-			confirm = confirmWindow();
-			
-			/******************************************************/
-			/* IF STATEMENT TO CONFIRM ACTION OF QUITTING PROGRAM */	
-			/******************************************************/
-			if(confirm == 0)
-			{
-				return;
-			}
-		}
-		
-		/*********************************************************/
-		/* ELSE IF STATEMENT TO CHECK IF DATE BUTTON WAS PRESSED */	
-		/*********************************************************/
-		else if (action.equals("Enter"))
-		{
-			System.out.print("Successful date implementation");
-		}
-		
-		/*************************************************************/
-		/* ELSE IF STATEMENT TO CHECK IF GROUP ID BUTTON WAS PRESSED */	
-		/*************************************************************/
-		else if(action.equals("Group ID"))
-		{
-			System.out.print("Successful Group ID implementation");
-		}
-		
-		/***************************************************************/
-		/* ELSE IF STATEMENT TO CHECK IF GROUP SIZE BUTTON WAS PRESSED */	
-		/***************************************************************/
-		else if (action.equals("Group Size"))
-		{
-			System.out.print("Successful Group Size implementation");
-		}
-	}
-	public static void main(String[]args)
-	{
-		new BusGUI();
-	}
-	
-	public static void errorMessage(String str)
-	/*********************************************************************/
-	/* PRECONDITION - NEEDS ERROR MESSAGE FOR INPUTS OF NEGATIVE NUMBERS */
-	/* POSTCONDITION - CREATES WIMDOW TO SHOW THE ERROR THE USER MADE 	 */
-	/*********************************************************************/
-	{
-		/******************************/
-		/* MAKES ERROR MESSAGE WINDOW */
-		/******************************/
-		JOptionPane.showMessageDialog(
-				null,
-				str,
-				"Error Message",
-				JOptionPane.ERROR_MESSAGE);
-	}
-	
-	public static int inputInt(String str, String hdstr)
-	/*************************************************/
-	/* PRECONDITION - NEEDS INTEGER VALUE	 		 */
-	/* POSTCONDITION - GETS INTEGER VALUE			 */
-	/*************************************************/
-	{
-		/********************/
-		/* VARIABLE SECTION */
-		/********************/
-		String inum;		// REUSABLE STRING INPUT
-		int num;			// REUSABLE INT VALUE
-		
-		/********************* ********/
-		/* LOOP UNTIL VALUE IS VALID */
-		/*****************************/
+		/***********************************************/
+		/* LOOP TO CHECK WHICH EVENT HAPPENS ON JFRAME */
+		/***********************************************/
 		do
-		{
-			/*****************************/
-			/* MAKES INPUT DIALOG WINDOW */
-			/*****************************/
-			inum = JOptionPane.showInputDialog(
-					null,
-					str,
-					hdstr,
-					JOptionPane.QUESTION_MESSAGE);
-			num = Integer.parseInt(inum);		// ASSIGNS THE STRING INUM 
-												// TO THE INTEGER NUM
+		{	
+			/************************************/
+			/* ASSIGNS BUTTON PRESSED TO ACTION */
+			/************************************/
+			action = event.getActionCommand();	// CALL TO GET ACTION COMMAND
 			
-			/*******************************/
-			/* IF STATEMENT TO ERROR CHECK */
-			/*******************************/
-			if(num < 0)
+			/****************************************************/
+			/* IF STATEMENT TO CHECK IF QUIT BUTTON WAS PRESSED */	
+			/****************************************************/
+			if (action.equals("Quit"))
 			{
-				errorMessage(error3);		// CALL TO ERROR MESSAGE
-			}
-		}
-		while(num < 0);
-		
-		/******************/
-		/* RETURN SECTION */
-		/******************/
-		return num;			// RETURNS NUM
-	}
-	
-	public static int inputInt2(String str, String hdstr)
-	/*************************************************/
-	/* PRECONDITION - NEEDS INTEGER VALUE	 		 */
-	/* POSTCONDITION - GETS INTEGER VALUE			 */
-	/*************************************************/
-	{
-		/********************/
-		/* VARIABLE SECTION */
-		/********************/
-		String inum;		// REUSABLE STRING INPUT
-		int num;			// REUSABLE INT VALUE
-		
-		/*****************************/
-		/* LOOP UNTIL VALUE IS VALID */
-		/*****************************/
-		do
-		{
-			/*****************************/
-			/* MAKES INPUT DIALOG WINDOW */
-			/*****************************/
-			inum = JOptionPane.showInputDialog(
-					null,
-					str,
-					hdstr,
-					JOptionPane.QUESTION_MESSAGE);
-			num = Integer.parseInt(inum);	// ASSIGNS THE STRING INUM 
-											// TO THE INTEGER NUM
+				confirm = confirmWindow();		// CALL TO CONFIRM WINDOW
 			
-			/*******************************/
-			/* IF STATEMENT TO ERROR CHECK */
-			/*******************************/
-			if ((num < 100) || (num > 999))
-			{
-				errorMessage(error2);		// CALL TO ERROR MESSAGE
+				/******************************************************/
+				/* IF STATEMENT TO CONFIRM ACTION OF QUITTING PROGRAM */	
+				/******************************************************/
+				if(confirm == 0)
+				{
+					System.exit(0);		// TERMINATES THE PROGRAM
+				}
 			}
+			
+			/*********************************************************/
+			/* ELSE IF STATEMENT TO CHECK IF ENTER BUTTON WAS PRESSED */	
+			/*********************************************************/
+			else if (action.equals("Enter"))
+			{
+				/*****************************************************/
+				/* IF STATEMENT TO CHECK IF ENTER BUTTON WAS PRESSED */	
+				/*****************************************************/
+				if((nameTF.getText() != null) && (grpIDTF.getText() != null) 
+					&& (grpSzTF.getText() != null) && (dateTF.getText() != null))
+				{
+							confirm = confirmWindow();		// CALL TO CONFIRM WINDOW
+					
+					/****************************************************************************/
+					/* IF STATEMENT TO CONFIRM ACTION OF CONTINUING THROUGH INFORMATION PROGRAM */	
+					/****************************************************************************/
+					if(confirm == 0)
+					{	
+						frame.dispose();		// GETS RID OF THE OLD FRAME
+						new Menu_GUI(); 		// INSTANTIATES A NEW FRAME
+					}
+				}
+					
+				/*******************************************************/
+				/* ELSE STATEMENT TO CHECK IF ENTER BUTTON WAS PRESSED */	
+				/*******************************************************/
+				else
+				{
+					frame.setVisible(false);	// SETS VISIBILTY OF FRAME TO FALSE
+					errorMessage(error4);		// CALL TO ERROR MESSAGE
+				}
+			}
+			
+			frame.setVisible(true);				// SETS VISIBILTY OF FRAME TO TRUE
+		
+			/***************/
+			/* INPUTS NAME */
+			/***************/
+			name = nameTF.getText();			// CALL TO GET TEXT INPUTTED BY USER
+			customer.setName(name);				// CALL TO SET NAME
+			
+			/*******************/
+			/* INPUTS GROUP ID */
+			/*******************/
+			groupID = grpIDTF.getText();		// CALL TO GET TEXT INPUTTED BY USER
+			grpID = Integer.parseInt(groupID);	// PARSES STRING TO AN INTEGER
+			customer.setID(grpID);				// CALL TO SET ID
+		
+			/*********************/
+			/* INPUTS GROUP SIZE */
+			/*********************/
+			groupSz = grpSzTF.getText();		// CALL TO GET TEXT INPUTTED BY USER
+			grpSz = Integer.parseInt(groupSz);	// PARSES STRING TO AN INTEGER
+			customer.setGroup(grpSz);			// CALL TO SET SIZE
+		
+			/***************/
+			/* INPUTS DATE */
+			/***************/
+			date = dateTF.getText();			// CALL TO GET TEXT INPUTTED BY USER
+			customer.setDate(date);				// CALL TO SET DATE
 		}
-		while((num < 100) || (num > 999));
-		
-		/******************/
-		/* RETURN SECTION */
-		/******************/
-		return num;			// RETURNS NUM
-	}
-	
-	public static String inputString(String str, String hdstr)
-	/*************************************************/
-	/* PRECONDITION - NEEDS STRING VALUE FOR NAME	 */
-	/* POSTCONDITION - GETS STRING VALUE FOR NAME	 */
-	/*************************************************/
-	{
-		/********************/
-		/* VARIABLE SECTION */
-		/********************/
-		String nm;		// INPUTS NUMBER AS A STRING
-		
-		/*****************************/
-		/* MAKES INPUT DIALOG WINDOW */
-		/*****************************/
-		nm = JOptionPane.showInputDialog(
-				null,
-				str,
-				hdstr,
-				JOptionPane.QUESTION_MESSAGE);
-		
-		/******************/
-		/* RETURN SECTION */
-		/******************/
-		return nm;		// RETURNS NM
+		while((action != "Quit") || (action != "Enter"));
 	}
 	
 	public static int confirmWindow()
@@ -424,11 +261,22 @@ public class BusGUI extends JFrame implements ActionListener
 		/******************/
 		return num;		// RETURNS NUM
 	}
-	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
 	
+	public static void errorMessage(String str)
+	/*********************************************************************/
+	/* PRECONDITION - NEEDS ERROR MESSAGE FOR INPUTS OF NEGATIVE NUMBERS */
+	/* POSTCONDITION - CREATES WIMDOW TO SHOW THE ERROR THE USER MADE 	 */
+	/*********************************************************************/
+	{
+		/******************************/
+		/* MAKES ERROR MESSAGE WINDOW */
+		/******************************/
+		JOptionPane.showMessageDialog(
+				null,
+				str,
+				"Error Message",
+				JOptionPane.ERROR_MESSAGE);
+	}
 }
 
 
