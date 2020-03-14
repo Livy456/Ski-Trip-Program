@@ -53,7 +53,7 @@ public class BusGUI implements ActionListener
 	private Label grpSzL;			// CREATES A LABEL FOR GROUP SIZE
 	private Label dateL;			// CREATES A LABEL FOR DATE
 	private JFrame frame;			// CREATES A JFRAME 
-	private Customer customer;		// CREATES AN INSTANCE OF THE CUSTOMER CLASS
+	//private Customer customer;		// CREATES AN INSTANCE OF THE CUSTOMER CLASS
 	private ArrayList <Customer> custList;	// CREATES AN ARRAYLIST OF CUSTOMER
 	
 	public BusGUI()
@@ -76,7 +76,7 @@ public class BusGUI implements ActionListener
 		grpIDL = new Label("Group ID");			// INSTANTIATES A LABEL
 		grpSzL = new Label("Group Size");		// INSTANTIATES A LABEL
 		dateL = new Label("Date");				// INSTANTIATES A LABEL
-		customer = new Customer();				// INSTANTIATES CUSTOMER
+		//customer = new Customer();				// INSTANTIATES CUSTOMER
 		
 		/**********************************************/
 		/* SETS BOUNDS FOR BUTTONS, JTEXTFIELD, LABEL */
@@ -140,10 +140,7 @@ public class BusGUI implements ActionListener
 		/********************/
 		String action; 		// STRING TO REPRESENT WHICH BUTTON WAS PRESSED
 		String name;		// REUSUABLE STRING INPUT FOR NAME 
-		String num;			// REUSUABLE STRING INPUT
 		String date;		// REUSUABLE STRING INPUT FOR DATE
-		String groupID;		// REUSUABLE STRING INPUT FOR GROUP ID
-		String groupSz;		// REUSUABLE STRING INPUT FOR GROUP SIZE
 		int grpID;			// REUSUABLE INT INPUT FOR GROUP ID
 		int grpSz;			// REUSUABLE INT INPUT FOR GROUP SIZE
 		int confirm; 		// REUSUABLE INT INPUT FOR CONFIRMING AN ACTION
@@ -152,7 +149,29 @@ public class BusGUI implements ActionListener
 		/* ASSIGNS BUTTON PRESSED TO ACTION */
 		/************************************/
 		action = event.getActionCommand();	// CALL TO GET ACTION COMMAND
-			
+					
+		/***************/
+		/* INPUTS NAME */
+		/***************/
+		name = inputName(nameTF);			// CALL TO INPUT NAME
+		
+		/*******************/
+		/* INPUTS GROUP ID */
+		/*******************/
+		grpID = inputGrpID(grpIDTF);		// CALL TO INPUT GROUP ID
+		
+		/*********************/
+		/* INPUTS GROUP SIZE */
+		/*********************/
+		grpSz = inputGrpSz(grpSzTF);		// CALL TO INPUT GROUP SIZE
+		
+		/***************/
+		/* INPUTS DATE */
+		/***************/
+		date = dateTF.getText();			// CALL TO GET TEXT INPUTTED BY USER
+		
+		custList.add(new Customer(name, date, grpID, grpSz));	// ADDS CUSTOMER TO ARRAYLIST
+	
 		/****************************************************/
 		/* IF STATEMENT TO CHECK IF QUIT BUTTON WAS PRESSED */	
 		/****************************************************/
@@ -165,7 +184,7 @@ public class BusGUI implements ActionListener
 			/******************************************************/
 			if(confirm == 0)
 			{
-				System.exit(0);		// TERMINATES THE PROGRAM
+				System.exit(0);				// TERMINATES THE PROGRAM
 			}
 		}
 			
@@ -189,40 +208,13 @@ public class BusGUI implements ActionListener
 			/*****************************************************/
 			else
 			{
-				frame.dispose();		// GETS RID OF THE OLD FRAME
-				new Menu_GUI(); 		// INSTANTIATES A NEW FRAME
+				frame.dispose();			// GETS RID OF THE OLD FRAME
+				
+				System.out.println(printArray(custList));
+
+				new Menu_GUI(); 			// INSTANTIATES A NEW FRAME
 			}
 		}
-					
-		/***************/
-		/* INPUTS NAME */
-		/***************/
-		name = nameTF.getText();			// CALL TO GET TEXT INPUTTED BY USER
-		customer.setName(name);				// CALL TO SET NAME
-			
-		/*******************/
-		/* INPUTS GROUP ID */
-		/*******************/
-		groupID = grpIDTF.getText();		// CALL TO GET TEXT INPUTTED BY USER
-		grpID = Integer.parseInt(groupID);	// PARSES STRING TO AN INTEGER
-		customer.setID(grpID);				// CALL TO SET ID
-		
-		/*********************/
-		/* INPUTS GROUP SIZE */
-		/*********************/
-		groupSz = grpSzTF.getText();		// CALL TO GET TEXT INPUTTED BY USER
-		grpSz = Integer.parseInt(groupSz);	// PARSES STRING TO AN INTEGER
-		customer.setGroup(grpSz);			// CALL TO SET SIZE
-		
-		/***************/
-		/* INPUTS DATE */
-		/***************/
-		date = dateTF.getText();			// CALL TO GET TEXT INPUTTED BY USER
-		customer.setDate(date);				// CALL TO SET DATE
-		
-		custList.add(customer);				// ADDS CUSTOMER TO ARRAYLIST
-		
-		System.out.println(customer + "\n" + custList);
 	}
 	
 	public static int confirmWindow()
@@ -270,6 +262,108 @@ public class BusGUI implements ActionListener
 				JOptionPane.ERROR_MESSAGE);
 	}
 	
+	public static int inputGrpID(JTextField grpIDTF)
+	/************************************************/
+	/* PRECONDITION - NEEDS GROUP ID VALUE	 		*/
+	/* POSTCONDITION - GETS GROUP ID VALUE			*/
+	/************************************************/
+	{
+		/********************/
+		/* VARIABLE SECTION */
+		/********************/
+		String numi;		// REUSUABLE STRING INPUT
+		int num;			// REUSUABLE INT VALUE
+		
+		/*****************************/
+		/* LOOP UNTIL VALUE IS VALID */
+		/*****************************/
+		do
+		{
+			/*******************/
+			/* INPUTS GROUP ID */
+			/*******************/
+			numi = grpIDTF.getText();		// CALL TO GET TEXT INPUTTED BY USER
+			num = Integer.parseInt(numi);	// PARSES STRING TO AN INTEGER
+		
+			/*******************************/
+			/* IF STATEMENT TO ERROR CHECK */
+			/*******************************/
+			if((num < 0) || (num > 1000))
+			{
+				grpIDTF.setText("");		// CLEARS THE TEXT FIELD 
+				errorMessage(error2);		// CALL TO ERROR MESSAGE
+			}
+		}
+		while((num < 0) || (num > 1000));
+		
+		/******************/
+		/* RETURN SECTION */
+		/******************/
+		return num;			// RETURNS NUM
+	}
+	
+	public static int inputGrpSz(JTextField grpSzTF)
+	/************************************************/
+	/* PRECONDITION - NEEDS GROUP SIZE VALUE	 	*/
+	/* POSTCONDITION - GETS GROUP SIZE VALUE		*/
+	/************************************************/
+	{
+		/********************/
+		/* VARIABLE SECTION */
+		/********************/
+		String numi;		// REUSUABLE STRING INPUT
+		int num;			// REUSUABLE INT VALUE
+		
+		/*****************************/
+		/* LOOP UNTIL VALUE IS VALID */
+		/*****************************/
+		do
+		{
+			/*******************/
+			/* INPUTS GROUP ID */
+			/*******************/
+			numi = grpSzTF.getText();		// CALL TO GET TEXT INPUTTED BY USER
+			num = Integer.parseInt(numi);	// PARSES STRING TO AN INTEGER
+		
+			/*******************************/
+			/* IF STATEMENT TO ERROR CHECK */
+			/*******************************/
+			if((num < 0) || (num > 100))
+			{
+				grpSzTF.setText("");		// CLEARS THE TEXT FIELD 
+				errorMessage(error2);		// CALL TO ERROR MESSAGE
+			}
+		}
+		while((num < 0) || (num > 100));
+		
+		/******************/
+		/* RETURN SECTION */
+		/******************/
+		return num;			// RETURNS NUM
+	}
+	
+	public static String inputName(JTextField nameTF)
+	/************************************************/
+	/* PRECONDITION - NEEDS GROUP ID VALUE	 		*/
+	/* POSTCONDITION - GETS GROUP ID VALUE			*/
+	/************************************************/
+	{
+		/********************/
+		/* VARIABLE SECTION */
+		/********************/
+		String numi;		// REUSUABLE STRING INPUT
+		
+		/*******************/
+		/* INPUTS GROUP ID */
+		/*******************/
+		numi = nameTF.getText();		// CALL TO GET TEXT INPUTTED BY USER
+		
+		/******************/
+		/* RETURN SECTION */
+		/******************/
+		return numi;		// RETURNS NUM
+	}
+	
 	public static String printArray(ArrayList<Customer> custList)
 	/*********************************************************/
 	/* PRECONDITION - NEEDS UPDATE OF ARRAYLIST OF INTEGERS	 */
@@ -288,7 +382,8 @@ public class BusGUI implements ActionListener
 		/***********************************************/
 		for(int i = 0; i < custList.size(); i++)
 		{
-			str+= "" + custList.get(i).toString();
+			str+= "" + custList.get(i).toString();		// CREATES A STRING 
+														// REPRESENTATION OF ARRAYLIST
 		}
 		
 		/******************/
@@ -297,6 +392,3 @@ public class BusGUI implements ActionListener
 		return str;			// RETURN STR
 	}
 }
-
-
-	
