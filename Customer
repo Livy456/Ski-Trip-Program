@@ -44,12 +44,9 @@ public class Customer implements Ski_Interface
 		date = "";			// INTIALIZES DATE TO AN EMPTY STRING
 		id = 0;				// INTIALIZES ID TO ZERO
 		grpsize = 0;		// INTIALIZES GROUPSIZE TO ZERO
-		bus = 0;			// INTIALIZES BUS TO ZERO
-		remainder = 0;		// INTIALIZES REMAINDER TO ZERO
-		cost = 0.00;		// INTIALIZES COST TO ZERO
 	}
 	
-	public Customer(String nm, String dt, int i,int grp, int b, int r, double ct)
+	public Customer(String nm, String dt, int i,int grp)
 	/*********************************************************************/
 	/* INITIALIZING CONSTRUCTOR - INITIALIZES NAME, DATE, ID, GROUPSIZE, */
 	/* 							  BUS, REMAINDER, AND COST 	  			 */
@@ -59,9 +56,6 @@ public class Customer implements Ski_Interface
 		date = dt;			// INITIALIZES DATE TO VALUE INPUTTED BY CLIENT
 		id = i;				// INITIALIZES ID TO VALUE INPUTTED BY CLIENT
 		grpsize = grp;		// INITIALIZES GROUPSIZE TO VALUE INPUTTED BY CLIENT
-		bus = b;			// INITIALIZES BUS TO VALUE INPUTTED BY CLIENT
-		remainder = r;		// INITIALIZES REMAINDER TO VALUE INPUTTEED BY CLIENT
-		cost = ct;			// INITIALIZES COST TO VALUE INPUTTED BY CLIENT
 	}
 	
 	public Customer(Customer cm)
@@ -74,8 +68,6 @@ public class Customer implements Ski_Interface
 		date = cm.date;			// INITIALIZES DATE TO COPY OF OBJECT NAME VALUE
 		id = cm.id;				// INITIALIZES ID TO COPY OF OBJECT NAME VALUE
 		grpsize = cm.grpsize;	// INITIALIZES GROUPSIZE TO COPY OF OBJECT NAME VALUE
-		bus = cm.bus;			// INITIALIZES BUS TO COPY OF OBJECT NAME VALUE
-		cost = cm.cost;			// INITIALIZES COST TO COPY OF OBJECT NAME VALUE
 	}
 	
 	public void setName(String nm)
