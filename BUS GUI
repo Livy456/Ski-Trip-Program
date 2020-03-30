@@ -36,8 +36,12 @@ public class BusGUI implements ActionListener
 	final static String heading2 = "Input Group ID";
 	final static String heading3 = "Input Group Size";
 	final static String error2 = "ERROR!!! Number must be between 100 and 999";
-	final static String error3 = "ERROR!!!Number must be greater than 0 and less than or equal to 100!!!";
-	final static String error4 = "ERROR!!! You need to finish filling out information!!!";
+	final static String error3 = "ERROR!!! Number must be greater than 0 and less than or equal to 100!!!";
+	final static String error4 = "ERROR!!! This month can not be chosen with this day!!!";
+	final static String error5 = "ERROR!!! This day can not be chosen with this month!!!";
+	final static String error6 = "ERROR!!! This day can not be chosen with this year!!!";
+	final static String error7 = "ERROR!!! This year can not be chosen with this day";
+	final static String error8 = "ERROR!!! You need to finish filling out information!!!";
 	
 	/*****************************/
 	/* INSTANCE VARIABLE SECTION */
@@ -238,10 +242,25 @@ public class BusGUI implements ActionListener
 		grpSz = inputGrpSz(grpSzTF);	// CALL TO INPUT GROUP SIZE
 		customer.setSize(grpSz);		// CALL TO SET GROUP SIZE
 		
+		/****************/
+		/* INPUTS MONTH */
+		/****************/
+		monthi = inputMonth(month);
+		
+		/**************/
+		/* INPUTS DAY */
+		/**************/
+		dayi = inputDay(day);
+		
+		/***************/
+		/* INPUTS YEAR */
+		/***************/
+		yeari = inputYear(year);
+		
 		/***************/
 		/* INPUTS DATE */
 		/***************/
-		date = "" + month + "/" + day + "/" + year;	
+		date = "" + monthi + "/" + dayi + "/" + yeari;	
 		customer.setDate(date);			// CALL TO SET DATE
 	}
 	
@@ -303,29 +322,6 @@ public class BusGUI implements ActionListener
 				str,
 				"Error Message",
 				JOptionPane.ERROR_MESSAGE);
-	}
-	
-	public static Object inputMonth(JComboBox month)
-	/*************************************************/
-	/* PRECONDITION - NEEDS STRING VALUE FOR DATE	 */
-	/* POSTCONDITION - GETS STRING VALUE FOR DATE	 */
-	/*************************************************/
-	{
-		/********************/
-		/* VARIABLE SECTION */
-		/********************/
-		Object num;			// REUSUABLE STRING INPUT
-				
-		/***************/
-		/* INPUTS DATE */
-		/***************/
-		num = month.getSelectedItem();		// CALL TO GET SELECTED ITEM 
-											// FROM DROP-DOWN LIST	
-		
-		/******************/
-		/* RETURN SECTION */
-		/******************/
-		return num;			// RETURNS NUM
 	}
 	
 	public static int inputGrpID(JTextField grpIDTF)
@@ -408,6 +404,73 @@ public class BusGUI implements ActionListener
 		return num;			// RETURNS NUM
 	}
 	
+	public static String inputMonth(JComboBox month, JComboBox day, JComboBox year)
+	/*************************************************/
+	/* PRECONDITION - NEEDS STRING VALUE FOR MONTH	 */
+	/* POSTCONDITION - GETS STRING VALUE FOR MONTH	 */
+	/*************************************************/
+	{
+		/********************/
+		/* VARIABLE SECTION */
+		/********************/
+		Object inum;			// REUSUABLE OBJECT INPUT
+		String num;				// REUSUABLE STRING INPUT	
+		
+		/*****************************/
+		/* LOOP UNTIL VALUE IS VALID */
+		/*****************************/
+		do
+		{
+			/****************/
+			/* INPUTS MONTH */
+			/****************/
+			inum = month.getSelectedItem();		// CALL TO GET SELECTED ITEM 
+												// FROM DROP-DOWN LIST	
+			num = (String) inum;				// TYPE CAST INUM TO BE A STRING
+			
+			/*******************************************************/
+			/* IF STATEMENT TO CHECK IF MONTH SELECTED IS FEBRUARY */
+			/*******************************************************/
+			if(num == "2")
+			{
+				Object dayi = day.getSelectedItem();
+				Object yeari = year.getSelectedItem();
+				String day2 = (String) dayi;
+				int year2 = (int) yeari;
+				
+				/*******************************/
+				/* IF STATEMENT TO ERROR CHECK */
+				/*******************************/
+				if((day2 == "29") && (year2%4 != 0))
+				{
+					errorMessage(error4);			// CALL TO ERROR MESSAGE
+				}
+				
+				/************************************/
+				/* ELSE IF STATEMENT TO ERROR CHECK */
+				/************************************/
+				else if(day2 == "30")
+				{
+					errorMessage(error4);			// CALL TO ERROR MESSAGE
+				}
+				
+				/************************************/
+				/* ELSE IF STATEMENT TO ERROR CHECK */
+				/************************************/
+				else if(day2 == "31")
+				{
+					errorMessage(error4);			// CALL TO ERROR MESSAGE
+				}
+			}	
+		}
+		while(num == "1");
+		
+		/******************/
+		/* RETURN SECTION */
+		/******************/
+		return num;			// RETURNS NUM
+	}
+	
 	public static String inputName(JTextField nameTF)
 	/*************************************************/
 	/* PRECONDITION - NEEDS STRING VALUE FOR NAME	 */
@@ -458,6 +521,3 @@ public class BusGUI implements ActionListener
 		return str;			// RETURN STR
 	}
 }
-
-
-	
