@@ -1,6 +1,6 @@
 /******************************************/
 /* USER DESCRIPTION SECTION 			  */
-/* OLIVIA 				   			  */
+/* OLIVIA DIAS				   			  */
 /* FINAL PROJECT			   	  		  */
 /* PROGRAM 12							  */
 /* FEBRUARY 10, 2020		   			  */
@@ -26,7 +26,7 @@ public class Customer implements Ski_Interface
 	/* INSTANCE VARIABLE SECTION */
 	/*****************************/
 	private String name;		// INSTANCE VARIABLE FOR USER'S NAME	
-	private String date;		// INSTANCE VARIABLE FOR DATE OF SKI TRIP
+	private Object date;		// INSTANCE VARIABLE FOR DATE OF SKI TRIP
 	private int id;				// INSTANCE VARIABLE FOR USER'S ID
 	private int grpsize;		// INSTANCE VARIABLE FOR USER'S GROUP SIZE
 	private int bus;			// INSTANCE VARIABLE FOR NUMBER OF BUSES
@@ -46,7 +46,7 @@ public class Customer implements Ski_Interface
 		grpsize = 0;		// INTIALIZES GROUPSIZE TO ZERO
 	}
 	
-	public Customer(String nm, String dt, int i,int grp)
+	public Customer(String nm, Object dt, int i,int grp)
 	/*********************************************************************/
 	/* INITIALIZING CONSTRUCTOR - INITIALIZES NAME, DATE, ID, GROUPSIZE, */
 	/* 							  BUS, REMAINDER, AND COST 	  			 */
@@ -91,7 +91,7 @@ public class Customer implements Ski_Interface
 		return name;		// RETURNS NAME
 	}
 	
-	public void setDate(String dt)
+	public void setDate(Object dt)
 	/************************************************/
 	/* PRECONDITION - PROGRAM HAS A DATE			*/
 	/* POSTCONDITION - FUNCTION SETS VALUE OF DATE	*/
@@ -100,7 +100,7 @@ public class Customer implements Ski_Interface
 		date = dt;		// SETS DATE TO DATE VALUE INPUTTED FROM CLIENT
 	}
 	
-	public String getDate()
+	public Object getDate()
 	/************************************************/
 	/* PRECONDITION - PROGRAM HAS A NAME			*/
 	/* POSTCONDITION - FUNCTION RETURNS NAME		*/
@@ -133,7 +133,7 @@ public class Customer implements Ski_Interface
 		return id;			// RETURNS ID
 	}
 	
-	public void setGroup(int grp)
+	public void setSize(int grp)
 	/****************************************************/
 	/* PRECONDITION - PROGRAM HAS A GROUPSIZE			*/
 	/* POSTCONDITION - FUNCTION SETS VALUE OF GROUPSIZE	*/
@@ -142,7 +142,7 @@ public class Customer implements Ski_Interface
 		grpsize = grp;	// SETS GROUPSIZE TO GROUPSIZE VALUE INPUTTED FROM CLIENT
 	}
 	
-	public int getGroup()
+	public int getSize()
 	/************************************************/
 	/* PRECONDITION - PROGRAM HAS A GROUPSIZE		*/
 	/* POSTCONDITION - FUNCTION RETURNS GROUPSIZE	*/
