@@ -55,17 +55,28 @@ public class BusGUI implements ActionListener
 	private Label grpSzL;			// CREATES A LABEL FOR GROUP SIZE
 	private Label dateL;			// CREATES A LABEL FOR DATE
 	private JFrame frame;			// CREATES A JFRAME 
-	private ArrayList <Customer> custList = new ArrayList();		// CREATES AN ARRAYLIST OF CUSTOMER
-	private ArrayList <String> dates = new ArrayList();	// CREATES AN ARRAY FOR POSSIBLE DATE
+	private ArrayList <Customer> custList = new ArrayList();			// CREATES AN ARRAYLIST OF CUSTOMER
+	private String[] months = {"1", "2", "3", "4", "5", "6",
+							   "7", "8", "9", "10", "11", "12"};		// CREATES AN ARRAY FOR MONTHS
+	private String[] years = {"2020", "2021", "2022", "2023", "2024",
+							  "2025", "2026", "2027", "2028", "2029",
+							  "2030", "2031", "2032", "2033", "2034",
+							  "2035", "2036", "2037", "2038", "2039",
+							  "2040", "2041", "2042", "2043", "2044",
+							  "2045", "2046", "2047", "2048", "2049"};	// CREATES AN ARRAY FOR YEARS
+	private String[] days = {"1", "2", "3", "4", "5",
+							 "6", "7", "8", "9", "10",
+							 "11", "12", "13", "14", "15",
+							 "16", "17", "18", "19", "20",
+							 "21", "22", "23", "24", "25",
+							 "26", "27", "28", "29", "30", "31"};		// CREATES AN ARRAY FOR DAYS
 	
 	public BusGUI()
 	/************************************************/
 	/* DEFAULT CONSTRUCTOR - IT CREATES A FRAME FOR */
 	/*						 CONTENT PANE			*/
 	/************************************************/
-	{
-		dates = addDates();		// CALL TO ADD DATES	
-		
+	{		
 		/*************************/
 		/* INSTANTIATION SECTION */
 		/*************************/
@@ -86,27 +97,31 @@ public class BusGUI implements ActionListener
 		/**********************************************/
 		/* SETS BOUNDS FOR BUTTONS, JTEXTFIELD, LABEL */
 		/**********************************************/
-		enterB.setBounds(150, 200, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		enterB.setBounds(150, 270, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		nameTF.setBounds(130, 80, 100, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		grpIDTF.setBounds(130, 110, 100, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		grpSzTF.setBounds(130, 140, 100, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		quitB.setBounds(250, 200, 75, 25);		// SETS (X POSITIION, Y POSITION, LENGTH, WIDTH)
-		dateCB.setBounds(130, 170, 100, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		quitB.setBounds(250, 270, 75, 25);		// SETS (X POSITIION, Y POSITION, LENGTH, WIDTH)
+		month.setBounds(130, 170, 100, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		day.setBounds(130, 200, 100, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		year.setBounds(130, 230, 100, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		nameL.setBounds(50, 80, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		grpIDL.setBounds(50, 110, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		grpSzL.setBounds(50, 140, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		dateL.setBounds(100, 170, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		dateL.setBounds(130, 170, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 
 		/**********************************************/
 		/* ADDS LISTENER TO BUTTON TO PERFORM ACTIONS */
 		/**********************************************/
 		enterB.addActionListener(this);		// ADDS ACTIONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED
 		quitB.addActionListener(this);		// ADDS ACITONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED
-		nameTF.addActionListener(this);		// ADDS ACITONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED
-		grpIDTF.addActionListener(this);	// ADDS ACITONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED
-		grpSzTF.addActionListener(this);	// ADDS ACITONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED
-		dateCB.addActionListener(this);		// ADDS ACITONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED
-
+		nameTF.addActionListener(this);		// ADDS ACITONLISTENER TO MAKE AN EVENT ONCE TEXT IS WRITTEN
+		grpIDTF.addActionListener(this);	// ADDS ACITONLISTENER TO MAKE AN EVENT ONCE TEXT IS WRITTEN
+		grpSzTF.addActionListener(this);	// ADDS ACITONLISTENER TO MAKE AN EVENT ONCE TEXT IS WRITTEN
+		month.addActionListener(this);		// ADDS ACITONLISTENER TO MAKE AN EVENT ONCE ITEM IS SELECTED
+		day.addActionListener(this);		// ADDS ACTIONLISTENER TO MAKE AN EVENT ONCE ITEM IS SELECTED
+		year.addActionListener(this);		// ADDS ACTIONLISTENER TO MAKE AN EVENT ONCE ITEM IS SELECTED
+		
 		/*************************/
 		/* ADDS BUTTONS TO FRAME */
 		/*************************/
@@ -115,7 +130,9 @@ public class BusGUI implements ActionListener
 		frame.add(nameTF);		// ADDS NAME TEXT FIELD TO FRAME
 		frame.add(grpIDTF);		// ADDS GROUP ID TEXT FIELD TO FRAME
 		frame.add(grpSzTF);		// ADDS GROUP SIZE TEXT FIELD TO FRAME
-		frame.add(dateCB);		// ADDS DATE TEXT FIELD TO FRAME
+		frame.add(month);		// ADDS MONTH COMBO BOX TO FRAME
+		frame.add(day);			// ADDS DAY COMBO BOX TO FRAME
+		frame.add(year);		// ADDS YEAR COMBO BOX TO FRAME
 		frame.add(nameL);		// ADDS NAME LABEL TO FRAME
 		frame.add(grpIDL);		// ADDS GROUP ID LABEL TO FRAME
 		frame.add(grpSzL);		// ADDS GROUP SIZE LABEL TO FRAME
@@ -288,7 +305,7 @@ public class BusGUI implements ActionListener
 				JOptionPane.ERROR_MESSAGE);
 	}
 	
-	public static Object inputDate(JComboBox dateCB)
+	public static Object inputMonth(JComboBox month)
 	/*************************************************/
 	/* PRECONDITION - NEEDS STRING VALUE FOR DATE	 */
 	/* POSTCONDITION - GETS STRING VALUE FOR DATE	 */
@@ -302,7 +319,7 @@ public class BusGUI implements ActionListener
 		/***************/
 		/* INPUTS DATE */
 		/***************/
-		num = dateCB.getSelectedItem();		// CALL TO GET SELECTED ITEM 
+		num = month.getSelectedItem();		// CALL TO GET SELECTED ITEM 
 											// FROM DROP-DOWN LIST	
 		
 		/******************/
