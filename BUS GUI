@@ -1,6 +1,6 @@
 /******************************************/
 /* USER DESCRIPTION SECTION 			  */
-/* OLIVIA DIAS				   			  */
+/* OLIVIA 				   			  */
 /* FINAL PROJECT		   	 			  */
 /* PROGRAM 12							  */
 /* MARCH 2, 2020		   			  	  */
@@ -206,9 +206,9 @@ public class BusGUI implements ActionListener
 			/*******************************************************/
 			/* ELSE STATEMENT TO CHECK IF ENTER BUTTON WAS PRESSED */	
 			/*******************************************************/
-			if((nameTF.getText() == "") && (grpIDTF.getText() == "") 
-				&& (grpSzTF.getText() == "") && (month.getSelectedItem() == null)
-				&& (day.getSelectedItem() == null) && (year.getSelectedItem()== null))
+			if((nameTF.getText() == "") || (grpIDTF.getText() == "") 
+				|| (grpSzTF.getText() == "") || (month.getSelectedItem() == null)
+				|| (day.getSelectedItem() == null) || (year.getSelectedItem()== null))
 			{
 				frame.setVisible(false);	// SETS VISIBILTY OF FRAME TO FALSE
 				errorMessage(error4);		// CALL TO ERROR MESSAGE
@@ -245,17 +245,17 @@ public class BusGUI implements ActionListener
 		/****************/
 		/* INPUTS MONTH */
 		/****************/
-		monthi = inputMonth(month);
+		monthi = inputMonth(month, day, year);
 		
 		/**************/
 		/* INPUTS DAY */
 		/**************/
-		dayi = inputDay(day);
+		dayi = inputDay(month, day, year);
 		
 		/***************/
 		/* INPUTS YEAR */
 		/***************/
-		yeari = inputYear(year);
+		yeari = inputYear(month, day, year);
 		
 		/***************/
 		/* INPUTS DATE */
@@ -323,6 +323,128 @@ public class BusGUI implements ActionListener
 				"Error Message",
 				JOptionPane.ERROR_MESSAGE);
 	}
+	
+	public static String inputDay(JComboBox month, JComboBox day, JComboBox year)
+	/*************************************************/
+	/* PRECONDITION - NEEDS STRING VALUE FOR DAY	 */
+	/* POSTCONDITION - GETS STRING VALUE FOR DAY	 */
+	/*************************************************/
+	{
+		/********************/
+		/* VARIABLE SECTION */
+		/********************/
+		Object inum;			// REUSUABLE OBJECT INPUT
+		String num;				// REUSUABLE STRING INPUT	
+		boolean redo = false;	// REUSUABLE BOOLEAN
+		
+		/*****************************/
+		/* LOOP UNTIL VALUE IS VALID */
+		/*****************************/
+		do
+		{
+			/****************/
+			/* INPUTS MONTH */
+			/****************/
+			inum = day.getSelectedItem();		// CALL TO GET SELECTED ITEM 
+												// FROM DROP-DOWN LIST	
+			num = (String) inum;				// TYPE CAST INUM TO BE A STRING
+			
+			Object monthi = day.getSelectedItem();
+			Object yeari = year.getSelectedItem();
+			String month2 = (String) monthi;
+			int year2 = (int) yeari;
+			
+			/********************************************************/
+			/* IF STATEMENT TO CHECK IF DAY SELECTED IS SUPPOSED TO */
+			/* HAVE LESS THAN 29 DAYS 								*/
+			/********************************************************/
+			if (num == "29")
+			{
+				/*******************************/
+				/* IF STATEMENT TO ERROR CHECK */
+				/*******************************/
+				if((month2 == "2") && (year2%4 != 0))
+				{
+					redo = true;
+					errorMessage(error4);			// CALL TO ERROR MESSAGE
+				}
+			}
+			
+			/************************************************************/
+			/* ELSE IF STATEMENT TO CHECK IF MONTH SELECTED IS SUPPOSED */
+			/* TO HAVE LESS THAN 30 DAYS 								*/
+			/************************************************************/
+			else if(num == "30")
+			{
+				/*******************************/
+				/* IF STATEMENT TO ERROR CHECK */
+				/*******************************/
+				if(month2 == "2")
+				{
+					redo = true;
+					errorMessage(error5);			// CALL TO ERROR MESSAGE
+				}
+			}
+			
+			/************************************************************/
+			/* ELSE IF STATEMENT TO CHECK IF MONTH SELECTED IS SUPPOSED */
+			/* TO HAVE LESS THAN 31 DAYS 								*/
+			/************************************************************/
+			else if((num == "31"))
+			{
+				/*******************************/
+				/* IF STATEMENT TO ERROR CHECK */
+				/*******************************/
+				if(month2 == "2")
+				{
+					redo = true;
+					errorMessage(error5);			// CALL TO ERROR MESSAGE
+				}
+				
+				/************************************/
+				/* ELSE IF STATEMENT TO ERROR CHECK */
+				/************************************/
+				else if(month2 == "4")
+				{
+					redo = true;
+					errorMessage(error5);			// CALL TO ERROR MESSAGE
+				}
+				
+				/************************************/
+				/* ELSE IF STATEMENT TO ERROR CHECK */
+				/************************************/
+				else if(month2 == "6")
+				{
+					redo = true;
+					errorMessage(error5);			// CALL TO ERROR MESSAGE
+				}
+				
+				/************************************/
+				/* ELSE IF STATEMENT TO ERROR CHECK */
+				/************************************/
+				else if(month2 == "9")
+				{
+					redo = true;
+					errorMessage(error5);			// CALL TO ERROR MESSAGE
+				}
+				
+				/************************************/
+				/* ELSE IF STATEMENT TO ERROR CHECK */
+				/************************************/
+				else if(month2 == "11")
+				{
+					redo = true;
+					errorMessage(error5);			// CALL TO ERROR MESSAGE
+				}
+			}
+		}
+		while(redo == true);
+		
+		/******************/
+		/* RETURN SECTION */
+		/******************/
+		return num;			// RETURNS NUM
+	}	
 	
 	public static int inputGrpID(JTextField grpIDTF)
 	/***************************************************/
@@ -415,6 +537,7 @@ public class BusGUI implements ActionListener
 		/********************/
 		Object inum;			// REUSUABLE OBJECT INPUT
 		String num;				// REUSUABLE STRING INPUT	
+		boolean redo = false;	// REUSUABLE BOOLEAN 
 		
 		/*****************************/
 		/* LOOP UNTIL VALUE IS VALID */
@@ -443,6 +566,7 @@ public class BusGUI implements ActionListener
 				/*******************************/
 				if((day2 == "29") && (year2%4 != 0))
 				{
+					redo = true;
 					errorMessage(error4);			// CALL TO ERROR MESSAGE
 				}
 				
@@ -451,6 +575,7 @@ public class BusGUI implements ActionListener
 				/************************************/
 				else if(day2 == "30")
 				{
+					redo = true;
 					errorMessage(error4);			// CALL TO ERROR MESSAGE
 				}
 				
@@ -459,11 +584,12 @@ public class BusGUI implements ActionListener
 				/************************************/
 				else if(day2 == "31")
 				{
+					redo = true;
 					errorMessage(error4);			// CALL TO ERROR MESSAGE
 				}
 			}	
 		}
-		while(num == "1");
+		while(redo == true);
 		
 		/******************/
 		/* RETURN SECTION */
@@ -491,6 +617,82 @@ public class BusGUI implements ActionListener
 		/* RETURN SECTION */
 		/******************/
 		return numi;		// RETURNS NUM
+	}
+	
+	public static String inputYear(JComboBox month, JComboBox day, JComboBox year)
+	/*************************************************/
+	/* PRECONDITION - NEEDS STRING VALUE FOR DAY	 */
+	/* POSTCONDITION - GETS STRING VALUE FOR DAY	 */
+	/*************************************************/
+	{
+		/********************/
+		/* VARIABLE SECTION */
+		/********************/
+		Object inum;			// REUSUABLE OBJECT INPUT
+		int num;				// REUSUABLE INT INPUT	
+		String num2;			// REUSUABLE STRING INPUT
+		boolean redo = false;	// REUSUABLE BOOLEAN 
+
+		
+		/*****************************/
+		/* LOOP UNTIL VALUE IS VALID */
+		/*****************************/
+		do
+		{
+			/****************/
+			/* INPUTS MONTH */
+			/****************/
+			inum = year.getSelectedItem();		// CALL TO GET SELECTED ITEM 
+												// FROM DROP-DOWN LIST	
+			num = (int) inum;				// TYPE CAST INUM TO BE A STRING
+			
+			Object monthi = month.getSelectedItem();
+			Object dayi = day.getSelectedItem();
+			String month2 = (String) monthi;
+			String day2 = (String) dayi;
+			
+			/********************************************************/
+			/* IF STATEMENT TO CHECK IF DAY SELECTED IS SUPPOSED TO */
+			/* HAVE LESS THAN 29 DAYS 								*/
+			/********************************************************/
+			if (num%4 != 0)
+			{				
+				/*******************************/
+				/* IF STATEMENT TO ERROR CHECK */
+				/*******************************/
+				if((month2 == "2") && (day2 == "29"))
+				{
+					redo = true;
+					errorMessage(error7);			// CALL TO ERROR MESSAGE
+				}
+				
+				/************************************/
+				/* ELSE IF STATEMENT TO ERROR CHECK */
+				/************************************/
+				else if ((month2 == "2") && (day2 == "30"))
+				{
+					redo = true;
+					errorMessage(error7);			// CALL TO ERROR MESSAGE
+				}
+				
+				/*******************************/
+				/* IF STATEMENT TO ERROR CHECK */
+				/*******************************/
+				else if ((month2 == "2") && (day2 == "31"))
+				{
+					redo = true;
+					errorMessage(error7);			// CALL TO ERROR MESSAGE
+				}
+			}
+		}
+		while(redo == true);
+		
+		num2 = "" + num;			// MAKES YEAR INTO A STRING
+		
+		/******************/
+		/* RETURN SECTION */
+		/******************/
+		return num2;			// RETURNS NUM
 	}
 	
 	public static String printArray(ArrayList<Customer> custList)
@@ -521,3 +723,6 @@ public class BusGUI implements ActionListener
 		return str;			// RETURN STR
 	}
 }
+
+
+	
