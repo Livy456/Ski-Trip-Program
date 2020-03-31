@@ -27,8 +27,8 @@ public interface Ski_Interface
 	public String getDate();
 	public void setID(int i);
 	public int getID();
-	public void setGroup(int grp);
-	public int getGroup();
+	public void setSize(int grp);
+	public int getSize();
 	public int getBus();
 	public int getRemain();
 	public double getCost();
