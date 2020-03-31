@@ -23,7 +23,7 @@ public interface Ski_Interface
 {
 	public void setName(String nm);
 	public String getName();
-	public void setDate(String dt);
+	public void setDate(Object dt);
 	public Object getDate();
 	public void setID(int i);
 	public int getID();
