@@ -58,14 +58,16 @@ public class BusGUI implements ActionListener
 	private Label nameL;			// CREATES A LABEL FOR NAME
 	private Label info;				// CREATES A LABEL FOR INFORMATION
 	private Label info2;			// CREATES A LABEL FOR ADDITIONAL INFORMATION
+	private Label warning;			// CREATES A LABEL FOR INPUT CONSTRAINTS
+	private Label warning2;			// CREATES A LABEL FOR INPUT CONSTRAINTS
 	private Label welcome;			// CREATES A LABEL TO WELCOME CLIENT
 	private Label grpSzL;			// CREATES A LABEL FOR GROUP SIZE
 	private Label dateL;			// CREATES A LABEL FOR DATE
 	private JFrame frame;			// CREATES A JFRAME 
 	private Container container;	// CREATES A CONTAINER
 	private Font font;				// CREATES A FONT FOR LABELS
-	private Customer customer;		// CREATES AN INSTANCE OF CUSTOMER
-	private ArrayList <Customer> custList = new ArrayList();			// CREATES AN ARRAYLIST OF CUSTOMER
+	protected static Customer customer;		// CREATES AN INSTANCE OF CUSTOMER
+	protected static ArrayList <Customer> custList = new ArrayList();			// CREATES AN ARRAYLIST OF CUSTOMER
 	private String[] months = {"", "1", "2", "3", "4", "5", "6",
 							   "7", "8", "9", "10", "11", "12"};		// CREATES AN ARRAY FOR MONTHS
 	private String[] years = {"", "2020", "2021", "2022", "2023", "2024",
@@ -105,13 +107,17 @@ public class BusGUI implements ActionListener
 		font = new Font("Times New Roman", 
 						Font.BOLD, 12);		// INSTANTIATES FONT					
 		customer = new Customer();			// INSTANTIATES AN INSTANCE OF CUSTOMER
-		welcome = new Label("Welcome to the Ski"+
-							"Trip Customer Input");	// INSTANTIATES A LABEL
+		welcome = new Label("Welcome to the Ski "+
+							"Customer Input");	// INSTANTIATES A LABEL
 		info = new Label("Please enter the " +
 						 "necessary information " +
 						 "into the fields below.");	// INSTANTIATES A LABEL
 		info2 = new Label("Press enter key after "+
 						  "entering info.");		// INSTANTIATES A LABEL
+		warning = new Label("Name has to be < "+
+							"11 characters.");			// INSTANTIATES A LABEL	
+		warning2 = new Label("Group size has to " +
+							 "be between 1 - 400.");// INSTANTIATES A LABEL
 		container = frame.getContentPane();			// CREATES A CONTENT PANE, WHICH  
 													// HOLDS THE OBJECTS ON THE FRAME
 		
@@ -135,6 +141,8 @@ public class BusGUI implements ActionListener
 		info.setFont(font);			// SETS THE FONT OF THE INFO LABEL
 		info2.setFont(font);		// SETS THE FONT OF THE INFO2 LABEL
 		welcome.setFont(font);		// SETS THE FONT OF THE WELCOME LABEL
+		warning.setFont(font);		// SETS THE FONT OF THE WARNING LABEL
+		warning2.setFont(font);		// SETS THE FONT OF THE WARNING LABEL
 		
 		/**********************************************/
 		/* SETS BOUNDS FOR BUTTONS, JTEXTFIELD, LABEL */
@@ -152,6 +160,8 @@ public class BusGUI implements ActionListener
 		info.setBounds(50, 30, 500, 30);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)				
 		info2.setBounds(120, 50, 500, 30);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		welcome.setBounds(110, 10, 500, 30);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		warning.setBounds(190, 80, 500, 30);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		warning2.setBounds(190, 110, 500, 30);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH) 
 		
 		/**********************************************/
 		/* ADDS LISTENER TO BUTTON TO PERFORM ACTIONS */
@@ -180,6 +190,8 @@ public class BusGUI implements ActionListener
 		container.add(info);		// ADDS INFO LABEL TO CONTAINER
 		container.add(info2);		// ADDS INFO2 LABEL TO CONTAINER
 		container.add(welcome);		// ADDS WELCOME LABEL TO CONTAINER
+		container.add(warning);		// ADDS WARNING LABEL TO CONTAINER
+		container.add(warning2);	// ADDS WARNING LABEL TO CONTAINER
 	}
 	
 	public void actionPerformed(ActionEvent event)
@@ -247,6 +259,8 @@ public class BusGUI implements ActionListener
 			{
 				frame.dispose();		// GETS RID OF THE OLD FRAME
 				custList.add(customer);	// ADDS CUSTOMER TO ARRAYLIST
+				str = printArray(custList);
+				System.out.println(str);
 				new Menu_GUI(); 		// INSTANTIATES A NEW FRAME
 			}
 		}
@@ -649,13 +663,13 @@ public class BusGUI implements ActionListener
 			/*******************************/
 			/* IF STATEMENT TO ERROR CHECK */
 			/*******************************/
-			if((grpSz < 0) ||(grpSz > 400))
+			if((grpSz <= 0) ||(grpSz > 400))
 			{
 				grpSzTF.setText("");			// CLEARS THE TEXT FIELD 
 				errorMessage(error3);			// CALL TO ERROR MESSAGE
 			}
 		}
-		while((grpSz < 0) || (grpSz > 400));
+		while((grpSz <= 0) || (grpSz > 400));
 		
 		customer.setSize(grpSz);		// CALL TO SET SIZE
 	}
@@ -759,8 +773,8 @@ public class BusGUI implements ActionListener
 		/***********************************************/
 		for(int i = 0; i < custList.size(); i++)
 		{
-			str+= "" + custList.get(i).toString();		// CREATES A STRING 
-														// REPRESENTATION OF ARRAYLIST
+			str+= "" + custList.get(i).toString() + "\n";// CREATES A STRING 
+														 // REPRESENTATION OF ARRAYLIST
 		}
 		
 		/******************/
