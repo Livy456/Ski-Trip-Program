@@ -1,6 +1,6 @@
 /******************************************/
 /* USER DESCRIPTION SECTION 			  */
-/* OLIVIA 				   			  */
+/* OLIVIA DIAS				   			  */
 /* FINAL PROJECT		   	 			  */
 /* PROGRAM 12							  */
 /* MARCH 8, 2020		   			  	  */
@@ -32,7 +32,6 @@ public class Menu_GUI extends BusGUI implements ActionListener
 	private JButton enterB;			// CREATES A BUTTON FOR ENTERING INFORMATION FOR PROGRAM	
 	private JButton insertB;		// CREATES A BUTTON FOR INSERT
 	private JButton removeB;		// CREATES A BUTTON FOR REMOVE
-	private JButton returnB;		// CREATES A BUTTON FOR REUTNRING TO HOME MENU
 	private JButton modifyB;		// CREATES A BUTTON TO MODIFY CUSTOMER  
 	private JButton quitB;			// CREATES A BUTTON TO QUIT PROGRAM 
 	private JButton costB;			// CREATES A BUTTON FOR COST OF SKI TRIP 
@@ -42,7 +41,6 @@ public class Menu_GUI extends BusGUI implements ActionListener
 	private JButton alphB;			// CREATES A BUTTON FOR SORTING ALPHABETICALLY
 	private JButton numB;			// CREATES A BUTTON FOR SORTING NUMERICALLY
 	private JButton grpB;			// CREATES A BUTTON FOR SORTING BY GROUP SIZE
-	private JButton confirmB;		// CREATES A BUTTON FOR CONFIRMING CHANGE IN INFO
 	private Label warningL;			// CREATES A LABEL FOR WARNINGS
 	private JLabel grpID;			// CREATES A LABEL FOR GROUP ID
 	private JFrame frame;			// CREATES A JFRAME 
@@ -61,8 +59,6 @@ public class Menu_GUI extends BusGUI implements ActionListener
 		enterB = new JButton("Enter");					// INSTANTIATES A JBUTTON 
 		insertB = new JButton("Insert");				// INSTANTIATES A JBUTTON
 		removeB = new JButton("Remove");				// INSTANTIATES A JBUTTON 
-		confirmB = new JButton("Confirm");				// INSTANTIATES A JBUTTON 
-		returnB = new JButton("Return");				// INSTANTIATES A JBUTTON 
 		modifyB = new JButton("Modify");				// INSTANTIATES A JBUTTON 
 		quitB = new JButton("Quit");					// INSTANTIATES A JBUTTON 
 		costB = new JButton("Cost");					// INSTANTIATES A JBUTTON 
@@ -72,7 +68,6 @@ public class Menu_GUI extends BusGUI implements ActionListener
 		alphB = new JButton("Sorting Alphabetically");	// INSTANTIATES A JBUTTON 
 		numB = new JButton("Sorting Numerically");		// INSTANTIATES A JBUTTON 
 		grpB = new JButton("Sorting by Group Size");	// INSTANTIATES A JBUTTON 
-		grpID = new JLabel("Group ID:");				// INSTANTIATES A JLABEL
 		warningL = new Label("Warning");				// INSTANTIATES A LABEL
 		DecimalFormat df = new DecimalFormat("0.00");	// INSTANTIATES DECIMALFORMAT
 		container = frame.getContentPane();				// CREATES A CONTENT PANE, WHICH  
@@ -102,8 +97,6 @@ public class Menu_GUI extends BusGUI implements ActionListener
 		numB.setBounds(270, 80, 150, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		grpB.setBounds(270, 110, 150, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		enterB.setBounds(50, 300, 100, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		confirmB.setBounds(150, 230, 100, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		returnB.setBounds(200, 350, 100, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		quitB.setBounds(300, 300, 100, 25);		// SETS (X POSITIION, Y POSITION, LENGTH, WIDTH)
 		grpID.setBounds(60, 340, 50, 50);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		warningL.setBounds(50, 230, 100, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
@@ -113,8 +106,6 @@ public class Menu_GUI extends BusGUI implements ActionListener
 		/**********************************************/
 		insertB.addActionListener(this);	// ADDS ACTIONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED
 		removeB.addActionListener(this);	// ADDS ACTIONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED
-		returnB.addActionListener(this);	// ADDS ACTIONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED
-		confirmB.addActionListener(this);	// ADDS ACITONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED
 		modifyB.addActionListener(this);	// ADDS ACTIONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED
 		quitB.addActionListener(this);		// ADDS ACITONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED
 		costB.addActionListener(this);		// ADDS ACITONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED
