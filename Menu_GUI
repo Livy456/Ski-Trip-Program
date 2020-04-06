@@ -29,7 +29,6 @@ public class Menu_GUI extends BusGUI implements ActionListener
 	/*****************************/
 	/* INSTANCE VARIABLE SECTION */
 	/*****************************/
-	private JButton enterB;			// CREATES A BUTTON FOR ENTERING INFORMATION FOR PROGRAM	
 	private JButton insertB;		// CREATES A BUTTON FOR INSERT
 	private JButton removeB;		// CREATES A BUTTON FOR REMOVE
 	private JButton modifyB;		// CREATES A BUTTON TO MODIFY CUSTOMER  
@@ -56,7 +55,6 @@ public class Menu_GUI extends BusGUI implements ActionListener
 		/* INSTANTIATION SECTION */
 		/*************************/
 		frame = new JFrame("Ski Trip Menu");			// INSTANTIATES A FRAME
-		enterB = new JButton("Enter");					// INSTANTIATES A JBUTTON 
 		insertB = new JButton("Insert");				// INSTANTIATES A JBUTTON
 		removeB = new JButton("Remove");				// INSTANTIATES A JBUTTON 
 		modifyB = new JButton("Modify");				// INSTANTIATES A JBUTTON 
@@ -96,7 +94,6 @@ public class Menu_GUI extends BusGUI implements ActionListener
 		alphB.setBounds(270, 50, 150, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		numB.setBounds(270, 80, 150, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		grpB.setBounds(270, 110, 150, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		enterB.setBounds(50, 300, 100, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		quitB.setBounds(300, 300, 100, 25);		// SETS (X POSITIION, Y POSITION, LENGTH, WIDTH)
 		grpID.setBounds(60, 340, 50, 50);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		warningL.setBounds(50, 230, 100, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
