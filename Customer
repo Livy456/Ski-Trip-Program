@@ -1,6 +1,6 @@
 /******************************************/
 /* USER DESCRIPTION SECTION 			  */
-/* OLIVIA DIAS				   			  */
+/* OLIVIA 				   			  */
 /* FINAL PROJECT			   	  		  */
 /* PROGRAM 12							  */
 /* FEBRUARY 10, 2020		   			  */
@@ -19,6 +19,7 @@ import java.awt.*;					// IMPORTS AWT
 import java.awt.event.*;			// IMPORTS EVENTS
 import javax.swing.*;				// IMPORTS SWING
 import java.text.DecimalFormat;		// IMPORTS DECIMAL FORMAT
+import java.util.Random;			// IMPORTS RANDOM
 
 public class Customer implements Ski_Interface
 {
@@ -33,6 +34,8 @@ public class Customer implements Ski_Interface
 	private int remainder;		// INSTANCE VARIABLE FOR NUMBER OF EXTRA SKIERS
 	private double cost;		// INSTANCE VARIABLE FOR USER'S COST
 	private double refund;		// INSTANE VARIABLE FOR REFUNDS
+	private Random generator = new Random();	// INSTANCE VARIABLE FOR RANDOM NUMBER 
+												// GENERATOR
 	
 	public Customer()
 	/**************************************************/
@@ -112,13 +115,27 @@ public class Customer implements Ski_Interface
 		return date;		// RETURNS DATE
 	}
 	
-	public void setID(int i)
+	public void setID()
 	/************************************************/
-	/* PRECONDITION - PROGRAM HAS A ID				*/
+	/* PRECONDITION - PROGRAM NEEDS A ID			*/
 	/* POSTCONDITION - FUNCTION SETS VALUE OF ID	*/
 	/************************************************/
 	{
-		id = i;			// SETS ID TO ID VALUE INPUTTED FROM CLIENT
+		/********************/
+		/* VARIABLE SECTION */
+		/********************/
+		int i;		// REUSUABLE INTEGER VALUE
+		
+		/********************************************/
+		/* LOOP UNTIL VALUE IS A THREE DIGIT NUMBER */
+		/********************************************/
+		do
+		{
+			i = generator.nextInt(1000);	// GENERATES A RANDOM INTEGER
+		}
+		while((i < 100) || (i > 999)); 
+		
+		id = i;		// SETS ID TO ID VALUE INPUTTED FROM CLIENT
 	}
 	
 	public int getID()
@@ -282,8 +299,8 @@ public class Customer implements Ski_Interface
 		/*****************************************/
 		/* MAKES STRING REPRESENTATION OF OBJECT */
 		/*****************************************/
-		str = "" + id + "/t" + name + "/t" + date + "/t" +  
-			  grpsize + "/t" + cost;
+		str = "" + id + "\t" + name + "\t" + date + "\t" +  
+			  grpsize + "\t" + cost;
 		
 		/******************/
 		/* RETURN SECTION */
