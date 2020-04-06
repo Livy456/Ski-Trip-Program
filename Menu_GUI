@@ -1,6 +1,6 @@
 /******************************************/
 /* USER DESCRIPTION SECTION 			  */
-/* OLIVIA 				   			  */
+/* OLIVIA DIAS				   			  */
 /* FINAL PROJECT		   	 			  */
 /* PROGRAM 12							  */
 /* MARCH 8, 2020		   			  	  */
@@ -22,7 +22,7 @@ import java.awt.event.ActionListener;	// IMPORTS ACTION LISTENER
 import java.text.DecimalFormat;			// IMPORTS DECIMAL FORMAT
 import java.util.ArrayList;				// IMPORTS ARRAYLIST
 
-public class Menu_GUI implements ActionListener
+public class Menu_GUI extends BusGUI implements ActionListener
 {
 	final static String error1 = "ERROR!!! Must be positive and greater than 0!!!";
 	
@@ -44,9 +44,10 @@ public class Menu_GUI implements ActionListener
 	private JButton grpB;			// CREATES A BUTTON FOR SORTING BY GROUP SIZE
 	private JButton confirmB;		// CREATES A BUTTON FOR CONFIRMING CHANGE IN INFO
 	private Label warningL;			// CREATES A LABEL FOR WARNINGS
+	private JLabel grpID;			// CREATES A LABEL FOR GROUP ID
 	private JFrame frame;			// CREATES A JFRAME 
-	private JPanel panel;			// CREATES A PANEL
-	private ArrayList<Customer> custlist;	// CREATES AN ARRAYLIST OF CUSTOMER
+	private Container container;	// CREATES A CONTAINER
+	private ArrayList<Customer> clist;	// CREATES AN ARRAYLIST OF CUSTOMER
 	 
 	public Menu_GUI()
 	/************************************************/
@@ -58,7 +59,6 @@ public class Menu_GUI implements ActionListener
 		/* INSTANTIATION SECTION */
 		/*************************/
 		frame = new JFrame("Ski Trip Menu");			// INSTANTIATES A FRAME
-		panel = new JPanel();							// INSTANTIATES A PANEL
 		enterB = new JButton("Enter");					// INSTANTIATES A JBUTTON 
 		insertB = new JButton("Insert");				// INSTANTIATES A JBUTTON
 		removeB = new JButton("Remove");				// INSTANTIATES A JBUTTON 
@@ -73,8 +73,21 @@ public class Menu_GUI implements ActionListener
 		alphB = new JButton("Sorting Alphabetically");	// INSTANTIATES A JBUTTON 
 		numB = new JButton("Sorting Numerically");		// INSTANTIATES A JBUTTON 
 		grpB = new JButton("Sorting by Group Size");	// INSTANTIATES A JBUTTON 
+		grpID = new JLabel("Group ID:");				// INSTANTIATES A JLABEL
 		warningL = new Label("Warning");				// INSTANTIATES A LABEL
 		DecimalFormat df = new DecimalFormat("0.00");	// INSTANTIATES DECIMALFORMAT
+		container = frame.getContentPane();				// CREATES A CONTENT PANE, WHICH  
+														// HOLDS THE OBJECTS ON THE FRAME
+
+		/**************************/
+		/* CREATES A BLANK JFRAME */
+		/**************************/
+		frame.pack();							// SIZE OF THE FRAME
+		frame.setBounds(450, 150, 450, 450);	// SETS X POSITION, Y POSITION, LENGTH, 
+		frame.setVisible(true);					// ALLOWS THE JFRAME TO BE VISIBLE
+		container.setLayout(null);				// SETS THE LAYOUT FOR THE JFRAME
+		container.setBackground(Color.WHITE);	// SETS THE BACKGROUND COLOR
+		frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);// ALLOWS THE JFRAME TO BE CLOSED
 		
 		/**********************************************/
 		/* SETS BOUNDS FOR BUTTONS, JTEXTFIELD, LABEL */
@@ -91,8 +104,9 @@ public class Menu_GUI implements ActionListener
 		grpB.setBounds(270, 110, 150, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		enterB.setBounds(50, 300, 100, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		confirmB.setBounds(150, 230, 100, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		returnB.setBounds(300, 350, 100, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		quitB.setBounds(50, 300, 100, 25);		// SETS (X POSITIION, Y POSITION, LENGTH, WIDTH)
+		returnB.setBounds(200, 350, 100, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		quitB.setBounds(300, 300, 100, 25);		// SETS (X POSITIION, Y POSITION, LENGTH, WIDTH)
+		grpID.setBounds(60, 340, 50, 50);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		warningL.setBounds(50, 230, 100, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		
 		/**********************************************/
@@ -115,38 +129,17 @@ public class Menu_GUI implements ActionListener
 		/*************************/
 		/* ADDS BUTTONS TO FRAME */
 		/*************************/
-		panel.add(insertB);			// ADDS INSERT BUTTON TO FRAME
-		panel.add(removeB);			// ADDS REMOVE BUTTON TO FRAME
-		panel.add(quitB);			// ADDS QUIT BUTTON TO FRAME
-		panel.add(modifyB);
-		panel.add(costB);
-		panel.add(busDtB);
-		panel.add(profitDtB);
-		panel.add(profitB);
-		panel.add(alphB);
-		panel.add(numB);
-		panel.add(grpB);
-		
-		insertB.setVisible(true);	// SETS VISIBILITY TO TRUE
-		removeB.setVisible(true);
-		quitB.setVisible(true);
-		modifyB.setVisible(true);
-		costB.setVisible(true);
-		busDtB.setVisible(true);
-		profitDtB.setVisible(true);
-		profitB.setVisible(true);
-		alphB.setVisible(true);
-		numB.setVisible(true);
-		grpB.setVisible(true);
-				
-		/**************************/
-		/* CREATES A BLANK JFRAME */
-		/**************************/
-		frame.pack();				// SIZE OF THE FRAME
-		frame.setSize(500, 500);	// SETS SIZE OF THE JFRAME
-		frame.setVisible(true);		// ALLOWS THE JFRAME TO BE VISIBLE
-		frame.setLayout(null);		// SETS THE LAYOUT FOR THE JFRAME
-		frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);// ALLOWS THE JFRAME TO BE CLOSED
+		container.add(insertB);			// ADDS INSERT BUTTON TO CONTAINER
+		container.add(removeB);			// ADDS REMOVE BUTTON TO CONTAINER
+		container.add(quitB);			// ADDS QUIT BUTTON TO CONTAINER
+		container.add(modifyB);			// ADDS MODIFY BUTTON TO CONTAINER
+		container.add(costB);			// ADDS COST BUTTON TO CONTAINER
+		container.add(busDtB);			// ADDS BUS BUTTON TO CONTAINER
+		container.add(profitDtB);		// ADDS PROFIT BY DATE BUTTON TO CONTAINER
+		container.add(profitB);			// ADDS TOTAL PROFIT BUTTON TO CONTAINER
+		container.add(alphB);			// ADDS ALPHABETIC SORTING BUTTON TO CONTAINER
+		container.add(numB);			// ADDS NUMERIC SORTING BUTTON TO CONTAINER
+		container.add(grpB);			// ADDS GROUP SIZE SORTING BUTTON TO CONTAINER
 	}
 	
 	public void actionPerformed(ActionEvent event)
@@ -168,7 +161,7 @@ public class Menu_GUI implements ActionListener
 		int grpSz;			// REUSUABLE INT INPUT FOR GROUP SIZE
 		int confirm; 		// REUSUABLE INT INPUT FOR CONFIRMING AN ACTION
 		
-		action = event.getActionCommand();	// SETS VISIBILTY OF FRAME TO FALSE
+		action = event.getActionCommand();	// CALL TO GET ACTION COMMAND
 		
 		/****************************************************/
 		/* IF STATEMENT TO CHECK IF QUIT BUTTON WAS PRESSED */	
@@ -186,18 +179,60 @@ public class Menu_GUI implements ActionListener
 			}
 		}
 			
-		/****************************************************/
-		/* IF STATEMENT TO CHECK IF QUIT BUTTON WAS PRESSED */	
-		/****************************************************/
+		/***********************************************************/
+		/* ELSE IF STATEMENT TO CHECK IF INSERT BUTTON WAS PRESSED */	
+		/***********************************************************/
 		else if (action.equals("Insert"))
 		{
-			//frame.setVisible(false);	// SETS VISIBILTY OF FRAME TO FALSE
-			frame.dispose();
-			new BusGUI();
+			confirm = confirmWindow();	// CALL TO CONFIRM WINDOW
 			
-			custlist = insert(custlist, "Hello", "Title");	// CALL TO INSERT
-				
-			//frame.setVisible(true);		// SETS VISIBILTY OF FRAME TO TRUE
+			/*****************************************************/
+			/* IF STATEMENT TO CONFIRM ACTION OF ADDING CUSTOMER */	
+			/*****************************************************/
+			if(confirm == 0)
+			{	
+				frame.dispose();			// DISPOSES OF MENU_GUI FRAME
+				new BusGUI();				// CREATES A NEW BUS GUI MENU
+				clist.add(BusGUI.customer);	// ADDS CUSTOMER FROM BUS GUI TO ARRAY LIST 
+			}	
+		}
+			
+		/***********************************************************/
+		/* ELSE IF STATEMENT TO CHECK IF REMOVE BUTTON WAS PRESSED */	
+		/***********************************************************/
+		else if (action.equals("Remove"))
+		{
+			confirm = confirmWindow();		// CALL TO CONFIRM WINDOW
+			
+			/*******************************************************/
+			/* IF STATEMENT TO CONFIRM ACTION OF REMOVING CUSTOMER */	
+			/*******************************************************/
+			if (confirm == 0)
+			{	
+				frame.dispose();			// DISPOSES OF MENU_GUI FRAME
+				underConstruction();		// CALL TO UNDER CONSTRUCTION
+			}
+			
+			new Menu_GUI();		// RECREATES THE MENU GUI FRAME	
+		}
+		
+		/**********************************************************/
+		/*ELSE IF STATEMENT TO CHECK IF MODIFY BUTTON WAS PRESSED */	
+		/**********************************************************/
+		else if (action.equals("Modify"))
+		{
+			confirm = confirmWindow();		// CALL TO CONFIRM WINDOW
+			
+			/********************************************************/
+			/* IF STATEMENT TO CONFIRM ACTION OF MODIFYING CUSTOMER */	
+			/********************************************************/
+			if (confirm == 0)
+			{
+				frame.dispose();			// DISPOSES OF MENU_GUI FRAME
+				underConstruction();		// CALL TO UNDER CONSTRUCTION
+			}
+			
+			new Menu_GUI();		// RECREATES THE MENU GUI FRAME	
 		}
 		
 	}
@@ -265,5 +300,23 @@ public class Menu_GUI implements ActionListener
 		/* RETURN SECTION */
 		/******************/
 		return intArray;		// RETURNS NUM
+	}
+	
+	public static void underConstruction()
+	/****************************************************/
+	/* PRECONDITION - NEEDS UNDER CONSTRUCTION WINDOW 	*/
+	/* POSTCONDITION - CREATES WINDOW TO TELL USER		*/
+	/* 				   THAT THE SECTION THEY ARE TRYING */
+	/*  			   TO USE IS UNDER CONSTRUCTION 	*/
+	/****************************************************/
+	{
+		/***********************/
+		/* MAKES DIALOG WINDOW */
+		/***********************/ 
+		JOptionPane.showMessageDialog(
+				null,
+				"This part of the option menu is under construction",
+				"Under construction menu",
+				JOptionPane.INFORMATION_MESSAGE);
 	}
 }
