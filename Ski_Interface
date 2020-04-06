@@ -1,6 +1,6 @@
 /******************************************/
 /* USER DESCRIPTION SECTION 			  */
-/* OLIVIA 				   			  */
+/* OLIVIA DIAS				   			  */
 /* FINAL PROJECT			   	  		  */
 /* PROGRAM 12							  */
 /* MARCH 4, 2020		   			  	  */
@@ -25,7 +25,7 @@ public interface Ski_Interface
 	public String getName();
 	public void setDate(Object dt);
 	public Object getDate();
-	public void setID(int i);
+	public void setID();
 	public int getID();
 	public void setSize(int grp);
 	public int getSize();
