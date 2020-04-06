@@ -5,7 +5,6 @@
 /* PROGRAM 12							  */
 /* FEBRUARY 10, 2020		   			  */
 /******************************************/
-
 /**********************************************/
 /* THIS IS A PROGRAM TO HAVE USER SCHEDULE	  */
 /* A SKI TRIP. USER WILL HAVE TO INPUT NAME,  */
@@ -20,11 +19,7 @@
 /******************/
 /* IMPORT SECTION */
 /******************/
-import java.util.*;					// IMPORTS ARRAYLIST
-import java.awt.*;					// IMPORTS AWT
-import java.awt.event.*;			// IMPORTS EVENTS
 import javax.swing.*;				// IMPORTS SWING
-import java.text.DecimalFormat;		// IMPORTS DECIMAL FORMAT
 
 public class Bus_Main 
 {
@@ -32,249 +27,24 @@ public class Bus_Main
 	/* FINAL SECTION */
 	/*****************/
 	final static String message1 = "Input the name of your Ski trip: ";
-	final static String message2 = "Input the group ID number(three digit number between 100 - 999): ";
-	final static String message3 = "Input the number of people in your group (must be greater than 0): ";
 	final static String heading1 = "Input Name of Ski Group";
-	final static String heading2 = "Input Group ID";
-	final static String heading3 = "Input Group Size";
 	final static String error2 = "ERROR!!! Number must be between 100 and 999";
-	final static String error3 = "ERROR!!!Number must be greater than 0!!!";
 	
 	public static void main(String[]args)
 	{
-		/********************/
-		/* VARIABLE SECTION */
-		/********************/
-		String name;		// NAME OF SKI TRIP GROUP
-		String option;		// RESPONSE FOR MENU OPTION
-		int id;				// NUMBER FOR THE GROUP ID 
-		int grpsize;		// NUMBER OF PEOPLE GOING ON SKI TRIP
-		int bus;			// NUMBER OF BUSES NEEDED FOR SKI TRIP
-		int remainder;		// NUMBER OF REMAINING SEATS
-		int runAgain;		// INT RESPONSE TO RE-RUNNING PROGRAM
-		
 		/*******************************/
 		/* PROGRAM DESCRIPTION SECTION */
 		/*******************************/
 		programDescription();
 		
-		/**************************/
-		/* LOOP TO RE-RUN PROGRAM */
-		/**************************/
-		//do
-		//{
-			/**************************/
-			/* INITIALIZATION SECTION */
-			/**************************/
-		remainder = 0;
-			
-			/*************************/
-			/* INSTANTIATION SECTION */
-			/*************************/ 	
-		Customer customer = new Customer();
+		/*************************/
+		/* INSTANTIATION SECTION */
+		/*************************/ 	
 		new BusGUI();
-						
-//			runAgain = runAgain();		// CALL TO RUN PROGRAM AGAIN
-//		}
-//		while(runAgain ==0);
 	}
 	/******************************************************************************/
 	/* 								FUNCTION SECTION 							  */
-	/******************************************************************************/
-	public static void errorMessage(String str)
-	/*********************************************************************/
-	/* PRECONDITION - NEEDS ERROR MESSAGE FOR INPUTS OF NEGATIVE NUMBERS */
-	/* POSTCONDITION - CREATES WIMDOW TO SHOW THE ERROR THE USER MADE 	 */
-	/*********************************************************************/
-	{
-		/******************************/
-		/* MAKES ERROR MESSAGE WINDOW */
-		/******************************/
-		JOptionPane.showMessageDialog(
-				null,
-				str,
-				"Error Message",
-				JOptionPane.ERROR_MESSAGE);
-	}
-	
-	public static int inputInt(String str, String hdstr)
-	/*************************************************/
-	/* PRECONDITION - NEEDS INTEGER VALUE	 		 */
-	/* POSTCONDITION - GETS INTEGER VALUE			 */
-	/*************************************************/
-	{
-		/********************/
-		/* VARIABLE SECTION */
-		/********************/
-		String inum;		// REUSABLE STRING INPUT
-		int num;			// REUSABLE INT VALUE
-		
-		/********************* ********/
-		/* LOOP UNTIL VALUE IS VALID */
-		/*****************************/
-		do
-		{
-			/*****************************/
-			/* MAKES INPUT DIALOG WINDOW */
-			/*****************************/
-			inum = JOptionPane.showInputDialog(
-					null,
-					str,
-					hdstr,
-					JOptionPane.QUESTION_MESSAGE);
-			num = Integer.parseInt(inum);		// ASSIGNS THE STRING INUM 
-												// TO THE INTEGER NUM
-			
-			/*******************************/
-			/* IF STATEMENT TO ERROR CHECK */
-			/*******************************/
-			if(num < 0)
-			{
-				errorMessage(error3);		// CALL TO ERROR MESSAGE
-			}
-		}
-		while(num < 0);
-		
-		/******************/
-		/* RETURN SECTION */
-		/******************/
-		return num;			// RETURNS NUM
-	}
-	
-	public static int inputInt2(String str, String hdstr)
-	/*************************************************/
-	/* PRECONDITION - NEEDS INTEGER VALUE	 		 */
-	/* POSTCONDITION - GETS INTEGER VALUE			 */
-	/*************************************************/
-	{
-		/********************/
-		/* VARIABLE SECTION */
-		/********************/
-		String inum;		// REUSABLE STRING INPUT
-		int num;			// REUSABLE INT VALUE
-		
-		/*****************************/
-		/* LOOP UNTIL VALUE IS VALID */
-		/*****************************/
-		do
-		{
-			/*****************************/
-			/* MAKES INPUT DIALOG WINDOW */
-			/*****************************/
-			inum = JOptionPane.showInputDialog(
-					null,
-					str,
-					hdstr,
-					JOptionPane.QUESTION_MESSAGE);
-			num = Integer.parseInt(inum);	// ASSIGNS THE STRING INUM 
-											// TO THE INTEGER NUM
-			
-			/*******************************/
-			/* IF STATEMENT TO ERROR CHECK */
-			/*******************************/
-			if ((num < 100) || (num > 999))
-			{
-				errorMessage(error2);		// CALL TO ERROR MESSAGE
-			}
-		}
-		while((num < 100) || (num > 999));
-		
-		/******************/
-		/* RETURN SECTION */
-		/******************/
-		return num;			// RETURNS NUM
-	}
-	
-	public static String inputString(String str, String hdstr)
-	/*************************************************/
-	/* PRECONDITION - NEEDS STRING VALUE FOR NAME	 */
-	/* POSTCONDITION - GETS STRING VALUE FOR NAME	 */
-	/*************************************************/
-	{
-		/********************/
-		/* VARIABLE SECTION */
-		/********************/
-		String nm;		// INPUTS NUMBER AS A STRING
-		
-		/*****************************/
-		/* MAKES INPUT DIALOG WINDOW */
-		/*****************************/
-		nm = JOptionPane.showInputDialog(
-				null,
-				str,
-				hdstr,
-				JOptionPane.QUESTION_MESSAGE);
-		
-		/******************/
-		/* RETURN SECTION */
-		/******************/
-		return nm;		// RETURNS NM
-	}
-	
-	public static int confirmWindow()
-	/************************************************/
-	/* PRECONDITION - NEEDS CONFIRM DIALOG BOX		*/
-	/* POSTCONDITION - CREATES WINDOW TO CONFIRM IF	*/
-	/* 				   USER WANTS TO CONFIRM ACTION	*/
-	/************************************************/
-	{
-		/********************/
-		/* VARIABLE SECTION */
-		/********************/
-		int num;		// INTEGER ANSWER TO MODIFY PROGRAM
-		
-		/*******************************/
-		/* MAKES CONFIRM DIALOG WINDOW */
-		/*******************************/
-		num = JOptionPane.showConfirmDialog(
-				null,
-				"Do you really want to do this? Once you do this" + "\n" + 
-				"you cannot undo this action.",
-				"Confirm Window",
-				JOptionPane.YES_NO_OPTION,
-				JOptionPane.QUESTION_MESSAGE);
-		
-		/******************/
-		/* RETURN SECTION */
-		/******************/
-		return num;		// RETURNS NUM
-	}
-	
-	public static String optionMenu()
-	/*******************************************************/
-	/* PRECONDITION - NEEDS TO CHOOSE TYPE OF BANK ACCOUNT */
-	/* POSTCONDITION - GETS TO CHOOSE TYPE OF BANK ACCOUNT */
-	/*******************************************************/
-	{
-		/********************/
-		/* VARIABLE SECTION */
-		/********************/
-		String str;			// REUSUABLE STRING INPUT 
-		
-		/*************************************/
-		/* MAKES AN ARRAY FOR DROP-DOWN MENU */
-		/*************************************/
-		Object[] options = {"Insert Customer", "Remove Customer", "Modify Customer",
-							"Print Customer", "Number of Buses", "Cost of Trip"};
-		
-		/*****************************/
-		/* MAKES INPUT DIALOG WINDOW */
-		/*****************************/ 
-		str = (String)JOptionPane.showInputDialog(
-				new JDialog(),
-				"Ski Trip Option Menu",
-				"Ski Trip Menu",
-				JOptionPane.INFORMATION_MESSAGE,
-				null,
-				options,
-				"");
-
-		/******************/
-		/* RETURN SECTION */
-		/******************/
-		return str;			// RETURNS STR
-	}
-	
+	/******************************************************************************/	
 	public static void programDescription()
 	/************************************************/
 	/* PRECONDITION - NEEDS PROGRAM DESCRIPTION		*/
@@ -295,34 +65,6 @@ public class Bus_Main
 				"allowed to remove, add, or modify their input information.",
 				"Program Description for Final Project",
 				JOptionPane.INFORMATION_MESSAGE);
-	}
-	
-	public static int runAgain()
-	/************************************************/
-	/* PRECONDITION - NEEDS CONFIRM DIALOG BOX		*/
-	/* POSTCONDITION - CREATES WINDOW TO CONFIRM IF	*/
-	/* 				   USER WANTS TO RE-RUN PROGRAM	*/
-	/************************************************/
-	{
-		/********************/
-		/* VARIABLE SECTION */
-		/********************/
-		int num;			// INTEGER ANSWER TO RE-RUN PROGRAM
-		
-		/*******************************/
-		/* MAKES CONFIRM DIALOG WINDOW */
-		/*******************************/ 
-		num = JOptionPane.showConfirmDialog(
-				null,
-				"Do you want to re-run the ski trip program?",
-				"Re-run Ski Trip Program",
-				JOptionPane.YES_NO_OPTION,
-				JOptionPane.QUESTION_MESSAGE);
-		
-		/******************/
-		/* RETURN SECTION */
-		/******************/
-		return num;			// RETURNS NUM
 	}
 	
 	public static void underConstruction()
