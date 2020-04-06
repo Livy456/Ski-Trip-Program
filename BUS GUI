@@ -1,6 +1,6 @@
 /******************************************/
 /* USER DESCRIPTION SECTION 			  */
-/* OLIVIA 				   			  */
+/* OLIVIA DIAS				   			  */
 /* FINAL PROJECT		   	 			  */
 /* PROGRAM 12							  */
 /* MARCH 2, 2020		   			  	  */
@@ -255,29 +255,6 @@ public class BusGUI implements ActionListener
 				new Menu_GUI(); 		// INSTANTIATES A NEW FRAME
 			}
 		}
-		
-		/****************/
-		/* INPUTS MONTH */
-		/****************/
-		monthi = inputMonth(monthCB, dayCB, yearCB);
-		
-		/**************/
-		/* INPUTS DAY */
-		/**************/
-		dayi = inputDay(monthCB, dayCB, yearCB);
-		
-		/***************/
-		/* INPUTS YEAR */
-		/***************/
-		yeari = inputYear(monthCB, dayCB, yearCB);
-		
-		/***************/
-		/* INPUTS DATE */
-		/***************/
-		date = "" + monthi + "/" + dayi + "/" + yeari;	
-		customer.setDate(date);			// CALL TO SET DATE
-				
-		enterB.setEnabled(true);
 	}
 	
 	private void actionPerformedDate(ActionEvent event)
