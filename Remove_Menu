@@ -1,0 +1,57 @@
+/******************************************/
+/* USER DESCRIPTION SECTION 			  */
+/* OLIVIA DIAS				   			  */
+/* FINAL PROJECT		   	 			  */
+/* PROGRAM 12							  */
+/* APRIL 6, 2020		   			  	  */
+/******************************************/
+/******************************************/
+/* THIS IS A PROGRAM TO MAKE AN OBJECT	  */
+/* HAVE INSTANCE VARIABLES, CONSTRUCTORS, */
+/* AND METHODS SO THE CLIENT CAN HAVE A   */
+/* SWING GUI  							  */
+/******************************************/
+
+/******************/
+/* IMPORT SECTION */
+/******************/
+import javax.swing.*;					// IMPORTS SWING
+import java.awt.*;						// IMPORTS AWT
+import java.awt.event.ActionEvent;		// IMPORTS ACTION EVENT
+import java.awt.event.ActionListener;	// IMPORTS ACTION LISTENER		
+import java.text.DecimalFormat;			// IMPORTS DECIMAL FORMAT
+import java.util.ArrayList;				// IMPORTS ARRAYLIST
+
+public class Remove_Menu extends BusGUI implements ActionListener
+{
+	/*****************************/
+	/* INSTANCE VARIABLE SECTION */
+	/*****************************/
+	private JButton enterB;			// CREATES A BUTTON FOR ENTERING INFORMATION FOR PROGRAM	
+	private JButton insertB;		// CREATES A BUTTON FOR INSERT
+	private JButton removeB;		// CREATES A BUTTON FOR REMOVE
+	private JButton returnB;		// CREATES A BUTTON FOR REUTNRING TO HOME MENU
+	private JButton modifyB;		// CREATES A BUTTON TO MODIFY CUSTOMER  
+	private JButton quitB;			// CREATES A BUTTON TO QUIT PROGRAM 
+	private JButton costB;			// CREATES A BUTTON FOR COST OF SKI TRIP 
+	private JButton busDtB;			// CREATES A BUTTON FOR SORTING BY NUM OF BUS FOR SPECIFIC DATE
+	private JButton profitDtB;		// CREATES A BUTTON FOR PROFIT BY DATE
+	private JButton profitB;		// CREATES A BUTTON FOR TOTAL PROFIT 
+	private JButton alphB;			// CREATES A BUTTON FOR SORTING ALPHABETICALLY
+	private JButton numB;			// CREATES A BUTTON FOR SORTING NUMERICALLY
+	private JButton grpB;			// CREATES A BUTTON FOR SORTING BY GROUP SIZE
+	private JButton confirmB;		// CREATES A BUTTON FOR CONFIRMING CHANGE IN INFO
+	private Label warningL;			// CREATES A LABEL FOR WARNINGS
+	private JLabel grpID;			// CREATES A LABEL FOR GROUP ID
+	private JFrame frame;			// CREATES A JFRAME 
+	private Container container;	// CREATES A CONTAINER
+	 
+	public Remove_Menu()
+	/************************************************/
+	/* DEFAULT CONSTRUCTOR - IT CREATES A FRAME FOR */
+	/*						 CONTENT PANE			*/
+	/************************************************/
+	{
+	
+	}
+}
