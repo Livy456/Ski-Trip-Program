@@ -28,21 +28,9 @@ public class Remove_Menu extends BusGUI implements ActionListener
 	/* INSTANCE VARIABLE SECTION */
 	/*****************************/
 	private JButton enterB;			// CREATES A BUTTON FOR ENTERING INFORMATION FOR PROGRAM	
-	private JButton insertB;		// CREATES A BUTTON FOR INSERT
-	private JButton removeB;		// CREATES A BUTTON FOR REMOVE
 	private JButton returnB;		// CREATES A BUTTON FOR REUTNRING TO HOME MENU
-	private JButton modifyB;		// CREATES A BUTTON TO MODIFY CUSTOMER  
 	private JButton quitB;			// CREATES A BUTTON TO QUIT PROGRAM 
-	private JButton costB;			// CREATES A BUTTON FOR COST OF SKI TRIP 
-	private JButton busDtB;			// CREATES A BUTTON FOR SORTING BY NUM OF BUS FOR SPECIFIC DATE
-	private JButton profitDtB;		// CREATES A BUTTON FOR PROFIT BY DATE
-	private JButton profitB;		// CREATES A BUTTON FOR TOTAL PROFIT 
-	private JButton alphB;			// CREATES A BUTTON FOR SORTING ALPHABETICALLY
-	private JButton numB;			// CREATES A BUTTON FOR SORTING NUMERICALLY
-	private JButton grpB;			// CREATES A BUTTON FOR SORTING BY GROUP SIZE
-	private JButton confirmB;		// CREATES A BUTTON FOR CONFIRMING CHANGE IN INFO
-	private Label warningL;			// CREATES A LABEL FOR WARNINGS
-	private JLabel grpID;			// CREATES A LABEL FOR GROUP ID
+	private Label info;				// CREATES A LABEL FOR WARNINGS
 	private JFrame frame;			// CREATES A JFRAME 
 	private Container container;	// CREATES A CONTAINER
 	 
@@ -52,6 +40,59 @@ public class Remove_Menu extends BusGUI implements ActionListener
 	/*						 CONTENT PANE			*/
 	/************************************************/
 	{
+		/*************************/
+		/* INSTANTIATION SECTION */
+		/*************************/
+		enterB = new JButton("Enter");		// INSTANTIATES JBUTTON
+		returnB = new JButton("Return");	// INSTANTIATES JBUTTON
+		quitB = new JButton("Quit");		// INSTANTIATES JBUTTON
+		info = new Label("Select one of "+
+						 "the customers "+
+						 "to remove.");		// INSTANTIATES LABEL
+		frame = new JFrame("Remove Menu");	// INSTANTIATES JFRAME
+		container = frame.getContentPane();	// CREATES A CONTENT PANE
+		
+		/**************************/
+		/* CREATES A BLANK JFRAME */
+		/**************************/
+		frame.pack();							// SIZE OF THE FRAME
+		frame.setBounds(450, 150, 450, 450);	// SETS X POSITION, Y POSITION, LENGTH, 
+		frame.setVisible(true);					// ALLOWS THE JFRAME TO BE VISIBLE
+		container.setLayout(null);				// SETS THE LAYOUT FOR THE JFRAME
+		container.setBackground(Color.WHITE);	// SETS THE BACKGROUND COLOR
+		frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);// ALLOWS THE JFRAME TO BE CLOSED
 	
+		/**********************************************/
+		/* SETS BOUNDS FOR BUTTONS, JTEXTFIELD, LABEL */
+		/**********************************************/
+		enterB.setBounds(300, 300, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		returnB.setBounds(220, 300, 75, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		quitB.setBounds(380, 300, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		info.setBounds(50, 30, 500, 30);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+	
+		/**********************************************/
+		/* ADDS LISTENER TO BUTTON TO PERFORM ACTIONS */
+		/**********************************************/
+		enterB.addActionListener(this);		// ADDS ACTIONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED
+		returnB.addActionListener(this);	// ADDS ACTIONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED
+		quitB.addActionListener(this);		// ADDS ACTIONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED
+		
+		/*************************/
+		/* ADDS BUTTONS TO FRAME */
+		/*************************/
+		container.add(enterB);		// ADDS ENTER BUTTON TO CONTAINER
+		container.add(returnB);		// ADDS RETURN BUTTON TO CONTAINER
+		container.add(quitB);		// ADDS QUIT BUTTON TO CONTAINER
+		container.add(info);		// ADDS INFO LABEL TO CONTAINER
+	}
+	
+	public void actionPerformed(ActionEvent event)
+	/************************************************/
+	/* PRECONDITION - PROGRAM HAS A BUTTON			*/
+	/* POSTCONDITION - FUNCTION CREATES AN ACTION 	*/
+	/* 				   EVENT FOR BUTTON				*/
+	/************************************************/
+	{
+		
 	}
 }
