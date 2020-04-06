@@ -1,6 +1,6 @@
 /******************************************/
 /* USER DESCRIPTION SECTION 			  */
-/* OLIVIA DIAS				   			  */
+/* OLIVIA 				   			  */
 /* FINAL PROJECT		   	 			  */
 /* PROGRAM 12							  */
 /* MARCH 8, 2020		   			  	  */
@@ -47,7 +47,6 @@ public class Menu_GUI extends BusGUI implements ActionListener
 	private JLabel grpID;			// CREATES A LABEL FOR GROUP ID
 	private JFrame frame;			// CREATES A JFRAME 
 	private Container container;	// CREATES A CONTAINER
-	private ArrayList<Customer> clist;	// CREATES AN ARRAYLIST OF CUSTOMER
 	 
 	public Menu_GUI()
 	/************************************************/
@@ -153,12 +152,6 @@ public class Menu_GUI extends BusGUI implements ActionListener
 		/* VARIABLE SECTION */
 		/********************/
 		String action; 		// STRING TO REPRESENT WHICH BUTTON WAS PRESSED
-		String num;			// REUSUABLE STRING INPUT
-		String date;		// REUSUABLE STRING INPUT FOR DATE
-		String groupID;		// REUSUABLE STRING INPUT FOR GROUP ID
-		String groupSz;		// REUSUABLE STRING INPUT FOR GROUP SIZE
-		int grpID;			// REUSUABLE INT INPUT FOR GROUP ID
-		int grpSz;			// REUSUABLE INT INPUT FOR GROUP SIZE
 		int confirm; 		// REUSUABLE INT INPUT FOR CONFIRMING AN ACTION
 		
 		action = event.getActionCommand();	// CALL TO GET ACTION COMMAND
@@ -193,7 +186,6 @@ public class Menu_GUI extends BusGUI implements ActionListener
 			{	
 				frame.dispose();			// DISPOSES OF MENU_GUI FRAME
 				new BusGUI();				// CREATES A NEW BUS GUI MENU
-				clist.add(BusGUI.customer);	// ADDS CUSTOMER FROM BUS GUI TO ARRAY LIST 
 			}	
 		}
 			
@@ -211,6 +203,7 @@ public class Menu_GUI extends BusGUI implements ActionListener
 			{	
 				frame.dispose();			// DISPOSES OF MENU_GUI FRAME
 				underConstruction();		// CALL TO UNDER CONSTRUCTION
+				new Remove_Menu();			//CREATES THE REMOVE MENU GUI
 			}
 			
 			new Menu_GUI();		// RECREATES THE MENU GUI FRAME	
@@ -235,6 +228,138 @@ public class Menu_GUI extends BusGUI implements ActionListener
 			new Menu_GUI();		// RECREATES THE MENU GUI FRAME	
 		}
 		
+		/**********************************************************/
+		/*ELSE IF STATEMENT TO CHECK IF COST BUTTON WAS PRESSED */	
+		/**********************************************************/
+		else if (action.equals("Cost"))
+		{
+			confirm = confirmWindow();		// CALL TO CONFIRM WINDOW
+			
+			/**************************************************************/
+			/* IF STATEMENT TO CONFIRM ACTION OF VIEWING COST OF SKI TRIP */	
+			/**************************************************************/
+			if (confirm == 0)
+			{
+				frame.dispose();			// DISPOSES OF MENU_GUI FRAME
+				underConstruction();		// CALL TO UNDER CONSTRUCTION
+			}
+			
+			new Menu_GUI();		// RECREATES THE MENU GUI FRAME	
+		}
+		
+		/**********************************************************/
+		/*ELSE IF STATEMENT TO CHECK IF COST BUTTON WAS PRESSED */	
+		/**********************************************************/
+		else if (action.equals("Sorting by Bus Date"))
+		{
+			confirm = confirmWindow();		// CALL TO CONFIRM WINDOW
+			
+			/**************************************************************/
+			/* IF STATEMENT TO CONFIRM ACTION OF VIEWING COST OF SKI TRIP */	
+			/**************************************************************/
+			if (confirm == 0)
+			{
+				frame.dispose();			// DISPOSES OF MENU_GUI FRAME
+				underConstruction();		// CALL TO UNDER CONSTRUCTION
+			}
+			
+			new Menu_GUI();		// RECREATES THE MENU GUI FRAME	
+		}
+		
+		/**********************************************************/
+		/*ELSE IF STATEMENT TO CHECK IF COST BUTTON WAS PRESSED */	
+		/**********************************************************/
+		else if (action.equals("Profit by Date"))
+		{
+			confirm = confirmWindow();		// CALL TO CONFIRM WINDOW
+			
+			/**************************************************************/
+			/* IF STATEMENT TO CONFIRM ACTION OF VIEWING COST OF SKI TRIP */	
+			/**************************************************************/
+			if (confirm == 0)
+			{
+				frame.dispose();			// DISPOSES OF MENU_GUI FRAME
+				underConstruction();		// CALL TO UNDER CONSTRUCTION
+			}
+			
+			new Menu_GUI();		// RECREATES THE MENU GUI FRAME	
+		}
+		
+		/**********************************************************/
+		/*ELSE IF STATEMENT TO CHECK IF COST BUTTON WAS PRESSED */	
+		/**********************************************************/
+		else if (action.equals("Total Profit"))
+		{
+			confirm = confirmWindow();		// CALL TO CONFIRM WINDOW
+			
+			/**************************************************************/
+			/* IF STATEMENT TO CONFIRM ACTION OF VIEWING COST OF SKI TRIP */	
+			/**************************************************************/
+			if (confirm == 0)
+			{
+				frame.dispose();			// DISPOSES OF MENU_GUI FRAME
+				underConstruction();		// CALL TO UNDER CONSTRUCTION
+			}
+			
+			new Menu_GUI();		// RECREATES THE MENU GUI FRAME	
+		}
+		
+		/**********************************************************/
+		/*ELSE IF STATEMENT TO CHECK IF COST BUTTON WAS PRESSED */	
+		/**********************************************************/
+		else if (action.equals("Sorting Alphabetically"))
+		{
+			confirm = confirmWindow();		// CALL TO CONFIRM WINDOW
+			
+			/**************************************************************/
+			/* IF STATEMENT TO CONFIRM ACTION OF VIEWING COST OF SKI TRIP */	
+			/**************************************************************/
+			if (confirm == 0)
+			{
+				frame.dispose();			// DISPOSES OF MENU_GUI FRAME
+				underConstruction();		// CALL TO UNDER CONSTRUCTION
+			}
+			
+			new Menu_GUI();		// RECREATES THE MENU GUI FRAME	
+		}
+		
+		/**********************************************************/
+		/*ELSE IF STATEMENT TO CHECK IF COST BUTTON WAS PRESSED */	
+		/**********************************************************/
+		else if (action.equals("Sorting Numerically"))
+		{
+			confirm = confirmWindow();		// CALL TO CONFIRM WINDOW
+			
+			/**************************************************************/
+			/* IF STATEMENT TO CONFIRM ACTION OF VIEWING COST OF SKI TRIP */	
+			/**************************************************************/
+			if (confirm == 0)
+			{
+				frame.dispose();			// DISPOSES OF MENU_GUI FRAME
+				underConstruction();		// CALL TO UNDER CONSTRUCTION
+			}
+			
+			new Menu_GUI();		// RECREATES THE MENU GUI FRAME	
+		}
+		
+		/**********************************************************/
+		/*ELSE IF STATEMENT TO CHECK IF COST BUTTON WAS PRESSED */	
+		/**********************************************************/
+		else if (action.equals("Sorting Numerically"))
+		{
+			confirm = confirmWindow();		// CALL TO CONFIRM WINDOW
+			
+			/**************************************************************/
+			/* IF STATEMENT TO CONFIRM ACTION OF VIEWING COST OF SKI TRIP */	
+			/**************************************************************/
+			if (confirm == 0)
+			{
+				frame.dispose();			// DISPOSES OF MENU_GUI FRAME
+				underConstruction();		// CALL TO UNDER CONSTRUCTION
+			}
+			
+			new Menu_GUI();		// RECREATES THE MENU GUI FRAME	
+		}
 	}
 	
 	public static int confirmWindow()
@@ -300,6 +425,34 @@ public class Menu_GUI extends BusGUI implements ActionListener
 		/* RETURN SECTION */
 		/******************/
 		return intArray;		// RETURNS NUM
+	}
+	
+	public static String printArray(ArrayList<Customer> cList)
+	/*********************************************************/
+	/* PRECONDITION - NEEDS UPDATE OF ARRAYLIST OF INTEGERS	 */
+	/* POSTCONDITION - GETS UPDATE FOR ARRAYLIST OF INTEGERS */
+	/*********************************************************/
+	{
+		/********************/
+		/* VARIABLE SECTION */
+		/********************/
+		String str;			// USED FOR REUSABLE OUTPUT
+		
+		str = "";			// INITIALIZES THE STRING
+		
+		/***********************************************/
+		/* FOR LOOP TO PRINT OUT ARRAYLIST OF CUSTOMER */
+		/***********************************************/
+		for(int i = 0; i < custList.size(); i++)
+		{
+			str+= "" + custList.get(i).toString() + "\n";// CREATES A STRING 
+														 // REPRESENTATION OF ARRAYLIST
+		}
+		
+		/******************/
+		/* RETURN SECTION */
+		/******************/
+		return str;			// RETURN STR
 	}
 	
 	public static void underConstruction()
