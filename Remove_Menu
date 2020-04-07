@@ -33,6 +33,7 @@ public class Remove_Menu extends BusGUI implements ActionListener
 	private Label info;				// CREATES A LABEL FOR WARNINGS
 	private JFrame frame;			// CREATES A JFRAME 
 	private Container container;	// CREATES A CONTAINER
+	private Checkbox checkbox;		// CREATES A CHECKBOX
 	 
 	public Remove_Menu()
 	/************************************************/
@@ -84,6 +85,11 @@ public class Remove_Menu extends BusGUI implements ActionListener
 		container.add(returnB);		// ADDS RETURN BUTTON TO CONTAINER
 		container.add(quitB);		// ADDS QUIT BUTTON TO CONTAINER
 		container.add(info);		// ADDS INFO LABEL TO CONTAINER
+		
+		for (int i = 0; i < BusGUI.custList.size(); i++)
+		{
+			
+		}
 	}
 	
 	public void actionPerformed(ActionEvent event)
