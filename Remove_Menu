@@ -15,14 +15,16 @@
 /******************/
 /* IMPORT SECTION */
 /******************/
-import javax.swing.*;					// IMPORTS SWING
-import java.awt.*;						// IMPORTS AWT
-import java.awt.event.ActionEvent;		// IMPORTS ACTION EVENT
-import java.awt.event.ActionListener;	// IMPORTS ACTION LISTENER		
-import java.text.DecimalFormat;			// IMPORTS DECIMAL FORMAT
-import java.util.ArrayList;				// IMPORTS ARRAYLIST
+import javax.swing.*;						// IMPORTS SWING
+import java.awt.*;							// IMPORTS AWT
+import java.awt.event.ActionEvent;			// IMPORTS ACTION EVENT
+import java.awt.event.ActionListener;		// IMPORTS ACTION LISTENER
+import java.awt.event.AdjustmentEvent;		// IMPORTS ADJUSTMENT EVENT
+import java.awt.event.AdjustmentListener;	// IMPORTS ADJUSTMENT LISTENER
+import java.text.DecimalFormat;				// IMPORTS DECIMAL FORMAT
+import java.util.ArrayList;					// IMPORTS ARRAYLIST
 
-public class Remove_Menu extends BusGUI implements ActionListener
+public class Remove_Menu extends BusGUI implements AdjustmentListener
 {
 	/*****************************/
 	/* INSTANCE VARIABLE SECTION */
@@ -34,6 +36,8 @@ public class Remove_Menu extends BusGUI implements ActionListener
 	private JFrame frame;			// CREATES A JFRAME 
 	private Container container;	// CREATES A CONTAINER
 	private Checkbox checkbox;		// CREATES A CHECKBOX
+	private JScrollBar scrollBar;	// CREATES A JSCROLL BAR
+	private ActionListener actionListener;
 	 
 	public Remove_Menu()
 	/************************************************/
@@ -52,12 +56,13 @@ public class Remove_Menu extends BusGUI implements ActionListener
 						 "to remove.");		// INSTANTIATES LABEL
 		frame = new JFrame("Remove Menu");	// INSTANTIATES JFRAME
 		container = frame.getContentPane();	// CREATES A CONTENT PANE
+		scrollBar = new JScrollBar();		// INSTANTIATES A JSCROLL BAR
 		
 		/**************************/
 		/* CREATES A BLANK JFRAME */
 		/**************************/
 		frame.pack();							// SIZE OF THE FRAME
-		frame.setBounds(450, 150, 450, 450);	// SETS X POSITION, Y POSITION, LENGTH, 
+		frame.setBounds(450, 150, 550, 550);	// SETS X POSITION, Y POSITION, LENGTH, 
 		frame.setVisible(true);					// ALLOWS THE JFRAME TO BE VISIBLE
 		container.setLayout(null);				// SETS THE LAYOUT FOR THE JFRAME
 		container.setBackground(Color.WHITE);	// SETS THE BACKGROUND COLOR
@@ -70,13 +75,15 @@ public class Remove_Menu extends BusGUI implements ActionListener
 		returnB.setBounds(220, 300, 75, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		quitB.setBounds(380, 300, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		info.setBounds(50, 30, 500, 30);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-	
+		scrollBar.setBounds(500, 1, 10, 500);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		
 		/**********************************************/
 		/* ADDS LISTENER TO BUTTON TO PERFORM ACTIONS */
 		/**********************************************/
 		enterB.addActionListener(this);		// ADDS ACTIONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED
 		returnB.addActionListener(this);	// ADDS ACTIONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED
 		quitB.addActionListener(this);		// ADDS ACTIONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED
+		scrollBar.addAdjustmentListener(this);
 		
 		/*************************/
 		/* ADDS BUTTONS TO FRAME */
@@ -85,11 +92,7 @@ public class Remove_Menu extends BusGUI implements ActionListener
 		container.add(returnB);		// ADDS RETURN BUTTON TO CONTAINER
 		container.add(quitB);		// ADDS QUIT BUTTON TO CONTAINER
 		container.add(info);		// ADDS INFO LABEL TO CONTAINER
-		
-		for (int i = 0; i < BusGUI.custList.size(); i++)
-		{
-			
-		}
+		container.add(scrollBar);	// ADDS SCROLL BAR TO CONTAINER
 	}
 	
 	public void actionPerformed(ActionEvent event)
@@ -99,6 +102,102 @@ public class Remove_Menu extends BusGUI implements ActionListener
 	/* 				   EVENT FOR BUTTON				*/
 	/************************************************/
 	{
+		/********************/
+		/* VARIABLE SECTION */
+		/********************/
+		String action;		// STRING TO REPRESENT WHICH BUTTON WAS PRESSED
+		int confirm;		// REUSUABLE INT INPUT FOR CONFIRMING AN ACTION
 		
+		action = event.getActionCommand();	// CALL TO GET ACTION COMMAND
+		
+		/****************************************************/
+		/* IF STATEMENT TO CHECK IF QUIT BUTTON WAS PRESSED */	
+		/****************************************************/
+		if(action == "Quit")
+		{
+			confirm = confirmWindow();		// CALL TO CONFIRM WINDOW
+			
+			/******************************************************/
+			/* IF STATEMENT TO CONFIRM ACTION OF QUITTING PROGRAM */	
+			/******************************************************/
+			if(confirm == 0)
+			{
+				System.exit(0);		// TERMINATES THE PROGRAM
+			}
+		}
+		
+		/**********************************************************/
+		/* ELSE IF STATEMENT TO CHECK IF ENTER BUTTON WAS PRESSED */	
+		/**********************************************************/
+		else if(action == "Enter")
+		{
+			confirm = confirmWindow();		// CALL TO CONFIRM WINDOW
+			
+			/*************************************************************/
+			/* IF STATEMENT TO CONFIRM ACTION OF CONFIRMING ENTERED INFO */	
+			/*************************************************************/
+			if(confirm == 0)
+			{
+				frame.dispose();		// DISPOSES THE REMOVE MENU WINDOW
+				new Menu_GUI();			// CREATES A NEW MENU WINDOW
+			}
+		}
+		
+		/***********************************************************/
+		/* ELSE IF STATEMENT TO CHECK IF RETURN BUTTON WAS PRESSED */	
+		/***********************************************************/
+		else if (action == "Return")
+		{
+			confirm = confirmWindow();		// CALL TO CONFIRM WINDOW
+			
+			/************************************************************/
+			/* IF STATEMENT TO CONFIRM ACTION OF RETURNING TO MAIN MENU */	
+			/************************************************************/
+			if(confirm == 0)
+			{
+				frame.dispose();		// DISPOSES THE REMOVE MENU WINDOW
+				new Menu_GUI();			// CREATES A NEW MENU WINDOW
+			}
+		}
+	}
+	
+	public void adjustmentValueChanged(AdjustmentEvent event)
+	/************************************************/
+	/* PRECONDITION - PROGRAM HAS A SCROLL BAR		*/
+	/* POSTCONDITION - FUNCTION CREATES AN ACTION 	*/
+	/* 				   EVENT FOR SCROLL BAR			*/
+	/************************************************/
+	{
+		int count;
+		count= 0;
+		count+=1;
+	}
+	
+	public static int confirmWindow()
+	/************************************************/
+	/* PRECONDITION - NEEDS CONFIRM DIALOG BOX		*/
+	/* POSTCONDITION - CREATES WINDOW TO CONFIRM IF	*/
+	/* 				   USER WANTS TO CONFIRM ACTION	*/
+	/************************************************/
+	{
+		/********************/
+		/* VARIABLE SECTION */
+		/********************/
+		int confirm;		// INTEGER ANSWER TO MODIFY PROGRAM
+		
+		/*******************************/
+		/* MAKES CONFIRM DIALOG WINDOW */
+		/*******************************/
+		confirm = JOptionPane.showConfirmDialog(
+				null, 
+				"Are you sure you want to do this action?",
+				"Confirmation Window",
+				JOptionPane.YES_NO_OPTION,
+				JOptionPane.QUESTION_MESSAGE);
+		
+		/******************/
+		/* RETURN SECTION */
+		/******************/
+		return confirm;		// RETURNS CONFIRM
 	}
 }
