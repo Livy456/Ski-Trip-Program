@@ -41,7 +41,6 @@ public class Menu_GUI extends BusGUI implements ActionListener
 	private JButton numB;			// CREATES A BUTTON FOR SORTING NUMERICALLY
 	private JButton grpB;			// CREATES A BUTTON FOR SORTING BY GROUP SIZE
 	private Label warningL;			// CREATES A LABEL FOR WARNINGS
-	private JLabel grpID;			// CREATES A LABEL FOR GROUP ID
 	private JFrame frame;			// CREATES A JFRAME 
 	private Container container;	// CREATES A CONTAINER
 	 
@@ -95,7 +94,6 @@ public class Menu_GUI extends BusGUI implements ActionListener
 		numB.setBounds(270, 80, 150, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		grpB.setBounds(270, 110, 150, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		quitB.setBounds(300, 300, 100, 25);		// SETS (X POSITIION, Y POSITION, LENGTH, WIDTH)
-		grpID.setBounds(60, 340, 50, 50);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		warningL.setBounds(50, 230, 100, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		
 		/**********************************************/
@@ -190,11 +188,8 @@ public class Menu_GUI extends BusGUI implements ActionListener
 			if (confirm == 0)
 			{	
 				frame.dispose();			// DISPOSES OF MENU_GUI FRAME
-				underConstruction();		// CALL TO UNDER CONSTRUCTION
 				new Remove_Menu();			//CREATES THE REMOVE MENU GUI
-			}
-			
-			new Menu_GUI();		// RECREATES THE MENU GUI FRAME	
+			}			
 		}
 		
 		/**********************************************************/
@@ -367,8 +362,7 @@ public class Menu_GUI extends BusGUI implements ActionListener
 		/*******************************/
 		num = JOptionPane.showConfirmDialog(
 				null,
-				"Do you really want to do this? Once you do this" + "\n" + 
-				"you cannot undo this action.",
+				"Do you really want to do this?",
 				"Confirm Window",
 				JOptionPane.YES_NO_OPTION,
 				JOptionPane.QUESTION_MESSAGE);
