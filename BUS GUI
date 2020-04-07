@@ -136,6 +136,7 @@ public class BusGUI implements ActionListener
 		/* SETS FONT OF THE LABEL */
 		/**************************/
 		nameL.setFont(font);		// SETS THE FONT OF THE NAME LABEL
+		nameL.setForeground(Color.WHITE);
 		grpSzL.setFont(font);		// SETS THE FONT OF THE GROUP SIZE LABEL
 		dateL.setFont(font);		// SETS THE FONT OF THE DATE LABEL
 		info.setFont(font);			// SETS THE FONT OF THE INFO LABEL
@@ -206,7 +207,6 @@ public class BusGUI implements ActionListener
 		/********************/
 		String action; 		// STRING TO REPRESENT WHICH BUTTON WAS PRESSED
 		String str;			// ERROR CHECKING ARRAYLIST
-		int id;				// REUSUABLE STRING FOR ID
 		int confirm; 		// REUSUABLE INT INPUT FOR CONFIRMING AN ACTION
 		
 		/************************************/
@@ -240,9 +240,9 @@ public class BusGUI implements ActionListener
 		/**********************************************************/
 		if (action.equals("Enter"))
 		{	
-			/*******************************************************/
-			/* ELSE STATEMENT TO CHECK IF ENTER BUTTON WAS PRESSED */	
-			/*******************************************************/
+			/*****************************************************/
+			/* IF STATEMENT TO CHECK IF ENTER BUTTON WAS PRESSED */	
+			/*****************************************************/
 			if((nameTF.getText() == "") || (grpSzTF.getText() == "") 
 				|| (monthCB.getSelectedItem() == "") || (dayCB.getSelectedItem() == "") 
 				|| (yearCB.getSelectedItem() == ""))
@@ -250,9 +250,9 @@ public class BusGUI implements ActionListener
 				errorMessage(error8);	// CALL TO ERROR MESSAGE
 			}
 				
-			/*****************************************************/
-			/* IF STATEMENT TO CHECK IF ENTER BUTTON WAS PRESSED */	
-			/*****************************************************/
+			/**********************************************************/
+			/* ELSE IF STATEMENT TO CHECK IF ENTER BUTTON WAS PRESSED */	
+			/**********************************************************/
 			else if ((nameTF.getText() != "") && (grpSzTF.getText() != "") 
 					&& (monthCB.getSelectedItem() != null) && (dayCB.getSelectedItem() != null) 
 					&& (yearCB.getSelectedItem() != null))
