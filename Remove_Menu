@@ -68,7 +68,7 @@ public class Remove_Menu extends BusGUI implements ActionListener
 		/* CREATES A BLANK JFRAME */
 		/**************************/
 		frame.pack();							// SIZE OF THE FRAME
-		frame.setBounds(450, 100, 350, 350);	// SETS X POSITION, Y POSITION, LENGTH, 
+		frame.setBounds(450, 100, 550, 550);	// SETS X POSITION, Y POSITION, LENGTH, 
 		frame.setVisible(true);					// ALLOWS THE JFRAME TO BE VISIBLE
 		container.setLayout(null);				// SETS THE LAYOUT FOR THE JFRAME
 		container.setBackground(Color.BLUE);	// SETS THE BACKGROUND COLOR
@@ -84,7 +84,6 @@ public class Remove_Menu extends BusGUI implements ActionListener
 		/* SETS FOREGROUND COLOR OF THE LABEL */
 		/**************************************/
 		info.setForeground(Color.WHITE);		// SETS FOREGROUND COLOR OF INFO LABEL
-		view.setForeground(Color.BLACK);		// SETS FOREGROUND COLOR OF VIEW BUTTON
 		
 		/**********************************************/
 		/* SETS BOUNDS FOR BUTTONS, JTEXTFIELD, LABEL */
@@ -92,9 +91,9 @@ public class Remove_Menu extends BusGUI implements ActionListener
 		enterB.setBounds(300, 300, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		returnB.setBounds(220, 300, 75, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		quitB.setBounds(380, 300, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		info.setBounds(100, 30, 500, 30);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		view.setBounds(50, 300, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		remove.setBounds(70, 150, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		info.setBounds(50, 30, 500, 30);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		view.setBounds(130, 300, 150, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		remove.setBounds(50, 60, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		
 		/**********************************************/
 		/* ADDS LISTENER TO BUTTON TO PERFORM ACTIONS */
@@ -225,15 +224,15 @@ public class Remove_Menu extends BusGUI implements ActionListener
 			/*******************************/
 			/* IF STATEMENT TO ERROR CHECK */
 			/*******************************/
-			if(num > BusGUI.custList.size())
+			if((num < 1) || (num > custList.size()))
 			{
 				remove.setText("");			// CLEARS THE TEXT FIELD
 				errorMessage(error1);		// CALL TO ERROR MESSAGE
 			}
 		}
-		while(num > BusGUI.custList.size());
+		while((num < 1) || (num > custList.size()));
 		
-		BusGUI.custList.remove(num-1);		// CALL TO REMOVE CUSTOMER FROM ARRAY LIST
+		custList.remove(num-1);		// CALL TO REMOVE CUSTOMER FROM ARRAY LIST
 	}
 	
 	public static int confirmWindow()
@@ -280,10 +279,10 @@ public class Remove_Menu extends BusGUI implements ActionListener
 		/***********************************************/
 		/* FOR LOOP TO PRINT OUT ARRAYLIST OF CUSTOMER */
 		/***********************************************/
-		for(int i = 0; i < BusGUI.custList.size(); i++)
+		for(int i = 0; i < custList.size(); i++)
 		{
-			str += "" + BusGUI.custList.get(i).toString() + "\n";// CREATES A STRING 
-			 													 // REPRESENTATION OF ARRAYLIST
+			str += "" + custList.get(i).toString() + "\n";	// CREATES A STRING 
+			 												// REPRESENTATION OF ARRAYLIST
 		}
 		
 		/******************/
@@ -302,6 +301,7 @@ public class Remove_Menu extends BusGUI implements ActionListener
 		/* VARIABLE SECTION */
 		/********************/
 		String str;			// USED FOR REUSABLE OUTPUT
+		int num;			// USED FOR CUSTOMER NUMBER
 		
 		str = "";			// INITIALIZES THE STRING
 		
@@ -310,8 +310,13 @@ public class Remove_Menu extends BusGUI implements ActionListener
 		/***********************************************/
 		for(int i = 0; i < custList.size(); i++)
 		{
-			str+= "Customer number: " + i + 1 + " " +
-				  custList.get(i).toString() + "\n";	// CREATES A STRING 
+			num = i;
+			str+= "Customer number: " + num + 1 + " " +
+				  custList.get(i).getID() + "\t" + 
+				  custList.get(i).getName() + "\t" + 
+				  custList.get(i).getDate() + "\t" +
+				  custList.get(i).getSize() + "\t" +
+				  custList.get(i).getCost() + "\n";		// CREATES A STRING 
 														// REPRESENTATION OF ARRAYLIST
 		}
 		
