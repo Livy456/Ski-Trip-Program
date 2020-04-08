@@ -1,6 +1,6 @@
 /******************************************/
 /* USER DESCRIPTION SECTION 			  */
-/* OLIVIA 				   			  */
+/* OLIVIA DIAS				   			  */
 /* FINAL PROJECT			   	  		  */
 /* PROGRAM 12							  */
 /* FEBRUARY 10, 2020		   			  */
@@ -34,6 +34,7 @@ public class Customer implements Ski_Interface
 	private int remainder;		// INSTANCE VARIABLE FOR NUMBER OF EXTRA SKIERS
 	private double cost;		// INSTANCE VARIABLE FOR USER'S COST
 	private double refund;		// INSTANE VARIABLE FOR REFUNDS
+	DecimalFormat df = new DecimalFormat("0.00");	// INSTANTIATES DECIMALFORMAT
 	private Random generator = new Random();	// INSTANCE VARIABLE FOR RANDOM NUMBER 
 												// GENERATOR
 	
@@ -294,13 +295,16 @@ public class Customer implements Ski_Interface
 		/********************/
 		/* VARIABLE SECTION */
 		/********************/
-		String str; 	// STRING REPRESENTATION OF OBJECT
+		String str; 			// STRING REPRESENTATION OF OBJECT
+		String costdf;			// STRING REPRESENTATION OF COST
+		
+		costdf = df.format(cost);	// FORMATS COST
 		
 		/*****************************************/
 		/* MAKES STRING REPRESENTATION OF OBJECT */
 		/*****************************************/
 		str = "" + id + "\t" + name + "\t" + date + "\t" +  
-			  grpsize + "\t" + cost;
+			  grpsize + "\t" + costdf;
 		
 		/******************/
 		/* RETURN SECTION */
