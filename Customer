@@ -224,13 +224,18 @@ public class Customer implements Ski_Interface
 		return remainder;		// RETURNS REMAINDER
 	}
 	
-	public double getCost()
+	public String getCost()
 	/**************************************************/
 	/* PRECONDITION - PROGRAM HAS BUS AND REMAINDER	  */
 	/* 				  NEEDS THE COST OF THE SKI TRIP  */
 	/* POSTCONDITION - FUNCTION RETURNS COST    	  */
 	/**************************************************/
 	{
+		/********************/
+		/* VARIABLE SECTION */
+		/********************/
+		String costdf;		// STRING REPRESENTATION OF COST
+		
 		/***********************************/
 		/* CALCULATES COST OF THE SKI TRIP */
 		/***********************************/
@@ -251,10 +256,12 @@ public class Customer implements Ski_Interface
 			cost = 49.99 * (grpsize - remainder);	// CALCULATES COST WITH REFUNDS
 		}
 		
+		costdf = df.format(cost);	// FORMATS COST	
+		
 		/******************/
 		/* RETURN SECTION */
 		/******************/
-		return cost;			// RETURNS COST
+		return costdf;			// RETURNS COST
 	}
 	
 	public double getRefund()
