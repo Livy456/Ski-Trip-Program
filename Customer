@@ -81,6 +81,84 @@ public class Customer implements Ski_Interface
 	/************************************************/	
 	{
 		name = nm;		// SETS NAME TO NAME VALUE INPUTTED FROM CLIENT
+		
+		/**********************************************************************/
+		/* IF STATEMENT TO CHECK LENGTH OF NAME SO LENGTH CAN BE STANDARDIZED */	
+		/**********************************************************************/
+		if (name.length() < 10)
+		{
+			/************************************************/
+			/* IF STATEMENT TO CHECK IF LENGTH OF NAME IS 1 */	
+			/************************************************/
+			if(name.length() == 1)
+			{
+				name += "         ";
+			}
+			
+			/************************************************/
+			/* IF STATEMENT TO CHECK IF LENGTH OF NAME IS 2 */	
+			/************************************************/
+			else if (name.length() == 2)
+			{
+				name += "        ";
+			}
+			
+			/************************************************/
+			/* IF STATEMENT TO CHECK IF LENGTH OF NAME IS 3 */	
+			/************************************************/
+			else if (name.length() == 3)
+			{
+				name += "       ";
+			}
+			
+			/************************************************/
+			/* IF STATEMENT TO CHECK IF LENGTH OF NAME IS 4 */	
+			/************************************************/
+			else if (name.length() == 4)
+			{
+				name += "      ";
+			}
+			
+			/************************************************/
+			/* IF STATEMENT TO CHECK IF LENGTH OF NAME IS 5 */	
+			/************************************************/
+			else if (name.length() == 5)
+			{
+				name += "     ";
+			}
+			
+			/************************************************/
+			/* IF STATEMENT TO CHECK IF LENGTH OF NAME IS 6 */	
+			/************************************************/
+			else if (name.length() == 6)
+			{
+				name += "    ";
+			}
+			
+			/************************************************/
+			/* IF STATEMENT TO CHECK IF LENGTH OF NAME IS 7 */	
+			/************************************************/
+			else if (name.length() == 7)
+			{
+				name += "   ";
+			}
+			
+			/************************************************/
+			/* IF STATEMENT TO CHECK IF LENGTH OF NAME IS 8 */	
+			/************************************************/
+			else if (name.length() == 8)
+			{
+				name += "  ";
+			}
+			
+			/************************************************/
+			/* IF STATEMENT TO CHECK IF LENGTH OF NAME IS 9 */	
+			/************************************************/
+			else if (name.length() == 9)
+			{
+				name += " ";
+			}
+		}
 	}
 	
 	public String getName()
@@ -206,11 +284,11 @@ public class Customer implements Ski_Interface
 		return bus;			// RETURNS BUS
 	}
 	
-	public int getRemain()
+	public void setRemain()
 	/**************************************************/
 	/* PRECONDITION - PROGRAM HAS A GROUPSIZE AND 	  */
 	/* 				  NEEDS THE REMAINDER OF SEATS	  */
-	/* POSTCONDITION - FUNCTION RETURNS REMAINDER     */
+	/* POSTCONDITION - FUNCTION SETS REMAINDER		  */
 	/**************************************************/
 	{
 		/*********************************/
@@ -218,6 +296,15 @@ public class Customer implements Ski_Interface
 		/*********************************/
 		remainder = grpsize % 20;
 	
+	}
+	
+	public int getRemain()
+	/**************************************************/
+	/* PRECONDITION - PROGRAM HAS A GROUPSIZE AND 	  */
+	/* 				  NEEDS THE REMAINDER OF SEATS	  */
+	/* POSTCONDITION - FUNCTION RETURNS REMAINDER     */
+	/**************************************************/
+	{
 		/******************/
 		/* RETURN SECTION */
 		/******************/
@@ -239,6 +326,9 @@ public class Customer implements Ski_Interface
 		/***********************************/
 		/* CALCULATES COST OF THE SKI TRIP */
 		/***********************************/
+		
+		setRemain();				// CALL TO SET REMAINDER
+		remainder = getRemain();	// CALL TO GET REMAIN
 		
 		/***************************************************/
 		/* IF STATEMENT TO CALCULATE IF REFUNDS ARE NEEDED */	
@@ -305,7 +395,7 @@ public class Customer implements Ski_Interface
 		String str; 			// STRING REPRESENTATION OF OBJECT
 		String costdf;			// STRING REPRESENTATION OF COST
 		
-		costdf = df.format(cost);	// FORMATS COST
+		costdf = getCost();		// CALL TO GET COST
 		
 		/*****************************************/
 		/* MAKES STRING REPRESENTATION OF OBJECT */
