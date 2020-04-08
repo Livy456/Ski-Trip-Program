@@ -40,7 +40,11 @@ public class Menu_GUI extends BusGUI implements ActionListener
 	private JButton alphB;			// CREATES A BUTTON FOR SORTING ALPHABETICALLY
 	private JButton numB;			// CREATES A BUTTON FOR SORTING NUMERICALLY
 	private JButton grpB;			// CREATES A BUTTON FOR SORTING BY GROUP SIZE
-	private Label warningL;			// CREATES A LABEL FOR WARNINGS
+	private Label heading;			// CREATES A LABEL FOR HEADING
+	private Label changeCust;		// CREATES A LABEL FOR CHANGING CUSTOMER
+	private Label cost;				// CREATES A LABEL FOR COST
+	private Label print;			// CREATES A LABEL FOR PRINT
+	private Font font;				// CREATES A FONT
 	private JFrame frame;			// CREATES A JFRAME 
 	private Container container;	// CREATES A CONTAINER
 	 
@@ -65,36 +69,77 @@ public class Menu_GUI extends BusGUI implements ActionListener
 		alphB = new JButton("Sorting Alphabetically");	// INSTANTIATES A JBUTTON 
 		numB = new JButton("Sorting Numerically");		// INSTANTIATES A JBUTTON 
 		grpB = new JButton("Sorting by Group Size");	// INSTANTIATES A JBUTTON 
-		warningL = new Label("Warning");				// INSTANTIATES A LABEL
-		DecimalFormat df = new DecimalFormat("0.00");	// INSTANTIATES DECIMALFORMAT
+		heading = new Label("Ski Trip Main Menu");		// INSTANTIATES A LABEL
+		changeCust = new Label("If you want to add, " +
+							   "remove, or modify " +
+							   "click one of the " + 
+							   "buttons below:");		// INSTANTIATES A LABEL
+		cost = new Label("To display the cost and " +
+						 "know the profit of the " +
+						 "Ski Trip click one of " +
+						 "the buttons below:");			// INSTANTIATES A LABEL
+		print = new Label("To print customer info " +
+						  "sorted alphabetically, " +
+						  "numerically, or by Ski " +
+						  "Trip date, click one of "+
+						  "the buttons below:");		// INSTANTIATES A LABEL
+		font = new Font("Times New Roman", 
+						Font.BOLD, 12);					// INSTANTIATES FONT 
 		container = frame.getContentPane();				// CREATES A CONTENT PANE, WHICH  
 														// HOLDS THE OBJECTS ON THE FRAME
 
-		/**************************/
-		/* CREATES A BLANK JFRAME */
-		/**************************/
+		/*************************************/
+		/* CREATES A BLANK JFRAME AND JPANEL */
+		/*************************************/
 		frame.pack();							// SIZE OF THE FRAME
-		frame.setBounds(450, 150, 450, 450);	// SETS X POSITION, Y POSITION, LENGTH, 
+		frame.setBounds(450, 150, 550, 550);	// SETS X POSITION, Y POSITION, LENGTH, WIDTH FOR FRAME
 		frame.setVisible(true);					// ALLOWS THE JFRAME TO BE VISIBLE
 		container.setLayout(null);				// SETS THE LAYOUT FOR THE JFRAME
-		container.setBackground(Color.WHITE);	// SETS THE BACKGROUND COLOR
+		container.setBackground(Color.WHITE);	// SETS THE BACKGROUND COLOR OF FRAME
 		frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);// ALLOWS THE JFRAME TO BE CLOSED
+		
+		/**************************/
+		/* SETS FONT OF THE LABEL */
+		/**************************/
+		heading.setFont(font);		// SETS FONT OF HEADING LABEL
+		changeCust.setFont(font);	// SETS FONT OF CHANGING CUSTOMER LABEL
+		cost.setFont(font);			// SETS FONT OF REMOVE LABEL
+		print.setFont(font);		// SETS FONT OF PRINT LABEL
+		
+		/**************************************/
+		/* SETS FOREGROUND COLOR OF THE LABEL */
+		/**************************************/
+		heading.setForeground(Color.WHITE);			// SETS FOREGROUND COLOR OF HEADING LABEL
+		changeCust.setForeground(Color.WHITE);		// SETS FOREGROUND COLOR OF CHANGING CUSTOMER LABEL
+		cost.setForeground(Color.WHITE);			// SETS FOREGROUND COLOR OF REMOVE LABEL
+		print.setForeground(Color.WHITE);			// SETS FOREGROUND COLOR OF PRINT LABEL
+		
+		/**************************************/
+		/* SETS BACKGROUND COLOR OF THE LABEL */
+		/**************************************/
+		heading.setBackground(Color.BLACK);			// SETS BACKGROUND COLOR OF HEADING LABEL
+		changeCust.setBackground(Color.GRAY);		// SETS BACKGROUND COLOR OF CHANGING CUSTOMER LABEL
+		cost.setBackground(Color.GRAY);				// SETS BACKGROUND COLOR OF COST LABEL
+		print.setBackground(Color.GRAY);			// SETS BACKGROUND COLOR OF PRINT LABEL
 		
 		/**********************************************/
 		/* SETS BOUNDS FOR BUTTONS, JTEXTFIELD, LABEL */
 		/**********************************************/
-		insertB.setBounds(50, 50, 100, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		removeB.setBounds(50, 80, 100, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		modifyB.setBounds(50, 110, 100, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		costB.setBounds(160, 50, 100, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		busDtB.setBounds(160, 80, 100, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		profitDtB.setBounds(160, 110, 100, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		profitB.setBounds(160, 140, 100, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		alphB.setBounds(270, 50, 150, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		numB.setBounds(270, 80, 150, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		grpB.setBounds(270, 110, 150, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		quitB.setBounds(300, 300, 100, 25);		// SETS (X POSITIION, Y POSITION, LENGTH, WIDTH)
-		warningL.setBounds(50, 230, 100, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		insertB.setBounds(50, 70, 100, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		removeB.setBounds(160, 70, 100, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		modifyB.setBounds(270, 70, 100, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		costB.setBounds(50, 120, 100, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		busDtB.setBounds(160, 120, 100, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		profitDtB.setBounds(270, 120, 100, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		profitB.setBounds(380, 120, 100, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		alphB.setBounds(50, 170, 150, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		numB.setBounds(160, 170, 150, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		grpB.setBounds(270, 170, 150, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		quitB.setBounds(420, 450, 100, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		heading.setBounds(100, 10, 300, 30);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		changeCust.setBounds(20, 50, 500, 50);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		cost.setBounds(20, 100, 500, 50);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		print.setBounds(20, 150, 500, 300);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		
 		/**********************************************/
 		/* ADDS LISTENER TO BUTTON TO PERFORM ACTIONS */
@@ -125,6 +170,10 @@ public class Menu_GUI extends BusGUI implements ActionListener
 		container.add(alphB);			// ADDS ALPHABETIC SORTING BUTTON TO CONTAINER
 		container.add(numB);			// ADDS NUMERIC SORTING BUTTON TO CONTAINER
 		container.add(grpB);			// ADDS GROUP SIZE SORTING BUTTON TO CONTAINER
+		container.add(heading);			// ADDS HEADING LABEL TO CONTAINER
+		container.add(changeCust);		// ADDS CHANGING CUSTOMER LABEL TO CONTAINER
+		container.add(cost);			// ADDS COST LABEL TO CONTAINER
+		container.add(print);			// ADDS PRINT LABEL TO CONTAINER
 	}
 	
 	public void actionPerformed(ActionEvent event)
