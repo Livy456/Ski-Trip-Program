@@ -31,7 +31,7 @@ public interface Ski_Interface
 	public int getSize();
 	public int getBus();
 	public int getRemain();
-	public double getCost();
+	public String getCost();
 	public double getRefund();
 	public String toString();
 }
