@@ -29,14 +29,19 @@ public class Remove_Menu extends BusGUI implements AdjustmentListener
 	/*****************************/
 	/* INSTANCE VARIABLE SECTION */
 	/*****************************/
+	private String arrayStr;		// CREATES A STRING REPRESENTATION OF ARRAY LIST
 	private JButton enterB;			// CREATES A BUTTON FOR ENTERING INFORMATION FOR PROGRAM	
 	private JButton returnB;		// CREATES A BUTTON FOR REUTNRING TO HOME MENU
 	private JButton quitB;			// CREATES A BUTTON TO QUIT PROGRAM 
-	private Label info;				// CREATES A LABEL FOR WARNINGS
+	private Label info;				// CREATES A LABEL FOR ADDITIONAL INFORMATION
+	private Label customerInfo;		// CREATES A LABEL OF ALL CUSTOMERS
 	private JFrame frame;			// CREATES A JFRAME 
 	private Container container;	// CREATES A CONTAINER
-	private Checkbox checkbox;		// CREATES A CHECKBOX
+	private Font font;				// CREATES A FONT
+	//private Checkbox checkbox;	// CREATES A CHECKBOX
 	private JScrollBar scrollBar;	// CREATES A JSCROLL BAR
+	DecimalFormat df = new DecimalFormat("0.00");	// INSTANTIATES DECIMALFORMAT
+	private JPanel panel;			// CREATES A LABEL FOR PANEL
 	private ActionListener actionListener;
 	 
 	public Remove_Menu()
@@ -45,6 +50,8 @@ public class Remove_Menu extends BusGUI implements AdjustmentListener
 	/*						 CONTENT PANE			*/
 	/************************************************/
 	{
+		arrayStr = printArray();	// CALL TO PRINT ARRAY
+		
 		/*************************/
 		/* INSTANTIATION SECTION */
 		/*************************/
@@ -54,45 +61,66 @@ public class Remove_Menu extends BusGUI implements AdjustmentListener
 		info = new Label("Select one of "+
 						 "the customers "+
 						 "to remove.");		// INSTANTIATES LABEL
+		customerInfo = new Label(arrayStr);	// INSTANTIATES LABEL
 		frame = new JFrame("Remove Menu");	// INSTANTIATES JFRAME
 		container = frame.getContentPane();	// CREATES A CONTENT PANE
+		font = new Font("Times New Roman", 
+						Font.BOLD, 12);		// INSTANTIATES FONT 
 		scrollBar = new JScrollBar();		// INSTANTIATES A JSCROLL BAR
+		panel = new JPanel();				// INSTANTIATES A LABEL
 		
 		/**************************/
 		/* CREATES A BLANK JFRAME */
 		/**************************/
 		frame.pack();							// SIZE OF THE FRAME
-		frame.setBounds(450, 150, 550, 550);	// SETS X POSITION, Y POSITION, LENGTH, 
+		frame.setBounds(450, 100, 550, 550);	// SETS X POSITION, Y POSITION, LENGTH, 
+		panel.setBounds(450, 50, 450, 50);		// SETS X POSITION, Y POSITION, LENGTH, WIDTH FOR PANEL
 		frame.setVisible(true);					// ALLOWS THE JFRAME TO BE VISIBLE
 		container.setLayout(null);				// SETS THE LAYOUT FOR THE JFRAME
-		container.setBackground(Color.WHITE);	// SETS THE BACKGROUND COLOR
+		container.setBackground(Color.BLUE);	// SETS THE BACKGROUND COLOR
+		panel.setBackground(Color.BLACK);		// SETS BACKGROUND COLOR OF PANEL
 		frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);// ALLOWS THE JFRAME TO BE CLOSED
 	
+		/**************************/
+		/* SETS FONT OF THE LABEL */
+		/**************************/
+		info.setFont(font);				// SETS FONT OF INFO LABEL
+		customerInfo.setFont(font);		// SETS FONT OF CUSTOMER INFO LABEL
+		
+		/**************************************/
+		/* SETS FOREGROUND COLOR OF THE LABEL */
+		/**************************************/
+		info.setForeground(Color.WHITE);		// SETS FOREGROUND COLOR OF INFO LABEL
+		customerInfo.setForeground(Color.BLACK);// SETS FOREGROUND COLOR OF CUSTOMER INFO LABEL
+		
 		/**********************************************/
 		/* SETS BOUNDS FOR BUTTONS, JTEXTFIELD, LABEL */
 		/**********************************************/
-		enterB.setBounds(300, 300, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		returnB.setBounds(220, 300, 75, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		quitB.setBounds(380, 300, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		info.setBounds(50, 30, 500, 30);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		scrollBar.setBounds(500, 1, 10, 500);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		enterB.setBounds(400, 400, 75, 25);			// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		returnB.setBounds(320, 400, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		quitB.setBounds(480, 400, 75, 25);			// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		info.setBounds(50, 30, 500, 30);			// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		customerInfo.setBounds(70, 60, 450, 300);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		scrollBar.setBounds(549, 1, 10, 490);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		
 		/**********************************************/
 		/* ADDS LISTENER TO BUTTON TO PERFORM ACTIONS */
 		/**********************************************/
-		enterB.addActionListener(this);		// ADDS ACTIONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED
-		returnB.addActionListener(this);	// ADDS ACTIONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED
-		quitB.addActionListener(this);		// ADDS ACTIONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED
-		scrollBar.addAdjustmentListener(this);
+		enterB.addActionListener(this);			// ADDS ACTIONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED
+		returnB.addActionListener(this);		// ADDS ACTIONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED
+		quitB.addActionListener(this);			// ADDS ACTIONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED
+		scrollBar.addAdjustmentListener(this);	// ADDS ADJUSTMENTLISTENER TO MAKE THE SCROLLBAR MOVE 
 		
 		/*************************/
 		/* ADDS BUTTONS TO FRAME */
 		/*************************/
-		container.add(enterB);		// ADDS ENTER BUTTON TO CONTAINER
-		container.add(returnB);		// ADDS RETURN BUTTON TO CONTAINER
-		container.add(quitB);		// ADDS QUIT BUTTON TO CONTAINER
-		container.add(info);		// ADDS INFO LABEL TO CONTAINER
-		container.add(scrollBar);	// ADDS SCROLL BAR TO CONTAINER
+		container.add(enterB);			// ADDS ENTER BUTTON TO CONTAINER
+		container.add(returnB);			// ADDS RETURN BUTTON TO CONTAINER
+		container.add(quitB);			// ADDS QUIT BUTTON TO CONTAINER
+		container.add(info);			// ADDS INFO LABEL TO CONTAINER
+		container.add(customerInfo);	// ADDS CUSTOMER INFO LABEL TO CONTAINER
+		container.add(scrollBar);		// ADDS SCROLL BAR TO CONTAINER
+		container.add(panel);			// ADDS PANEL TO CONTAINER
 	}
 	
 	public void actionPerformed(ActionEvent event)
@@ -168,9 +196,7 @@ public class Remove_Menu extends BusGUI implements AdjustmentListener
 	/* 				   EVENT FOR SCROLL BAR			*/
 	/************************************************/
 	{
-		int count;
-		count= 0;
-		count+=1;
+		
 	}
 	
 	public static int confirmWindow()
@@ -199,5 +225,33 @@ public class Remove_Menu extends BusGUI implements AdjustmentListener
 		/* RETURN SECTION */
 		/******************/
 		return confirm;		// RETURNS CONFIRM
+	}
+	
+	public static String printArray()
+	/*********************************************************/
+	/* PRECONDITION - NEEDS UPDATE OF ARRAYLIST OF INTEGERS	 */
+	/* POSTCONDITION - GETS UPDATE FOR ARRAYLIST OF INTEGERS */
+	/*********************************************************/
+	{
+		/********************/
+		/* VARIABLE SECTION */
+		/********************/
+		String str;			// USED FOR REUSABLE OUTPUT
+		
+		str = "";			// INITIALIZES STR
+		
+		/***********************************************/
+		/* FOR LOOP TO PRINT OUT ARRAYLIST OF CUSTOMER */
+		/***********************************************/
+		for(int i = 0; i < BusGUI.custList.size(); i++)
+		{
+			str += "" + BusGUI.custList.get(i).toString() + "\n";// CREATES A STRING 
+			 													 // REPRESENTATION OF ARRAYLIST
+		}
+		
+		/******************/
+		/* RETURN SECTION */
+		/******************/
+		return str;			// RETURNS STR
 	}
 }
