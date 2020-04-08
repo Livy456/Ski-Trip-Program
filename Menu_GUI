@@ -40,12 +40,12 @@ public class Menu_GUI extends BusGUI implements ActionListener
 	private JButton alphB;			// CREATES A BUTTON FOR SORTING ALPHABETICALLY
 	private JButton numB;			// CREATES A BUTTON FOR SORTING NUMERICALLY
 	private JButton grpB;			// CREATES A BUTTON FOR SORTING BY GROUP SIZE
-	private Label heading;			// CREATES A LABEL FOR HEADING
-	private Label changeCust;		// CREATES A LABEL FOR CHANGING CUSTOMER
-	private Label cost;				// CREATES A LABEL FOR COST
-	private Label print;			// CREATES A LABEL FOR PRINT
+	private JLabel heading;			// CREATES A LABEL FOR HEADING
+	private JLabel changeCust;		// CREATES A LABEL FOR CHANGING CUSTOMER
+	private JLabel cost;				// CREATES A LABEL FOR COST
+	private JLabel print;			// CREATES A LABEL FOR PRINT
 	private Font font;				// CREATES A FONT
-	private JFrame frame;			// CREATES A JFRAME 
+	private JFrame frame;			// CREATES A JFRAME
 	private Container container;	// CREATES A CONTAINER
 	 
 	public Menu_GUI()
@@ -57,36 +57,33 @@ public class Menu_GUI extends BusGUI implements ActionListener
 		/*************************/
 		/* INSTANTIATION SECTION */
 		/*************************/
-		frame = new JFrame("Ski Trip Menu");			// INSTANTIATES A FRAME
-		insertB = new JButton("Insert");				// INSTANTIATES A JBUTTON
-		removeB = new JButton("Remove");				// INSTANTIATES A JBUTTON 
-		modifyB = new JButton("Modify");				// INSTANTIATES A JBUTTON 
-		quitB = new JButton("Quit");					// INSTANTIATES A JBUTTON 
-		costB = new JButton("Cost");					// INSTANTIATES A JBUTTON 
-		busDtB = new JButton("Sorting by Bus Date");	// INSTANTIATES A JBUTTON 
-		profitDtB = new JButton("Profit by Date");		// INSTANTIATES A JBUTTON 
-		profitB = new JButton("Total Profit");			// INSTANTIATES A JBUTTON 
-		alphB = new JButton("Sorting Alphabetically");	// INSTANTIATES A JBUTTON 
-		numB = new JButton("Sorting Numerically");		// INSTANTIATES A JBUTTON 
-		grpB = new JButton("Sorting by Group Size");	// INSTANTIATES A JBUTTON 
-		heading = new Label("Ski Trip Main Menu");		// INSTANTIATES A LABEL
-		changeCust = new Label("If you want to add, " +
-							   "remove, or modify " +
-							   "click one of the " + 
-							   "buttons below:");		// INSTANTIATES A LABEL
-		cost = new Label("To display the cost and " +
-						 "know the profit of the " +
-						 "Ski Trip click one of " +
-						 "the buttons below:");			// INSTANTIATES A LABEL
-		print = new Label("To print customer info " +
-						  "sorted alphabetically, " +
-						  "numerically, or by Ski " +
-						  "Trip date, click one of "+
-						  "the buttons below:");		// INSTANTIATES A LABEL
+		frame = new JFrame("Ski Trip Menu");				// INSTANTIATES A FRAME
+		insertB = new JButton("Insert");					// INSTANTIATES A JBUTTON
+		removeB = new JButton("Remove");					// INSTANTIATES A JBUTTON 
+		modifyB = new JButton("Modify");					// INSTANTIATES A JBUTTON 
+		quitB = new JButton("Quit");						// INSTANTIATES A JBUTTON 
+		costB = new JButton("Cost");						// INSTANTIATES A JBUTTON 
+		busDtB = new JButton("Sorting by Bus Date");		// INSTANTIATES A JBUTTON 
+		profitDtB = new JButton("Profit by Date");			// INSTANTIATES A JBUTTON 
+		profitB = new JButton("Total Profit");				// INSTANTIATES A JBUTTON 
+		alphB = new JButton("Sorting Alphabetically");		// INSTANTIATES A JBUTTON 
+		numB = new JButton("Sorting Numerically");			// INSTANTIATES A JBUTTON 
+		grpB = new JButton("Sorting by Group Size");		// INSTANTIATES A JBUTTON 
+		heading = new JLabel("Ski Trip Main Menu");			// INSTANTIATES A LABEL
+		changeCust = new JLabel("If you want to add, remove, " +
+							   "or modify click one of " +
+							   "the buttons below:");		// INSTANTIATES A LABEL
+		cost = new JLabel("To display the cost and know the " +
+						 "profit of the Ski Trip click " +
+						 "one of the buttons below:");		// INSTANTIATES A LABEL
+		print = new JLabel("To print customer info sorted " +
+						  "alphabetically, numerically, " +
+						  "or by Ski Trip date, click one " +
+						  "of the buttons below:");			// INSTANTIATES A LABEL
 		font = new Font("Times New Roman", 
-						Font.BOLD, 12);					// INSTANTIATES FONT 
-		container = frame.getContentPane();				// CREATES A CONTENT PANE, WHICH  
-														// HOLDS THE OBJECTS ON THE FRAME
+						Font.BOLD, 12);						// INSTANTIATES FONT 
+		container = frame.getContentPane();					// CREATES A CONTENT PANE, WHICH  
+															// HOLDS THE OBJECTS ON THE FRAME
 
 		/*************************************/
 		/* CREATES A BLANK JFRAME AND JPANEL */
@@ -95,7 +92,7 @@ public class Menu_GUI extends BusGUI implements ActionListener
 		frame.setBounds(450, 150, 550, 550);	// SETS X POSITION, Y POSITION, LENGTH, WIDTH FOR FRAME
 		frame.setVisible(true);					// ALLOWS THE JFRAME TO BE VISIBLE
 		container.setLayout(null);				// SETS THE LAYOUT FOR THE JFRAME
-		container.setBackground(Color.WHITE);	// SETS THE BACKGROUND COLOR OF FRAME
+		container.setBackground(Color.GRAY);	// SETS THE BACKGROUND COLOR OF FRAME
 		frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);// ALLOWS THE JFRAME TO BE CLOSED
 		
 		/**************************/
@@ -118,28 +115,28 @@ public class Menu_GUI extends BusGUI implements ActionListener
 		/* SETS BACKGROUND COLOR OF THE LABEL */
 		/**************************************/
 		heading.setBackground(Color.BLACK);			// SETS BACKGROUND COLOR OF HEADING LABEL
-		changeCust.setBackground(Color.GRAY);		// SETS BACKGROUND COLOR OF CHANGING CUSTOMER LABEL
-		cost.setBackground(Color.GRAY);				// SETS BACKGROUND COLOR OF COST LABEL
-		print.setBackground(Color.GRAY);			// SETS BACKGROUND COLOR OF PRINT LABEL
-		
+		//changeCust.setBackground(Color.BLACK);		// SETS BACKGROUND COLOR OF CHANGING CUSTOMER LABEL
+		//cost.setBackground(Color.BLACK);			// SETS BACKGROUND COLOR OF COST LABEL
+		//print.setBackground(Color.BLACK);			// SETS BACKGROUND COLOR OF PRINT LABEL
+				
 		/**********************************************/
 		/* SETS BOUNDS FOR BUTTONS, JTEXTFIELD, LABEL */
 		/**********************************************/
-		insertB.setBounds(50, 70, 100, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		removeB.setBounds(160, 70, 100, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		modifyB.setBounds(270, 70, 100, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		costB.setBounds(50, 120, 100, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		busDtB.setBounds(160, 120, 100, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		profitDtB.setBounds(270, 120, 100, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		profitB.setBounds(380, 120, 100, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		alphB.setBounds(50, 170, 150, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		numB.setBounds(160, 170, 150, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		grpB.setBounds(270, 170, 150, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		insertB.setBounds(50, 130, 100, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		removeB.setBounds(160, 130, 100, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		modifyB.setBounds(270, 130, 100, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		costB.setBounds(50, 240, 100, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		busDtB.setBounds(160, 240, 100, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		profitDtB.setBounds(270, 240, 100, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		profitB.setBounds(380, 240, 100, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		alphB.setBounds(50, 360, 150, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		numB.setBounds(160, 360, 150, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		grpB.setBounds(270, 360, 150, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		quitB.setBounds(420, 450, 100, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		heading.setBounds(100, 10, 300, 30);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		changeCust.setBounds(20, 50, 500, 50);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		cost.setBounds(20, 100, 500, 50);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		print.setBounds(20, 150, 500, 300);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		heading.setBounds(200, 10, 400, 50);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		changeCust.setBounds(20, 70, 500, 50);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		cost.setBounds(20, 190, 500, 50);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		print.setBounds(20, 310, 500, 50);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		
 		/**********************************************/
 		/* ADDS LISTENER TO BUTTON TO PERFORM ACTIONS */
@@ -438,27 +435,7 @@ public class Menu_GUI extends BusGUI implements ActionListener
 				JOptionPane.ERROR_MESSAGE);
 	}
 	
-	public static ArrayList<Customer> insert(ArrayList<Customer>intArray, String str, String hdstr)
-	/*********************************************************************/
-	/* PRECONDITION - NEEDS TO INSERT INTEGER INTO ARRAYLIST OF INTEGERS */
-	/* POSTCONDITION - GETS INSERTED INTEGER INTO ARRAYLIST OF INTEGERS  */
-	/*********************************************************************/
-	{
-		/********************/
-		/* VARIABLE SECTION */
-		/********************/
-		String inum;		// INPUTS NUMBER AS A STRING
-		Customer num;		// USED FOR REUSEABLE INPUT
-		
-		new BusGUI();		// INSTANTIATES A NEW FRAME
-				
-		/******************/
-		/* RETURN SECTION */
-		/******************/
-		return intArray;		// RETURNS NUM
-	}
-	
-	public static String printArray(ArrayList<Customer> cList)
+	public static String printArray()
 	/*********************************************************/
 	/* PRECONDITION - NEEDS UPDATE OF ARRAYLIST OF INTEGERS	 */
 	/* POSTCONDITION - GETS UPDATE FOR ARRAYLIST OF INTEGERS */
@@ -486,6 +463,24 @@ public class Menu_GUI extends BusGUI implements ActionListener
 		return str;			// RETURN STR
 	}
 	
+	public static void remove(ArrayList<Customer>intArray, String str, String hdstr)
+	/****************************************************************/
+	/* PRECONDITION - NEEDS TO REMOVE CUSTOMER FROM THE ARRAY LIST 	*/
+	/* POSTCONDITION - GETS INTEGER FOR CUSTOMER NUMBER AND REMOVES */
+	/* 				   THAT CUSTOMER FROM THE ARRAY LIST   			*/
+	/****************************************************************/
+	{
+		/********************/
+		/* VARIABLE SECTION */
+		/********************/
+		String numi;		// USED FOR REUSABLE STRING INPUT
+		int num;			// USED FOR REUSABLE INTEGER INPUT
+		
+		updateMenu();		// CALL TO UPDATE MENU
+				
+		new Remove_Menu();	//
+	}
+	
 	public static void underConstruction()
 	/****************************************************/
 	/* PRECONDITION - NEEDS UNDER CONSTRUCTION WINDOW 	*/
@@ -501,6 +496,40 @@ public class Menu_GUI extends BusGUI implements ActionListener
 				null,
 				"This part of the option menu is under construction",
 				"Under construction menu",
+				JOptionPane.INFORMATION_MESSAGE);
+	}
+	
+	public static void updateMenu()
+	/*****************************************************************/
+	/* PRECONDITION - NEEDS AN UPDATE WINDOW OF ALL CUSTOMERS 		 */
+	/* POSTCONDITION - CREATES WINDOW TO TELL USER ALL THE CUSTOMERS */
+	/*****************************************************************/
+	{
+		/********************/
+		/* VARIABLE SECTION */
+		/********************/
+		String str;			// USED FOR REUSABLE OUTPUT
+		
+		str = "";			// INITIALIZES THE STRING
+		
+		/***********************************************/
+		/* FOR LOOP TO PRINT OUT ARRAYLIST OF CUSTOMER */
+		/***********************************************/
+		for(int i = 0; i < custList.size(); i++)
+		{
+			str+= "Customer number: " + i + 1 + " " +
+				  custList.get(i).toString() + "\n";	// CREATES A STRING 
+														// REPRESENTATION OF ARRAYLIST
+		}
+		
+		/***********************/
+		/* MAKES DIALOG WINDOW */
+		/***********************/ 
+		JOptionPane.showMessageDialog(
+				null,
+				"Make sure to remember the number of the customer you wish to remove. \n"+
+				str,
+				"Customer List",
 				JOptionPane.INFORMATION_MESSAGE);
 	}
 }
