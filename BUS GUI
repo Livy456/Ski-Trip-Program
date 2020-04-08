@@ -136,7 +136,6 @@ public class BusGUI implements ActionListener
 		/* SETS FONT OF THE LABEL */
 		/**************************/
 		nameL.setFont(font);		// SETS THE FONT OF THE NAME LABEL
-		nameL.setForeground(Color.WHITE);
 		grpSzL.setFont(font);		// SETS THE FONT OF THE GROUP SIZE LABEL
 		dateL.setFont(font);		// SETS THE FONT OF THE DATE LABEL
 		info.setFont(font);			// SETS THE FONT OF THE INFO LABEL
@@ -144,6 +143,16 @@ public class BusGUI implements ActionListener
 		welcome.setFont(font);		// SETS THE FONT OF THE WELCOME LABEL
 		warning.setFont(font);		// SETS THE FONT OF THE WARNING LABEL
 		warning2.setFont(font);		// SETS THE FONT OF THE WARNING LABEL
+		
+		/**************************************/
+		/* SETS FOREGROUND COLOR OF THE LABEL */
+		/**************************************/
+		nameL.setForeground(Color.WHITE);	// SETS FOREGROUND COLOR OF NAME LABEL
+		grpSzL.setForeground(Color.WHITE);	// SETS FOREGROUND COLOR OF GROUP SIZE LABEL
+		dateL.setForeground(Color.WHITE);	// SETS FOREGROUND COLOR OF DATE LABEL
+		info.setForeground(Color.WHITE);	// SETS FOREGROUND COLOR OF INFO LABEL
+		info2.setForeground(Color.WHITE);	// SETS FOREGROUND COLOR OF INFO2 LABEL
+		welcome.setForeground(Color.WHITE);	// SETS FOREGROUND COLOR OF WELCOME LABEL
 		
 		/**********************************************/
 		/* SETS BOUNDS FOR BUTTONS, JTEXTFIELD, LABEL */
