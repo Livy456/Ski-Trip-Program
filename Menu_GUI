@@ -23,9 +23,7 @@ import java.text.DecimalFormat;			// IMPORTS DECIMAL FORMAT
 import java.util.ArrayList;				// IMPORTS ARRAYLIST
 
 public class Menu_GUI extends BusGUI implements ActionListener
-{
-	final static String error1 = "ERROR!!! Must be positive and greater than 0!!!";
-	
+{	
 	/*****************************/
 	/* INSTANCE VARIABLE SECTION */
 	/*****************************/
@@ -70,18 +68,17 @@ public class Menu_GUI extends BusGUI implements ActionListener
 		numB = new JButton("Sorting Numerically");			// INSTANTIATES A JBUTTON 
 		grpB = new JButton("Sorting by Group Size");		// INSTANTIATES A JBUTTON 
 		heading = new JLabel("Ski Trip Main Menu");			// INSTANTIATES A LABEL
-		changeCust = new JLabel("If you want to add, remove, " +
-							   "or modify click one of " +
+		changeCust = new JLabel("To add, remove, or modify " +
+							   "click one of " +
 							   "the buttons below:");		// INSTANTIATES A LABEL
-		cost = new JLabel("To display the cost and know the " +
-						 "profit of the Ski Trip click " +
-						 "one of the buttons below:");		// INSTANTIATES A LABEL
-		print = new JLabel("To print customer info sorted " +
-						  "alphabetically, numerically, " +
-						  "or by Ski Trip date, click one " +
+		cost = new JLabel("To display cost or profit " +
+						 "of Ski Trip click one of " +
+						 "the buttons below:");				// INSTANTIATES A LABEL
+		print = new JLabel("To print customer info " +
+						  "click one " +
 						  "of the buttons below:");			// INSTANTIATES A LABEL
 		font = new Font("Times New Roman", 
-						Font.BOLD, 12);						// INSTANTIATES FONT 
+						Font.BOLD, 15);						// INSTANTIATES FONT 
 		container = frame.getContentPane();					// CREATES A CONTENT PANE, WHICH  
 															// HOLDS THE OBJECTS ON THE FRAME
 
@@ -89,7 +86,7 @@ public class Menu_GUI extends BusGUI implements ActionListener
 		/* CREATES A BLANK JFRAME AND JPANEL */
 		/*************************************/
 		frame.pack();							// SIZE OF THE FRAME
-		frame.setBounds(450, 150, 550, 550);	// SETS X POSITION, Y POSITION, LENGTH, WIDTH FOR FRAME
+		frame.setBounds(450, 150, 500, 450);	// SETS X POSITION, Y POSITION, LENGTH, WIDTH FOR FRAME
 		frame.setVisible(true);					// ALLOWS THE JFRAME TO BE VISIBLE
 		container.setLayout(null);				// SETS THE LAYOUT FOR THE JFRAME
 		container.setBackground(Color.GRAY);	// SETS THE BACKGROUND COLOR OF FRAME
@@ -122,21 +119,21 @@ public class Menu_GUI extends BusGUI implements ActionListener
 		/**********************************************/
 		/* SETS BOUNDS FOR BUTTONS, JTEXTFIELD, LABEL */
 		/**********************************************/
-		insertB.setBounds(50, 130, 100, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		removeB.setBounds(160, 130, 100, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		modifyB.setBounds(270, 130, 100, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		costB.setBounds(50, 240, 100, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		busDtB.setBounds(160, 240, 100, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		profitDtB.setBounds(270, 240, 100, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		profitB.setBounds(380, 240, 100, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		alphB.setBounds(50, 360, 150, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		numB.setBounds(160, 360, 150, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		grpB.setBounds(270, 360, 150, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		quitB.setBounds(420, 450, 100, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		heading.setBounds(200, 10, 400, 50);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		insertB.setBounds(50, 110, 100, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		removeB.setBounds(160, 110, 100, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		modifyB.setBounds(270, 110, 100, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		costB.setBounds(50, 190, 100, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		profitDtB.setBounds(160, 190, 140, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		profitB.setBounds(310, 190, 100, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		busDtB.setBounds(50, 270, 180, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		alphB.setBounds(240, 270, 180, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		numB.setBounds(50, 300, 180, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		grpB.setBounds(240, 300, 180, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		quitB.setBounds(370, 370, 100, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		heading.setBounds(170, 10, 400, 50);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		changeCust.setBounds(20, 70, 500, 50);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		cost.setBounds(20, 190, 500, 50);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		print.setBounds(20, 310, 500, 50);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		cost.setBounds(20, 150, 500, 50);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		print.setBounds(20, 230, 500, 50);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		
 		/**********************************************/
 		/* ADDS LISTENER TO BUTTON TO PERFORM ACTIONS */
@@ -234,6 +231,7 @@ public class Menu_GUI extends BusGUI implements ActionListener
 			if (confirm == 0)
 			{	
 				frame.dispose();			// DISPOSES OF MENU_GUI FRAME
+				updateMenu();				// CALL TO UPDATE MENU
 				new Remove_Menu();			//CREATES THE REMOVE MENU GUI
 			}			
 		}
@@ -509,7 +507,7 @@ public class Menu_GUI extends BusGUI implements ActionListener
 		/* VARIABLE SECTION */
 		/********************/
 		String str;			// USED FOR REUSABLE OUTPUT
-		
+		int num;			// USED FOR CUSTOMER NUMBER
 		str = "";			// INITIALIZES THE STRING
 		
 		/***********************************************/
@@ -517,8 +515,13 @@ public class Menu_GUI extends BusGUI implements ActionListener
 		/***********************************************/
 		for(int i = 0; i < custList.size(); i++)
 		{
-			str+= "Customer number: " + i + 1 + " " +
-				  custList.get(i).toString() + "\n";	// CREATES A STRING 
+			num = i;	
+			str+= "Customer number: " + num + 1 + " " +
+				  custList.get(i).getID() + "\t" +
+				  custList.get(i).getName() + "\t" +
+				  custList.get(i).getDate() + "\t" +
+				  custList.get(i).getSize() + "\t" +
+				  custList.get(i).getCost() + "\n";		// CREATES A STRING 
 														// REPRESENTATION OF ARRAYLIST
 		}
 		
