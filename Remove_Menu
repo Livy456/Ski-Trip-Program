@@ -19,10 +19,6 @@ import javax.swing.*;						// IMPORTS SWING
 import java.awt.*;							// IMPORTS AWT
 import java.awt.event.ActionEvent;			// IMPORTS ACTION EVENT
 import java.awt.event.ActionListener;		// IMPORTS ACTION LISTENER
-import java.awt.event.AdjustmentEvent;		// IMPORTS ADJUSTMENT EVENT
-import java.awt.event.AdjustmentListener;	// IMPORTS ADJUSTMENT LISTENER
-import java.text.DecimalFormat;				// IMPORTS DECIMAL FORMAT
-import java.util.ArrayList;					// IMPORTS ARRAYLIST
 
 public class Remove_Menu extends BusGUI implements ActionListener
 {
