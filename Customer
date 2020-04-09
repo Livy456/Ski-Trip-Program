@@ -92,7 +92,7 @@ public class Customer implements Ski_Interface
 			/************************************************/
 			if(name.length() == 1)
 			{
-				name += "         ";
+				name += "              ";
 			}
 			
 			/************************************************/
@@ -100,15 +100,15 @@ public class Customer implements Ski_Interface
 			/************************************************/
 			else if (name.length() == 2)
 			{
-				name += "        ";
+				name += "             ";
 			}
 			
 			/************************************************/
 			/* IF STATEMENT TO CHECK IF LENGTH OF NAME IS 3 */	
 			/************************************************/
 			else if (name.length() == 3)
-			{
-				name += "       ";
+			{ 
+				name += "            ";
 			}
 			
 			/************************************************/
@@ -116,7 +116,7 @@ public class Customer implements Ski_Interface
 			/************************************************/
 			else if (name.length() == 4)
 			{
-				name += "      ";
+				name += "          ";
 			}
 			
 			/************************************************/
@@ -124,7 +124,7 @@ public class Customer implements Ski_Interface
 			/************************************************/
 			else if (name.length() == 5)
 			{
-				name += "     ";
+				name += "         ";
 			}
 			
 			/************************************************/
@@ -132,7 +132,7 @@ public class Customer implements Ski_Interface
 			/************************************************/
 			else if (name.length() == 6)
 			{
-				name += "    ";
+				name += "       ";
 			}
 			
 			/************************************************/
@@ -140,7 +140,7 @@ public class Customer implements Ski_Interface
 			/************************************************/
 			else if (name.length() == 7)
 			{
-				name += "   ";
+				name += "     ";
 			}
 			
 			/************************************************/
@@ -148,7 +148,7 @@ public class Customer implements Ski_Interface
 			/************************************************/
 			else if (name.length() == 8)
 			{
-				name += "  ";
+				name += "   ";
 			}
 			
 			/************************************************/
