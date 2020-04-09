@@ -25,18 +25,15 @@ public class Modify_Menu extends Menu_GUI implements ActionListener
 	/*****************************/
 	/* INSTANCE VARIABLE SECTION */
 	/*****************************/
-	private JButton enterB;			// CREATES A BUTTON FOR ENTERING INFORMATION FOR PROGRAM	
-	private JButton returnB;		// CREATES A BUTTON FOR REUTNRING TO HOME MENU
-	private JButton quitB;			// CREATES A BUTTON TO QUIT PROGRAM 
-	private JButton view;			// CREATES A BUTTON FOR VIEWING LIST OF CUSTOMERS
-	private JTextField modify;		// CREATES A TEXT FIELD FOR MODIFYING CUSTOMERS
-	private JTextField nameTF;
-	private JComboBox monthCB;
-	private JComboBox dayCB;
-	private JLabel info;			// CREATES A LABEL FOR ADDITIONAL INFORMATION
-	private JFrame frame;			// CREATES A JFRAME 
-	private Container container;	// CREATES A CONTAINER
-	private Font font;				// CREATES A FONT
+	private JButton enterB;				// CREATES A BUTTON FOR ENTERING INFORMATION FOR PROGRAM	
+	private JButton returnB;			// CREATES A BUTTON FOR REUTNRING TO HOME MENU
+	private JButton quitB;				// CREATES A BUTTON TO QUIT PROGRAM 
+	private JButton view;				// CREATES A BUTTON FOR VIEWING LIST OF CUSTOMERS
+	private JTextField modify;			// CREATES A TEXT FIELD FOR MODIFYING CUSTOMERS
+	private JLabel info;				// CREATES A LABEL FOR ADDITIONAL INFORMATION
+	private JFrame frame;				// CREATES A JFRAME 
+	private static Container container;	// CREATES A CONTAINER
+	private Font font;					// CREATES A FONT
 	
 	public Modify_Menu()
 	/************************************************/
@@ -166,7 +163,7 @@ public class Modify_Menu extends Menu_GUI implements ActionListener
 		{
 			frame.dispose();			// DISPOSES THE REMOVE MENU WINDOW
 			updateMenu(heading1);		// CALL TO UPDATE MENU
-			new Remove_Menu();			// RECREATES THE REMOVE MENU WINDOW
+			new Modify_Menu();			// RECREATES THE REMOVE MENU WINDOW
 		}
 		
 		actionPerformedModify(event);		// CALL TO ACTION PERFORMED FOR REMOVE
@@ -208,7 +205,8 @@ public class Modify_Menu extends Menu_GUI implements ActionListener
 		/********************/
 		String numi;		// REUSUABLE STRING INPUT
 		String name;		// REUSUABLE STRING INPUT
-		Object date;		// REUSUABLE OBJECT INPUT
+		String date;		// REUSUABLE STRING INPUT
+		Object datei;		// REUSUABLE OBJECT INPUT
 		int size;			// REUSUABLE INTEGER INPUT
 		int id;				// REUSUABLE INTEGER INPUT
 		int num;			// REUSUABLE INT VALUE
@@ -241,14 +239,14 @@ public class Modify_Menu extends Menu_GUI implements ActionListener
 		while((num < 1) || (num > custList.size()));
 		
 		name = custList.get(num-1).getName();		// CALL TO GET CUSTOMER'S NAME FROM ARRAY LIST
-		date = custList.get(num-1).getDate();		// CALL TO GET CUSTOMER'S DATE FROM ARRAY LIST
+		datei = custList.get(num-1).getDate();		// CALL TO GET CUSTOMER'S DATE FROM ARRAY LIST
 		size = custList.get(num-1).getSize();		// CALL TO GET CUSTOMER'S SIZE FROM ARRAY LIST
-		id = custList.get(num-1).getID();			// CALL TO GET CUSTOMER'S ID FROM ARRAY LIST
+		date = (String) datei;
 		
-		modify(name, date, size, id, event);		// CALL TO MODIFY
+		modify(name, date, size, event);	// CALL TO MODIFY
 	}
 	
-	public static void modify(String nm, Object dt, int sz, int i, ActionEvent event)
+	public static void modify(String nm, String dt, int sz, ActionEvent event)
 	/***********************************************************/
 	/* PRECONDITION - PROGRAM HAS A CUSTOMER NAME, DATE, SIZE, */ 
 	/* 				  AND ID NEEDS TO MODIFY IT 			   */
@@ -256,7 +254,81 @@ public class Modify_Menu extends Menu_GUI implements ActionListener
 	/* 				   DATE, SIZE, AND ID			   		   */
 	/***********************************************************/
 	{
-		actionPerformedName(event);
-		actionPerformedDate(event);
+		/********************/
+		/* VARIABLE SECTION */
+		/********************/
+		String month;		// REUSUABLE STRING INPUT
+		String day;			// REUSUABLE STRING INPUT
+		String year;		// REUSUABLE STRING INPUT
+		String ele;			// REUSUABLE STRING VARIABLE
+		int count;			// COUNTER
+		
+		month = "";		// INITIALIZES MONTH
+		day = "";		// INITIALIZES DAY
+		year = "";		// INITIALIZES YEAR
+		ele = "";		// INITIALIZES ELE
+		count = 0;		// INITIALIZES COUNT
+		
+		/***********************************************/
+		/* FOR LOOP TO GET MONTH, DAY, AND YEAR VALUES */
+		/***********************************************/
+		for(int i = 0; i < dt.length(); i++)
+		{
+			ele = dt.substring(i);	
+			
+			/***********************************************/
+			/* IF STATEMENT TO CHECK IF ELE IS A BACKSLASH */
+			/***********************************************/
+			if(ele == "/")
+			{
+				count+=1;
+			}
+			
+			/**********************************************/
+			/* ELSE STATEMENT TO CHECK IF ELE IS A NUMBER */
+			/**********************************************/
+			else
+			{
+				/********************************************************/
+				/* IF STATEMENT TO CHECK IF ELE IS IN THE MONTH SECTION */
+				/********************************************************/
+				if(count == 0)
+				{
+					month+=ele;
+				}
+				
+				/***********************************************************/
+				/* ELSE IF STATEMENT TO CHECK IF ELE IS IN THE DAY SECTION */
+				/***********************************************************/
+				else if(count == 1)
+				{
+					day+=ele;
+				}
+				
+				/************************************************************/
+				/* ELSE IF STATEMENT TO CHECK IF ELE IS IN THE YEAR SECTION */
+				/************************************************************/
+				else if(count == 2)
+				{
+					year+=ele;
+				}
+			}
+		}
+		
+		nameTF.setText(nm);					// SETS TEXT OF NAME TEXT FIELD
+		grpSzTF.setText(""+sz);				// SETS TEXT OF GROUP SIZE TEXT FIELD
+		monthCB.setSelectedItem(month);		// SETS SELECTED DROP-DOWN ITEM OF MONTH COMBO BOX
+		dayCB.setSelectedItem(day);			// SETS SELECTED DROP-DOWN ITEM OF DAY COMBO BOX
+		yearCB.setSelectedItem(year);		// SETS SELECTED DROP-DOWN ITEM OF YEAR COMBO BOX
+		
+		container.add(nameTF);		// ADDS NAME TEXT FIELD TO CONTAINER
+		container.add(grpSzTF);		// ADDS GROUP SIZE TEXT FIELD TO CONTAINER
+		container.add(monthCB);		// ADDS MONTH COMBO BOX TO CONTAINER
+		container.add(dayCB);		// ADDS DAY COMBO BOX TO CONTAINER
+		container.add(yearCB);		// ADDS YEAR COMBO BOX TO CONTAINER
+		
+		actionPerformedName(event);		// CALL TO ACTION PERFORMED FOR NAME
+		actionPerformedSize(event);		// CALL TO ACTION PERFORMED FOR SIZE
+		actionPerformedDate(event);		// CALL TO ACTION PERFORMED FOR DATE
 	}
 }
