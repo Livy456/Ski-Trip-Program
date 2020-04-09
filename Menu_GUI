@@ -430,7 +430,17 @@ public class Menu_GUI extends BusGUI implements ActionListener
 		for(int i = 0; i < custList.size(); i++)
 		{
 			num = i + 1;	// ASSIGNS CUSTOMER NUMBER
-			str+= "" + num + "               ";
+			
+			if(num < 10)
+			{
+				str+= "" + 0 + num + "               ";
+			}
+			
+			else if(num >=10)
+			{
+				str+= "" + num + "               ";
+			}
+			
 			str+= "                           " + custList.get(i).getID();
 			str+= "                    " + custList.get(i).getName();
 			str+= "          " + custList.get(i).getDate();
@@ -438,12 +448,12 @@ public class Menu_GUI extends BusGUI implements ActionListener
 			
 			if(custList.get(i).getSize() < 10)
 			{
-				str+= "                    " +  custList.get(i).getCost() + "\n";
+				str+= "                     " +  custList.get(i).getCost() + "\n";
 			}
 			
 			else if((custList.get(i).getSize() >= 10) && (custList.get(i).getSize() < 100))
 			{
-				str+= "                  " +  custList.get(i).getCost() + "\n";
+				str+= "                   " +  custList.get(i).getCost() + "\n";
 			}
 			
 			else
