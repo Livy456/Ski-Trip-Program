@@ -21,7 +21,7 @@ import java.awt.event.ActionEvent;			// IMPORTS ACTION EVENT
 import java.awt.event.ActionListener;		// IMPORTS ACTION LISTENER
 
 public class Modify_Menu extends Menu_GUI implements ActionListener
-{
+{	
 	/*****************************/
 	/* INSTANCE VARIABLE SECTION */
 	/*****************************/
@@ -30,6 +30,9 @@ public class Modify_Menu extends Menu_GUI implements ActionListener
 	private JButton quitB;			// CREATES A BUTTON TO QUIT PROGRAM 
 	private JButton view;			// CREATES A BUTTON FOR VIEWING LIST OF CUSTOMERS
 	private JTextField modify;		// CREATES A TEXT FIELD FOR MODIFYING CUSTOMERS
+	private JTextField nameTF;
+	private JComboBox monthCB;
+	private JComboBox dayCB;
 	private JLabel info;			// CREATES A LABEL FOR ADDITIONAL INFORMATION
 	private JFrame frame;			// CREATES A JFRAME 
 	private Container container;	// CREATES A CONTAINER
@@ -166,7 +169,7 @@ public class Modify_Menu extends Menu_GUI implements ActionListener
 			new Remove_Menu();			// RECREATES THE REMOVE MENU WINDOW
 		}
 		
-		actionPerformedRm(event);		// CALL TO ACTION PERFORMED FOR REMOVE
+		actionPerformedModify(event);		// CALL TO ACTION PERFORMED FOR REMOVE
 		
 		/**********************************************************/
 		/* ELSE IF STATEMENT TO CHECK IF ENTER BUTTON WAS PRESSED */	
@@ -192,7 +195,7 @@ public class Modify_Menu extends Menu_GUI implements ActionListener
 		}
 	}
 	
-	public void actionPerformedRm(ActionEvent e)
+	public void actionPerformedModify(ActionEvent event)
 	/***********************************************************/
 	/* PRECONDITION - PROGRAM HAS JCOMBO BOXES FOR MONTH, DAY, */ 
 	/* 				  AND YEAR AND NEEDS A DATE 			   */
@@ -242,10 +245,10 @@ public class Modify_Menu extends Menu_GUI implements ActionListener
 		size = custList.get(num-1).getSize();		// CALL TO GET CUSTOMER'S SIZE FROM ARRAY LIST
 		id = custList.get(num-1).getID();			// CALL TO GET CUSTOMER'S ID FROM ARRAY LIST
 		
-		modify(name, date, size, id);		// CALL TO MODIFY
+		modify(name, date, size, id, event);		// CALL TO MODIFY
 	}
 	
-	public static void modify(String nm, Object dt, int sz, int i)
+	public static void modify(String nm, Object dt, int sz, int i, ActionEvent event)
 	/***********************************************************/
 	/* PRECONDITION - PROGRAM HAS A CUSTOMER NAME, DATE, SIZE, */ 
 	/* 				  AND ID NEEDS TO MODIFY IT 			   */
@@ -253,6 +256,7 @@ public class Modify_Menu extends Menu_GUI implements ActionListener
 	/* 				   DATE, SIZE, AND ID			   		   */
 	/***********************************************************/
 	{
-		
+		actionPerformedName(event);
+		actionPerformedDate(event);
 	}
 }
