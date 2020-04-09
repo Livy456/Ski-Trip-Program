@@ -89,7 +89,7 @@ public class Menu_GUI extends BusGUI implements ActionListener
 		frame.setBounds(450, 150, 500, 450);	// SETS X POSITION, Y POSITION, LENGTH, WIDTH FOR FRAME
 		frame.setVisible(true);					// ALLOWS THE JFRAME TO BE VISIBLE
 		container.setLayout(null);				// SETS THE LAYOUT FOR THE JFRAME
-		container.setBackground(Color.GRAY);	// SETS THE BACKGROUND COLOR OF FRAME
+		container.setBackground(Color.BLUE);	// SETS THE BACKGROUND COLOR OF FRAME
 		frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);// ALLOWS THE JFRAME TO BE CLOSED
 		
 		/**************************/
@@ -103,19 +103,11 @@ public class Menu_GUI extends BusGUI implements ActionListener
 		/**************************************/
 		/* SETS FOREGROUND COLOR OF THE LABEL */
 		/**************************************/
-		heading.setForeground(Color.WHITE);			// SETS FOREGROUND COLOR OF HEADING LABEL
-		changeCust.setForeground(Color.WHITE);		// SETS FOREGROUND COLOR OF CHANGING CUSTOMER LABEL
-		cost.setForeground(Color.WHITE);			// SETS FOREGROUND COLOR OF REMOVE LABEL
-		print.setForeground(Color.WHITE);			// SETS FOREGROUND COLOR OF PRINT LABEL
-		
-		/**************************************/
-		/* SETS BACKGROUND COLOR OF THE LABEL */
-		/**************************************/
-		heading.setBackground(Color.BLACK);			// SETS BACKGROUND COLOR OF HEADING LABEL
-		//changeCust.setBackground(Color.BLACK);		// SETS BACKGROUND COLOR OF CHANGING CUSTOMER LABEL
-		//cost.setBackground(Color.BLACK);			// SETS BACKGROUND COLOR OF COST LABEL
-		//print.setBackground(Color.BLACK);			// SETS BACKGROUND COLOR OF PRINT LABEL
-				
+		heading.setForeground(Color.YELLOW);		// SETS FOREGROUND COLOR OF HEADING LABEL
+		changeCust.setForeground(Color.YELLOW);		// SETS FOREGROUND COLOR OF CHANGING CUSTOMER LABEL
+		cost.setForeground(Color.YELLOW);			// SETS FOREGROUND COLOR OF REMOVE LABEL
+		print.setForeground(Color.YELLOW);			// SETS FOREGROUND COLOR OF PRINT LABEL
+			
 		/**********************************************/
 		/* SETS BOUNDS FOR BUTTONS, JTEXTFIELD, LABEL */
 		/**********************************************/
@@ -130,7 +122,7 @@ public class Menu_GUI extends BusGUI implements ActionListener
 		numB.setBounds(50, 300, 180, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		grpB.setBounds(240, 300, 180, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		quitB.setBounds(370, 370, 100, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		heading.setBounds(170, 10, 400, 50);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		heading.setBounds(170, 20, 400, 50);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		changeCust.setBounds(20, 70, 500, 50);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		cost.setBounds(20, 150, 500, 50);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		print.setBounds(20, 230, 500, 50);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
@@ -248,11 +240,9 @@ public class Menu_GUI extends BusGUI implements ActionListener
 			/********************************************************/
 			if (confirm == 0)
 			{
-				frame.dispose();			// DISPOSES OF MENU_GUI FRAME
+				//frame.dispose();			// DISPOSES OF MENU_GUI FRAME
 				underConstruction();		// CALL TO UNDER CONSTRUCTION
 			}
-			
-			new Menu_GUI();		// RECREATES THE MENU GUI FRAME	
 		}
 		
 		/**********************************************************/
@@ -267,11 +257,9 @@ public class Menu_GUI extends BusGUI implements ActionListener
 			/**************************************************************/
 			if (confirm == 0)
 			{
-				frame.dispose();			// DISPOSES OF MENU_GUI FRAME
+				//frame.dispose();			// DISPOSES OF MENU_GUI FRAME
 				underConstruction();		// CALL TO UNDER CONSTRUCTION
 			}
-			
-			new Menu_GUI();		// RECREATES THE MENU GUI FRAME	
 		}
 		
 		/**********************************************************/
@@ -286,11 +274,9 @@ public class Menu_GUI extends BusGUI implements ActionListener
 			/**************************************************************/
 			if (confirm == 0)
 			{
-				frame.dispose();			// DISPOSES OF MENU_GUI FRAME
+				//frame.dispose();			// DISPOSES OF MENU_GUI FRAME
 				underConstruction();		// CALL TO UNDER CONSTRUCTION
 			}
-			
-			new Menu_GUI();		// RECREATES THE MENU GUI FRAME	
 		}
 		
 		/**********************************************************/
@@ -305,11 +291,9 @@ public class Menu_GUI extends BusGUI implements ActionListener
 			/**************************************************************/
 			if (confirm == 0)
 			{
-				frame.dispose();			// DISPOSES OF MENU_GUI FRAME
+				//frame.dispose();			// DISPOSES OF MENU_GUI FRAME
 				underConstruction();		// CALL TO UNDER CONSTRUCTION
 			}
-			
-			new Menu_GUI();		// RECREATES THE MENU GUI FRAME	
 		}
 		
 		/**********************************************************/
@@ -324,11 +308,9 @@ public class Menu_GUI extends BusGUI implements ActionListener
 			/**************************************************************/
 			if (confirm == 0)
 			{
-				frame.dispose();			// DISPOSES OF MENU_GUI FRAME
+			//	frame.dispose();			// DISPOSES OF MENU_GUI FRAME
 				underConstruction();		// CALL TO UNDER CONSTRUCTION
 			}
-			
-			new Menu_GUI();		// RECREATES THE MENU GUI FRAME	
 		}
 		
 		/**********************************************************/
@@ -343,11 +325,9 @@ public class Menu_GUI extends BusGUI implements ActionListener
 			/**************************************************************/
 			if (confirm == 0)
 			{
-				frame.dispose();			// DISPOSES OF MENU_GUI FRAME
+				//frame.dispose();			// DISPOSES OF MENU_GUI FRAME
 				underConstruction();		// CALL TO UNDER CONSTRUCTION
 			}
-			
-			new Menu_GUI();		// RECREATES THE MENU GUI FRAME	
 		}
 		
 		/**********************************************************/
@@ -362,11 +342,9 @@ public class Menu_GUI extends BusGUI implements ActionListener
 			/**************************************************************/
 			if (confirm == 0)
 			{
-				frame.dispose();			// DISPOSES OF MENU_GUI FRAME
+				//frame.dispose();			// DISPOSES OF MENU_GUI FRAME
 				underConstruction();		// CALL TO UNDER CONSTRUCTION
 			}
-			
-			new Menu_GUI();		// RECREATES THE MENU GUI FRAME	
 		}
 		
 		/**********************************************************/
@@ -381,11 +359,9 @@ public class Menu_GUI extends BusGUI implements ActionListener
 			/**************************************************************/
 			if (confirm == 0)
 			{
-				frame.dispose();			// DISPOSES OF MENU_GUI FRAME
+			//	frame.dispose();			// DISPOSES OF MENU_GUI FRAME
 				underConstruction();		// CALL TO UNDER CONSTRUCTION
 			}
-			
-			new Menu_GUI();		// RECREATES THE MENU GUI FRAME	
 		}
 	}
 	
@@ -443,16 +419,38 @@ public class Menu_GUI extends BusGUI implements ActionListener
 		/* VARIABLE SECTION */
 		/********************/
 		String str;			// USED FOR REUSABLE OUTPUT
+		int num;			// USED FOR CUSTOMER NUMBER
 		
-		str = "";			// INITIALIZES THE STRING
+		str = "Customer number          Group ID          Name                 " +
+			  "Date                          Size              Cost\n\n";	// INITIALIZES THE STRING
 		
 		/***********************************************/
 		/* FOR LOOP TO PRINT OUT ARRAYLIST OF CUSTOMER */
 		/***********************************************/
 		for(int i = 0; i < custList.size(); i++)
 		{
-			str+= "" + custList.get(i).toString() + "\n";// CREATES A STRING 
-														 // REPRESENTATION OF ARRAYLIST
+			num = i + 1;	// ASSIGNS CUSTOMER NUMBER
+			str+= "" + num + "               ";
+			str+= "                           " + custList.get(i).getID();
+			str+= "                    " + custList.get(i).getName();
+			str+= "          " + custList.get(i).getDate();
+			str+= "             " + custList.get(i).getSize();
+			
+			if(custList.get(i).getSize() < 10)
+			{
+				str+= "                    " +  custList.get(i).getCost() + "\n";
+			}
+			
+			else if((custList.get(i).getSize() >= 10) && (custList.get(i).getSize() < 100))
+			{
+				str+= "                  " +  custList.get(i).getCost() + "\n";
+			}
+			
+			else
+			{
+				str+= "                " +  custList.get(i).getCost() + "\n";	// CREATES A STRING 
+																				// REPRESENTATION OF ARRAYLIST
+			}
 		}
 		
 		/******************/
@@ -507,23 +505,8 @@ public class Menu_GUI extends BusGUI implements ActionListener
 		/* VARIABLE SECTION */
 		/********************/
 		String str;			// USED FOR REUSABLE OUTPUT
-		int num;			// USED FOR CUSTOMER NUMBER
-		str = "";			// INITIALIZES THE STRING
 		
-		/***********************************************/
-		/* FOR LOOP TO PRINT OUT ARRAYLIST OF CUSTOMER */
-		/***********************************************/
-		for(int i = 0; i < custList.size(); i++)
-		{
-			num = i;	
-			str+= "Customer number: " + num + 1 + " " +
-				  custList.get(i).getID() + "\t" +
-				  custList.get(i).getName() + "\t" +
-				  custList.get(i).getDate() + "\t" +
-				  custList.get(i).getSize() + "\t" +
-				  custList.get(i).getCost() + "\n";		// CREATES A STRING 
-														// REPRESENTATION OF ARRAYLIST
-		}
+		str = printArray();	// CALL TO PRINT ARRAY
 		
 		/***********************/
 		/* MAKES DIALOG WINDOW */
