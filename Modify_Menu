@@ -22,6 +22,10 @@ import java.awt.event.ActionListener;		// IMPORTS ACTION LISTENER
 
 public class Modify_Menu extends Menu_GUI implements ActionListener
 {	
+	final static String error1 = "ERROR!!! Customer number is not on the list!!!";
+	final static String error2 = "ERROR!!! Finish filling in the information!!!";
+	final static String error3 = "ERROR!!! You have no customers to view!!!";
+	
 	/*****************************/
 	/* INSTANCE VARIABLE SECTION */
 	/*****************************/
@@ -61,7 +65,7 @@ public class Modify_Menu extends Menu_GUI implements ActionListener
 		/* CREATES A BLANK JFRAME */
 		/**************************/
 		frame.pack();							// SIZE OF THE FRAME
-		frame.setBounds(450, 100, 550, 350);	// SETS X POSITION, Y POSITION, LENGTH, 
+		frame.setBounds(450, 100, 550, 550);	// SETS X POSITION, Y POSITION, LENGTH, 
 		frame.setVisible(true);					// ALLOWS THE JFRAME TO BE VISIBLE
 		container.setLayout(null);				// SETS THE LAYOUT FOR THE JFRAME
 		container.setBackground(Color.YELLOW);	// SETS THE BACKGROUND COLOR
@@ -184,10 +188,13 @@ public class Modify_Menu extends Menu_GUI implements ActionListener
 		/**********************************************************/
 		if(action == "Enter")
 		{
+			
 			/*****************************************************/
 			/* IF STATEMENT TO CHECK IF ENTER BUTTON WAS PRESSED */	
 			/*****************************************************/
-			if(modify.getText() == "")
+			if((nameTF.getText() == "") || (grpSzTF.getText() == "") || 
+			  (monthCB.getSelectedItem() == null) || (dayCB.getSelectedItem() == null) ||
+			  (yearCB.getSelectedItem() == null))
 			{
 				errorMessage(error2);	// CALL TO ERROR MESSAGE
 			}
@@ -195,7 +202,9 @@ public class Modify_Menu extends Menu_GUI implements ActionListener
 			/**********************************************************/
 			/* ELSE IF STATEMENT TO CHECK IF ENTER BUTTON WAS PRESSED */	
 			/**********************************************************/
-			else if(modify.getText() != "")
+			else if((nameTF.getText() != "") && (grpSzTF.getText() != "") && 
+				   (monthCB.getSelectedItem() != null) && (dayCB.getSelectedItem() != null) &&
+				   (yearCB.getSelectedItem() != null))
 			{
 				frame.dispose();		// DISPOSES THE REMOVE MENU WINDOW
 				new Menu_GUI();			// CREATES A NEW MENU WINDOW
