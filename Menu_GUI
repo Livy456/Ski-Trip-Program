@@ -3,7 +3,7 @@
 /* OLIVIA DIAS				   			  */
 /* FINAL PROJECT		   	 			  */
 /* PROGRAM 12							  */
-/* MARCH 8, 2020		   			  	  */
+/* APRIL 6, 2020		   			  	  */
 /******************************************/
 /******************************************/
 /* THIS IS A PROGRAM TO MAKE AN OBJECT	  */
@@ -15,38 +15,35 @@
 /******************/
 /* IMPORT SECTION */
 /******************/
-import javax.swing.*;					// IMPORTS SWING
-import java.awt.*;						// IMPORTS AWT
-import java.awt.event.ActionEvent;		// IMPORTS ACTION EVENT
-import java.awt.event.ActionListener;	// IMPORTS ACTION LISTENER		
-import java.text.DecimalFormat;			// IMPORTS DECIMAL FORMAT
-import java.util.ArrayList;				// IMPORTS ARRAYLIST
+import javax.swing.*;						// IMPORTS SWING
+import java.awt.*;							// IMPORTS AWT
+import java.awt.event.ActionEvent;			// IMPORTS ACTION EVENT
+import java.awt.event.ActionListener;		// IMPORTS ACTION LISTENER
+import java.awt.event.AdjustmentEvent;		// IMPORTS ADJUSTMENT EVENT
+import java.awt.event.AdjustmentListener;	// IMPORTS ADJUSTMENT LISTENER
+import java.text.DecimalFormat;				// IMPORTS DECIMAL FORMAT
+import java.util.ArrayList;					// IMPORTS ARRAYLIST
 
-public class Menu_GUI extends BusGUI implements ActionListener
-{	
+public class Remove_Menu extends BusGUI implements ActionListener
+{
+	final static String error1 = "ERROR!!! Customer number is not on the list!!!";
+	final static String error2 = "ERROR!!! Finish filling in the information!!!";
+	final static String error3 = "ERROR!!! You have no customers to view!!!";
+	
 	/*****************************/
 	/* INSTANCE VARIABLE SECTION */
 	/*****************************/
-	private JButton insertB;		// CREATES A BUTTON FOR INSERT
-	private JButton removeB;		// CREATES A BUTTON FOR REMOVE
-	private JButton modifyB;		// CREATES A BUTTON TO MODIFY CUSTOMER  
+	private JButton enterB;			// CREATES A BUTTON FOR ENTERING INFORMATION FOR PROGRAM	
+	private JButton returnB;		// CREATES A BUTTON FOR REUTNRING TO HOME MENU
 	private JButton quitB;			// CREATES A BUTTON TO QUIT PROGRAM 
-	private JButton costB;			// CREATES A BUTTON FOR COST OF SKI TRIP 
-	private JButton busDtB;			// CREATES A BUTTON FOR SORTING BY NUM OF BUS FOR SPECIFIC DATE
-	private JButton profitDtB;		// CREATES A BUTTON FOR PROFIT BY DATE
-	private JButton profitB;		// CREATES A BUTTON FOR TOTAL PROFIT 
-	private JButton alphB;			// CREATES A BUTTON FOR SORTING ALPHABETICALLY
-	private JButton numB;			// CREATES A BUTTON FOR SORTING NUMERICALLY
-	private JButton grpB;			// CREATES A BUTTON FOR SORTING BY GROUP SIZE
-	private JLabel heading;			// CREATES A LABEL FOR HEADING
-	private JLabel changeCust;		// CREATES A LABEL FOR CHANGING CUSTOMER
-	private JLabel cost;				// CREATES A LABEL FOR COST
-	private JLabel print;			// CREATES A LABEL FOR PRINT
-	private Font font;				// CREATES A FONT
-	private JFrame frame;			// CREATES A JFRAME
+	private JButton view;			// CREATES A BUTTON FOR VIEWING LIST OF CUSTOMERS
+	private JTextField remove;		// CREATES A TEXT FIELD FOR REMOVING CUSTOMERS
+	private JLabel info;			// CREATES A LABEL FOR ADDITIONAL INFORMATION
+	private JFrame frame;			// CREATES A JFRAME 
 	private Container container;	// CREATES A CONTAINER
+	private Font font;				// CREATES A FONT
 	 
-	public Menu_GUI()
+	public Remove_Menu()
 	/************************************************/
 	/* DEFAULT CONSTRUCTOR - IT CREATES A FRAME FOR */
 	/*						 CONTENT PANE			*/
@@ -55,111 +52,68 @@ public class Menu_GUI extends BusGUI implements ActionListener
 		/*************************/
 		/* INSTANTIATION SECTION */
 		/*************************/
-		frame = new JFrame("Ski Trip Menu");				// INSTANTIATES A FRAME
-		insertB = new JButton("Insert");					// INSTANTIATES A JBUTTON
-		removeB = new JButton("Remove");					// INSTANTIATES A JBUTTON 
-		modifyB = new JButton("Modify");					// INSTANTIATES A JBUTTON 
-		quitB = new JButton("Quit");						// INSTANTIATES A JBUTTON 
-		costB = new JButton("Cost");						// INSTANTIATES A JBUTTON 
-		busDtB = new JButton("Sorting by Bus Date");		// INSTANTIATES A JBUTTON 
-		profitDtB = new JButton("Profit by Date");			// INSTANTIATES A JBUTTON 
-		profitB = new JButton("Total Profit");				// INSTANTIATES A JBUTTON 
-		alphB = new JButton("Sorting Alphabetically");		// INSTANTIATES A JBUTTON 
-		numB = new JButton("Sorting Numerically");			// INSTANTIATES A JBUTTON 
-		grpB = new JButton("Sorting by Group Size");		// INSTANTIATES A JBUTTON 
-		heading = new JLabel("Ski Trip Main Menu");			// INSTANTIATES A LABEL
-		changeCust = new JLabel("To add, remove, or modify " +
-							   "click one of " +
-							   "the buttons below:");		// INSTANTIATES A LABEL
-		cost = new JLabel("To display cost or profit " +
-						 "of Ski Trip click one of " +
-						 "the buttons below:");				// INSTANTIATES A LABEL
-		print = new JLabel("To print customer info " +
-						  "click one " +
-						  "of the buttons below:");			// INSTANTIATES A LABEL
+		enterB = new JButton("Enter");		// INSTANTIATES JBUTTON
+		returnB = new JButton("Return");	// INSTANTIATES JBUTTON
+		quitB = new JButton("Quit");		// INSTANTIATES JBUTTON
+		view = new JButton("Customer List");// INSTANTIATES JBUTTON
+		remove = new JTextField("");		// INSTANTIATES JTEXTFIELD
+		info = new JLabel("Enter the customer "+
+						 "number that you want "+
+						 "to remove.");		// INSTANTIATES JLABEL
+		frame = new JFrame("Remove Menu");	// INSTANTIATES JFRAME
+		container = frame.getContentPane();	// CREATES A CONTENT PANE
 		font = new Font("Times New Roman", 
-						Font.BOLD, 15);						// INSTANTIATES FONT 
-		container = frame.getContentPane();					// CREATES A CONTENT PANE, WHICH  
-															// HOLDS THE OBJECTS ON THE FRAME
-
-		/*************************************/
-		/* CREATES A BLANK JFRAME AND JPANEL */
-		/*************************************/
+						Font.BOLD, 15);		// INSTANTIATES FONT 
+		
+		/**************************/
+		/* CREATES A BLANK JFRAME */
+		/**************************/
 		frame.pack();							// SIZE OF THE FRAME
-		frame.setBounds(450, 150, 500, 450);	// SETS X POSITION, Y POSITION, LENGTH, WIDTH FOR FRAME
+		frame.setBounds(450, 100, 550, 350);	// SETS X POSITION, Y POSITION, LENGTH, 
 		frame.setVisible(true);					// ALLOWS THE JFRAME TO BE VISIBLE
 		container.setLayout(null);				// SETS THE LAYOUT FOR THE JFRAME
-		container.setBackground(Color.BLUE);	// SETS THE BACKGROUND COLOR OF FRAME
+		container.setBackground(Color.BLUE);	// SETS THE BACKGROUND COLOR
 		frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);// ALLOWS THE JFRAME TO BE CLOSED
-		
+	
 		/**************************/
 		/* SETS FONT OF THE LABEL */
 		/**************************/
-		heading.setFont(font);		// SETS FONT OF HEADING LABEL
-		changeCust.setFont(font);	// SETS FONT OF CHANGING CUSTOMER LABEL
-		cost.setFont(font);			// SETS FONT OF REMOVE LABEL
-		print.setFont(font);		// SETS FONT OF PRINT LABEL
+		info.setFont(font);				// SETS FONT OF INFO LABEL
+		view.setFont(font);				// SETS FONT OF VIEW BUTTON 
 		
 		/**************************************/
 		/* SETS FOREGROUND COLOR OF THE LABEL */
 		/**************************************/
-		heading.setForeground(Color.YELLOW);		// SETS FOREGROUND COLOR OF HEADING LABEL
-		changeCust.setForeground(Color.YELLOW);		// SETS FOREGROUND COLOR OF CHANGING CUSTOMER LABEL
-		cost.setForeground(Color.YELLOW);			// SETS FOREGROUND COLOR OF REMOVE LABEL
-		print.setForeground(Color.YELLOW);			// SETS FOREGROUND COLOR OF PRINT LABEL
-			
+		info.setForeground(Color.WHITE);		// SETS FOREGROUND COLOR OF INFO LABEL
+		
 		/**********************************************/
 		/* SETS BOUNDS FOR BUTTONS, JTEXTFIELD, LABEL */
 		/**********************************************/
-		insertB.setBounds(50, 110, 100, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		removeB.setBounds(160, 110, 100, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		modifyB.setBounds(270, 110, 100, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		costB.setBounds(50, 190, 100, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		profitDtB.setBounds(160, 190, 140, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		profitB.setBounds(310, 190, 100, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		busDtB.setBounds(50, 270, 180, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		alphB.setBounds(240, 270, 180, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		numB.setBounds(50, 300, 180, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		grpB.setBounds(240, 300, 180, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		quitB.setBounds(370, 370, 100, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		heading.setBounds(170, 20, 400, 50);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		changeCust.setBounds(20, 70, 500, 50);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		cost.setBounds(20, 150, 500, 50);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		print.setBounds(20, 230, 500, 50);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		enterB.setBounds(370, 250, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		returnB.setBounds(290, 250, 75, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		quitB.setBounds(450, 250, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		info.setBounds(50, 30, 500, 30);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		view.setBounds(160, 80, 150, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		remove.setBounds(50, 80, 100, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		
 		/**********************************************/
 		/* ADDS LISTENER TO BUTTON TO PERFORM ACTIONS */
 		/**********************************************/
-		insertB.addActionListener(this);	// ADDS ACTIONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED
-		removeB.addActionListener(this);	// ADDS ACTIONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED
-		modifyB.addActionListener(this);	// ADDS ACTIONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED
-		quitB.addActionListener(this);		// ADDS ACITONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED
-		costB.addActionListener(this);		// ADDS ACITONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED
-		busDtB.addActionListener(this);		// ADDS ACITONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED
-		profitDtB.addActionListener(this);	// ADDS ACITONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED
-		profitB.addActionListener(this);	// ADDS ACITONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED
-		alphB.addActionListener(this);		// ADDS ACITONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED
-		numB.addActionListener(this);		// ADDS ACITONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED
-		grpB.addActionListener(this);		// ADDS ACITONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED
+		enterB.addActionListener(this);		// ADDS ACTIONLISTENER TO MAKE AN EVENT OCCUR ONCE BUTTON IS PUSHED
+		returnB.addActionListener(this);	// ADDS ACTIONLISTENER TO MAKE AN EVENT OCCUR ONCE BUTTON IS PUSHED
+		quitB.addActionListener(this);		// ADDS ACTIONLISTENER TO MAKE AN EVENT OCCUR ONCE BUTTON IS PUSHED
+		view.addActionListener(this);		// ADDS ACTIONLISTENER TO MAKE AN EVENT OCCUR ONCE BUTTON IS PUSHED
+		remove.addActionListener(this);		// ADDS ACTIONLISTENER TO MAKE AN EVENT OCCUR ONCE BUTTON IS PUSHED
 		
 		/*************************/
 		/* ADDS BUTTONS TO FRAME */
 		/*************************/
-		container.add(insertB);			// ADDS INSERT BUTTON TO CONTAINER
-		container.add(removeB);			// ADDS REMOVE BUTTON TO CONTAINER
+		container.add(enterB);			// ADDS ENTER BUTTON TO CONTAINER
+		container.add(returnB);			// ADDS RETURN BUTTON TO CONTAINER
 		container.add(quitB);			// ADDS QUIT BUTTON TO CONTAINER
-		container.add(modifyB);			// ADDS MODIFY BUTTON TO CONTAINER
-		container.add(costB);			// ADDS COST BUTTON TO CONTAINER
-		container.add(busDtB);			// ADDS BUS BUTTON TO CONTAINER
-		container.add(profitDtB);		// ADDS PROFIT BY DATE BUTTON TO CONTAINER
-		container.add(profitB);			// ADDS TOTAL PROFIT BUTTON TO CONTAINER
-		container.add(alphB);			// ADDS ALPHABETIC SORTING BUTTON TO CONTAINER
-		container.add(numB);			// ADDS NUMERIC SORTING BUTTON TO CONTAINER
-		container.add(grpB);			// ADDS GROUP SIZE SORTING BUTTON TO CONTAINER
-		container.add(heading);			// ADDS HEADING LABEL TO CONTAINER
-		container.add(changeCust);		// ADDS CHANGING CUSTOMER LABEL TO CONTAINER
-		container.add(cost);			// ADDS COST LABEL TO CONTAINER
-		container.add(print);			// ADDS PRINT LABEL TO CONTAINER
+		container.add(view);			// ADDS VIEW BUTTON TO CONTAINER
+		container.add(info);			// ADDS INFO LABEL TO CONTAINER
+		container.add(remove);			// ADDS REMOVE TEXT FIELD TO CONTAINER
 	}
 	
 	public void actionPerformed(ActionEvent event)
@@ -172,15 +126,15 @@ public class Menu_GUI extends BusGUI implements ActionListener
 		/********************/
 		/* VARIABLE SECTION */
 		/********************/
-		String action; 		// STRING TO REPRESENT WHICH BUTTON WAS PRESSED
-		int confirm; 		// REUSUABLE INT INPUT FOR CONFIRMING AN ACTION
+		String action;		// STRING TO REPRESENT WHICH BUTTON WAS PRESSED
+		int confirm;		// REUSUABLE INT INPUT FOR CONFIRMING AN ACTION
 		
 		action = event.getActionCommand();	// CALL TO GET ACTION COMMAND
 		
 		/****************************************************/
 		/* IF STATEMENT TO CHECK IF QUIT BUTTON WAS PRESSED */	
 		/****************************************************/
-		if (action.equals("Quit"))
+		if(action == "Quit")
 		{
 			confirm = confirmWindow();	// CALL TO CONFIRM WINDOW
 			
@@ -192,177 +146,102 @@ public class Menu_GUI extends BusGUI implements ActionListener
 				System.exit(0);			// TERMINATES THE PROGRAM
 			}
 		}
-			
+		
 		/***********************************************************/
-		/* ELSE IF STATEMENT TO CHECK IF INSERT BUTTON WAS PRESSED */	
+		/* ELSE IF STATEMENT TO CHECK IF RETURN BUTTON WAS PRESSED */	
 		/***********************************************************/
-		else if (action.equals("Insert"))
+		else if (action == "Return")
 		{
 			confirm = confirmWindow();	// CALL TO CONFIRM WINDOW
 			
-			/*****************************************************/
-			/* IF STATEMENT TO CONFIRM ACTION OF ADDING CUSTOMER */	
-			/*****************************************************/
+			/************************************************************/
+			/* IF STATEMENT TO CONFIRM ACTION OF RETURNING TO MAIN MENU */	
+			/************************************************************/
 			if(confirm == 0)
-			{	
-				frame.dispose();			// DISPOSES OF MENU_GUI FRAME
-				new BusGUI();				// CREATES A NEW BUS GUI MENU
-			}	
-		}
-			
-		/***********************************************************/
-		/* ELSE IF STATEMENT TO CHECK IF REMOVE BUTTON WAS PRESSED */	
-		/***********************************************************/
-		else if (action.equals("Remove"))
-		{
-			confirm = confirmWindow();		// CALL TO CONFIRM WINDOW
-			
-			/*******************************************************/
-			/* IF STATEMENT TO CONFIRM ACTION OF REMOVING CUSTOMER */	
-			/*******************************************************/
-			if (confirm == 0)
-			{	
-				frame.dispose();			// DISPOSES OF MENU_GUI FRAME
-				updateMenu();				// CALL TO UPDATE MENU
-				new Remove_Menu();			//CREATES THE REMOVE MENU GUI
-			}			
-		}
-		
-		/**********************************************************/
-		/*ELSE IF STATEMENT TO CHECK IF MODIFY BUTTON WAS PRESSED */	
-		/**********************************************************/
-		else if (action.equals("Modify"))
-		{
-			confirm = confirmWindow();		// CALL TO CONFIRM WINDOW
-			
-			/********************************************************/
-			/* IF STATEMENT TO CONFIRM ACTION OF MODIFYING CUSTOMER */	
-			/********************************************************/
-			if (confirm == 0)
 			{
-				//frame.dispose();			// DISPOSES OF MENU_GUI FRAME
-				underConstruction();		// CALL TO UNDER CONSTRUCTION
+				frame.dispose();		// DISPOSES THE REMOVE MENU WINDOW
+				new Menu_GUI();			// CREATES A NEW MENU WINDOW
 			}
 		}
 		
-		/**********************************************************/
-		/*ELSE IF STATEMENT TO CHECK IF COST BUTTON WAS PRESSED */	
-		/**********************************************************/
-		else if (action.equals("Cost"))
+		/*********************************************************/
+		/* ELSE IF STATEMENT TO CHECK IF VIEW BUTTON WAS PRESSED */	
+		/*********************************************************/
+		else if (action == "Customer List")
 		{
-			confirm = confirmWindow();		// CALL TO CONFIRM WINDOW
-			
-			/**************************************************************/
-			/* IF STATEMENT TO CONFIRM ACTION OF VIEWING COST OF SKI TRIP */	
-			/**************************************************************/
-			if (confirm == 0)
-			{
-				//frame.dispose();			// DISPOSES OF MENU_GUI FRAME
-				underConstruction();		// CALL TO UNDER CONSTRUCTION
-			}
+			frame.dispose();			// DISPOSES THE REMOVE MENU WINDOW
+			updateMenu();				// CALL TO UPDATE MENU
+			new Remove_Menu();			// RECREATES THE REMOVE MENU WINDOW
 		}
 		
-		/**********************************************************/
-		/*ELSE IF STATEMENT TO CHECK IF COST BUTTON WAS PRESSED */	
-		/**********************************************************/
-		else if (action.equals("Sorting by Bus Date"))
-		{
-			confirm = confirmWindow();		// CALL TO CONFIRM WINDOW
-			
-			/**************************************************************/
-			/* IF STATEMENT TO CONFIRM ACTION OF VIEWING COST OF SKI TRIP */	
-			/**************************************************************/
-			if (confirm == 0)
-			{
-				//frame.dispose();			// DISPOSES OF MENU_GUI FRAME
-				underConstruction();		// CALL TO UNDER CONSTRUCTION
-			}
-		}
+		actionPerformedRm(event);		// CALL TO ACTION PERFORMED FOR REMOVE
 		
 		/**********************************************************/
-		/*ELSE IF STATEMENT TO CHECK IF COST BUTTON WAS PRESSED */	
+		/* ELSE IF STATEMENT TO CHECK IF ENTER BUTTON WAS PRESSED */	
 		/**********************************************************/
-		else if (action.equals("Profit by Date"))
+		if(action == "Enter")
 		{
-			confirm = confirmWindow();		// CALL TO CONFIRM WINDOW
-			
-			/**************************************************************/
-			/* IF STATEMENT TO CONFIRM ACTION OF VIEWING COST OF SKI TRIP */	
-			/**************************************************************/
-			if (confirm == 0)
+			/*****************************************************/
+			/* IF STATEMENT TO CHECK IF ENTER BUTTON WAS PRESSED */	
+			/*****************************************************/
+			if(remove.getText() == "")
 			{
-				//frame.dispose();			// DISPOSES OF MENU_GUI FRAME
-				underConstruction();		// CALL TO UNDER CONSTRUCTION
+				errorMessage(error2);	// CALL TO ERROR MESSAGE
+			}
+			
+			/**********************************************************/
+			/* ELSE IF STATEMENT TO CHECK IF ENTER BUTTON WAS PRESSED */	
+			/**********************************************************/
+			else if(remove.getText() != "")
+			{
+				frame.dispose();		// DISPOSES THE REMOVE MENU WINDOW
+				new Menu_GUI();			// CREATES A NEW MENU WINDOW
 			}
 		}
+	}
+	
+	public void actionPerformedRm(ActionEvent e)
+	/***********************************************************/
+	/* PRECONDITION - PROGRAM HAS JCOMBO BOXES FOR MONTH, DAY, */ 
+	/* 				  AND YEAR AND NEEDS A DATE 			   */
+	/* POSTCONDITION - FUNCTION CREATES AN ACTION EVENT FOR    */
+	/* 				   TEXT FIELD FOR GROUP SIZE			   */
+	/***********************************************************/
+	{
+		/********************/
+		/* VARIABLE SECTION */
+		/********************/
+		String numi;		// REUSUABLE STRING INPUT
+		int num;			// REUSUABLE INT VALUE
 		
-		/**********************************************************/
-		/*ELSE IF STATEMENT TO CHECK IF COST BUTTON WAS PRESSED */	
-		/**********************************************************/
-		else if (action.equals("Total Profit"))
+		/*****************************/
+		/* LOOP UNTIL VALUE IS VALID */
+		/*****************************/
+		do
 		{
-			confirm = confirmWindow();		// CALL TO CONFIRM WINDOW
-			
-			/**************************************************************/
-			/* IF STATEMENT TO CONFIRM ACTION OF VIEWING COST OF SKI TRIP */	
-			/**************************************************************/
-			if (confirm == 0)
+			/*******************************/
+			/* IF STATEMENT TO ERROR CHECK */
+			/*******************************/
+			if(custList.size() < 1)
 			{
-			//	frame.dispose();			// DISPOSES OF MENU_GUI FRAME
-				underConstruction();		// CALL TO UNDER CONSTRUCTION
+				errorMessage(error3); 	// CALL TO ERROR MESSAGE
+			}
+			
+			numi = remove.getText();		// CALL TO GET TEXT INPUTTED BY USER
+			num = Integer.parseInt(numi);	// PARSES STRING TO AN INTEGER
+			
+			/*******************************/
+			/* IF STATEMENT TO ERROR CHECK */
+			/*******************************/
+			if((num < 1) || (num > custList.size()))
+			{
+				remove.setText("");			// CLEARS THE TEXT FIELD
+				errorMessage(error1);		// CALL TO ERROR MESSAGE
 			}
 		}
+		while((num < 1) || (num > custList.size()));
 		
-		/**********************************************************/
-		/*ELSE IF STATEMENT TO CHECK IF COST BUTTON WAS PRESSED */	
-		/**********************************************************/
-		else if (action.equals("Sorting Alphabetically"))
-		{
-			confirm = confirmWindow();		// CALL TO CONFIRM WINDOW
-			
-			/**************************************************************/
-			/* IF STATEMENT TO CONFIRM ACTION OF VIEWING COST OF SKI TRIP */	
-			/**************************************************************/
-			if (confirm == 0)
-			{
-				//frame.dispose();			// DISPOSES OF MENU_GUI FRAME
-				underConstruction();		// CALL TO UNDER CONSTRUCTION
-			}
-		}
-		
-		/**********************************************************/
-		/*ELSE IF STATEMENT TO CHECK IF COST BUTTON WAS PRESSED */	
-		/**********************************************************/
-		else if (action.equals("Sorting Numerically"))
-		{
-			confirm = confirmWindow();		// CALL TO CONFIRM WINDOW
-			
-			/**************************************************************/
-			/* IF STATEMENT TO CONFIRM ACTION OF VIEWING COST OF SKI TRIP */	
-			/**************************************************************/
-			if (confirm == 0)
-			{
-				//frame.dispose();			// DISPOSES OF MENU_GUI FRAME
-				underConstruction();		// CALL TO UNDER CONSTRUCTION
-			}
-		}
-		
-		/**********************************************************/
-		/*ELSE IF STATEMENT TO CHECK IF COST BUTTON WAS PRESSED */	
-		/**********************************************************/
-		else if (action.equals("Sorting Numerically"))
-		{
-			confirm = confirmWindow();		// CALL TO CONFIRM WINDOW
-			
-			/**************************************************************/
-			/* IF STATEMENT TO CONFIRM ACTION OF VIEWING COST OF SKI TRIP */	
-			/**************************************************************/
-			if (confirm == 0)
-			{
-			//	frame.dispose();			// DISPOSES OF MENU_GUI FRAME
-				underConstruction();		// CALL TO UNDER CONSTRUCTION
-			}
-		}
+		custList.remove(num-1);		// CALL TO REMOVE CUSTOMER FROM ARRAY LIST
 	}
 	
 	public static int confirmWindow()
@@ -375,38 +254,22 @@ public class Menu_GUI extends BusGUI implements ActionListener
 		/********************/
 		/* VARIABLE SECTION */
 		/********************/
-		int num;		// INTEGER ANSWER TO MODIFY PROGRAM
+		int confirm;		// INTEGER ANSWER TO MODIFY PROGRAM
 		
 		/*******************************/
 		/* MAKES CONFIRM DIALOG WINDOW */
 		/*******************************/
-		num = JOptionPane.showConfirmDialog(
-				null,
-				"Do you really want to do this?",
-				"Confirm Window",
+		confirm = JOptionPane.showConfirmDialog(
+				null, 
+				"Are you sure you want to do this action?",
+				"Confirmation Window",
 				JOptionPane.YES_NO_OPTION,
 				JOptionPane.QUESTION_MESSAGE);
 		
 		/******************/
 		/* RETURN SECTION */
 		/******************/
-		return num;		// RETURNS NUM
-	}
-	
-	public static void errorMessage(String str)
-	/*********************************************************************/
-	/* PRECONDITION - NEEDS ERROR MESSAGE FOR INPUTS OF NEGATIVE NUMBERS */
-	/* POSTCONDITION - CREATES WIMDOW TO SHOW THE ERROR THE USER MADE 	 */
-	/*********************************************************************/
-	{
-		/******************************/
-		/* MAKES ERROR MESSAGE WINDOW */
-		/******************************/
-		JOptionPane.showMessageDialog(
-				null,
-				str,
-				"Error Message",
-				JOptionPane.ERROR_MESSAGE);
+		return confirm;		// RETURNS CONFIRM
 	}
 	
 	public static String printArray()
@@ -422,7 +285,7 @@ public class Menu_GUI extends BusGUI implements ActionListener
 		int num;			// USED FOR CUSTOMER NUMBER
 		
 		str = "Customer number          Group ID          Name                 " +
-			  "Date                          Size              Cost\n\n";	// INITIALIZES THE STRING
+			  "Date                        Size                Cost\n\n";	// INITIALIZES THE STRING
 		
 		/***********************************************/
 		/* FOR LOOP TO PRINT OUT ARRAYLIST OF CUSTOMER */
@@ -467,42 +330,6 @@ public class Menu_GUI extends BusGUI implements ActionListener
 		/* RETURN SECTION */
 		/******************/
 		return str;			// RETURN STR
-	}
-	
-	public static void remove(ArrayList<Customer>intArray, String str, String hdstr)
-	/****************************************************************/
-	/* PRECONDITION - NEEDS TO REMOVE CUSTOMER FROM THE ARRAY LIST 	*/
-	/* POSTCONDITION - GETS INTEGER FOR CUSTOMER NUMBER AND REMOVES */
-	/* 				   THAT CUSTOMER FROM THE ARRAY LIST   			*/
-	/****************************************************************/
-	{
-		/********************/
-		/* VARIABLE SECTION */
-		/********************/
-		String numi;		// USED FOR REUSABLE STRING INPUT
-		int num;			// USED FOR REUSABLE INTEGER INPUT
-		
-		updateMenu();		// CALL TO UPDATE MENU
-				
-		new Remove_Menu();	//
-	}
-	
-	public static void underConstruction()
-	/****************************************************/
-	/* PRECONDITION - NEEDS UNDER CONSTRUCTION WINDOW 	*/
-	/* POSTCONDITION - CREATES WINDOW TO TELL USER		*/
-	/* 				   THAT THE SECTION THEY ARE TRYING */
-	/*  			   TO USE IS UNDER CONSTRUCTION 	*/
-	/****************************************************/
-	{
-		/***********************/
-		/* MAKES DIALOG WINDOW */
-		/***********************/ 
-		JOptionPane.showMessageDialog(
-				null,
-				"This part of the option menu is under construction",
-				"Under construction menu",
-				JOptionPane.INFORMATION_MESSAGE);
 	}
 	
 	public static void updateMenu()
