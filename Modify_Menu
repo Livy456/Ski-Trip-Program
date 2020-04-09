@@ -3,7 +3,7 @@
 /* OLIVIA DIAS				   			  */
 /* FINAL PROJECT		   	 			  */
 /* PROGRAM 12							  */
-/* APRIL 6, 2020		   			  	  */
+/* APRIL 9, 2020		   			  	  */
 /******************************************/
 /******************************************/
 /* THIS IS A PROGRAM TO MAKE AN OBJECT	  */
@@ -20,7 +20,239 @@ import java.awt.*;							// IMPORTS AWT
 import java.awt.event.ActionEvent;			// IMPORTS ACTION EVENT
 import java.awt.event.ActionListener;		// IMPORTS ACTION LISTENER
 
-public class Modify_Menu 
+public class Modify_Menu extends Menu_GUI implements ActionListener
 {
-
+	/*****************************/
+	/* INSTANCE VARIABLE SECTION */
+	/*****************************/
+	private JButton enterB;			// CREATES A BUTTON FOR ENTERING INFORMATION FOR PROGRAM	
+	private JButton returnB;		// CREATES A BUTTON FOR REUTNRING TO HOME MENU
+	private JButton quitB;			// CREATES A BUTTON TO QUIT PROGRAM 
+	private JButton view;			// CREATES A BUTTON FOR VIEWING LIST OF CUSTOMERS
+	private JTextField modify;		// CREATES A TEXT FIELD FOR MODIFYING CUSTOMERS
+	private JLabel info;			// CREATES A LABEL FOR ADDITIONAL INFORMATION
+	private JFrame frame;			// CREATES A JFRAME 
+	private Container container;	// CREATES A CONTAINER
+	private Font font;				// CREATES A FONT
+	
+	public Modify_Menu()
+	/************************************************/
+	/* DEFAULT CONSTRUCTOR - IT CREATES A FRAME FOR */
+	/*						 CONTENT PANE			*/
+	/************************************************/
+	{
+		/*************************/
+		/* INSTANTIATION SECTION */
+		/*************************/
+		enterB = new JButton("Enter");		// INSTANTIATES JBUTTON
+		returnB = new JButton("Return");	// INSTANTIATES JBUTTON
+		quitB = new JButton("Quit");		// INSTANTIATES JBUTTON
+		view = new JButton("Customer List");// INSTANTIATES JBUTTON
+		modify = new JTextField("");		// INSTANTIATES JTEXTFIELD
+		info = new JLabel("Enter the customer "+
+						 "number that you want "+
+						 "to modify.");		// INSTANTIATES JLABEL
+		frame = new JFrame("Modify Menu");	// INSTANTIATES JFRAME
+		container = frame.getContentPane();	// CREATES A CONTENT PANE
+		font = new Font("Times New Roman", 
+						Font.BOLD, 15);		// INSTANTIATES FONT 
+		
+		/**************************/
+		/* CREATES A BLANK JFRAME */
+		/**************************/
+		frame.pack();							// SIZE OF THE FRAME
+		frame.setBounds(450, 100, 550, 350);	// SETS X POSITION, Y POSITION, LENGTH, 
+		frame.setVisible(true);					// ALLOWS THE JFRAME TO BE VISIBLE
+		container.setLayout(null);				// SETS THE LAYOUT FOR THE JFRAME
+		container.setBackground(Color.YELLOW);	// SETS THE BACKGROUND COLOR
+		frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);// ALLOWS THE JFRAME TO BE CLOSED
+	
+		/**************************/
+		/* SETS FONT OF THE LABEL */
+		/**************************/
+		info.setFont(font);				// SETS FONT OF INFO LABEL
+		view.setFont(font);				// SETS FONT OF VIEW BUTTON 
+		
+		/**************************************/
+		/* SETS FOREGROUND COLOR OF THE LABEL */
+		/**************************************/
+		info.setForeground(Color.BLACK);		// SETS FOREGROUND COLOR OF INFO LABEL
+		
+		/**********************************************/
+		/* SETS BOUNDS FOR BUTTONS, JTEXTFIELD, LABEL */
+		/**********************************************/
+		enterB.setBounds(370, 250, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		returnB.setBounds(290, 250, 75, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		quitB.setBounds(450, 250, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		info.setBounds(50, 30, 500, 30);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		view.setBounds(160, 80, 150, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		modify.setBounds(50, 80, 100, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		
+		/**********************************************/
+		/* ADDS LISTENER TO BUTTON TO PERFORM ACTIONS */
+		/**********************************************/
+		enterB.addActionListener(this);		// ADDS ACTIONLISTENER TO MAKE AN EVENT OCCUR ONCE BUTTON IS PUSHED
+		returnB.addActionListener(this);	// ADDS ACTIONLISTENER TO MAKE AN EVENT OCCUR ONCE BUTTON IS PUSHED
+		quitB.addActionListener(this);		// ADDS ACTIONLISTENER TO MAKE AN EVENT OCCUR ONCE BUTTON IS PUSHED
+		view.addActionListener(this);		// ADDS ACTIONLISTENER TO MAKE AN EVENT OCCUR ONCE BUTTON IS PUSHED
+		modify.addActionListener(this);		// ADDS ACTIONLISTENER TO MAKE AN EVENT OCCUR ONCE BUTTON IS PUSHED
+		
+		/*************************/
+		/* ADDS BUTTONS TO FRAME */
+		/*************************/
+		container.add(enterB);			// ADDS ENTER BUTTON TO CONTAINER
+		container.add(returnB);			// ADDS RETURN BUTTON TO CONTAINER
+		container.add(quitB);			// ADDS QUIT BUTTON TO CONTAINER
+		container.add(view);			// ADDS VIEW BUTTON TO CONTAINER
+		container.add(info);			// ADDS INFO LABEL TO CONTAINER
+		container.add(modify);			// ADDS MODFIY TEXT FIELD TO CONTAINER
+	}
+	
+	public void actionPerformed(ActionEvent event)
+	/************************************************/
+	/* PRECONDITION - PROGRAM HAS A BUTTON			*/
+	/* POSTCONDITION - FUNCTION CREATES AN ACTION 	*/
+	/* 				   EVENT FOR BUTTON				*/
+	/************************************************/
+	{
+		/********************/
+		/* VARIABLE SECTION */
+		/********************/
+		String action;		// STRING TO REPRESENT WHICH BUTTON WAS PRESSED
+		int confirm;		// REUSUABLE INT INPUT FOR CONFIRMING AN ACTION
+		
+		action = event.getActionCommand();		// CALL TO GET ACTION COMMAND
+		
+		/****************************************************/
+		/* IF STATEMENT TO CHECK IF QUIT BUTTON WAS PRESSED */	
+		/****************************************************/
+		if(action == "Quit")
+		{
+			confirm = confirmWindow();	// CALL TO CONFIRM WINDOW
+			
+			/******************************************************/
+			/* IF STATEMENT TO CONFIRM ACTION OF QUITTING PROGRAM */	
+			/******************************************************/
+			if(confirm == 0)
+			{
+				System.exit(0);			// TERMINATES THE PROGRAM
+			}
+		}
+		
+		/***********************************************************/
+		/* ELSE IF STATEMENT TO CHECK IF RETURN BUTTON WAS PRESSED */	
+		/***********************************************************/
+		else if (action == "Return")
+		{
+			confirm = confirmWindow();	// CALL TO CONFIRM WINDOW
+			
+			/************************************************************/
+			/* IF STATEMENT TO CONFIRM ACTION OF RETURNING TO MAIN MENU */	
+			/************************************************************/
+			if(confirm == 0)
+			{
+				frame.dispose();		// DISPOSES THE REMOVE MENU WINDOW
+				new Menu_GUI();			// CREATES A NEW MENU WINDOW
+			}
+		}
+		
+		/*********************************************************/
+		/* ELSE IF STATEMENT TO CHECK IF VIEW BUTTON WAS PRESSED */	
+		/*********************************************************/
+		else if (action == "Customer List")
+		{
+			frame.dispose();			// DISPOSES THE REMOVE MENU WINDOW
+			updateMenu(heading1);		// CALL TO UPDATE MENU
+			new Remove_Menu();			// RECREATES THE REMOVE MENU WINDOW
+		}
+		
+		actionPerformedRm(event);		// CALL TO ACTION PERFORMED FOR REMOVE
+		
+		/**********************************************************/
+		/* ELSE IF STATEMENT TO CHECK IF ENTER BUTTON WAS PRESSED */	
+		/**********************************************************/
+		if(action == "Enter")
+		{
+			/*****************************************************/
+			/* IF STATEMENT TO CHECK IF ENTER BUTTON WAS PRESSED */	
+			/*****************************************************/
+			if(modify.getText() == "")
+			{
+				errorMessage(error2);	// CALL TO ERROR MESSAGE
+			}
+			
+			/**********************************************************/
+			/* ELSE IF STATEMENT TO CHECK IF ENTER BUTTON WAS PRESSED */	
+			/**********************************************************/
+			else if(modify.getText() != "")
+			{
+				frame.dispose();		// DISPOSES THE REMOVE MENU WINDOW
+				new Menu_GUI();			// CREATES A NEW MENU WINDOW
+			}
+		}
+	}
+	
+	public void actionPerformedRm(ActionEvent e)
+	/***********************************************************/
+	/* PRECONDITION - PROGRAM HAS JCOMBO BOXES FOR MONTH, DAY, */ 
+	/* 				  AND YEAR AND NEEDS A DATE 			   */
+	/* POSTCONDITION - FUNCTION CREATES AN ACTION EVENT FOR    */
+	/* 				   TEXT FIELD FOR GROUP SIZE			   */
+	/***********************************************************/
+	{
+		/********************/
+		/* VARIABLE SECTION */
+		/********************/
+		String numi;		// REUSUABLE STRING INPUT
+		String name;		// REUSUABLE STRING INPUT
+		Object date;		// REUSUABLE OBJECT INPUT
+		int size;			// REUSUABLE INTEGER INPUT
+		int id;				// REUSUABLE INTEGER INPUT
+		int num;			// REUSUABLE INT VALUE
+		
+		/*****************************/
+		/* LOOP UNTIL VALUE IS VALID */
+		/*****************************/
+		do
+		{
+			/*******************************/
+			/* IF STATEMENT TO ERROR CHECK */
+			/*******************************/
+			if(custList.size() < 1)
+			{
+				errorMessage(error3); 	// CALL TO ERROR MESSAGE
+			}
+			
+			numi = modify.getText();		// CALL TO GET TEXT INPUTTED BY USER
+			num = Integer.parseInt(numi);	// PARSES STRING TO AN INTEGER
+			
+			/*******************************/
+			/* IF STATEMENT TO ERROR CHECK */
+			/*******************************/
+			if((num < 1) || (num > custList.size()))
+			{
+				modify.setText("");			// CLEARS THE TEXT FIELD
+				errorMessage(error1);		// CALL TO ERROR MESSAGE
+			}
+		}
+		while((num < 1) || (num > custList.size()));
+		
+		name = custList.get(num-1).getName();		// CALL TO GET CUSTOMER'S NAME FROM ARRAY LIST
+		date = custList.get(num-1).getDate();		// CALL TO GET CUSTOMER'S DATE FROM ARRAY LIST
+		size = custList.get(num-1).getSize();		// CALL TO GET CUSTOMER'S SIZE FROM ARRAY LIST
+		id = custList.get(num-1).getID();			// CALL TO GET CUSTOMER'S ID FROM ARRAY LIST
+		
+		modify(name, date, size, id);		// CALL TO MODIFY
+	}
+	
+	public static void modify(String nm, Object dt, int sz, int i)
+	/***********************************************************/
+	/* PRECONDITION - PROGRAM HAS A CUSTOMER NAME, DATE, SIZE, */ 
+	/* 				  AND ID NEEDS TO MODIFY IT 			   */
+	/* POSTCONDITION - FUNCTION MODIFIES A CUSTOMER'S NAME,    */
+	/* 				   DATE, SIZE, AND ID			   		   */
+	/***********************************************************/
+	{
+		
+	}
 }
