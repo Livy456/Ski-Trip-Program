@@ -53,15 +53,15 @@ public class BusGUI implements ActionListener
 	protected static JComboBox monthCB;	// CREATES A COMBO BOX(DROP-DOWN LIST) FOR MONTH
 	protected static JComboBox dayCB;	// CREATES A COMBO BOX FOR DAY
 	protected static JComboBox yearCB;	// CREATES A COMBO BOX FOR YEAR
-	private static JTextField nameTF;	// CREATES A TEXT FIELD FOR NAME 
-	private static JTextField grpSzTF;	// CREATES A TEXT FIELD FOR GROUP SIZE
-	private Label nameL;				// CREATES A LABEL FOR NAME
+	protected static JTextField nameTF;	// CREATES A TEXT FIELD FOR NAME 
+	protected static JTextField grpSzTF;// CREATES A TEXT FIELD FOR GROUP SIZE
+	protected static Label nameL;		// CREATES A LABEL FOR NAME
 	private Label info;					// CREATES A LABEL FOR INFORMATION
 	private Label warning;				// CREATES A LABEL FOR INPUT CONSTRAINTS
 	private Label warning2;				// CREATES A LABEL FOR INPUT CONSTRAINTS
 	private Label welcome;				// CREATES A LABEL TO WELCOME CLIENT
-	private Label grpSzL;				// CREATES A LABEL FOR GROUP SIZE
-	private Label dateL;				// CREATES A LABEL FOR DATE
+	protected static Label grpSzL;		// CREATES A LABEL FOR GROUP SIZE
+	protected static Label dateL;		// CREATES A LABEL FOR DATE
 	private JFrame frame;				// CREATES A JFRAME 
 	private Container container;		// CREATES A CONTAINER
 	private Font font;					// CREATES A FONT FOR LABELS
@@ -233,7 +233,7 @@ public class BusGUI implements ActionListener
 		}
 		
 		actionPerformedName(event);		// CALL TO ACTION PERFORMED FOR NAME
-		actionPerformedGrpSize(event);	// CALL TO ACTION PERFORMED FOR GROUP SIZE
+		actionPerformedSize(event);	// CALL TO ACTION PERFORMED FOR GROUP SIZE
 		actionPerformedDate(event);		// CALL TO ACTION PERFORMED FOR DATE
 		customer.setID();				// CALL TO SET GROUP ID
 		
@@ -641,7 +641,7 @@ public class BusGUI implements ActionListener
 		customer.setDate(date);		// CALL TO SET DATE
 	}
 	
-	public static void actionPerformedGrpSize(ActionEvent event)
+	public static void actionPerformedSize(ActionEvent event)
 	/**********************************************************/
 	/* PRECONDITION - PROGRAM HAS A TEXT FIELD FOR GROUP SIZE */
 	/* POSTCONDITION - FUNCTION CREATES AN ACTION EVENT FOR   */
