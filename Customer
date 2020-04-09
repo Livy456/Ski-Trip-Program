@@ -66,7 +66,7 @@ public class Customer implements Ski_Interface
 	/****************************************************/
 	/* COPY CONSTRUCTOR - USES AN OBJECT TO INITIALIZES */
 	/* NAME, DATE, ID, GROUPSIZE, BUS, AND COST 	  	*/
-	/****************************************************/
+	/****************************************************/ 
 	{
 		name = cm.name;			// INITIALIZES NAME TO COPY OF OBJECT NAME VALUE
 		date = cm.date;			// INITIALIZES DATE TO COPY OF OBJECT NAME VALUE
@@ -116,7 +116,7 @@ public class Customer implements Ski_Interface
 			/************************************************/
 			else if (name.length() == 4)
 			{
-				name += "          ";
+				name += "         ";
 			}
 			
 			/************************************************/
@@ -132,7 +132,7 @@ public class Customer implements Ski_Interface
 			/************************************************/
 			else if (name.length() == 6)
 			{
-				name += "       ";
+				name += "      ";
 			}
 			
 			/************************************************/
@@ -140,7 +140,7 @@ public class Customer implements Ski_Interface
 			/************************************************/
 			else if (name.length() == 7)
 			{
-				name += "     ";
+				name += "    ";
 			}
 			
 			/************************************************/
@@ -148,7 +148,7 @@ public class Customer implements Ski_Interface
 			/************************************************/
 			else if (name.length() == 8)
 			{
-				name += "   ";
+				name += "  ";
 			}
 			
 			/************************************************/
