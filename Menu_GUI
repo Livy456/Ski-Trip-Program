@@ -24,6 +24,9 @@ public class Menu_GUI extends BusGUI implements ActionListener
 {	
 	final static String heading1 = "Make sure to remember the customer number that you wish to remove.";
 	final static String heading2 = "Make sure to remember the customer number that you wish to modfiy.";
+	final static String error1 = "ERROR!!! Customer number is not on the list!!!";
+	final static String error2 = "ERROR!!! Finish filling in the information!!!";
+	final static String error3 = "ERROR!!! You have no customers to view!!!";
 	
 	/*****************************/
 	/* INSTANCE VARIABLE SECTION */
