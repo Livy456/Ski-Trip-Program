@@ -28,6 +28,7 @@ public class Remove_Menu extends BusGUI implements ActionListener
 {
 	final static String error1 = "ERROR!!! Customer number is not on the list!!!";
 	final static String error2 = "ERROR!!! Finish filling in the information!!!";
+	final static String error3 = "ERROR!!! You have no customers to view!!!";
 	
 	/*****************************/
 	/* INSTANCE VARIABLE SECTION */
@@ -62,13 +63,13 @@ public class Remove_Menu extends BusGUI implements ActionListener
 		frame = new JFrame("Remove Menu");	// INSTANTIATES JFRAME
 		container = frame.getContentPane();	// CREATES A CONTENT PANE
 		font = new Font("Times New Roman", 
-						Font.BOLD, 12);		// INSTANTIATES FONT 
+						Font.BOLD, 15);		// INSTANTIATES FONT 
 		
 		/**************************/
 		/* CREATES A BLANK JFRAME */
 		/**************************/
 		frame.pack();							// SIZE OF THE FRAME
-		frame.setBounds(450, 100, 550, 550);	// SETS X POSITION, Y POSITION, LENGTH, 
+		frame.setBounds(450, 100, 550, 350);	// SETS X POSITION, Y POSITION, LENGTH, 
 		frame.setVisible(true);					// ALLOWS THE JFRAME TO BE VISIBLE
 		container.setLayout(null);				// SETS THE LAYOUT FOR THE JFRAME
 		container.setBackground(Color.BLUE);	// SETS THE BACKGROUND COLOR
@@ -88,12 +89,12 @@ public class Remove_Menu extends BusGUI implements ActionListener
 		/**********************************************/
 		/* SETS BOUNDS FOR BUTTONS, JTEXTFIELD, LABEL */
 		/**********************************************/
-		enterB.setBounds(300, 300, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		returnB.setBounds(220, 300, 75, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		quitB.setBounds(380, 300, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		enterB.setBounds(370, 250, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		returnB.setBounds(290, 250, 75, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		quitB.setBounds(450, 250, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		info.setBounds(50, 30, 500, 30);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		view.setBounds(130, 300, 150, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		remove.setBounds(50, 60, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		view.setBounds(160, 80, 150, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		remove.setBounds(50, 80, 100, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		
 		/**********************************************/
 		/* ADDS LISTENER TO BUTTON TO PERFORM ACTIONS */
@@ -218,6 +219,14 @@ public class Remove_Menu extends BusGUI implements ActionListener
 		/*****************************/
 		do
 		{
+			/*******************************/
+			/* IF STATEMENT TO ERROR CHECK */
+			/*******************************/
+			if(custList.size() < 1)
+			{
+				errorMessage(error3); 	// CALL TO ERROR MESSAGE
+			}
+			
 			numi = remove.getText();		// CALL TO GET TEXT INPUTTED BY USER
 			num = Integer.parseInt(numi);	// PARSES STRING TO AN INTEGER
 			
@@ -273,22 +282,54 @@ public class Remove_Menu extends BusGUI implements ActionListener
 		/* VARIABLE SECTION */
 		/********************/
 		String str;			// USED FOR REUSABLE OUTPUT
+		int num;			// USED FOR CUSTOMER NUMBER
 		
-		str = "";			// INITIALIZES STR
+		str = "Customer number          Group ID          Name                 " +
+			  "Date                        Size                Cost\n\n";	// INITIALIZES THE STRING
 		
 		/***********************************************/
 		/* FOR LOOP TO PRINT OUT ARRAYLIST OF CUSTOMER */
 		/***********************************************/
 		for(int i = 0; i < custList.size(); i++)
 		{
-			str += "" + custList.get(i).toString() + "\n";	// CREATES A STRING 
-			 												// REPRESENTATION OF ARRAYLIST
+			num = i + 1;	// ASSIGNS CUSTOMER NUMBER
+			
+			if(num < 10)
+			{
+				str+= "" + 0 + num + "               ";
+			}
+			
+			else if(num >=10)
+			{
+				str+= "" + num + "               ";
+			}
+			
+			str+= "                           " + custList.get(i).getID();
+			str+= "                    " + custList.get(i).getName();
+			str+= "          " + custList.get(i).getDate();
+			str+= "             " + custList.get(i).getSize();
+			
+			if(custList.get(i).getSize() < 10)
+			{
+				str+= "                     " +  custList.get(i).getCost() + "\n";
+			}
+			
+			else if((custList.get(i).getSize() >= 10) && (custList.get(i).getSize() < 100))
+			{
+				str+= "                   " +  custList.get(i).getCost() + "\n";
+			}
+			
+			else
+			{
+				str+= "                " +  custList.get(i).getCost() + "\n";	// CREATES A STRING 
+																				// REPRESENTATION OF ARRAYLIST
+			}
 		}
 		
 		/******************/
 		/* RETURN SECTION */
 		/******************/
-		return str;			// RETURNS STR
+		return str;			// RETURN STR
 	}
 	
 	public static void updateMenu()
@@ -301,24 +342,8 @@ public class Remove_Menu extends BusGUI implements ActionListener
 		/* VARIABLE SECTION */
 		/********************/
 		String str;			// USED FOR REUSABLE OUTPUT
-		int num;			// USED FOR CUSTOMER NUMBER
 		
-		str = "";			// INITIALIZES THE STRING
-		
-		/***********************************************/
-		/* FOR LOOP TO PRINT OUT ARRAYLIST OF CUSTOMER */
-		/***********************************************/
-		for(int i = 0; i < custList.size(); i++)
-		{
-			num = i;
-			str+= "Customer number: " + num + 1 + " " +
-				  custList.get(i).getID() + "\t" + 
-				  custList.get(i).getName() + "\t" + 
-				  custList.get(i).getDate() + "\t" +
-				  custList.get(i).getSize() + "\t" +
-				  custList.get(i).getCost() + "\n";		// CREATES A STRING 
-														// REPRESENTATION OF ARRAYLIST
-		}
+		str = printArray();	// CALL TO PRINT ARRAY
 		
 		/***********************/
 		/* MAKES DIALOG WINDOW */
