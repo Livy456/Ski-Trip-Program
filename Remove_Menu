@@ -20,12 +20,8 @@ import java.awt.*;							// IMPORTS AWT
 import java.awt.event.ActionEvent;			// IMPORTS ACTION EVENT
 import java.awt.event.ActionListener;		// IMPORTS ACTION LISTENER
 
-public class Remove_Menu extends BusGUI implements ActionListener
+public class Remove_Menu extends Menu_GUI implements ActionListener
 {
-	final static String error1 = "ERROR!!! Customer number is not on the list!!!";
-	final static String error2 = "ERROR!!! Finish filling in the information!!!";
-	final static String error3 = "ERROR!!! You have no customers to view!!!";
-	
 	/*****************************/
 	/* INSTANCE VARIABLE SECTION */
 	/*****************************/
@@ -166,7 +162,7 @@ public class Remove_Menu extends BusGUI implements ActionListener
 		else if (action == "Customer List")
 		{
 			frame.dispose();			// DISPOSES THE REMOVE MENU WINDOW
-			updateMenu();				// CALL TO UPDATE MENU
+			updateMenu(heading1);		// CALL TO UPDATE MENU
 			new Remove_Menu();			// RECREATES THE REMOVE MENU WINDOW
 		}
 		
@@ -328,7 +324,7 @@ public class Remove_Menu extends BusGUI implements ActionListener
 		return str;			// RETURN STR
 	}
 	
-	public static void updateMenu()
+	public static void updateMenu(String hdstr)
 	/*****************************************************************/
 	/* PRECONDITION - NEEDS AN UPDATE WINDOW OF ALL CUSTOMERS 		 */
 	/* POSTCONDITION - CREATES WINDOW TO TELL USER ALL THE CUSTOMERS */
@@ -346,7 +342,7 @@ public class Remove_Menu extends BusGUI implements ActionListener
 		/***********************/ 
 		JOptionPane.showMessageDialog(
 				null,
-				"Make sure to remember the number of the customer you wish to remove. \n"+
+				hdstr + "\n"+
 				str,
 				"Customer List",
 				JOptionPane.INFORMATION_MESSAGE);
