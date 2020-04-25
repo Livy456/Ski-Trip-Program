@@ -1,6 +1,6 @@
 /******************************************/
 /* USER DESCRIPTION SECTION 			  */
-/* OLIVIA DIAS				   			  */
+/* OLIVIA 				   			  */
 /* FINAL PROJECT		   	 			  */
 /* PROGRAM 12							  */
 /* APRIL 9, 2020		   			  	  */
@@ -35,6 +35,7 @@ public class Modify_Menu extends Menu_GUI implements ActionListener
 	private JButton view;				// CREATES A BUTTON FOR VIEWING LIST OF CUSTOMERS
 	private JTextField modify;			// CREATES A TEXT FIELD FOR MODIFYING CUSTOMERS
 	private JLabel info;				// CREATES A LABEL FOR ADDITIONAL INFORMATION
+	private JLabel custnum;				// CREATES A LABEL FOR CUSTOMER NUMBER
 	private JFrame frame;				// CREATES A JFRAME 
 	private static Container container;	// CREATES A CONTAINER
 	private Font font;					// CREATES A FONT
@@ -48,18 +49,19 @@ public class Modify_Menu extends Menu_GUI implements ActionListener
 		/*************************/
 		/* INSTANTIATION SECTION */
 		/*************************/
-		enterB = new JButton("Enter");		// INSTANTIATES JBUTTON
-		returnB = new JButton("Return");	// INSTANTIATES JBUTTON
-		quitB = new JButton("Quit");		// INSTANTIATES JBUTTON
-		view = new JButton("Customer List");// INSTANTIATES JBUTTON
-		modify = new JTextField("");		// INSTANTIATES JTEXTFIELD
+		enterB = new JButton("Enter");				// INSTANTIATES JBUTTON
+		returnB = new JButton("Return");			// INSTANTIATES JBUTTON
+		quitB = new JButton("Quit");				// INSTANTIATES JBUTTON
+		view = new JButton("Customer List");		// INSTANTIATES JBUTTON
+		modify = new JTextField("");				// INSTANTIATES JTEXTFIELD
 		info = new JLabel("Enter the customer "+
 						 "number that you want "+
-						 "to modify.");		// INSTANTIATES JLABEL
-		frame = new JFrame("Modify Menu");	// INSTANTIATES JFRAME
-		container = frame.getContentPane();	// CREATES A CONTENT PANE
+						 "to modify.");				// INSTANTIATES JLABEL
+		custnum = new JLabel("Customer Number");	// INSTANTIATES JLABEL
+		frame = new JFrame("Modify Menu");			// INSTANTIATES JFRAME
+		container = frame.getContentPane();			// CREATES A CONTENT PANE
 		font = new Font("Times New Roman", 
-						Font.BOLD, 15);		// INSTANTIATES FONT 
+						Font.BOLD, 15);				// INSTANTIATES FONT 
 		
 		/**************************/
 		/* CREATES A BLANK JFRAME */
@@ -81,6 +83,7 @@ public class Modify_Menu extends Menu_GUI implements ActionListener
 		/* SETS FOREGROUND COLOR OF THE LABEL */
 		/**************************************/
 		info.setForeground(Color.BLACK);		// SETS FOREGROUND COLOR OF INFO LABEL
+		custnum.setForeground(Color.BLACK);		// SETS FOREGROUND COLOR OF CUSTOMER NUMBER
 		nameL.setForeground(Color.BLACK);		// SETS FOREGROUND COLOR OF NAME LABEL
 		grpSzL.setForeground(Color.BLACK);		// SETS FOREGROUND COLOR OF GROUP SIZE LABEL
 		dateL.setForeground(Color.BLACK);		// SETS FOREGROUND COLOR OF DATE LABEL
@@ -88,20 +91,21 @@ public class Modify_Menu extends Menu_GUI implements ActionListener
 		/**********************************************/
 		/* SETS BOUNDS FOR BUTTONS, JTEXTFIELD, LABEL */
 		/**********************************************/
-		enterB.setBounds(370, 250, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		returnB.setBounds(290, 250, 75, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		quitB.setBounds(450, 250, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		info.setBounds(50, 30, 500, 30);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		view.setBounds(160, 80, 150, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		modify.setBounds(50, 80, 100, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		nameL.setBounds(50, 140, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		grpSzL.setBounds(50, 170, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		dateL.setBounds(50, 200, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		nameTF.setBounds(130, 140, 100, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		grpSzTF.setBounds(130, 170, 100, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		monthCB.setBounds(130, 200, 100, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		dayCB.setBounds(160, 200, 100, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		yearCB.setBounds(270, 200, 100, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		enterB.setBounds(370, 280, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		returnB.setBounds(290, 280, 75, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		quitB.setBounds(450, 280, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		info.setBounds(80, 30, 500, 30);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		custnum.setBounds(20, 80, 200, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		view.setBounds(240, 80, 150, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		modify.setBounds(130, 80, 100, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		nameL.setBounds(20, 110, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		grpSzL.setBounds(20, 140, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		dateL.setBounds(20, 170, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		nameTF.setBounds(130, 110, 100, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		grpSzTF.setBounds(130, 140, 100, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		monthCB.setBounds(130, 170, 100, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		dayCB.setBounds(240, 170, 100, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		yearCB.setBounds(350, 170, 100, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		
 		/**********************************************/
 		/* ADDS LISTENER TO BUTTON TO PERFORM ACTIONS */
@@ -115,12 +119,21 @@ public class Modify_Menu extends Menu_GUI implements ActionListener
 		/*************************/
 		/* ADDS BUTTONS TO FRAME */
 		/*************************/
-		container.add(enterB);			// ADDS ENTER BUTTON TO CONTAINER
-		container.add(returnB);			// ADDS RETURN BUTTON TO CONTAINER
-		container.add(quitB);			// ADDS QUIT BUTTON TO CONTAINER
-		container.add(view);			// ADDS VIEW BUTTON TO CONTAINER
-		container.add(info);			// ADDS INFO LABEL TO CONTAINER
-		container.add(modify);			// ADDS MODFIY TEXT FIELD TO CONTAINER
+		container.add(enterB);		// ADDS ENTER BUTTON TO CONTAINER
+		container.add(returnB);		// ADDS RETURN BUTTON TO CONTAINER
+		container.add(quitB);		// ADDS QUIT BUTTON TO CONTAINER
+		container.add(view);		// ADDS VIEW BUTTON TO CONTAINER
+		container.add(info);		// ADDS INFO LABEL TO CONTAINER
+		container.add(custnum);		// ADDS CUSTOMER NUMBER LABEL TO CONTAINER
+		container.add(modify);		// ADDS MODFIY TEXT FIELD TO CONTAINER
+		container.add(nameL);		// ADDS NAME LABEL TO CONTAINER
+		container.add(grpSzL);		// ADDS GROUP SIZE LABEL TO CONTAINER
+		container.add(dateL);		// ADDS DATE LABEL TO CONTAINER
+		container.add(nameTF);		// ADDS NAME TEXT FIELD TO CONTAINER
+		container.add(grpSzTF);		// ADDS GROUP SIZE TEXT FIELD TO CONTAINER
+		container.add(monthCB);		// ADDS MONTH COMBO BOX TO CONTAINER
+		container.add(dayCB);		// ADDS DAY COMBO BOX TO CONTAINER
+		container.add(yearCB);		// ADDS YEAR COMBO BOX TO CONTAINER
 	}
 	
 	public void actionPerformed(ActionEvent event)
@@ -180,8 +193,8 @@ public class Modify_Menu extends Menu_GUI implements ActionListener
 			updateMenu(heading1);		// CALL TO UPDATE MENU
 			new Modify_Menu();			// RECREATES THE REMOVE MENU WINDOW
 		}
-		
-		actionPerformedModify(event);		// CALL TO ACTION PERFORMED FOR REMOVE
+				
+		actionPerformedModify(event);	// CALL TO ACTION PERFORMED FOR REMOVE 
 		
 		/**********************************************************/
 		/* ELSE IF STATEMENT TO CHECK IF ENTER BUTTON WAS PRESSED */	
@@ -189,25 +202,20 @@ public class Modify_Menu extends Menu_GUI implements ActionListener
 		if(action == "Enter")
 		{
 			
-			/*****************************************************/
-			/* IF STATEMENT TO CHECK IF ENTER BUTTON WAS PRESSED */	
-			/*****************************************************/
-			if((nameTF.getText() == "") || (grpSzTF.getText() == "") || 
-			  (monthCB.getSelectedItem() == null) || (dayCB.getSelectedItem() == null) ||
-			  (yearCB.getSelectedItem() == null))
+			/*******************************************************************/
+			/* IF STATEMENT TO CHECK IF NOTHING ENTERED INTO MODIFY YEXT FIELD */	
+			/*******************************************************************/
+			if(modify.getText() == "")
 			{
 				errorMessage(error2);	// CALL TO ERROR MESSAGE
 			}
 			
-			/**********************************************************/
-			/* ELSE IF STATEMENT TO CHECK IF ENTER BUTTON WAS PRESSED */	
-			/**********************************************************/
-			else if((nameTF.getText() != "") && (grpSzTF.getText() != "") && 
-				   (monthCB.getSelectedItem() != null) && (dayCB.getSelectedItem() != null) &&
-				   (yearCB.getSelectedItem() != null))
+			/************************************************************************/
+			/* ELSE IF STATEMENT TO CHECK IF NOTHING ENTERED INTO MODIFY YEXT FIELD */	
+			/************************************************************************/
+			else if (modify.getText() != "")
 			{
-				frame.dispose();		// DISPOSES THE REMOVE MENU WINDOW
-				new Menu_GUI();			// CREATES A NEW MENU WINDOW
+				
 			}
 		}
 	}
@@ -223,13 +231,145 @@ public class Modify_Menu extends Menu_GUI implements ActionListener
 		/********************/
 		/* VARIABLE SECTION */
 		/********************/
-		String numi;		// REUSUABLE STRING INPUT
 		String name;		// REUSUABLE STRING INPUT
-		String date;		// REUSUABLE STRING INPUT
-		Object datei;		// REUSUABLE OBJECT INPUT
+		String month;		// REUSUABLE STRING INPUT
+		String day;			// REUSUABLE STRING INPUT
+		String year;		// REUSUABLE STRING INPUT
 		int size;			// REUSUABLE INTEGER INPUT
-		int id;				// REUSUABLE INTEGER INPUT
 		int num;			// REUSUABLE INT VALUE
+
+		/**************************/
+		/* INITIALIZATION SECTION */
+		/**************************/
+		month = "";			// INITIALIZES MONTH
+		day = "";			// INITIALIZES DAY
+		year = "";			// INITIALIZES YEAR
+		
+		/************************************/
+		/* INPUTS CUSTOMER NUMBER TO MODIFY */
+		/************************************/
+		num = inputInt();	// CALL TO INPUT INT
+		
+		name = custList.get(num-1).getName();		// CALL TO GET CUSTOMER'S NAME FROM ARRAY LIST
+		month = custList.get(num-1).getMonth();		// CALL TO GET CUSTOMER'S MONTH FROM ARRAY LIST
+		day = custList.get(num-1).getDay();			// CALL TO GET CUSTOMER'S DAY FROM ARRAY LIST
+		year = custList.get(num-1).getYear();		// CALL TO GET CUSTOMER'S YEAR FROM ARRAY LIST
+		size = custList.get(num-1).getSize();		// CALL TO GET CUSTOMER'S SIZE FROM ARRAY LIST		
+		
+		modify(name, month, day, year, size, event);	// CALL TO MODIFY
+	}
+	
+	public void actionPerformedName(String nm2, ActionEvent event)
+	/*****************************************************/
+	/* PRECONDITION - PROGRAM HAS A TEXT FIELD FOR NAME  */
+	/* POSTCONDITION - FUNCTION CREATES AN ACTION EVENT  */
+	/* 				   FOR TEXT FIELD FOR NAME			 */
+	/*****************************************************/
+	{		
+		/********************/
+		/* VARIABLE SECTION */
+		/********************/
+		String name;		// REUSUABLE STRING INPUT
+		
+		confirmWindow();	// CALL TO CONFIRM WINDOW
+
+		/*****************************/
+		/* LOOP UNTIL VALUE IS VALID */
+		/*****************************/
+		do
+		{
+			/*******************/
+			/* INPUTS GROUP ID */
+			/*******************/
+			name = nameTF.getText();		// CALL TO GET TEXT INPUTTED BY USER
+			
+			/*******************************/
+			/* IF STATEMENT TO ERROR CHECK */
+			/*******************************/
+			if (name.length() > 10)
+			{
+				nameTF.setText("" + nm2);	// CLEARS THE TEXT FIELD
+				errorMessage(error1);		// CALL TO ERROR MESSAGE
+			}
+		}
+		while(name.length() > 10);
+		
+		customer.setName(name);				// CALL TO SET NAME
+	}
+	
+	public void actionPerformedSize(int grpsz, ActionEvent event)
+	/**********************************************************/
+	/* PRECONDITION - PROGRAM HAS A TEXT FIELD FOR GROUP SIZE */
+	/* POSTCONDITION - FUNCTION CREATES AN ACTION EVENT FOR   */
+	/* 				   TEXT FIELD FOR GROUP SIZE			  */
+	/**********************************************************/
+	{
+		/********************/
+		/* VARIABLE SECTION */
+		/********************/
+		String grp;			// REUSUABLE STRING INPUT
+		int grpSz;			// REUSUABLE INT VALUE
+		
+		confirmWindow();		// CALL TO CONFIRM WINDOW
+
+		/*****************************/
+		/* LOOP UNTIL VALUE IS VALID */
+		/*****************************/
+		do
+		{
+			grp = grpSzTF.getText();			// CALL TO GET TEXT INPUTTED BY USER
+			grpSz = Integer.parseInt(grp);		// PARSES STRING TO AN INTEGER
+			
+			/*******************************/
+			/* IF STATEMENT TO ERROR CHECK */
+			/*******************************/
+			if((grpSz <= 0) ||(grpSz > 400))
+			{
+				grpSzTF.setText("" + grpsz);	// CLEARS THE TEXT FIELD 
+				errorMessage(error3);			// CALL TO ERROR MESSAGE
+			}
+		}
+		while((grpSz <= 0) || (grpSz > 400));
+		
+		customer.setSize(grpSz);		// CALL TO SET SIZE
+	}
+	
+	public static int confirmWindow()
+	/************************************************/
+	/* PRECONDITION - NEEDS CONFIRM DIALOG BOX		*/
+	/* POSTCONDITION - CREATES WINDOW TO CONFIRM IF	*/
+	/* 				   USER WANTS TO CONFIRM ACTION	*/
+	/************************************************/
+	{
+		/********************/
+		/* VARIABLE SECTION */
+		/********************/
+		int num;			// INTEGER ANSWER TO MODIFY PROGRAM
+		
+		/*******************************/
+		/* MAKES CONFIRM DIALOG WINDOW */
+		/*******************************/
+		num = JOptionPane.showConfirmDialog(
+				null,
+				"Do you really want to do this?",
+				"Confirm Window",
+				JOptionPane.YES_NO_OPTION,
+				JOptionPane.QUESTION_MESSAGE);
+		
+		/******************/
+		/* RETURN SECTION */
+		/******************/
+		return num;			// RETURNS NUM
+	}
+	
+	public int inputInt()
+	
+	{
+		/********************/
+		/* VARIABLE SECTION */
+		/********************/
+		String numi;
+		int num;
 		
 		/*****************************/
 		/* LOOP UNTIL VALUE IS VALID */
@@ -258,15 +398,14 @@ public class Modify_Menu extends Menu_GUI implements ActionListener
 		}
 		while((num < 1) || (num > custList.size()));
 		
-		name = custList.get(num-1).getName();		// CALL TO GET CUSTOMER'S NAME FROM ARRAY LIST
-		datei = custList.get(num-1).getDate();		// CALL TO GET CUSTOMER'S DATE FROM ARRAY LIST
-		size = custList.get(num-1).getSize();		// CALL TO GET CUSTOMER'S SIZE FROM ARRAY LIST
-		date = (String) datei;
-		
-		modify(name, date, size, event);	// CALL TO MODIFY
+		/******************/
+		/* RETURN SECTION */
+		/******************/
+		return num;			// RETURNS NUM
 	}
 	
-	public static void modify(String nm, String dt, int sz, ActionEvent event)
+	public void modify(String nm, String mn, String dy, String yr,
+			   int sz, ActionEvent event)
 	/***********************************************************/
 	/* PRECONDITION - PROGRAM HAS A CUSTOMER NAME, DATE, SIZE, */ 
 	/* 				  AND ID NEEDS TO MODIFY IT 			   */
@@ -274,84 +413,17 @@ public class Modify_Menu extends Menu_GUI implements ActionListener
 	/* 				   DATE, SIZE, AND ID			   		   */
 	/***********************************************************/
 	{
-		/********************/
-		/* VARIABLE SECTION */
-		/********************/
-		String month;		// REUSUABLE STRING INPUT
-		String day;			// REUSUABLE STRING INPUT
-		String year;		// REUSUABLE STRING INPUT
-		String ele;			// REUSUABLE STRING VARIABLE
-		int count;			// COUNTER
+		nameTF.setText(""+nm);					// SETS TEXT OF NAME TEXT FIELD
+		grpSzTF.setText(""+sz);					// SETS TEXT OF GROUP SIZE TEXT FIELD
+		monthCB.setSelectedItem(""+mn);			// SETS SELECTED DROP-DOWN ITEM OF MONTH COMBO BOX
+		dayCB.setSelectedItem(""+dy);			// SETS SELECTED DROP-DOWN ITEM OF DAY COMBO BOX
+		yearCB.setSelectedItem(""+yr);			// SETS SELECTED DROP-DOWN ITEM OF YEAR COMBO BOX
+
+		System.out.print(monthCB.getSelectedItem() + " " + dayCB.getSelectedItem() + " " + yearCB.getSelectedItem());
 		
-		month = "";		// INITIALIZES MONTH
-		day = "";		// INITIALIZES DAY
-		year = "";		// INITIALIZES YEAR
-		ele = "";		// INITIALIZES ELE
-		count = 0;		// INITIALIZES COUNT
-		
-		/***********************************************/
-		/* FOR LOOP TO GET MONTH, DAY, AND YEAR VALUES */
-		/***********************************************/
-		for(int i = 0; i < dt.length(); i++)
-		{
-			ele = dt.substring(i);	
-			
-			/***********************************************/
-			/* IF STATEMENT TO CHECK IF ELE IS A BACKSLASH */
-			/***********************************************/
-			if(ele == "/")
-			{
-				count+=1;
-			}
-			
-			/**********************************************/
-			/* ELSE STATEMENT TO CHECK IF ELE IS A NUMBER */
-			/**********************************************/
-			else
-			{
-				/********************************************************/
-				/* IF STATEMENT TO CHECK IF ELE IS IN THE MONTH SECTION */
-				/********************************************************/
-				if(count == 0)
-				{
-					month+=ele;
-				}
-				
-				/***********************************************************/
-				/* ELSE IF STATEMENT TO CHECK IF ELE IS IN THE DAY SECTION */
-				/***********************************************************/
-				else if(count == 1)
-				{
-					day+=ele;
-				}
-				
-				/************************************************************/
-				/* ELSE IF STATEMENT TO CHECK IF ELE IS IN THE YEAR SECTION */
-				/************************************************************/
-				else if(count == 2)
-				{
-					year+=ele;
-				}
-			}
-		}
-		
-		nameTF.setText(nm);					// SETS TEXT OF NAME TEXT FIELD
-		grpSzTF.setText(""+sz);				// SETS TEXT OF GROUP SIZE TEXT FIELD
-		monthCB.setSelectedItem(month);		// SETS SELECTED DROP-DOWN ITEM OF MONTH COMBO BOX
-		dayCB.setSelectedItem(day);			// SETS SELECTED DROP-DOWN ITEM OF DAY COMBO BOX
-		yearCB.setSelectedItem(year);		// SETS SELECTED DROP-DOWN ITEM OF YEAR COMBO BOX
-		
-		container.add(nameL);		// ADDS NAME LABEL TO CONTAINER
-		container.add(grpSzL);		// ADDS GROUP SIZE LABEL TO CONTAINER
-		container.add(dateL);		// ADDS DATE LABEL TO CONTAINER
-		container.add(nameTF);		// ADDS NAME TEXT FIELD TO CONTAINER
-		container.add(grpSzTF);		// ADDS GROUP SIZE TEXT FIELD TO CONTAINER
-		container.add(monthCB);		// ADDS MONTH COMBO BOX TO CONTAINER
-		container.add(dayCB);		// ADDS DAY COMBO BOX TO CONTAINER
-		container.add(yearCB);		// ADDS YEAR COMBO BOX TO CONTAINER
-		
-		actionPerformedName(event);		// CALL TO ACTION PERFORMED FOR NAME
-		actionPerformedSize(event);		// CALL TO ACTION PERFORMED FOR SIZE
-		actionPerformedDate(event);		// CALL TO ACTION PERFORMED FOR DATE
+		actionPerformedName(nm, event);			// CALL TO ACTION PERFORMED FOR NAME
+		actionPerformedSize(sz, event);			// CALL TO ACTION PERFORMED FOR SIZE
+		inputDate(mn, dy, yr, event);			// CALL TO INPUT DATE
+		System.out.println("End of the modify method!!!");
 	}
 }
