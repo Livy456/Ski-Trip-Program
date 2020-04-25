@@ -1,6 +1,6 @@
 /******************************************/
 /* USER DESCRIPTION SECTION 			  */
-/* OLIVIA DIAS				   			  */
+/* OLIVIA 				   			  */
 /* FINAL PROJECT			   	  		  */
 /* PROGRAM 12							  */
 /* FEBRUARY 10, 2020		   			  */
@@ -27,6 +27,9 @@ public class Customer implements Ski_Interface
 	/* INSTANCE VARIABLE SECTION */
 	/*****************************/
 	private String name;		// INSTANCE VARIABLE FOR USER'S NAME	
+	private String month;		// INSTANCE VARIABLE FOR MONTH OF SKI TRIP
+	private String day;			// INSTANCE VARIABLE FOR DAY OF SKI TRIP
+	private String year;		// INSTANCE VARIABLE FOR YEAR OF SKI TRIP
 	private Object date;		// INSTANCE VARIABLE FOR DATE OF SKI TRIP
 	private int id;				// INSTANCE VARIABLE FOR USER'S ID
 	private int grpsize;		// INSTANCE VARIABLE FOR USER'S GROUP SIZE
@@ -44,19 +47,26 @@ public class Customer implements Ski_Interface
 	/* VARIABLE VALUES TO AN EMPTY STRING AND ZERO 	  */
 	/**************************************************/
 	{
-		name = "";			// INTIALIZES NAME TO AN EMPTY STRING
-		date = "";			// INTIALIZES DATE TO AN EMPTY STRING
-		id = 0;				// INTIALIZES ID TO ZERO
-		grpsize = 0;		// INTIALIZES GROUPSIZE TO ZERO
+		name = "";			// INITIALIZES NAME TO AN EMPTY STRING
+		month = "";			// INITIALIZES MONTH TO AN EMPTY STRING
+		day = "";			// INITIALIZES DAY TO AN EMPTY STRING
+		year = "";			// INITIALIZES YEAR TO AN EMPTY STRING
+		date = "";			// INITIALIZES DATE TO AN EMPTY STRING
+		id = 0;				// INITIALIZES ID TO ZERO
+		grpsize = 0;		// INITIALIZES GROUPSIZE TO ZERO
 	}
 	
-	public Customer(String nm, Object dt, int i,int grp)
+	public Customer(String nm, String mn, String dy, String yr, 
+					Object dt, int i,int grp)
 	/*********************************************************************/
 	/* INITIALIZING CONSTRUCTOR - INITIALIZES NAME, DATE, ID, GROUPSIZE, */
 	/* 							  BUS, REMAINDER, AND COST 	  			 */
 	/*********************************************************************/
 	{
 		name = nm;			// INITIALIZES NAME TO VALUE INPUTTED BY CLIENT
+		month = mn;			// INITIALIZES MONTH TO VALUE INPUTTED BY CLIENT
+		day = dy;			// INITIALIZES DAY TO VALUE INPUTTED BY CLIENT
+		year = yr;			// INITIALIZES YEAR TO VALUE INPUTTED BY CLIENT
 		date = dt;			// INITIALIZES DATE TO VALUE INPUTTED BY CLIENT
 		id = i;				// INITIALIZES ID TO VALUE INPUTTED BY CLIENT
 		grpsize = grp;		// INITIALIZES GROUPSIZE TO VALUE INPUTTED BY CLIENT
@@ -69,6 +79,9 @@ public class Customer implements Ski_Interface
 	/****************************************************/ 
 	{
 		name = cm.name;			// INITIALIZES NAME TO COPY OF OBJECT NAME VALUE
+		month = cm.month;		// INITIALIZES MONTH TO COPY OF OBJECT NAME VALUE
+		day = cm.day;			// INITIALIZES DAY TO COPY OF OBJECT NAME VALUE
+		year = cm.year;			// INITIALIZES YEAR TO COPY OF OBJECT NAME VALUE
 		date = cm.date;			// INITIALIZES DATE TO COPY OF OBJECT NAME VALUE
 		id = cm.id;				// INITIALIZES ID TO COPY OF OBJECT NAME VALUE
 		grpsize = cm.grpsize;	// INITIALIZES GROUPSIZE TO COPY OF OBJECT NAME VALUE
@@ -124,7 +137,7 @@ public class Customer implements Ski_Interface
 			/************************************************/
 			else if (name.length() == 5)
 			{
-				name += "         ";
+				name += "       ";
 			}
 			
 			/************************************************/
@@ -156,7 +169,7 @@ public class Customer implements Ski_Interface
 			/************************************************/
 			else if (name.length() == 9)
 			{
-				name += " ";
+				name += "";
 			}
 		}
 	}
@@ -173,6 +186,69 @@ public class Customer implements Ski_Interface
 		return name;		// RETURNS NAME
 	}
 	
+	public void setMonth(String mn)
+	/************************************************/
+	/* PRECONDITION - PROGRAM HAS A MONTH			*/
+	/* POSTCONDITION - FUNCTION SETS VALUE OF MONTH	*/
+	/************************************************/	
+	{
+		month = mn;		// SETS MONTH TO MONTH VALUE INPUTTED FROM CLIENT
+	}
+	
+	public String getMonth()
+	/************************************************/
+	/* PRECONDITION - PROGRAM HAS A MONTH			*/
+	/* POSTCONDITION - FUNCTION RETURNS MONTH		*/
+	/************************************************/
+	{
+		/******************/
+		/* RETURN SECTION */
+		/******************/
+		return month;	// RETURNS MONTH
+	}
+	
+	public void setDay(String dy)
+	/************************************************/
+	/* PRECONDITION - PROGRAM HAS A DAY				*/
+	/* POSTCONDITION - FUNCTION SETS VALUE OF DAY	*/
+	/************************************************/	
+	{
+		day = dy;		// SETS DAY TO DAY VALUE INPUTTED FROM CLIENT
+	}
+	
+	public String getDay()
+	/************************************************/
+	/* PRECONDITION - PROGRAM HAS A DAY				*/
+	/* POSTCONDITION - FUNCTION RETURNS DAY			*/
+	/************************************************/
+	{
+		/******************/
+		/* RETURN SECTION */
+		/******************/
+		return day;		// RETURNS DAY
+	}
+	
+	public void setYear(String yr)
+	/************************************************/
+	/* PRECONDITION - PROGRAM HAS A YEAR			*/
+	/* POSTCONDITION - FUNCTION SETS VALUE OF YEAR	*/
+	/************************************************/
+	{
+		year = yr;		// SETS YEAR TO YEAR VALUE INPUTTED FROM CLIENT
+	}
+	
+	public String getYear()
+	/************************************************/
+	/* PRECONDITION - PROGRAM HAS A YEAR			*/
+	/* POSTCONDITION - FUNCTION RETURNS YEAR		*/
+	/************************************************/
+	{
+		/******************/
+		/* RETURN SECTION */
+		/******************/	
+		return year;	// RETURN YEAR
+	}
+	
 	public void setDate(Object dt)
 	/************************************************/
 	/* PRECONDITION - PROGRAM HAS A DATE			*/
@@ -184,8 +260,8 @@ public class Customer implements Ski_Interface
 	
 	public Object getDate()
 	/************************************************/
-	/* PRECONDITION - PROGRAM HAS A NAME			*/
-	/* POSTCONDITION - FUNCTION RETURNS NAME		*/
+	/* PRECONDITION - PROGRAM HAS A DATE			*/
+	/* POSTCONDITION - FUNCTION RETURNS DATE		*/
 	/************************************************/
 	{
 		/******************/
