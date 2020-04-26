@@ -1,6 +1,6 @@
 /******************************************/
 /* USER DESCRIPTION SECTION 			  */
-/* OLIVIA 				   			  */
+/* OLIVIA DIAS				   			  */
 /* FINAL PROJECT		   	 			  */
 /* PROGRAM 12							  */
 /* APRIL 9, 2020		   			  	  */
@@ -25,6 +25,9 @@ public class Modify_Menu extends Menu_GUI implements ActionListener
 	final static String error1 = "ERROR!!! Customer number is not on the list!!!";
 	final static String error2 = "ERROR!!! Finish filling in the information!!!";
 	final static String error3 = "ERROR!!! You have no customers to view!!!";
+	final static String error4 = "ERROR!!! Name has to be less than 10 characters";
+	final static String error5 = "ERROR!!! Size has to be between 1 and 400";
+	final static String error6 = "ERROR!!! Need to change one of the fields for the customer!!!";
 	
 	/*****************************/
 	/* INSTANCE VARIABLE SECTION */
@@ -33,12 +36,18 @@ public class Modify_Menu extends Menu_GUI implements ActionListener
 	private JButton returnB;			// CREATES A BUTTON FOR REUTNRING TO HOME MENU
 	private JButton quitB;				// CREATES A BUTTON TO QUIT PROGRAM 
 	private JButton view;				// CREATES A BUTTON FOR VIEWING LIST OF CUSTOMERS
+	private JButton confirm;			// CREATES A BUTTON FOR CONFIMRING THE CHANGE TO CUSTOMER INFO
 	private JTextField modify;			// CREATES A TEXT FIELD FOR MODIFYING CUSTOMERS
 	private JLabel info;				// CREATES A LABEL FOR ADDITIONAL INFORMATION
 	private JLabel custnum;				// CREATES A LABEL FOR CUSTOMER NUMBER
 	private JFrame frame;				// CREATES A JFRAME 
 	private static Container container;	// CREATES A CONTAINER
 	private Font font;					// CREATES A FONT
+	private String name;				// NAME OF CUSTOMER
+	private int size;					// GROUP SIZE OF CUSTOMER
+	private String month;				// MONTH OF THE SKI TRIP
+	private String day;					// DAY OF THE SKI TRIP
+	private String year;				// YEAR OF THE SKI TRIP	
 	
 	public Modify_Menu()
 	/************************************************/
@@ -53,6 +62,7 @@ public class Modify_Menu extends Menu_GUI implements ActionListener
 		returnB = new JButton("Return");			// INSTANTIATES JBUTTON
 		quitB = new JButton("Quit");				// INSTANTIATES JBUTTON
 		view = new JButton("Customer List");		// INSTANTIATES JBUTTON
+		confirm = new JButton("Confirm");			// INSTANTIATES JBUTTON
 		modify = new JTextField("");				// INSTANTIATES JTEXTFIELD
 		info = new JLabel("Enter the customer "+
 						 "number that you want "+
@@ -91,21 +101,22 @@ public class Modify_Menu extends Menu_GUI implements ActionListener
 		/**********************************************/
 		/* SETS BOUNDS FOR BUTTONS, JTEXTFIELD, LABEL */
 		/**********************************************/
-		enterB.setBounds(370, 280, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		returnB.setBounds(290, 280, 75, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		enterB.setBounds(240, 80, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		returnB.setBounds(370, 280, 75, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		confirm.setBounds(265, 280, 100, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		quitB.setBounds(450, 280, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		info.setBounds(80, 30, 500, 30);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		custnum.setBounds(20, 80, 200, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		view.setBounds(240, 80, 150, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		view.setBounds(240, 110, 150, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		modify.setBounds(130, 80, 100, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		nameL.setBounds(20, 110, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		grpSzL.setBounds(20, 140, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		dateL.setBounds(20, 170, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		nameTF.setBounds(130, 110, 100, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		grpSzTF.setBounds(130, 140, 100, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		monthCB.setBounds(130, 170, 100, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		dayCB.setBounds(240, 170, 100, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		yearCB.setBounds(350, 170, 100, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		nameL.setBounds(20, 140, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		grpSzL.setBounds(20, 170, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		dateL.setBounds(20, 200, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		nameTF.setBounds(130, 140, 100, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		grpSzTF.setBounds(130, 170, 100, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		monthCB.setBounds(130, 200, 100, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		dayCB.setBounds(240, 200, 100, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		yearCB.setBounds(350, 200, 100, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		
 		/**********************************************/
 		/* ADDS LISTENER TO BUTTON TO PERFORM ACTIONS */
@@ -119,9 +130,10 @@ public class Modify_Menu extends Menu_GUI implements ActionListener
 		/*************************/
 		/* ADDS BUTTONS TO FRAME */
 		/*************************/
-		container.add(enterB);		// ADDS ENTER BUTTON TO CONTAINER
+		//container.add(enterB);		// ADDS ENTER BUTTON TO CONTAINER
 		container.add(returnB);		// ADDS RETURN BUTTON TO CONTAINER
 		container.add(quitB);		// ADDS QUIT BUTTON TO CONTAINER
+		container.add(confirm);		// ADDS CONFRIM BUTTON TO CONTAINER
 		container.add(view);		// ADDS VIEW BUTTON TO CONTAINER
 		container.add(info);		// ADDS INFO LABEL TO CONTAINER
 		container.add(custnum);		// ADDS CUSTOMER NUMBER LABEL TO CONTAINER
@@ -148,7 +160,7 @@ public class Modify_Menu extends Menu_GUI implements ActionListener
 		/********************/
 		String action;		// STRING TO REPRESENT WHICH BUTTON WAS PRESSED
 		int confirm;		// REUSUABLE INT INPUT FOR CONFIRMING AN ACTION
-		
+		confirm =1;
 		action = event.getActionCommand();		// CALL TO GET ACTION COMMAND
 		
 		/****************************************************/
@@ -156,7 +168,7 @@ public class Modify_Menu extends Menu_GUI implements ActionListener
 		/****************************************************/
 		if(action == "Quit")
 		{
-			confirm = confirmWindow();	// CALL TO CONFIRM WINDOW
+			//confirm = confirmWindow();	// CALL TO CONFIRM WINDOW
 			
 			/******************************************************/
 			/* IF STATEMENT TO CONFIRM ACTION OF QUITTING PROGRAM */	
@@ -172,7 +184,7 @@ public class Modify_Menu extends Menu_GUI implements ActionListener
 		/***********************************************************/
 		else if (action == "Return")
 		{
-			confirm = confirmWindow();	// CALL TO CONFIRM WINDOW
+			//confirm = confirmWindow();	// CALL TO CONFIRM WINDOW
 			
 			/************************************************************/
 			/* IF STATEMENT TO CONFIRM ACTION OF RETURNING TO MAIN MENU */	
@@ -196,26 +208,35 @@ public class Modify_Menu extends Menu_GUI implements ActionListener
 				
 		actionPerformedModify(event);	// CALL TO ACTION PERFORMED FOR REMOVE 
 		
-		/**********************************************************/
-		/* ELSE IF STATEMENT TO CHECK IF ENTER BUTTON WAS PRESSED */	
-		/**********************************************************/
-		if(action == "Enter")
+		if (action == "Enter")
 		{
-			
-			/*******************************************************************/
-			/* IF STATEMENT TO CHECK IF NOTHING ENTERED INTO MODIFY YEXT FIELD */	
-			/*******************************************************************/
-			if(modify.getText() == "")
+			System.out.println("It works!!");
+		}
+		
+		/*******************************************************/
+		/* IF STATEMENT TO CHECK IF CONFIRM BUTTON WAS PRESSED */	
+		/*******************************************************/
+		if(action == "Confirm")
+		{
+			/*********************************************************************/
+			/* IF STATEMENT TO CHECK IF NOTHING WAS CHANGED IN OTHER TEXT FIELDS */	
+			/*********************************************************************/
+			if((nameTF.getText() == name) && (grpSzTF.getText() == ""+size) && 
+			   (monthCB.getSelectedItem() == month) && (dayCB.getSelectedItem() == day)
+			   && (yearCB.getSelectedItem() == year))
 			{
-				errorMessage(error2);	// CALL TO ERROR MESSAGE
+				errorMessage(error6);
 			}
 			
-			/************************************************************************/
-			/* ELSE IF STATEMENT TO CHECK IF NOTHING ENTERED INTO MODIFY YEXT FIELD */	
-			/************************************************************************/
-			else if (modify.getText() != "")
+			/****************************************************************************/
+			/* ELSE IF STATEMENT TO CHECK IF SOMETHING WAS CHANGED IN OTHER TEXT FIELDS */	
+			/****************************************************************************/
+			else if ((nameTF.getText() != name) || (grpSzTF.getText() != ""+size) || 
+					 (monthCB.getSelectedItem() != month) || (dayCB.getSelectedItem() != day)
+					 || (yearCB.getSelectedItem() != year))
 			{
-				
+				frame.dispose();	// GETS RID OF FRAME
+				new Menu_GUI();		// NEW MENU FRAME IS INSTANTIATED
 			}
 		}
 	}
@@ -238,13 +259,6 @@ public class Modify_Menu extends Menu_GUI implements ActionListener
 		int size;			// REUSUABLE INTEGER INPUT
 		int num;			// REUSUABLE INT VALUE
 
-		/**************************/
-		/* INITIALIZATION SECTION */
-		/**************************/
-		month = "";			// INITIALIZES MONTH
-		day = "";			// INITIALIZES DAY
-		year = "";			// INITIALIZES YEAR
-		
 		/************************************/
 		/* INPUTS CUSTOMER NUMBER TO MODIFY */
 		/************************************/
@@ -256,10 +270,10 @@ public class Modify_Menu extends Menu_GUI implements ActionListener
 		year = custList.get(num-1).getYear();		// CALL TO GET CUSTOMER'S YEAR FROM ARRAY LIST
 		size = custList.get(num-1).getSize();		// CALL TO GET CUSTOMER'S SIZE FROM ARRAY LIST		
 		
-		modify(name, month, day, year, size, event);	// CALL TO MODIFY
+		modify(name, month, day, year, size, num, event);	// CALL TO MODIFY
 	}
 	
-	public void actionPerformedName(String nm2, ActionEvent event)
+	public void actionPerformedName(int cust, String nm2, ActionEvent event)
 	/*****************************************************/
 	/* PRECONDITION - PROGRAM HAS A TEXT FIELD FOR NAME  */
 	/* POSTCONDITION - FUNCTION CREATES AN ACTION EVENT  */
@@ -271,8 +285,6 @@ public class Modify_Menu extends Menu_GUI implements ActionListener
 		/********************/
 		String name;		// REUSUABLE STRING INPUT
 		
-		confirmWindow();	// CALL TO CONFIRM WINDOW
-
 		/*****************************/
 		/* LOOP UNTIL VALUE IS VALID */
 		/*****************************/
@@ -281,7 +293,9 @@ public class Modify_Menu extends Menu_GUI implements ActionListener
 			/*******************/
 			/* INPUTS GROUP ID */
 			/*******************/
-			name = nameTF.getText();		// CALL TO GET TEXT INPUTTED BY USER
+			name = nameTF.getText();			// CALL TO GET TEXT INPUTTED BY USER
+			
+			name = name.replaceAll(" ", "");	// GET RID OF ALL THE ADDITIONAL SPACES
 			
 			/*******************************/
 			/* IF STATEMENT TO ERROR CHECK */
@@ -289,15 +303,15 @@ public class Modify_Menu extends Menu_GUI implements ActionListener
 			if (name.length() > 10)
 			{
 				nameTF.setText("" + nm2);	// CLEARS THE TEXT FIELD
-				errorMessage(error1);		// CALL TO ERROR MESSAGE
+				errorMessage(error4);		// CALL TO ERROR MESSAGE
 			}
 		}
 		while(name.length() > 10);
 		
-		customer.setName(name);				// CALL TO SET NAME
+		custList.get(cust - 1).setName(name);	// CALL TO SET NAME
 	}
 	
-	public void actionPerformedSize(int grpsz, ActionEvent event)
+	public void actionPerformedSize(int grpsz, int cust, ActionEvent event)
 	/**********************************************************/
 	/* PRECONDITION - PROGRAM HAS A TEXT FIELD FOR GROUP SIZE */
 	/* POSTCONDITION - FUNCTION CREATES AN ACTION EVENT FOR   */
@@ -310,8 +324,6 @@ public class Modify_Menu extends Menu_GUI implements ActionListener
 		String grp;			// REUSUABLE STRING INPUT
 		int grpSz;			// REUSUABLE INT VALUE
 		
-		confirmWindow();		// CALL TO CONFIRM WINDOW
-
 		/*****************************/
 		/* LOOP UNTIL VALUE IS VALID */
 		/*****************************/
@@ -326,12 +338,12 @@ public class Modify_Menu extends Menu_GUI implements ActionListener
 			if((grpSz <= 0) ||(grpSz > 400))
 			{
 				grpSzTF.setText("" + grpsz);	// CLEARS THE TEXT FIELD 
-				errorMessage(error3);			// CALL TO ERROR MESSAGE
+				errorMessage(error5);			// CALL TO ERROR MESSAGE
 			}
 		}
 		while((grpSz <= 0) || (grpSz > 400));
 		
-		customer.setSize(grpSz);		// CALL TO SET SIZE
+		custList.get(cust - 1).setSize(grpSz);	// CALL TO SET SIZE
 	}
 	
 	public static int confirmWindow()
@@ -362,14 +374,395 @@ public class Modify_Menu extends Menu_GUI implements ActionListener
 		return num;			// RETURNS NUM
 	}
 	
-	public int inputInt()
-	
+	public void inputDate(int cust, String month2, String day2, String year2, ActionEvent event)
+	/***********************************************************/
+	/* PRECONDITION - PROGRAM HAS JCOMBO BOXES FOR MONTH, DAY, */ 
+	/* 				  AND YEAR AND NEEDS A DATE 			   */
+	/* POSTCONDITION - FUNCTION CREATES AN ACTION EVENT FOR    */
+	/* 				   TEXT FIELD FOR GROUP SIZE			   */
+	/***********************************************************/
 	{
 		/********************/
 		/* VARIABLE SECTION */
 		/********************/
-		String numi;
-		int num;
+		Object month;		// REUSUABLE OBJECT INPUT
+		Object day;			// REUSUABLE OBJECT INPUT
+		Object year;		// REUSUABLE OBJECT INPUT
+		String date;		// REUSUABLE STRING INPUT
+
+		confirmWindow();	// CALL TO CONFIRM WINDOW
+
+		/*****************************/
+		/* LOOP UNTIL VALUE IS VALID */
+		/*****************************/
+		do
+		{
+			/*******************************/
+			/* INPUTS MONTH, DAY, AND YEAR */
+			/*******************************/
+			month = monthCB.getSelectedItem();	// CALL TO GET SELECTED ITEM 
+													// FROM MONTH DROP-DOWN LIST	
+			day = dayCB.getSelectedItem();		// CALL TO GET SELECTED ITEM 
+													// FROM DAY DROP-DOWN LIST		
+			year = yearCB.getSelectedItem();	// CALL TO GET SELECTED ITEM 
+													// FROM YEAR DROP-DOWN LIST	
+
+			/************************************/
+			/* IF STATEMENT TO ERROR CHECK DATE */
+			/************************************/
+			if((month.equals("02")) && (day.equals("29")) && (year.equals("2021")))
+			{
+				errorMessage(error6);					// CALL TO ERROR MESSAGE
+				monthCB.setSelectedItem("" + month2);	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				dayCB.setSelectedItem("" + day2);		// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				yearCB.setSelectedItem("" + year2); 	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+			}
+
+			/************************************/
+			/* IF STATEMENT TO ERROR CHECK DATE */
+			/************************************/
+			else if((month.equals("02")) && (day.equals("29")) && (year.equals("2022")))
+			{
+				errorMessage(error6);					// CALL TO ERROR MESSAGE
+				monthCB.setSelectedItem("" + month2);	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				dayCB.setSelectedItem("" + day2);		// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				yearCB.setSelectedItem("" + year2); 	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+			}
+
+			/************************************/
+			/* IF STATEMENT TO ERROR CHECK DATE */
+			/************************************/
+			else if((month.equals("02")) && (day.equals("29")) && (year.equals("2023")))
+			{
+				errorMessage(error6);					// CALL TO ERROR MESSAGE
+				monthCB.setSelectedItem("" + month2);	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				dayCB.setSelectedItem("" + day2);		// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				yearCB.setSelectedItem("" + year2); 	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+			}
+
+			/************************************/
+			/* IF STATEMENT TO ERROR CHECK DATE */
+			/************************************/
+			else if((month.equals("02")) && (day.equals("29")) && (year.equals("2025")))
+			{
+				errorMessage(error6);					// CALL TO ERROR MESSAGE
+				monthCB.setSelectedItem("" + month2);	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				dayCB.setSelectedItem("" + day2);		// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				yearCB.setSelectedItem("" + year2); 	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+			}
+
+			/************************************/
+			/* IF STATEMENT TO ERROR CHECK DATE */
+			/************************************/
+			else if((month.equals("02")) && (day.equals("29")) && (year.equals("2026")))
+			{
+				errorMessage(error6);					// CALL TO ERROR MESSAGE
+				monthCB.setSelectedItem("" + month2);	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				dayCB.setSelectedItem("" + day2);		// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				yearCB.setSelectedItem("" + year2); 	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+			}
+			
+			/************************************/
+			/* IF STATEMENT TO ERROR CHECK DATE */
+			/************************************/
+			else if((month.equals("02")) && (day.equals("29")) && (year.equals("2027")))
+			{
+				errorMessage(error6);					// CALL TO ERROR MESSAGE
+				monthCB.setSelectedItem("" + month2);	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				dayCB.setSelectedItem("" + day2);		// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				yearCB.setSelectedItem("" + year2); 	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+			}
+
+			/************************************/
+			/* IF STATEMENT TO ERROR CHECK DATE */
+			/************************************/
+			else if((month.equals("02")) && (day.equals("29")) && (year.equals("2029")))
+			{
+				errorMessage(error6);					// CALL TO ERROR MESSAGE
+				monthCB.setSelectedItem("" + month2);	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				dayCB.setSelectedItem("" + day2);		// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				yearCB.setSelectedItem("" + year2); 	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+			}
+
+			/************************************/
+			/* IF STATEMENT TO ERROR CHECK DATE */
+			/************************************/
+			else if((month.equals("02")) && (day.equals("29")) && (year.equals("2030")))
+			{
+				errorMessage(error6);					// CALL TO ERROR MESSAGE
+				monthCB.setSelectedItem("" + month2);	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				dayCB.setSelectedItem("" + day2);		// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				yearCB.setSelectedItem("" + year2); 	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+			}
+
+			/************************************/
+			/* IF STATEMENT TO ERROR CHECK DATE */
+			/************************************/
+			else if((month.equals("02")) && (day.equals("29")) && (year.equals("2031")))
+			{
+				errorMessage(error6);					// CALL TO ERROR MESSAGE
+				monthCB.setSelectedItem("" + month2);	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				dayCB.setSelectedItem("" + day2);		// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				yearCB.setSelectedItem("" + year2); 	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+			}
+
+			/************************************/
+			/* IF STATEMENT TO ERROR CHECK DATE */
+			/************************************/
+			else if((month.equals("02")) && (day.equals("29")) && (year.equals("2033")))
+			{
+				errorMessage(error6);					// CALL TO ERROR MESSAGE
+				monthCB.setSelectedItem("" + month2);	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				dayCB.setSelectedItem("" + day2);		// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				yearCB.setSelectedItem("" + year2); 	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+			}
+
+			/************************************/
+			/* IF STATEMENT TO ERROR CHECK DATE */
+			/************************************/
+			else if((month.equals("02")) && (day.equals("29")) && (year.equals("2034")))
+			{
+				errorMessage(error6);					// CALL TO ERROR MESSAGE
+				monthCB.setSelectedItem("" + month2);	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				dayCB.setSelectedItem("" + day2);		// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				yearCB.setSelectedItem("" + year2); 	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+			}
+
+			/************************************/
+			/* IF STATEMENT TO ERROR CHECK DATE */
+			/************************************/
+			else if((month.equals("02")) && (day.equals("29")) && (year.equals("2035")))
+			{
+				errorMessage(error6);					// CALL TO ERROR MESSAGE
+				monthCB.setSelectedItem("" + month2);	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				dayCB.setSelectedItem("" + day2);		// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				yearCB.setSelectedItem("" + year2); 	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+			}
+
+			/************************************/
+			/* IF STATEMENT TO ERROR CHECK DATE */
+			/************************************/
+			else if((month.equals("02")) && (day.equals("29")) && (year.equals("2037")))
+			{
+				errorMessage(error6);					// CALL TO ERROR MESSAGE
+				monthCB.setSelectedItem("" + month2);	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				dayCB.setSelectedItem("" + day2);		// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				yearCB.setSelectedItem("" + year2); 	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+			}
+
+			/************************************/
+			/* IF STATEMENT TO ERROR CHECK DATE */
+			/************************************/
+			else if((month.equals("02")) && (day.equals("29")) && (year.equals("2038")))
+			{
+				errorMessage(error6);					// CALL TO ERROR MESSAGE
+				monthCB.setSelectedItem("" + month2);	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				dayCB.setSelectedItem("" + day2);		// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				yearCB.setSelectedItem("" + year2); 	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+			}
+				
+			/************************************/
+			/* IF STATEMENT TO ERROR CHECK DATE */
+			/************************************/
+			else if((month.equals("02")) && (day.equals("29")) && (year.equals("2039")))
+			{
+				errorMessage(error6);					// CALL TO ERROR MESSAGE
+				monthCB.setSelectedItem("" + month2);	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				dayCB.setSelectedItem("" + day2);		// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				yearCB.setSelectedItem("" + year2); 	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+			}
+			
+			/************************************/
+			/* IF STATEMENT TO ERROR CHECK DATE */
+			/************************************/
+			else if((month.equals("02")) && (day.equals("29")) && (year.equals("2041")))
+			{
+				errorMessage(error6);					// CALL TO ERROR MESSAGE
+				monthCB.setSelectedItem("" + month2);	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				dayCB.setSelectedItem("" + day2);		// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				yearCB.setSelectedItem("" + year2); 	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+			}
+			
+			/************************************/
+			/* IF STATEMENT TO ERROR CHECK DATE */
+			/************************************/
+			else if((month.equals("02")) && (day.equals("29")) && (year.equals("2042")))
+			{
+				errorMessage(error6);					// CALL TO ERROR MESSAGE
+				monthCB.setSelectedItem("" + month2);	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				dayCB.setSelectedItem("" + day2);		// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				yearCB.setSelectedItem("" + year2); 	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+			}
+
+			/************************************/
+			/* IF STATEMENT TO ERROR CHECK DATE */
+			/************************************/
+			else if((month.equals("02")) && (day.equals("29")) && (year.equals("2043")))
+			{
+				errorMessage(error6);					// CALL TO ERROR MESSAGE
+				monthCB.setSelectedItem("" + month2);	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				dayCB.setSelectedItem("" + day2);		// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				yearCB.setSelectedItem("" + year2); 	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+			}
+
+			/************************************/
+			/* IF STATEMENT TO ERROR CHECK DATE */
+			/************************************/
+			else if((month.equals("02")) && (day.equals("29")) && (year.equals("2045")))
+			{	
+				errorMessage(error6);					// CALL TO ERROR MESSAGE
+				monthCB.setSelectedItem("" + month2);	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				dayCB.setSelectedItem("" + day2);		// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				yearCB.setSelectedItem("" + year2); 	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+			}
+
+			/************************************/
+			/* IF STATEMENT TO ERROR CHECK DATE */
+			/************************************/
+			else if((month.equals("02")) && (day.equals("29")) && (year.equals("2046")))
+			{
+				errorMessage(error6);					// CALL TO ERROR MESSAGE
+				monthCB.setSelectedItem("" + month2);	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				dayCB.setSelectedItem("" + day2);		// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				yearCB.setSelectedItem("" + year2); 	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+			}
+
+			/************************************/
+			/* IF STATEMENT TO ERROR CHECK DATE */
+			/************************************/
+			else if((month.equals("02")) && (day.equals("29")) && (year.equals("2047")))
+			{
+				errorMessage(error6);					// CALL TO ERROR MESSAGE
+				monthCB.setSelectedItem("" + month2);	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				dayCB.setSelectedItem("" + day2);		// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				yearCB.setSelectedItem("" + year2); 	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+			}
+				
+			/************************************/
+			/* IF STATEMENT TO ERROR CHECK DATE */
+			/************************************/
+			else if((month.equals("02")) && (day.equals("29")) && (year.equals("2049")))
+			{
+				errorMessage(error6);					// CALL TO ERROR MESSAGE
+				monthCB.setSelectedItem("" + month2);	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				dayCB.setSelectedItem("" + day2);		// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				yearCB.setSelectedItem("" + year2); 	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+			}
+				
+			/*****************************************/
+			/* ELSE IF STATEMENT TO ERROR CHECK DATE */
+			/*****************************************/
+			else if((month.equals("02")) && (day.equals("30")))
+			{
+				errorMessage(error5);					// CALL TO ERROR MESSAGE
+				monthCB.setSelectedItem("" + month2);	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				dayCB.setSelectedItem("" + day2);		// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				yearCB.setSelectedItem("" + year2); 	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+			}
+				
+			/*****************************************/
+			/* ELSE IF STATEMENT TO ERROR CHECK DATE */
+			/*****************************************/
+			else if((month.equals("02")) && (day.equals("31")))
+			{
+				errorMessage(error5);					// CALL TO ERROR MESSAGE
+				monthCB.setSelectedItem("" + month2);	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				dayCB.setSelectedItem("" + day2);		// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				yearCB.setSelectedItem("" + year2); 	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+			}
+				
+			/*****************************************/
+			/* ELSE IF STATEMENT TO ERROR CHECK DATE */
+			/*****************************************/
+			else if((month.equals("04")) && (day.equals("31")))
+			{
+				errorMessage(error4);					// CALL TO ERROR MESSAGE
+				monthCB.setSelectedItem("" + month2);	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				dayCB.setSelectedItem("" + day2);		// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				yearCB.setSelectedItem("" + year2); 	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+			}	
+				
+			/*****************************************/
+			/* ELSE IF STATEMENT TO ERROR CHECK DATE */
+			/*****************************************/
+			else if((month.equals("06")) && (day.equals("31")))
+			{
+				errorMessage(error4);					// CALL TO ERROR MESSAGE
+				monthCB.setSelectedItem("" + month2);	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				dayCB.setSelectedItem("" + day2);		// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				yearCB.setSelectedItem("" + year2); 	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+			}
+			
+			/*****************************************/
+			/* ELSE IF STATEMENT TO ERROR CHECK DATE */
+			/*****************************************/
+			else if((month.equals("09")) && (day.equals("31")))
+			{
+				errorMessage(error4);					// CALL TO ERROR MESSAGE
+				monthCB.setSelectedItem("" + month2);	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				dayCB.setSelectedItem("" + day2);		// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				yearCB.setSelectedItem("" + year2); 	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+			}
+				
+			/*****************************************/
+			/* ELSE IF STATEMENT TO ERROR CHECK DATE */
+			/*****************************************/
+			else if((month.equals("11")) && (day.equals("31")))
+			{
+				errorMessage(error4);					// CALL TO ERROR MESSAGE
+				monthCB.setSelectedItem("" + month2);	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				dayCB.setSelectedItem("" + day2);		// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				yearCB.setSelectedItem("" + year2); 	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+			}
+				
+			date = "" + month + "/" + day + "/" + year;
+		}
+		while((month.equals("02")) && (day.equals("29")) && (year.equals("2021")) || 
+		(month.equals("02")) && (day.equals("29")) && (year.equals("2022")) ||
+		(month.equals("02")) && (day.equals("29")) && (year.equals("2023")) ||
+		(month.equals("02")) && (day.equals("29")) && (year.equals("2025")) ||
+		(month.equals("02")) && (day.equals("29")) && (year.equals("2026")) ||
+		(month.equals("02")) && (day.equals("29")) && (year.equals("2027")) ||
+		(month.equals("02")) && (day.equals("29")) && (year.equals("2029")) ||
+		(month.equals("02")) && (day.equals("29")) && (year.equals("2030")) ||
+		(month.equals("02")) && (day.equals("29")) && (year.equals("2031")) ||
+		(month.equals("02")) && (day.equals("29")) && (year.equals("2033")) ||
+		(month.equals("02")) && (day.equals("29")) && (year.equals("2034")) ||
+		(month.equals("02")) && (day.equals("29")) && (year.equals("2035")) ||
+		(month.equals("02")) && (day.equals("29")) && (year.equals("2037")) ||
+		(month.equals("02")) && (day.equals("29")) && (year.equals("2038")) ||
+		(month.equals("02")) && (day.equals("29")) && (year.equals("2039")) ||
+		(month.equals("02")) && (day.equals("29")) && (year.equals("2041")) ||
+		(month.equals("02")) && (day.equals("29")) && (year.equals("2042")) ||
+		(month.equals("02")) && (day.equals("29")) && (year.equals("2043")) ||
+		(month.equals("02")) && (day.equals("29")) && (year.equals("2045")) ||
+		(month.equals("02")) && (day.equals("29")) && (year.equals("2046")) ||
+		(month.equals("02")) && (day.equals("29")) && (year.equals("2047")) ||
+		(month.equals("02")) && (day.equals("29")) && (year.equals("2049")) ||
+		(month.equals("02")) && (day.equals("30")) || 
+		(month.equals("02")) && (day.equals("31")) || 
+		(month.equals("4")) && (day.equals("31")) || 
+		(month.equals("6")) && (day.equals("31")) || 
+		(month.equals("9")) && (day.equals("31")) || 
+		(month.equals("11")) && (day.equals("31")));
+
+		custList.get(cust - 1).setMonth((String)month);	// CALL TO SET MONTH
+		custList.get(cust - 1).setDay((String)day);		// CALL TO SET DAY
+		custList.get(cust - 1).setYear((String)year);		// CALL TO SET YEAR
+		custList.get(cust - 1).setDate(date);				// CALL TO SET DATE
+	}
+	
+	public int inputInt()
+	/*************************************************/
+	/* PRECONDITION - NEEDS INTEGER VALUE	 		 */
+	/* POSTCONDITION - GETS INTEGER VALUE			 */
+	/*************************************************/
+	{
+		/********************/
+		/* VARIABLE SECTION */
+		/********************/
+		String numi;			// REUSUABLE STRING INPUT
+		int num;				// REUSUABLE INT VALUE
 		
 		/*****************************/
 		/* LOOP UNTIL VALUE IS VALID */
@@ -397,7 +790,7 @@ public class Modify_Menu extends Menu_GUI implements ActionListener
 			}
 		}
 		while((num < 1) || (num > custList.size()));
-		
+				
 		/******************/
 		/* RETURN SECTION */
 		/******************/
@@ -405,7 +798,7 @@ public class Modify_Menu extends Menu_GUI implements ActionListener
 	}
 	
 	public void modify(String nm, String mn, String dy, String yr,
-			   int sz, ActionEvent event)
+			   int sz, int cst, ActionEvent event)
 	/***********************************************************/
 	/* PRECONDITION - PROGRAM HAS A CUSTOMER NAME, DATE, SIZE, */ 
 	/* 				  AND ID NEEDS TO MODIFY IT 			   */
@@ -418,12 +811,9 @@ public class Modify_Menu extends Menu_GUI implements ActionListener
 		monthCB.setSelectedItem(""+mn);			// SETS SELECTED DROP-DOWN ITEM OF MONTH COMBO BOX
 		dayCB.setSelectedItem(""+dy);			// SETS SELECTED DROP-DOWN ITEM OF DAY COMBO BOX
 		yearCB.setSelectedItem(""+yr);			// SETS SELECTED DROP-DOWN ITEM OF YEAR COMBO BOX
-
-		System.out.print(monthCB.getSelectedItem() + " " + dayCB.getSelectedItem() + " " + yearCB.getSelectedItem());
 		
-		actionPerformedName(nm, event);			// CALL TO ACTION PERFORMED FOR NAME
-		actionPerformedSize(sz, event);			// CALL TO ACTION PERFORMED FOR SIZE
-		inputDate(mn, dy, yr, event);			// CALL TO INPUT DATE
-		System.out.println("End of the modify method!!!");
+		actionPerformedName(cst, nm, event);			// CALL TO ACTION PERFORMED FOR NAME
+		actionPerformedSize(cst, sz, event);			// CALL TO ACTION PERFORMED FOR SIZE
+		inputDate(cst, mn, dy, yr, event);			// CALL TO INPUT DATE
 	}
 }
