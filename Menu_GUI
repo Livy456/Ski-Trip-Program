@@ -107,10 +107,10 @@ public class Menu_GUI extends BusGUI implements ActionListener
 		/**************************************/
 		/* SETS FOREGROUND COLOR OF THE LABEL */
 		/**************************************/
-		heading.setForeground(Color.YELLOW);		// SETS FOREGROUND COLOR OF HEADING LABEL
-		changeCust.setForeground(Color.YELLOW);		// SETS FOREGROUND COLOR OF CHANGING CUSTOMER LABEL
-		cost.setForeground(Color.YELLOW);			// SETS FOREGROUND COLOR OF REMOVE LABEL
-		print.setForeground(Color.YELLOW);			// SETS FOREGROUND COLOR OF PRINT LABEL
+		heading.setForeground(Color.WHITE);		// SETS FOREGROUND COLOR OF HEADING LABEL
+		changeCust.setForeground(Color.WHITE);	// SETS FOREGROUND COLOR OF CHANGING CUSTOMER LABEL
+		cost.setForeground(Color.WHITE);		// SETS FOREGROUND COLOR OF REMOVE LABEL
+		print.setForeground(Color.WHITE);		// SETS FOREGROUND COLOR OF PRINT LABEL
 			
 		/**********************************************/
 		/* SETS BOUNDS FOR BUTTONS, JTEXTFIELD, LABEL */
@@ -246,14 +246,13 @@ public class Menu_GUI extends BusGUI implements ActionListener
 			{
 				frame.dispose();			// DISPOSES OF MENU_GUI FRAME
 				updateMenu(heading2);		// CALL TO UPDATE MENU
-				
-				underConstruction();		// CALL TO UNDER CONSTRUCTION
+				new Modify_Menu();			// INSTANTIATES MODIFY MENU
 			}
 		}
 		
-		/**********************************************************/
+		/********************************************************/
 		/*ELSE IF STATEMENT TO CHECK IF COST BUTTON WAS PRESSED */	
-		/**********************************************************/
+		/********************************************************/
 		else if (action.equals("Cost"))
 		{
 			confirm = confirmWindow();		// CALL TO CONFIRM WINDOW
@@ -268,16 +267,16 @@ public class Menu_GUI extends BusGUI implements ActionListener
 			}
 		}
 		
-		/**********************************************************/
-		/*ELSE IF STATEMENT TO CHECK IF COST BUTTON WAS PRESSED */	
-		/**********************************************************/
+		/***********************************************************************/
+		/*ELSE IF STATEMENT TO CHECK IF SORTING BY BUS DATE BUTTON WAS PRESSED */	
+		/***********************************************************************/
 		else if (action.equals("Sorting by Bus Date"))
 		{
 			confirm = confirmWindow();		// CALL TO CONFIRM WINDOW
 			
-			/**************************************************************/
-			/* IF STATEMENT TO CONFIRM ACTION OF VIEWING COST OF SKI TRIP */	
-			/**************************************************************/
+			/*********************************************************************/
+			/* IF STATEMENT TO CONFIRM ACTION OF SORTING BY BUS DATE OF SKI TRIP */	
+			/*********************************************************************/
 			if (confirm == 0)
 			{
 				//frame.dispose();			// DISPOSES OF MENU_GUI FRAME
@@ -285,16 +284,16 @@ public class Menu_GUI extends BusGUI implements ActionListener
 			}
 		}
 		
-		/**********************************************************/
-		/*ELSE IF STATEMENT TO CHECK IF COST BUTTON WAS PRESSED */	
-		/**********************************************************/
+		/******************************************************************/
+		/*ELSE IF STATEMENT TO CHECK IF PROFIT BY DATE BUTTON WAS PRESSED */	
+		/******************************************************************/
 		else if (action.equals("Profit by Date"))
 		{
 			confirm = confirmWindow();		// CALL TO CONFIRM WINDOW
 			
-			/**************************************************************/
-			/* IF STATEMENT TO CONFIRM ACTION OF VIEWING COST OF SKI TRIP */	
-			/**************************************************************/
+			/************************************************************************/
+			/* IF STATEMENT TO CONFIRM ACTION OF VIEWING PROFIT BY DATE OF SKI TRIP */	
+			/************************************************************************/
 			if (confirm == 0)
 			{
 				//frame.dispose();			// DISPOSES OF MENU_GUI FRAME
@@ -302,16 +301,16 @@ public class Menu_GUI extends BusGUI implements ActionListener
 			}
 		}
 		
-		/**********************************************************/
-		/*ELSE IF STATEMENT TO CHECK IF COST BUTTON WAS PRESSED */	
-		/**********************************************************/
+		/****************************************************************/
+		/*ELSE IF STATEMENT TO CHECK IF TOTAL PROFIT BUTTON WAS PRESSED */	
+		/****************************************************************/
 		else if (action.equals("Total Profit"))
 		{
 			confirm = confirmWindow();		// CALL TO CONFIRM WINDOW
 			
-			/**************************************************************/
-			/* IF STATEMENT TO CONFIRM ACTION OF VIEWING COST OF SKI TRIP */	
-			/**************************************************************/
+			/**********************************************************************/
+			/* IF STATEMENT TO CONFIRM ACTION OF VIEWING TOTAL PROFIT OF SKI TRIP */	
+			/**********************************************************************/
 			if (confirm == 0)
 			{
 			//	frame.dispose();			// DISPOSES OF MENU_GUI FRAME
@@ -319,16 +318,16 @@ public class Menu_GUI extends BusGUI implements ActionListener
 			}
 		}
 		
-		/**********************************************************/
-		/*ELSE IF STATEMENT TO CHECK IF COST BUTTON WAS PRESSED */	
-		/**********************************************************/
+		/**************************************************************************/
+		/*ELSE IF STATEMENT TO CHECK IF SORTING ALPHABETICALLY BUTTON WAS PRESSED */	
+		/**************************************************************************/
 		else if (action.equals("Sorting Alphabetically"))
 		{
 			confirm = confirmWindow();		// CALL TO CONFIRM WINDOW
 			
-			/**************************************************************/
-			/* IF STATEMENT TO CONFIRM ACTION OF VIEWING COST OF SKI TRIP */	
-			/**************************************************************/
+			/********************************************************************************/
+			/* IF STATEMENT TO CONFIRM ACTION OF VIEWING SORTING ALPHABETICALLY OF SKI TRIP */	
+			/********************************************************************************/
 			if (confirm == 0)
 			{
 				//frame.dispose();			// DISPOSES OF MENU_GUI FRAME
@@ -336,16 +335,16 @@ public class Menu_GUI extends BusGUI implements ActionListener
 			}
 		}
 		
-		/**********************************************************/
-		/*ELSE IF STATEMENT TO CHECK IF COST BUTTON WAS PRESSED */	
-		/**********************************************************/
+		/***********************************************************************/
+		/*ELSE IF STATEMENT TO CHECK IF SORTING NUMERICALLY BUTTON WAS PRESSED */	
+		/***********************************************************************/
 		else if (action.equals("Sorting Numerically"))
 		{
 			confirm = confirmWindow();		// CALL TO CONFIRM WINDOW
 			
-			/**************************************************************/
-			/* IF STATEMENT TO CONFIRM ACTION OF VIEWING COST OF SKI TRIP */	
-			/**************************************************************/
+			/*****************************************************************************/
+			/* IF STATEMENT TO CONFIRM ACTION OF VIEWING SORTING NUMERICALLY OF SKI TRIP */	
+			/*****************************************************************************/
 			if (confirm == 0)
 			{
 				//frame.dispose();			// DISPOSES OF MENU_GUI FRAME
@@ -353,16 +352,16 @@ public class Menu_GUI extends BusGUI implements ActionListener
 			}
 		}
 		
-		/**********************************************************/
-		/*ELSE IF STATEMENT TO CHECK IF COST BUTTON WAS PRESSED */	
-		/**********************************************************/
-		else if (action.equals("Sorting Numerically"))
+		/***********************************************************************/
+		/*ELSE IF STATEMENT TO CHECK IF SORTING BY GROUP SIZE BUTTON WAS PRESSED */	
+		/***********************************************************************/
+		else if (action.equals("Sorting by Group Size"))
 		{
 			confirm = confirmWindow();		// CALL TO CONFIRM WINDOW
 			
-			/**************************************************************/
-			/* IF STATEMENT TO CONFIRM ACTION OF VIEWING COST OF SKI TRIP */	
-			/**************************************************************/
+			/*******************************************************************************/
+			/* IF STATEMENT TO CONFIRM ACTION OF VIEWING SORTING BY GROUP SIZE OF SKI TRIP */	
+			/*******************************************************************************/
 			if (confirm == 0)
 			{
 			//	frame.dispose();			// DISPOSES OF MENU_GUI FRAME
@@ -415,16 +414,6 @@ public class Menu_GUI extends BusGUI implements ActionListener
 				JOptionPane.ERROR_MESSAGE);
 	}
 	
-	public static void modifyWindow()
-	/************************************************/
-	/* PRECONDITION - NEEDS MODIFY DIALOG BOX		*/
-	/* POSTCONDITION - CREATES WINDOW TO CONFIRM IF	*/
-	/* 				   USER WANTS TO CONFIRM ACTION	*/
-	/************************************************/
-	{
-		
-	}
-	
 	public static String printArray()
 	/*********************************************************/
 	/* PRECONDITION - NEEDS UPDATE OF ARRAYLIST OF INTEGERS	 */
@@ -446,6 +435,7 @@ public class Menu_GUI extends BusGUI implements ActionListener
 		for(int i = 0; i < custList.size(); i++)
 		{
 			num = i + 1;	// ASSIGNS CUSTOMER NUMBER
+			
 			
 			if(num < 10)
 			{
