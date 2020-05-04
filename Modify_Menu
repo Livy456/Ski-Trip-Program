@@ -113,13 +113,13 @@ public class Modify_Menu extends Menu_GUI implements ActionListener
 		/**********************************************/
 		/* SETS BOUNDS FOR BUTTONS, JTEXTFIELD, LABEL */
 		/**********************************************/
-		enterB.setBounds(240, 80, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		returnB.setBounds(370, 280, 75, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		confirm.setBounds(265, 280, 100, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		quitB.setBounds(450, 280, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		info.setBounds(80, 30, 500, 30);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		custnum.setBounds(20, 80, 200, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		view.setBounds(240, 110, 150, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		enterB.setBounds(240, 80, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		view.setBounds(320, 80, 150, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		modify.setBounds(130, 80, 100, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		disName.setBounds(210, 140, 100, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		disSize.setBounds(210, 170, 100, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
@@ -149,6 +149,7 @@ public class Modify_Menu extends Menu_GUI implements ActionListener
 		container.add(returnB);		// ADDS RETURN BUTTON TO CONTAINER
 		container.add(quitB);		// ADDS QUIT BUTTON TO CONTAINER
 		container.add(confirm);		// ADDS CONFRIM BUTTON TO CONTAINER
+		container.add(enterB);		// ADDS ENTER BUTTON TO CONTAINER
 		container.add(view);		// ADDS VIEW BUTTON TO CONTAINER
 		container.add(info);		// ADDS INFO LABEL TO CONTAINER
 		container.add(custnum);		// ADDS CUSTOMER NUMBER LABEL TO CONTAINER
@@ -202,7 +203,7 @@ public class Modify_Menu extends Menu_GUI implements ActionListener
 		/***********************************************************/
 		else if (action == "Return")
 		{
-			//confirm = confirmWindow();	// CALL TO CONFIRM WINDOW
+			confirm = confirmWindow();	// CALL TO CONFIRM WINDOW
 			
 			/************************************************************/
 			/* IF STATEMENT TO CONFIRM ACTION OF RETURNING TO MAIN MENU */	
@@ -226,6 +227,9 @@ public class Modify_Menu extends Menu_GUI implements ActionListener
 				
 		actionPerformedModify(event);	// CALL TO ACTION PERFORMED FOR REMOVE 
 		
+		/*****************************************************/
+		/* IF STATEMENT TO CHECK IF ENTER BUTTON WAS PRESSED */	
+		/*****************************************************/
 		if (action == "Enter")
 		{
 			System.out.println("It works!!");
@@ -236,25 +240,33 @@ public class Modify_Menu extends Menu_GUI implements ActionListener
 		/*******************************************************/
 		if(action == "Confirm")
 		{
-			/*********************************************************************/
-			/* IF STATEMENT TO CHECK IF NOTHING WAS CHANGED IN OTHER TEXT FIELDS */	
-			/*********************************************************************/
-			if((nameTF.getText() == name) && (grpSzTF.getText() == ""+size) && 
-			   (monthCB.getSelectedItem() == month) && (dayCB.getSelectedItem() == day)
-			   && (yearCB.getSelectedItem() == year))
+			confirm = confirmWindow();	// CALL TO CONFIRM WINDOW
+
+			/******************************************************/
+			/* IF STATEMENT TO CONFIRM ACTION OF QUITTING PROGRAM */	
+			/******************************************************/
+			if(confirm == 0)
 			{
-				errorMessage(error6);
-			}
-			
-			/****************************************************************************/
-			/* ELSE IF STATEMENT TO CHECK IF SOMETHING WAS CHANGED IN OTHER TEXT FIELDS */	
-			/****************************************************************************/
-			else if ((nameTF.getText() != name) || (grpSzTF.getText() != ""+size) || 
-					 (monthCB.getSelectedItem() != month) || (dayCB.getSelectedItem() != day)
-					 || (yearCB.getSelectedItem() != year))
-			{
-				frame.dispose();	// GETS RID OF FRAME
-				new Menu_GUI();		// NEW MENU FRAME IS INSTANTIATED
+				/*********************************************************************/
+				/* IF STATEMENT TO CHECK IF NOTHING WAS CHANGED IN OTHER TEXT FIELDS */	
+				/*********************************************************************/
+				if((nameTF.getText() == "") && (grpSzTF.getText() == "") && 
+				   (monthCB.getSelectedItem() == "") && (dayCB.getSelectedItem() == "")
+				   && (yearCB.getSelectedItem() == ""))
+				{
+					errorMessage(error6);
+				}
+				
+				/****************************************************************************/
+				/* ELSE IF STATEMENT TO CHECK IF SOMETHING WAS CHANGED IN OTHER TEXT FIELDS */	
+				/****************************************************************************/
+				else if ((nameTF.getText() != "") || (grpSzTF.getText() != "") || 
+						 (monthCB.getSelectedItem() != "") || (dayCB.getSelectedItem() != "")
+						 || (yearCB.getSelectedItem() != ""))
+				{
+					frame.dispose();	// GETS RID OF FRAME
+					new Menu_GUI();		// NEW MENU FRAME IS INSTANTIATED
+				}
 			}
 		}
 	}
