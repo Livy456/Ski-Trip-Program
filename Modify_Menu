@@ -44,7 +44,7 @@ public class Modify_Menu extends Menu_GUI implements ActionListener
 	private JButton quitB;				// CREATES A BUTTON TO QUIT PROGRAM 
 	private JButton view;				// CREATES A BUTTON FOR VIEWING LIST OF CUSTOMERS
 	private JButton confirm;			// CREATES A BUTTON FOR CONFIMRING THE CHANGE TO CUSTOMER INFO
-	private JTextField modify;			// CREATES A TEXT FIELD FOR MODIFYING CUSTOMERS
+	private JComboBox modify;			// CREATES A COMBO BOX FOR SELECTING CUSTOMERS TO MODIFY
 	private JLabel info;				// CREATES A LABEL FOR ADDITIONAL INFORMATION
 	private JLabel custnum;				// CREATES A LABEL FOR CUSTOMER NUMBER
 	private JLabel disName;				// CREATES A LABEL TO DISPLAY CUSTOMER'S OLD NAME
@@ -53,11 +53,6 @@ public class Modify_Menu extends Menu_GUI implements ActionListener
 	private JFrame frame;				// CREATES A JFRAME 
 	private static Container container;	// CREATES A CONTAINER
 	private Font font;					// CREATES A FONT
-	private String name;				// NAME OF CUSTOMER
-	private int size;					// GROUP SIZE OF CUSTOMER
-	private String month;				// MONTH OF THE SKI TRIP
-	private String day;					// DAY OF THE SKI TRIP
-	private String year;				// YEAR OF THE SKI TRIP	
 	
 	public Modify_Menu()
 	/************************************************/
@@ -73,7 +68,7 @@ public class Modify_Menu extends Menu_GUI implements ActionListener
 		quitB = new JButton("Quit");				// INSTANTIATES JBUTTON
 		view = new JButton("Customer List");		// INSTANTIATES JBUTTON
 		confirm = new JButton("Confirm");			// INSTANTIATES JBUTTON
-		modify = new JTextField("");				// INSTANTIATES JTEXTFIELD
+		modify = new JComboBox();					// INSTANTIATES JCOMBOBOX
 		disName = new JLabel("");					// INSTANTIATES JLABEL
 		disSize = new JLabel("");					// INSTANTIATES JLABEL
 		disDate = new JLabel("");					// INSTANTIATES JLABEL
