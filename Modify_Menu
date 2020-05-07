@@ -44,7 +44,7 @@ public class Modify_Menu extends Menu_GUI implements ActionListener
 	private JButton quitB;				// CREATES A BUTTON TO QUIT PROGRAM 
 	private JButton view;				// CREATES A BUTTON FOR VIEWING LIST OF CUSTOMERS
 	private JButton confirm;			// CREATES A BUTTON FOR CONFIMRING THE CHANGE TO CUSTOMER INFO
-	private JComboBox modify;			// CREATES A COMBO BOX FOR SELECTING CUSTOMERS TO MODIFY
+	private JTextField modify;			// CREATES A TEXT FIELD FOR SELECTING CUSTOMERS TO MODIFY
 	private JLabel info;				// CREATES A LABEL FOR ADDITIONAL INFORMATION
 	private JLabel custnum;				// CREATES A LABEL FOR CUSTOMER NUMBER
 	private JLabel disName;				// CREATES A LABEL TO DISPLAY CUSTOMER'S OLD NAME
@@ -68,7 +68,7 @@ public class Modify_Menu extends Menu_GUI implements ActionListener
 		quitB = new JButton("Quit");				// INSTANTIATES JBUTTON
 		view = new JButton("Customer List");		// INSTANTIATES JBUTTON
 		confirm = new JButton("Confirm");			// INSTANTIATES JBUTTON
-		modify = new JComboBox();					// INSTANTIATES JCOMBOBOX
+		modify = new JTextField("");				// INSTANTIATES JTEXTFIELD
 		disName = new JLabel("");					// INSTANTIATES JLABEL
 		disSize = new JLabel("");					// INSTANTIATES JLABEL
 		disDate = new JLabel("");					// INSTANTIATES JLABEL
@@ -836,7 +836,6 @@ public class Modify_Menu extends Menu_GUI implements ActionListener
 	/* 				   DATE, AND SIZE		   		   		   */
 	/***********************************************************/
 	{	
-		
 		disName.setText("Current Customer "+custNum+" Name: "+name);					// SETS TEXT OF DISPLAY NAME LABEL
 		disSize.setText("Current Customer "+custNum+" Size: "+size);					// SETS TEXT OF DISPLAY SIZE LABEL
 		disDate.setText("Current Customer "+custNum+" Date: "+month+"/"+day+"/"+year);	// SETS TEXT OF DISPLAY DATE LABEL
