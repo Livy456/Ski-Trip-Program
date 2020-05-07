@@ -1,6 +1,6 @@
 /******************************************/
 /* USER DESCRIPTION SECTION 			  */
-/* OLIVIA 				   			  */
+/* OLIVIA DIAS				   			  */
 /* FINAL PROJECT			   	  		  */
 /* PROGRAM 12							  */
 /* FEBRUARY 10, 2020		   			  */
@@ -94,84 +94,6 @@ public class Customer implements Ski_Interface
 	/************************************************/	
 	{
 		name = nm;		// SETS NAME TO NAME VALUE INPUTTED FROM CLIENT
-		
-		/**********************************************************************/
-		/* IF STATEMENT TO CHECK LENGTH OF NAME SO LENGTH CAN BE STANDARDIZED */	
-		/**********************************************************************/
-		if (name.length() < 10)
-		{
-			/************************************************/
-			/* IF STATEMENT TO CHECK IF LENGTH OF NAME IS 1 */	
-			/************************************************/
-			if(name.length() == 1)
-			{
-				name += "              ";
-			}
-			
-			/************************************************/
-			/* IF STATEMENT TO CHECK IF LENGTH OF NAME IS 2 */	
-			/************************************************/
-			else if (name.length() == 2)
-			{
-				name += "             ";
-			}
-			
-			/************************************************/
-			/* IF STATEMENT TO CHECK IF LENGTH OF NAME IS 3 */	
-			/************************************************/
-			else if (name.length() == 3)
-			{ 
-				name += "            ";
-			}
-			
-			/************************************************/
-			/* IF STATEMENT TO CHECK IF LENGTH OF NAME IS 4 */	
-			/************************************************/
-			else if (name.length() == 4)
-			{
-				name += "         ";
-			}
-			
-			/************************************************/
-			/* IF STATEMENT TO CHECK IF LENGTH OF NAME IS 5 */	
-			/************************************************/
-			else if (name.length() == 5)
-			{
-				name += "       ";
-			}
-			
-			/************************************************/
-			/* IF STATEMENT TO CHECK IF LENGTH OF NAME IS 6 */	
-			/************************************************/
-			else if (name.length() == 6)
-			{
-				name += "      ";
-			}
-			
-			/************************************************/
-			/* IF STATEMENT TO CHECK IF LENGTH OF NAME IS 7 */	
-			/************************************************/
-			else if (name.length() == 7)
-			{
-				name += "    ";
-			}
-			
-			/************************************************/
-			/* IF STATEMENT TO CHECK IF LENGTH OF NAME IS 8 */	
-			/************************************************/
-			else if (name.length() == 8)
-			{
-				name += "  ";
-			}
-			
-			/************************************************/
-			/* IF STATEMENT TO CHECK IF LENGTH OF NAME IS 9 */	
-			/************************************************/
-			else if (name.length() == 9)
-			{
-				name += "";
-			}
-		}
 	}
 	
 	public String getName()
