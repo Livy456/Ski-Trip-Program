@@ -138,6 +138,7 @@ public class Modify_Menu extends Menu_GUI implements ActionListener
 		/**********************************************/
 		/* ADDS LISTENER TO BUTTON TO PERFORM ACTIONS */
 		/**********************************************/
+		confirm.addActionListener(this);	// ADDS ACTIONLISTENER TO MAKE AN EVENT OCCUR ONCE BUTTON IS PUSHED 
 		enterB.addActionListener(this);		// ADDS ACTIONLISTENER TO MAKE AN EVENT OCCUR ONCE BUTTON IS PUSHED
 		returnB.addActionListener(this);	// ADDS ACTIONLISTENER TO MAKE AN EVENT OCCUR ONCE BUTTON IS PUSHED
 		quitB.addActionListener(this);		// ADDS ACTIONLISTENER TO MAKE AN EVENT OCCUR ONCE BUTTON IS PUSHED
@@ -181,7 +182,8 @@ public class Modify_Menu extends Menu_GUI implements ActionListener
 		String action;		// STRING TO REPRESENT WHICH BUTTON WAS PRESSED
 		int custNum;		// NUMBER FOR THE CUSTOMER IN ARRAYLIST
 		int confirm;		// REUSUABLE INT INPUT FOR CONFIRMING AN ACTION
-		confirm =1;
+		
+		confirm = 1;		// INITIALIZES CONFIRM
 		action = event.getActionCommand();	// CALL TO GET ACTION COMMAND
 		
 		/****************************************************/
@@ -227,9 +229,9 @@ public class Modify_Menu extends Menu_GUI implements ActionListener
 			new Modify_Menu();			// RECREATES THE REMOVE MENU WINDOW
 		}
 		
-		/*******************************************************/
-		/* IF STATEMENT TO CHECK IF CONFIRM BUTTON WAS PRESSED */	
-		/*******************************************************/
+		/************************************************************/
+		/* ELSE IF STATEMENT TO CHECK IF CONFIRM BUTTON WAS PRESSED */	
+		/************************************************************/
 		else if(action == "Confirm")
 		{
 			confirm = confirmWindow();	// CALL TO CONFIRM WINDOW
@@ -261,11 +263,19 @@ public class Modify_Menu extends Menu_GUI implements ActionListener
 				}
 			}
 		}
-		
+	
 		custNum = actionPerformedModify(event);	// CALL TO ACTION PERFORMED FOR MODIFY 
 		actionPerformedName(event, custNum);	// CALL TO ACTION PERFORMED FOR NAME
 		actionPerformedSize(event, custNum);	// CALL TO ACTION PERFORMED FOR SIZE
 		actionPerformedDate(event, custNum);	// CALL TO ACTION PERFORMED FOR DATE
+		
+		/*******************************************************/
+		/* IF STATEMENT TO CHECK IF CONFIRM BUTTON WAS PRESSED */	
+		/*******************************************************/
+		if (action == "Enter")
+		{
+			System.out.println("This works!!!");
+		}
 	}
 	
 	public void actionPerformedDate(ActionEvent event, int custNum)
