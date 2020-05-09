@@ -65,7 +65,7 @@ public class BusGUI implements ActionListener
 	private JFrame frame;				// CREATES A JFRAME 
 	private Container container;		// CREATES A CONTAINER
 	private Font font;					// CREATES A FONT FOR LABELS
-	protected static Customer customer;		// CREATES AN INSTANCE OF CUSTOMER
+	protected static Customer customer;	// CREATES AN INSTANCE OF CUSTOMER
 	protected static ArrayList <Customer> custList = new ArrayList();	// CREATES AN ARRAYLIST OF CUSTOMER
 	private String[] months = {"", "01", "02", "03", "04", "05", "06",
 							   "07", "08", "09", "10", "11", "12"};		// CREATES AN ARRAY FOR MONTHS
