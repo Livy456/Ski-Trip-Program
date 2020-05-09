@@ -19,6 +19,7 @@ import javax.swing.*;						// IMPORTS SWING
 import java.awt.*;							// IMPORTS AWT
 import java.awt.event.ActionEvent;			// IMPORTS ACTION EVENT
 import java.awt.event.ActionListener;		// IMPORTS ACTION LISTENER
+import java.util.ArrayList;
 
 public class Modify_Menu extends Menu_GUI implements ActionListener
 {	
@@ -53,6 +54,7 @@ public class Modify_Menu extends Menu_GUI implements ActionListener
 	private JFrame frame;				// CREATES A JFRAME 
 	private static Container container;	// CREATES A CONTAINER
 	private Font font;					// CREATES A FONT
+	private String[] custAmt = inputArray();	// CREATES AN ARRAY OF CUSTOMER NUMBERS TO SELECT FROM 
 	
 	public Modify_Menu()
 	/************************************************/
@@ -790,6 +792,43 @@ public class Modify_Menu extends Menu_GUI implements ActionListener
 		/* RETURN SECTION */
 		/******************/
 		return num;			// RETURNS NUM
+	}
+	
+	public static String[] inputArray ()
+	/**************************************************/
+	/* PRECONDITION - NEEDS ARRAY FOR CUSTOMER NUMBER */
+	/* POSTCONDITION - GETS ARRAY OF CUSTOMER NUMBERS */
+	/**************************************************/
+	{
+		/********************/
+		/* VARIABLE SECTION */
+		/********************/
+		String[] array;				// REUSUABLE STRING ARRAY 
+		ArrayList<String> arrayL;	// REUSUABLE STRING ARRAYLIST
+		int size;					// SIZE OF CUSTOMER ARRAYLIST
+		int custNum;				// CUSTOMER NUMBER
+		
+		custNum = 0;				// INITIALIZES CUSTOMER NUMBER
+		arrayL = new ArrayList();	// INSTANTIATES ARRAYLIST
+		
+		size = custList.size();		// CALL TO SIZE METHOD
+		
+		/*******************************************************/
+		/* FOR LOOP TO CREATE AN ARRAYLIST OF CUSTOMER NUMBERS */
+		/*******************************************************/
+		for (int i = 0; i < size; i++)
+		{
+			custNum = i + 1;			// CREATES CUSTOMER NUMBER
+			arrayL.add(""+ custNum);	// ADDS CUSTOMER NUMBER TO ARRAYLIST
+		}
+		
+		array = new String[size];		// INSTANTIATES ARRAY
+		array = arrayL.toArray(array);	// CONVERTS ARRAYLIST TO ARRAY
+		
+		/******************/
+		/* RETURN SECTION */
+		/******************/
+		return array;		// RETURNS ARRAY
 	}
 	
 	public int inputInt()
