@@ -45,7 +45,7 @@ public class Modify_Menu extends Menu_GUI implements ActionListener
 	private JButton quitB;				// CREATES A BUTTON TO QUIT PROGRAM 
 	private JButton view;				// CREATES A BUTTON FOR VIEWING LIST OF CUSTOMERS
 	private JButton confirm;			// CREATES A BUTTON FOR CONFIMRING THE CHANGE TO CUSTOMER INFO
-	private JTextField modify;			// CREATES A TEXT FIELD FOR SELECTING CUSTOMERS TO MODIFY
+	private JComboBox modify;			// CREATES A JCOMBOBOX FOR SELECTING CUSTOMERS TO MODIFY
 	private JLabel info;				// CREATES A LABEL FOR ADDITIONAL INFORMATION
 	private JLabel custnum;				// CREATES A LABEL FOR CUSTOMER NUMBER
 	private JLabel disName;				// CREATES A LABEL TO DISPLAY CUSTOMER'S OLD NAME
@@ -70,7 +70,7 @@ public class Modify_Menu extends Menu_GUI implements ActionListener
 		quitB = new JButton("Quit");				// INSTANTIATES JBUTTON
 		view = new JButton("Customer List");		// INSTANTIATES JBUTTON
 		confirm = new JButton("Confirm");			// INSTANTIATES JBUTTON
-		modify = new JTextField("");				// INSTANTIATES JTEXTFIELD
+		modify = new JComboBox(custAmt);			// INSTANTIATES JCOMBOBOX
 		disName = new JLabel("");					// INSTANTIATES JLABEL
 		disSize = new JLabel("");					// INSTANTIATES JLABEL
 		disDate = new JLabel("");					// INSTANTIATES JLABEL
@@ -810,8 +810,8 @@ public class Modify_Menu extends Menu_GUI implements ActionListener
 		
 		custNum = 0;				// INITIALIZES CUSTOMER NUMBER
 		arrayL = new ArrayList();	// INSTANTIATES ARRAYLIST
-		
 		size = custList.size();		// CALL TO SIZE METHOD
+		arrayL.add("");				// ADDS A BLANK SPOT FOR ARRAYLIST
 		
 		/*******************************************************/
 		/* FOR LOOP TO CREATE AN ARRAYLIST OF CUSTOMER NUMBERS */
@@ -822,6 +822,7 @@ public class Modify_Menu extends Menu_GUI implements ActionListener
 			arrayL.add(""+ custNum);	// ADDS CUSTOMER NUMBER TO ARRAYLIST
 		}
 		
+		size += 1;						// COMPENSATING FOR THE BLANK SPOT IN ARRAY
 		array = new String[size];		// INSTANTIATES ARRAY
 		array = arrayL.toArray(array);	// CONVERTS ARRAYLIST TO ARRAY
 		
@@ -840,7 +841,7 @@ public class Modify_Menu extends Menu_GUI implements ActionListener
 		/********************/
 		/* VARIABLE SECTION */
 		/********************/
-		String numi;			// REUSUABLE STRING INPUT
+		Object numi;			// REUSUABLE OBJECT INPUT
 		int num;				// REUSUABLE INT VALUE
 		
 		/*****************************/
@@ -856,15 +857,15 @@ public class Modify_Menu extends Menu_GUI implements ActionListener
 				errorMessage(error3); 	// CALL TO ERROR MESSAGE
 			}
 			
-			numi = modify.getText();		// CALL TO GET TEXT INPUTTED BY USER
-			num = Integer.parseInt(numi);	// PARSES STRING TO AN INTEGER
+			numi = modify.getSelectedItem();		// CALL TO GET TEXT INPUTTED BY USER
+			num = (int) numi;	// PARSES STRING TO AN INTEGER
 			
 			/*******************************/
 			/* IF STATEMENT TO ERROR CHECK */
 			/*******************************/
 			if((num < 1) || (num > custList.size()))
 			{
-				modify.setText("");			// CLEARS THE TEXT FIELD
+				modify.setSelectedItem("");			// CLEARS THE TEXT FIELD
 				errorMessage(error1);		// CALL TO ERROR MESSAGE
 			}
 		}
