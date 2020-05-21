@@ -274,4 +274,28 @@ public class Modify_Menu extends Menu_GUI implements ActionListener
 		/******************/
 		return num;			// RETURNS NUM
 	}
+	
+	public static void updateMenu(String hdstr)
+	/*****************************************************************/
+	/* PRECONDITION - NEEDS AN UPDATE WINDOW OF ALL CUSTOMERS 		 */
+	/* POSTCONDITION - CREATES WINDOW TO TELL USER ALL THE CUSTOMERS */
+	/*****************************************************************/
+	{
+		/********************/
+		/* VARIABLE SECTION */
+		/********************/
+		String str;			// USED FOR REUSABLE OUTPUT
+		
+		str = printArray();	// CALL TO PRINT ARRAY
+		
+		/***********************/
+		/* MAKES DIALOG WINDOW */
+		/***********************/ 
+		JOptionPane.showMessageDialog(
+				null,
+				hdstr + "\n"+
+				str,
+				"Customer List",
+				JOptionPane.INFORMATION_MESSAGE);
+	}
 }
