@@ -28,7 +28,6 @@ public class Modify extends Modify_Menu implements ActionListener
 	/*****************************/
 	private Label warning;		// CREATES A LABEL FOR INPUT CONSTRAINTS
 	private Label warning2;		// CREATES A LABEL FOR INPUT CONSTRAINTS
-	private int num;			// INTEGER VALUE FOR CUSTOMER NUMBER
 	
 	public Modify()
 	/************************************************/
@@ -57,14 +56,12 @@ public class Modify extends Modify_Menu implements ActionListener
 		container = frame.getContentPane();			// CREATES A CONTENT PANE
 		font = new Font("Times New Roman", 
 						Font.BOLD, 15);				// INSTANTIATES FONT 
-		
-		num = custNum;	// INITIALIZES CUSTOMER NUMBER
-		
+				
 		/**************************/
 		/* CREATES A BLANK JFRAME */
 		/**************************/
 		frame.pack();							// SIZE OF THE FRAME
-		frame.setBounds(450, 100, 550, 550);	// SETS X POSITION, Y POSITION, LENGTH, WIDTH 
+		frame.setBounds(450, 100, 550, 450);	// SETS X POSITION, Y POSITION, LENGTH, WIDTH 
 		frame.setVisible(true);					// ALLOWS THE JFRAME TO BE VISIBLE
 		container.setLayout(null);				// SETS THE LAYOUT FOR THE JFRAME
 		container.setBackground(Color.WHITE);	// SETS THE BACKGROUND COLOR
@@ -95,9 +92,9 @@ public class Modify extends Modify_Menu implements ActionListener
 		/* SETS BOUNDS FOR BUTTONS, JTEXTFIELD, LABEL */
 		/**********************************************/
 		returnB.setBounds(270, 320, 75, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		confirm.setBounds(350, 320, 75, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		quitB.setBounds(430, 320, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		info.setBounds(80, 30, 500, 30);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		confirm.setBounds(350, 320, 100, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		quitB.setBounds(455, 320, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		info.setBounds(20, 30, 500, 30);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		disName.setBounds(20, 230, 500, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		disSize.setBounds(20, 260, 500, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		disDate.setBounds(20, 290, 500, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
@@ -109,8 +106,8 @@ public class Modify extends Modify_Menu implements ActionListener
 		nameTF.setBounds(100, 80, 100, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		grpSzTF.setBounds(100, 110, 100, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		monthCB.setBounds(100, 140, 100, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		dayCB.setBounds(240, 140, 100, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		yearCB.setBounds(350, 140, 100, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		dayCB.setBounds(210, 140, 100, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		yearCB.setBounds(320, 140, 100, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 	
 		/**********************************************/
 		/* ADDS LISTENER TO BUTTON TO PERFORM ACTIONS */
@@ -152,20 +149,10 @@ public class Modify extends Modify_Menu implements ActionListener
 		/* VARIABLE SECTION */
 		/********************/
 		String action;		// STRING TO REPRESENT WHICH BUTTON WAS PRESSED
-		String name;		// STRING FOR NAME OF CUSTOMER		
-		String month;		// STRING FOR MONTH OF CUSTOMER SKI TRIP
-		String day;			// STRING FOR DAY OF CUSTOMER SKI TRIP
-		String year;		// STRING FOR YEAR OF CUSTOMER SKI TRIP
-		int size;			// INTEGER FOR SIZE OF GROUP FOR SKI TRIP
 		int confirm;		// REUSUABLE INT INPUT FOR CONFIRMING AN ACTION
 		
 		confirm = 1;							// INITIALIZES CONFIRM
 		action = event.getActionCommand();		// CALL TO GET ACTION COMMAND
-		name = custList.get(num-1).getName();	// GETS NAME OF CUSTOMER FOR MODIFICATION
-		month = custList.get(num-1).getMonth();	// GETS MONTH OF CUSTOMER FOR MODIFICATION
-		day = custList.get(num-1).getDay();		// GETS DAY OF CUSTOMER FOR MODIFICATION
-		year = custList.get(num-1).getYear();	// GETS YEAR OF CUSTOMER FOR MODIFICATION
-		size = custList.get(num-1).getSize();	// GETS SIZE OF CUSTOMER FOR MODIFICATION
 		
 		/****************************************************/
 		/* IF STATEMENT TO CHECK IF QUIT BUTTON WAS PRESSED */	
@@ -200,9 +187,9 @@ public class Modify extends Modify_Menu implements ActionListener
 			}
 		}
 		
-		actionPerformedName(num);		// CALL TO ACTION PERFORMED NAME FOR MODIFY
-		actionPerformedSize(num);		// CALL TO ACTION PERFORMED SIZE FOR MODIFY
-		actionPerformedDate(num);		// CALL TO ACTION PERFORMED DATE FOR MODIFY
+		actionPerformedName();		// CALL TO ACTION PERFORMED NAME FOR MODIFY
+		actionPerformedSize();		// CALL TO ACTION PERFORMED SIZE FOR MODIFY
+		actionPerformedDate();		// CALL TO ACTION PERFORMED DATE FOR MODIFY
 		
 		/************************************************************/
 		/* ELSE IF STATEMENT TO CHECK IF CONFIRM BUTTON WAS PRESSED */	
@@ -240,7 +227,7 @@ public class Modify extends Modify_Menu implements ActionListener
 		}
 	}
 	
-	public void actionPerformedDate(int custNum)
+	public void actionPerformedDate()
 	/************************************************************/
 	/* PRECONDITION - PROGRAM HAS A CUSTOMER SIZE THAT NEEDS TO */ 
 	/* 				  BE MODIFIED 			   					*/
@@ -616,7 +603,7 @@ public class Modify extends Modify_Menu implements ActionListener
 		custList.get(custNum - 1).setDate(date);			// CALL TO SET DATE
 	}
 
-	public void actionPerformedName(int custNum)
+	public void actionPerformedName()
 	/************************************************************/
 	/* PRECONDITION - PROGRAM HAS A CUSTOMER NAME THAT NEEDS TO */ 
 	/* 				  BE MODIFIED 			   					*/
@@ -653,7 +640,7 @@ public class Modify extends Modify_Menu implements ActionListener
 		custList.get(custNum - 1).setName(name);	// CALL TO SET NAME
 	}
 	
-	public void actionPerformedSize(int custNum)
+	public void actionPerformedSize()
 	/************************************************************/
 	/* PRECONDITION - PROGRAM HAS A CUSTOMER SIZE THAT NEEDS TO */ 
 	/* 				  BE MODIFIED 			   					*/
