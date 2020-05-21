@@ -28,7 +28,7 @@ public class Modify extends Modify_Menu implements ActionListener
 	/*****************************/
 	private int num;		// INTEGER VALUE FOR CUSTOMER NUMBER
 	
-	public Modify(int custNum)
+	public Modify()
 	/************************************************/
 	/* DEFAULT CONSTRUCTOR - IT CREATES A FRAME FOR */
 	/*						 CONTENT PANE			*/
@@ -39,6 +39,10 @@ public class Modify extends Modify_Menu implements ActionListener
 		/*************************/
 		info = new JLabel("Modify the Customer");	// INSTANTIATES JLABEL
 		frame = new JFrame("Modify Customer");		// INSTANTIATES JFRAME
+		disName = new JLabel("");					// INSTANTIATES JLABEL
+		disSize = new JLabel("");					// INSTANTIATES JLABEL
+		disDate = new JLabel("");					// INSTANTIATES JLABEL
+		confirm = new JButton("Confirm");			// INSTANTIATES JBUTTON
 		container = frame.getContentPane();			// CREATES A CONTENT PANE
 		font = new Font("Times New Roman", 
 						Font.BOLD, 15);				// INSTANTIATES FONT 
@@ -49,11 +53,19 @@ public class Modify extends Modify_Menu implements ActionListener
 		/* CREATES A BLANK JFRAME */
 		/**************************/
 		frame.pack();							// SIZE OF THE FRAME
-		frame.setBounds(350, 100, 550, 550);	// SETS X POSITION, Y POSITION, LENGTH, WIDTH 
+		frame.setBounds(450, 100, 550, 550);	// SETS X POSITION, Y POSITION, LENGTH, WIDTH 
 		frame.setVisible(true);					// ALLOWS THE JFRAME TO BE VISIBLE
 		container.setLayout(null);				// SETS THE LAYOUT FOR THE JFRAME
-		container.setBackground(Color.YELLOW);	// SETS THE BACKGROUND COLOR
+		container.setBackground(Color.WHITE);	// SETS THE BACKGROUND COLOR
 		frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);// ALLOWS THE JFRAME TO BE CLOSED
+		
+		/**************************/
+		/* SETS FONT OF THE LABEL */
+		/**************************/
+		info.setFont(font);			// SETS FONT OF INFO LABEL
+		disName.setFont(font);		// SETS FONT OF NAME DISPLAY LABEL		
+		disSize.setFont(font);		// SETS FONT OF SIZE DISPLAY LABEL
+		disDate.setFont(font);		// SETS FONT OF DATE DISPLAY LABEL
 		
 		/**************************************/
 		/* SETS FOREGROUND COLOR OF THE LABEL */
@@ -70,7 +82,6 @@ public class Modify extends Modify_Menu implements ActionListener
 		/* SETS BOUNDS FOR BUTTONS, JTEXTFIELD, LABEL */
 		/**********************************************/
 		returnB.setBounds(370, 320, 75, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		enter.setBounds(265, 320, 100, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		confirm.setBounds(370, 320, 100, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		quitB.setBounds(450, 320, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		info.setBounds(80, 30, 500, 30);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
@@ -90,7 +101,6 @@ public class Modify extends Modify_Menu implements ActionListener
 		/* ADDS LISTENER TO BUTTON TO PERFORM ACTIONS */
 		/**********************************************/
 		confirm.addActionListener(this);	// ADDS ACTIONLISTENER TO MAKE AN EVENT OCCUR ONCE BUTTON IS PUSHED 
-		enter.addActionListener(this);		// ADDS ACTIONLISTENER TO MAKE AN EVENT OCCUR ONCE BUTTON IS PUSHED 
 		returnB.addActionListener(this);	// ADDS ACTIONLISTENER TO MAKE AN EVENT OCCUR ONCE BUTTON IS PUSHED
 		quitB.addActionListener(this);		// ADDS ACTIONLISTENER TO MAKE AN EVENT OCCUR ONCE BUTTON IS PUSHED
 
@@ -99,7 +109,6 @@ public class Modify extends Modify_Menu implements ActionListener
 		/*************************/
 		container.add(returnB);		// ADDS RETURN BUTTON TO CONTAINER
 		container.add(quitB);		// ADDS QUIT BUTTON TO CONTAINER
-		container.add(enter);		// ADDS ENTER BUTTON TO CONTAINER
 		container.add(confirm);		// ADDS CONFRIM BUTTON TO CONTAINER
 		container.add(disName);		// ADDS DISPLAY NAME LABEL TO CONTAINER
 		container.add(disSize);		// ADDS DISPLAY SIZE LABEL TO CONTAINER
