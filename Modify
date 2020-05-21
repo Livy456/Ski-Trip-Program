@@ -3,7 +3,7 @@
 /* OLIVIA DIAS				   			  */
 /* FINAL PROJECT		   	 			  */
 /* PROGRAM 12							  */
-/* APRIL 9, 2020		   			  	  */
+/* MAY 11, 2020		   			  	 	  */
 /******************************************/
 /******************************************/
 /* THIS IS A PROGRAM TO MAKE AN OBJECT	  */
@@ -37,12 +37,7 @@ public class Modify extends Modify_Menu implements ActionListener
 		/*************************/
 		/* INSTANTIATION SECTION */
 		/*************************/
-		disName = new JLabel("" + custList.get(custNum-1).getName());	// INSTANTIATES JLABEL
-		disSize = new JLabel("" + custList.get(custNum-1).getSize());	// INSTANTIATES JLABEL
-		disDate = new JLabel("" + custList.get(custNum-1).getDate());		// INSTANTIATES JLABEL
-		info = new JLabel("Enter the customer "+
-						 "number that you want "+
-						 "to modify.");				// INSTANTIATES JLABEL
+		info = new JLabel("Modify the Customer");	// INSTANTIATES JLABEL
 		frame = new JFrame("Modify Customer");		// INSTANTIATES JFRAME
 		container = frame.getContentPane();			// CREATES A CONTENT PANE
 		font = new Font("Times New Roman", 
@@ -63,6 +58,7 @@ public class Modify extends Modify_Menu implements ActionListener
 		/**************************************/
 		/* SETS FOREGROUND COLOR OF THE LABEL */
 		/**************************************/
+		info.setForeground(Color.BLACK);		// SETS FOREGROUND COLOR OF INFO LABEL 
 		nameL.setForeground(Color.BLACK);		// SETS FOREGROUND COLOR OF NAME LABEL
 		grpSzL.setForeground(Color.BLACK);		// SETS FOREGROUND COLOR OF GROUP SIZE LABEL
 		dateL.setForeground(Color.BLACK);		// SETS FOREGROUND COLOR OF DATE LABEL
@@ -77,6 +73,7 @@ public class Modify extends Modify_Menu implements ActionListener
 		enter.setBounds(265, 320, 100, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		confirm.setBounds(370, 320, 100, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		quitB.setBounds(450, 320, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		info.setBounds(80, 30, 500, 30);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		disName.setBounds(20, 230, 500, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		disSize.setBounds(20, 260, 500, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		disDate.setBounds(20, 290, 500, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
@@ -128,10 +125,20 @@ public class Modify extends Modify_Menu implements ActionListener
 		/* VARIABLE SECTION */
 		/********************/
 		String action;		// STRING TO REPRESENT WHICH BUTTON WAS PRESSED
+		String name;		// STRING FOR NAME OF CUSTOMER		
+		String month;		// STRING FOR MONTH OF CUSTOMER SKI TRIP
+		String day;			// STRING FOR DAY OF CUSTOMER SKI TRIP
+		String year;		// STRING FOR YEAR OF CUSTOMER SKI TRIP
+		int size;			// INTEGER FOR SIZE OF GROUP FOR SKI TRIP
 		int confirm;		// REUSUABLE INT INPUT FOR CONFIRMING AN ACTION
 		
-		confirm = 1;						// INITIALIZES CONFIRM
-		action = event.getActionCommand();	// CALL TO GET ACTION COMMAND
+		confirm = 1;							// INITIALIZES CONFIRM
+		action = event.getActionCommand();		// CALL TO GET ACTION COMMAND
+		name = custList.get(num-1).getName();	// GETS NAME OF CUSTOMER FOR MODIFICATION
+		month = custList.get(num-1).getMonth();	// GETS MONTH OF CUSTOMER FOR MODIFICATION
+		day = custList.get(num-1).getDay();		// GETS DAY OF CUSTOMER FOR MODIFICATION
+		year = custList.get(num-1).getYear();	// GETS YEAR OF CUSTOMER FOR MODIFICATION
+		size = custList.get(num-1).getSize();	// GETS SIZE OF CUSTOMER FOR MODIFICATION
 		
 		/****************************************************/
 		/* IF STATEMENT TO CHECK IF QUIT BUTTON WAS PRESSED */	
@@ -166,9 +173,10 @@ public class Modify extends Modify_Menu implements ActionListener
 			}
 		}
 		
-		actionPerformedName(num);
-		actionPerformedSize(num);
-		actionPerformedDate(num);
+		modify(name, month, day, year, size, num);	// CALL TO MODIFY
+		actionPerformedName(num);		// CALL TO ACTION PERFORMED NAME FOR MODIFY
+		actionPerformedSize(num);		// CALL TO ACTION PERFORMED SIZE FOR MODIFY
+		actionPerformedDate(num);		// CALL TO ACTION PERFORMED DATE FOR MODIFY
 		
 		/************************************************************/
 		/* ELSE IF STATEMENT TO CHECK IF CONFIRM BUTTON WAS PRESSED */	
