@@ -1,0 +1,54 @@
+/******************************************/
+/* USER DESCRIPTION SECTION 			  */
+/* OLIVIA DIAS				   			  */
+/* FINAL PROJECT		   	 			  */
+/* PROGRAM 12							  */
+/* APRIL 9, 2020		   			  	  */
+/******************************************/
+/******************************************/
+/* THIS IS A PROGRAM TO MAKE AN OBJECT	  */
+/* HAVE INSTANCE VARIABLES, CONSTRUCTORS, */
+/* AND METHODS SO THE CLIENT CAN HAVE A   */
+/* SWING GUI  							  */
+/******************************************/
+
+/******************/
+/* IMPORT SECTION */
+/******************/
+import javax.swing.*;						// IMPORTS SWING
+import java.awt.*;							// IMPORTS AWT
+import java.awt.event.ActionEvent;			// IMPORTS ACTION EVENT
+import java.awt.event.ActionListener;		// IMPORTS ACTION LISTENER
+import java.util.ArrayList;
+
+public class Modify extends Modify_Menu implements ActionListener
+{
+	public Modify()
+	/************************************************/
+	/* DEFAULT CONSTRUCTOR - IT CREATES A FRAME FOR */
+	/*						 CONTENT PANE			*/
+	/************************************************/
+	{
+		/**********************************************/
+		/* SETS BOUNDS FOR BUTTONS, JTEXTFIELD, LABEL */
+		/**********************************************/
+		returnB.setBounds(370, 320, 75, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		enter.setBounds(265, 320, 100, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		confirm.setBounds(370, 320, 100, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		quitB.setBounds(450, 320, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		custnum.setBounds(20, 80, 200, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		view.setBounds(240, 80, 150, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		disName.setBounds(20, 230, 500, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		disSize.setBounds(20, 260, 500, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		disDate.setBounds(20, 290, 500, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		nameL.setBounds(20, 140, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		grpSzL.setBounds(20, 170, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		dateL.setBounds(20, 200, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		nameTF.setBounds(130, 140, 100, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		grpSzTF.setBounds(130, 170, 100, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		monthCB.setBounds(130, 200, 100, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		dayCB.setBounds(240, 200, 100, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		yearCB.setBounds(350, 200, 100, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		
+	}
+}
