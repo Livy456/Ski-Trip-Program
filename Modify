@@ -29,6 +29,16 @@ public class Modify extends Modify_Menu implements ActionListener
 	/*						 CONTENT PANE			*/
 	/************************************************/
 	{
+		/**************************/
+		/* CREATES A BLANK JFRAME */
+		/**************************/
+		frame.pack();							// SIZE OF THE FRAME
+		frame.setBounds(350, 100, 550, 550);	// SETS X POSITION, Y POSITION, LENGTH, WIDTH 
+		frame.setVisible(true);					// ALLOWS THE JFRAME TO BE VISIBLE
+		container.setLayout(null);				// SETS THE LAYOUT FOR THE JFRAME
+		container.setBackground(Color.YELLOW);	// SETS THE BACKGROUND COLOR
+		frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);// ALLOWS THE JFRAME TO BE CLOSED
+		
 		/**********************************************/
 		/* SETS BOUNDS FOR BUTTONS, JTEXTFIELD, LABEL */
 		/**********************************************/
@@ -49,6 +59,37 @@ public class Modify extends Modify_Menu implements ActionListener
 		monthCB.setBounds(130, 200, 100, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		dayCB.setBounds(240, 200, 100, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		yearCB.setBounds(350, 200, 100, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		
+	
+		/**********************************************/
+		/* ADDS LISTENER TO BUTTON TO PERFORM ACTIONS */
+		/**********************************************/
+		confirm.addActionListener(this);	// ADDS ACTIONLISTENER TO MAKE AN EVENT OCCUR ONCE BUTTON IS PUSHED 
+		enter.addActionListener(this);		// ADDS ACTIONLISTENER TO MAKE AN EVENT OCCUR ONCE BUTTON IS PUSHED 
+		returnB.addActionListener(this);	// ADDS ACTIONLISTENER TO MAKE AN EVENT OCCUR ONCE BUTTON IS PUSHED
+		quitB.addActionListener(this);		// ADDS ACTIONLISTENER TO MAKE AN EVENT OCCUR ONCE BUTTON IS PUSHED
+		view.addActionListener(this);		// ADDS ACTIONLISTENER TO MAKE AN EVENT OCCUR ONCE BUTTON IS PUSHED
+
+		/*************************/
+		/* ADDS BUTTONS TO FRAME */
+		/*************************/
+		container.add(returnB);		// ADDS RETURN BUTTON TO CONTAINER
+		container.add(quitB);		// ADDS QUIT BUTTON TO CONTAINER
+		container.add(enter);		// ADDS ENTER BUTTON TO CONTAINER
+		container.add(confirm);		// ADDS CONFRIM BUTTON TO CONTAINER
+		container.add(view);		// ADDS VIEW BUTTON TO CONTAINER
+		container.add(custnum);		// ADDS CUSTOMER NUMBER LABEL TO CONTAINER
+		container.add(disName);		// ADDS DISPLAY NAME LABEL TO CONTAINER
+		container.add(disSize);		// ADDS DISPLAY SIZE LABEL TO CONTAINER
+		container.add(disDate);		// ADDS DISPLAY DATE LABEL TO CONTAINER
+		container.add(nameL);		// ADDS NAME LABEL TO CONTAINER
+		container.add(grpSzL);		// ADDS GROUP SIZE LABEL TO CONTAINER
+		container.add(dateL);		// ADDS DATE LABEL TO CONTAINER
+		container.add(nameTF);		// ADDS NAME TEXT FIELD TO CONTAINER
+		container.add(grpSzTF);		// ADDS GROUP SIZE TEXT FIELD TO CONTAINER
+		container.add(monthCB);		// ADDS MONTH COMBO BOX TO CONTAINER
+		container.add(dayCB);		// ADDS DAY COMBO BOX TO CONTAINER
+		container.add(yearCB);		// ADDS YEAR COMBO BOX TO CONTAINER
 	}
+	
+	
 }
