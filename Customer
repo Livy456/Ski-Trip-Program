@@ -47,7 +47,7 @@ public class Customer implements Ski_Interface
 	/* VARIABLE VALUES TO AN EMPTY STRING AND ZERO 	  */
 	/**************************************************/
 	{
-		name = "";			// INITIALIZES NAME TO AN EMPTY STRING
+		name = "Customer Object doesn't work";			// INITIALIZES NAME TO AN EMPTY STRING
 		month = "";			// INITIALIZES MONTH TO AN EMPTY STRING
 		day = "";			// INITIALIZES DAY TO AN EMPTY STRING
 		year = "";			// INITIALIZES YEAR TO AN EMPTY STRING
@@ -282,20 +282,6 @@ public class Customer implements Ski_Interface
 		return bus;			// RETURNS BUS
 	}
 	
-	public void setRemain()
-	/**************************************************/
-	/* PRECONDITION - PROGRAM HAS A GROUPSIZE AND 	  */
-	/* 				  NEEDS THE REMAINDER OF SEATS	  */
-	/* POSTCONDITION - FUNCTION SETS REMAINDER		  */
-	/**************************************************/
-	{
-		/*********************************/
-		/* CALCULATES REMAINDER OF SEATS */
-		/*********************************/
-		remainder = grpsize % 20;
-	
-	}
-	
 	public int getRemain()
 	/**************************************************/
 	/* PRECONDITION - PROGRAM HAS A GROUPSIZE AND 	  */
@@ -303,6 +289,11 @@ public class Customer implements Ski_Interface
 	/* POSTCONDITION - FUNCTION RETURNS REMAINDER     */
 	/**************************************************/
 	{
+		/*********************************/
+		/* CALCULATES REMAINDER OF SEATS */
+		/*********************************/
+		remainder = grpsize % 20;
+		
 		/******************/
 		/* RETURN SECTION */
 		/******************/
@@ -325,7 +316,6 @@ public class Customer implements Ski_Interface
 		/* CALCULATES COST OF THE SKI TRIP */
 		/***********************************/
 		
-		setRemain();				// CALL TO SET REMAINDER
 		remainder = getRemain();	// CALL TO GET REMAIN
 		
 		/***************************************************/
