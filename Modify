@@ -26,7 +26,9 @@ public class Modify extends Modify_Menu implements ActionListener
 	/*****************************/
 	/* INSTANCE VARIABLE SECTION */
 	/*****************************/
-	private int num;		// INTEGER VALUE FOR CUSTOMER NUMBER
+	private Label warning;		// CREATES A LABEL FOR INPUT CONSTRAINTS
+	private Label warning2;		// CREATES A LABEL FOR INPUT CONSTRAINTS
+	private int num;			// INTEGER VALUE FOR CUSTOMER NUMBER
 	
 	public Modify()
 	/************************************************/
@@ -42,6 +44,10 @@ public class Modify extends Modify_Menu implements ActionListener
 		disName = new JLabel("");					// INSTANTIATES JLABEL
 		disSize = new JLabel("");					// INSTANTIATES JLABEL
 		disDate = new JLabel("");					// INSTANTIATES JLABEL
+		warning = new Label("Name has to be < "+
+				"11 characters.");					// INSTANTIATES A LABEL	
+		warning2 = new Label("Group size has to " +
+				 "be between 1 - 400.");			// INSTANTIATES A LABEL
 		confirm = new JButton("Confirm");			// INSTANTIATES JBUTTON
 		container = frame.getContentPane();			// CREATES A CONTENT PANE
 		font = new Font("Times New Roman", 
@@ -66,6 +72,8 @@ public class Modify extends Modify_Menu implements ActionListener
 		disName.setFont(font);		// SETS FONT OF NAME DISPLAY LABEL		
 		disSize.setFont(font);		// SETS FONT OF SIZE DISPLAY LABEL
 		disDate.setFont(font);		// SETS FONT OF DATE DISPLAY LABEL
+		warning.setFont(font);		// SETS THE FONT OF THE WARNING LABEL
+		warning2.setFont(font);		// SETS THE FONT OF THE WARNING LABEL
 		
 		/**************************************/
 		/* SETS FOREGROUND COLOR OF THE LABEL */
@@ -81,13 +89,15 @@ public class Modify extends Modify_Menu implements ActionListener
 		/**********************************************/
 		/* SETS BOUNDS FOR BUTTONS, JTEXTFIELD, LABEL */
 		/**********************************************/
-		returnB.setBounds(370, 320, 75, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		returnB.setBounds(270, 320, 75, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		confirm.setBounds(370, 320, 100, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		quitB.setBounds(450, 320, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		info.setBounds(80, 30, 500, 30);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		disName.setBounds(20, 230, 500, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		disSize.setBounds(20, 260, 500, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		disDate.setBounds(20, 290, 500, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		warning.setBounds(240, 80, 500, 30);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		warning2.setBounds(240, 110, 500, 30);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH) 
 		nameL.setBounds(20, 140, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		grpSzL.setBounds(20, 170, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		dateL.setBounds(20, 200, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
@@ -110,9 +120,12 @@ public class Modify extends Modify_Menu implements ActionListener
 		container.add(returnB);		// ADDS RETURN BUTTON TO CONTAINER
 		container.add(quitB);		// ADDS QUIT BUTTON TO CONTAINER
 		container.add(confirm);		// ADDS CONFRIM BUTTON TO CONTAINER
+		container.add(info);		// ADDS INFO LABEL TO CONTAINER
 		container.add(disName);		// ADDS DISPLAY NAME LABEL TO CONTAINER
 		container.add(disSize);		// ADDS DISPLAY SIZE LABEL TO CONTAINER
 		container.add(disDate);		// ADDS DISPLAY DATE LABEL TO CONTAINER
+		container.add(warning);		// ADDS WARNING LABEL TO CONTAINER
+		container.add(warning2);	// ADDS WARNING 2 LABEL TO CONTAINER
 		container.add(nameL);		// ADDS NAME LABEL TO CONTAINER
 		container.add(grpSzL);		// ADDS GROUP SIZE LABEL TO CONTAINER
 		container.add(dateL);		// ADDS DATE LABEL TO CONTAINER
