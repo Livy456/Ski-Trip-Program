@@ -45,7 +45,7 @@ public class Modify_Menu extends Menu_GUI implements ActionListener
 	protected JButton quitB;				// CREATES A BUTTON TO QUIT PROGRAM 
 	protected JButton view;					// CREATES A BUTTON FOR VIEWING LIST OF CUSTOMERS
 	protected JButton confirm;				// CREATES A BUTTON FOR CONFIMRING THE CHANGE TO CUSTOMER INFO
-	private JComboBox modify;				// CREATES A JCOMBOBOX FOR SELECTING CUSTOMERS TO MODIFY
+	private JTextField modify;				// CREATES A JTEXTFIELD FOR MODIFYING CUSTOMER INFO
 	protected JLabel info;					// CREATES A LABEL FOR ADDITIONAL INFORMATION
 	private JLabel custnum;					// CREATES A LABEL FOR CUSTOMER NUMBER
 	protected JLabel disName;				// CREATES A LABEL TO DISPLAY CUSTOMER'S OLD NAME
@@ -54,7 +54,7 @@ public class Modify_Menu extends Menu_GUI implements ActionListener
 	protected JFrame frame;					// CREATES A JFRAME 
 	protected static Container container;	// CREATES A CONTAINER
 	protected Font font;					// CREATES A FONT
-	private String[] custAmt = inputArray();// CREATES AN ARRAY OF CUSTOMER NUMBERS TO SELECT FROM 
+	protected int custNum;					// INTEGER VALUE FOR CUSTOMER NUMBER
 	
 	public Modify_Menu()
 	/************************************************/
@@ -69,8 +69,7 @@ public class Modify_Menu extends Menu_GUI implements ActionListener
 		enter = new JButton("Enter");				// INSTANTIATES JBUTTON
 		quitB = new JButton("Quit");				// INSTANTIATES JBUTTON
 		view = new JButton("Customer List");		// INSTANTIATES JBUTTON
-		confirm = new JButton("Confirm");			// INSTANTIATES JBUTTON
-		modify = new JComboBox(custAmt);			// INSTANTIATES JCOMBOBOX
+		modify = new JTextField("");				// INSTANTIATES JTEXTFIELD
 		info = new JLabel("Enter the customer "+
 						 "number that you want "+
 						 "to modify.");				// INSTANTIATES JLABEL
@@ -95,37 +94,27 @@ public class Modify_Menu extends Menu_GUI implements ActionListener
 		/**************************/
 		info.setFont(font);				// SETS FONT OF INFO LABEL
 		view.setFont(font);				// SETS FONT OF VIEW BUTTON 
-		disName.setFont(font);			// SETS FONT OF DISPLAY NAME LABEL
-		disSize.setFont(font);			// SETS FONT OF DISPLAY SIZE LABEL
-		disDate.setFont(font);			// SETS FONT OF DISPLAY DATE LABEL
 		
 		/**************************************/
 		/* SETS FOREGROUND COLOR OF THE LABEL */
 		/**************************************/
 		info.setForeground(Color.BLACK);		// SETS FOREGROUND COLOR OF INFO LABEL
 		custnum.setForeground(Color.BLACK);		// SETS FOREGROUND COLOR OF CUSTOMER NUMBER
-		nameL.setForeground(Color.BLACK);		// SETS FOREGROUND COLOR OF NAME LABEL
-		grpSzL.setForeground(Color.BLACK);		// SETS FOREGROUND COLOR OF GROUP SIZE LABEL
-		dateL.setForeground(Color.BLACK);		// SETS FOREGROUND COLOR OF DATE LABEL
-		disName.setForeground(Color.BLACK);		// SETS FOREGROUND COLOR OF DISPLAY NAME LABEL
-		disSize.setForeground(Color.BLACK);		// SETS FOREGROUND COLOR OF DISPLAY SIZE LABEL
-		disDate.setForeground(Color.BLACK);		// SETS FOREGROUND COLOR OF DISPLAY DATE LABEL
 		
 		/**********************************************/
 		/* SETS BOUNDS FOR BUTTONS, JTEXTFIELD, LABEL */
 		/**********************************************/
 		returnB.setBounds(370, 320, 75, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		enter.setBounds(265, 320, 100, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		enter.setBounds(240, 80, 100, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		quitB.setBounds(450, 320, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		info.setBounds(80, 30, 500, 30);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		custnum.setBounds(20, 80, 200, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		view.setBounds(240, 80, 150, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		view.setBounds(350, 80, 150, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		modify.setBounds(130, 80, 100, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 	
 		/**********************************************/
 		/* ADDS LISTENER TO BUTTON TO PERFORM ACTIONS */
 		/**********************************************/
-		confirm.addActionListener(this);	// ADDS ACTIONLISTENER TO MAKE AN EVENT OCCUR ONCE BUTTON IS PUSHED 
 		enter.addActionListener(this);		// ADDS ACTIONLISTENER TO MAKE AN EVENT OCCUR ONCE BUTTON IS PUSHED 
 		returnB.addActionListener(this);	// ADDS ACTIONLISTENER TO MAKE AN EVENT OCCUR ONCE BUTTON IS PUSHED
 		quitB.addActionListener(this);		// ADDS ACTIONLISTENER TO MAKE AN EVENT OCCUR ONCE BUTTON IS PUSHED
@@ -138,7 +127,6 @@ public class Modify_Menu extends Menu_GUI implements ActionListener
 		container.add(returnB);		// ADDS RETURN BUTTON TO CONTAINER
 		container.add(quitB);		// ADDS QUIT BUTTON TO CONTAINER
 		container.add(enter);		// ADDS ENTER BUTTON TO CONTAINER
-		container.add(confirm);		// ADDS CONFRIM BUTTON TO CONTAINER
 		container.add(view);		// ADDS VIEW BUTTON TO CONTAINER
 		container.add(info);		// ADDS INFO LABEL TO CONTAINER
 		container.add(custnum);		// ADDS CUSTOMER NUMBER LABEL TO CONTAINER
@@ -194,6 +182,17 @@ public class Modify_Menu extends Menu_GUI implements ActionListener
 				new Menu_GUI();			// CREATES A NEW MENU WINDOW
 			}
 		}
+				
+		actionPerformedInt();	// CALL TO ACTION PERFORMED INT
+		
+		/*****************************************************/
+		/* IF STATEMENT TO CHECK IF ENTER BUTTON WAS PRESSED */	
+		/*****************************************************/
+		if (action == "Enter")
+		{
+			frame.dispose();	// DISPOSES THE MODIFY MENU WINDOW
+			new Modify();		// CREATES A NEW MODIFY WINDOW
+		}
 		
 		/*********************************************************/
 		/* ELSE IF STATEMENT TO CHECK IF VIEW BUTTON WAS PRESSED */	
@@ -205,16 +204,48 @@ public class Modify_Menu extends Menu_GUI implements ActionListener
 			new Modify_Menu();			// RECREATES THE REMOVE MENU WINDOW
 		}
 		
-		custNum = inputInt();	// CALL TO INPUT INT
-
-		/*****************************************************/
-		/* IF STATEMENT TO CHECK IF ENTER BUTTON WAS PRESSED */	
-		/*****************************************************/
-		if (action == "Enter")
+	}
+	
+	public void actionPerformedInt()
+	/*************************************************/
+	/* PRECONDITION - NEEDS INTEGER VALUE	 		 */
+	/* POSTCONDITION - GETS INTEGER VALUE			 */
+	/*************************************************/
+	{
+		/********************/
+		/* VARIABLE SECTION */
+		/********************/
+		String numi;		// REUSUABLE OBJECT INPUT
+		int num;			// REUSUABLE INT VALUE
+		
+		/*****************************/
+		/* LOOP UNTIL VALUE IS VALID */
+		/*****************************/
+		do
 		{
-			frame.dispose();	// DISPOSES THE MODIFY MENU WINDOW
-			new Modify(custNum);// CREATES A NEW MODIFY WINDOW
+			/*******************************/
+			/* IF STATEMENT TO ERROR CHECK */
+			/*******************************/
+			if(custList.size() < 1)
+			{
+				errorMessage(error3); 	// CALL TO ERROR MESSAGE
+			}
+			
+			numi = modify.getText();		// CALL TO GET TEXT INPUTTED BY USER
+			num = Integer.parseInt(numi);	// PARSES STRING TO AN INTEGER
+			
+			/*******************************/
+			/* IF STATEMENT TO ERROR CHECK */
+			/*******************************/
+			if((num < 1) || (num > custList.size()))
+			{
+				modify.setText("");		// CLEARS THE TEXT FIELD
+				errorMessage(error1);	// CALL TO ERROR MESSAGE
+			}
 		}
+		while((num < 1) || (num > custList.size()));
+		
+		custNum = num;
 	}
 	
 	public static int confirmWindow()
@@ -245,86 +276,5 @@ public class Modify_Menu extends Menu_GUI implements ActionListener
 		return num;			// RETURNS NUM
 	}
 	
-	public static String[] inputArray ()
-	/**************************************************/
-	/* PRECONDITION - NEEDS ARRAY FOR CUSTOMER NUMBER */
-	/* POSTCONDITION - GETS ARRAY OF CUSTOMER NUMBERS */
-	/**************************************************/
-	{
-		/********************/
-		/* VARIABLE SECTION */
-		/********************/
-		String[] array;				// REUSUABLE STRING ARRAY 
-		ArrayList<String> arrayL;	// REUSUABLE STRING ARRAYLIST
-		int size;					// SIZE OF CUSTOMER ARRAYLIST
-		int custNum;				// CUSTOMER NUMBER
-		
-		custNum = 0;				// INITIALIZES CUSTOMER NUMBER
-		arrayL = new ArrayList();	// INSTANTIATES ARRAYLIST
-		size = custList.size();		// CALL TO SIZE METHOD
-		arrayL.add("");				// ADDS A BLANK SPOT FOR ARRAYLIST
-		
-		/*******************************************************/
-		/* FOR LOOP TO CREATE AN ARRAYLIST OF CUSTOMER NUMBERS */
-		/*******************************************************/
-		for (int i = 0; i < size; i++)
-		{
-			custNum = i + 1;			// CREATES CUSTOMER NUMBER
-			arrayL.add(""+ custNum);	// ADDS CUSTOMER NUMBER TO ARRAYLIST
-		}
-		
-		size += 1;						// COMPENSATING FOR THE BLANK SPOT IN ARRAY
-		array = new String[size];		// INSTANTIATES ARRAY
-		array = arrayL.toArray(array);	// CONVERTS ARRAYLIST TO ARRAY
-		
-		/******************/
-		/* RETURN SECTION */
-		/******************/
-		return array;	// RETURNS ARRAY
-	}
 	
-	public int inputInt()
-	/*************************************************/
-	/* PRECONDITION - NEEDS INTEGER VALUE	 		 */
-	/* POSTCONDITION - GETS INTEGER VALUE			 */
-	/*************************************************/
-	{
-		/********************/
-		/* VARIABLE SECTION */
-		/********************/
-		Object numi;			// REUSUABLE OBJECT INPUT
-		int num;				// REUSUABLE INT VALUE
-		
-		/*****************************/
-		/* LOOP UNTIL VALUE IS VALID */
-		/*****************************/
-		do
-		{
-			/*******************************/
-			/* IF STATEMENT TO ERROR CHECK */
-			/*******************************/
-			if(custList.size() < 1)
-			{
-				errorMessage(error3); 	// CALL TO ERROR MESSAGE
-			}
-			
-			numi = modify.getSelectedItem();	// CALL TO GET TEXT INPUTTED BY USER
-			num = (int) numi;					// PARSES STRING TO AN INTEGER
-			
-			/*******************************/
-			/* IF STATEMENT TO ERROR CHECK */
-			/*******************************/
-			if((num < 1) || (num > custList.size()))
-			{
-				modify.setSelectedItem("");	// CLEARS THE TEXT FIELD
-				errorMessage(error1);		// CALL TO ERROR MESSAGE
-			}
-		}
-		while((num < 1) || (num > custList.size()));
-		
-		/******************/
-		/* RETURN SECTION */
-		/******************/
-		return num;			// RETURNS NUM
-	}
 }
