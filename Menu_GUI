@@ -424,6 +424,10 @@ public class Menu_GUI extends BusGUI implements ActionListener
 		/* VARIABLE SECTION */
 		/********************/
 		String str;			// USED FOR REUSABLE OUTPUT
+		String name;		// USED FOR CUSTOMER NAME 
+		Object date;		// USED FOR CUSTOMER DATE 
+		int size;			// USED FOR CUSTOMER SIZE
+		int id;				// USED FOR CUSTOMER ID
 		int num;			// USED FOR CUSTOMER NUMBER
 		
 		str = "Customer number          Group ID          Name                 " +
@@ -436,32 +440,134 @@ public class Menu_GUI extends BusGUI implements ActionListener
 		{
 			num = i + 1;	// ASSIGNS CUSTOMER NUMBER
 			
+			name = custList.get(i).getName();	// CALL TO GET NAME FROM CUSTOMER	
+			size = custList.get(i).getSize();	// CALL TO GET SIZE FROM CUSTOMER
+			date = custList.get(i).getDate();	// CALL TO GET DATE FROM CUSTOMER
+			id = custList.get(i).getID();		// CALL TO GET ID FROM CUSTOMER
 			
+			/******************************************************/
+			/* IF STATEMENT TO MAKE SINGLE DIGIT AND DOUBLE DIGIT */
+			/* CUSTOMER NUMBER LINE UP WHEN PRINTED				  */	
+			/******************************************************/
 			if(num < 10)
 			{
 				str+= "" + 0 + num + "               ";
 			}
 			
+			/******************************************************/
+			/* ELSE IF STATEMENT TO MAKE SINGLE DIGIT AND DOUBLE  */
+			/* DIGIT CUSTOMER NUMBER LINE UP WHEN PRINTED		  */	
+			/******************************************************/
 			else if(num >=10)
 			{
 				str+= "" + num + "               ";
 			}
 			
-			str+= "                           " + custList.get(i).getID();
-			str+= "                    " + custList.get(i).getName();
-			str+= "          " + custList.get(i).getDate();
-			str+= "             " + custList.get(i).getSize();
+			/**********************************************************************/
+			/* IF STATEMENT TO CHECK LENGTH OF NAME SO LENGTH CAN BE STANDARDIZED */	
+			/**********************************************************************/
+			if (name.length() < 10)
+			{
+				/************************************************/
+				/* IF STATEMENT TO CHECK IF LENGTH OF NAME IS 1 */	
+				/************************************************/
+				if(name.length() == 1)
+				{
+					name += "              ";
+				}
+				
+				/*****************************************************/
+				/* ELSE IF STATEMENT TO CHECK IF LENGTH OF NAME IS 2 */	
+				/*****************************************************/
+				else if (name.length() == 2)
+				{
+					name += "             ";
+				}
+				
+				/*****************************************************/
+				/* ELSE IF STATEMENT TO CHECK IF LENGTH OF NAME IS 3 */	
+				/*****************************************************/
+				else if (name.length() == 3)
+				{ 
+					name += "            ";
+				}
+				
+				/*****************************************************/
+				/* ELSE IF STATEMENT TO CHECK IF LENGTH OF NAME IS 4 */	
+				/*****************************************************/
+				else if (name.length() == 4)
+				{
+					name += "          ";
+				}
+				
+				/*****************************************************/
+				/* ELSE IF STATEMENT TO CHECK IF LENGTH OF NAME IS 5 */	
+				/*****************************************************/
+				else if (name.length() == 5)
+				{
+					name += "      ";
+				}
+				
+				/*****************************************************/
+				/* ELSE IF STATEMENT TO CHECK IF LENGTH OF NAME IS 6 */	
+				/*****************************************************/
+				else if (name.length() == 6)
+				{
+					name += "       ";
+				}
+				
+				/*****************************************************/
+				/* ELSE IF STATEMENT TO CHECK IF LENGTH OF NAME IS 7 */	
+				/*****************************************************/
+				else if (name.length() == 7)
+				{
+					name += "   ";
+				}
+				
+				/*****************************************************/
+				/* ELSE IF STATEMENT TO CHECK IF LENGTH OF NAME IS 8 */	
+				/*****************************************************/
+				else if (name.length() == 8)
+				{
+					name += "  ";
+				}
+				
+				/*****************************************************/
+				/* ELSE IF STATEMENT TO CHECK IF LENGTH OF NAME IS 9 */	
+				/*****************************************************/
+				else if (name.length() == 9)
+				{
+					name += "";
+				}
+			}
 			
-			if(custList.get(i).getSize() < 10)
+			str+= "                           " + id;
+			str+= "                    " + name;
+			str+= "          " + date;
+			str+= "             " + size;
+			
+			/********************************************************/
+			/* IF STATEMENT TO MAKE SINGLE DIGIT, DOUBLE DIGIT, AND */
+			/* TRIPLE DIGIT CUSTOMER SIZE LINE UP WHEN PRINTED		*/	
+			/********************************************************/
+			if(size < 10)
 			{
 				str+= "                    " +  custList.get(i).getCost() + "\n";
 			}
 			
-			else if((custList.get(i).getSize() >= 10) && (custList.get(i).getSize() < 100))
+			/*********************************************************/
+			/* ELSE IF STATEMENT TO MAKE SINGLE DIGIT, DOUBLE DIGIT, */
+			/* AND TRIPLE DIGIT CUSTOMER SIZE LINE UP WHEN PRINTED	 */	
+			/*********************************************************/
+			else if((size >= 10) && (size < 100))
 			{
 				str+= "                  " +  custList.get(i).getCost() + "\n";
 			}
 			
+			/*******************************************************/
+			/* ELSE STATEMENT TO MAKE SINGLE DIGIT, DOUBLE DIGIT,  */
+			/* AND TRIPLE DIGIT CUSTOMER SIZE LINE UP WHEN PRINTED */	
+			/*******************************************************/
 			else
 			{
 				str+= "                " +  custList.get(i).getCost() + "\n";	// CREATES A STRING 
