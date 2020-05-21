@@ -275,6 +275,4 @@ public class Modify_Menu extends Menu_GUI implements ActionListener
 		/******************/
 		return num;			// RETURNS NUM
 	}
-	
-	
 }
