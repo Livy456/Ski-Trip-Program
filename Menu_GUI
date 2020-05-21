@@ -44,7 +44,7 @@ public class Menu_GUI extends BusGUI implements ActionListener
 	private JButton grpB;			// CREATES A BUTTON FOR SORTING BY GROUP SIZE
 	private JLabel heading;			// CREATES A LABEL FOR HEADING
 	private JLabel changeCust;		// CREATES A LABEL FOR CHANGING CUSTOMER
-	private JLabel cost;				// CREATES A LABEL FOR COST
+	private JLabel cost;			// CREATES A LABEL FOR COST
 	private JLabel print;			// CREATES A LABEL FOR PRINT
 	private Font font;				// CREATES A FONT
 	private JFrame frame;			// CREATES A JFRAME
@@ -313,8 +313,9 @@ public class Menu_GUI extends BusGUI implements ActionListener
 			/**********************************************************************/
 			if (confirm == 0)
 			{
-			//	frame.dispose();			// DISPOSES OF MENU_GUI FRAME
-				underConstruction();		// CALL TO UNDER CONSTRUCTION
+				frame.dispose();	// DISPOSES OF MENU_GUI FRAME
+				totalProfit();		// CALL TO TOTAL PROFIT WINDOW
+				new Menu_GUI();		// CREATES NEW MENU GUI WINDOW
 			}
 		}
 		
@@ -352,9 +353,9 @@ public class Menu_GUI extends BusGUI implements ActionListener
 			}
 		}
 		
-		/***********************************************************************/
+		/*************************************************************************/
 		/*ELSE IF STATEMENT TO CHECK IF SORTING BY GROUP SIZE BUTTON WAS PRESSED */	
-		/***********************************************************************/
+		/*************************************************************************/
 		else if (action.equals("Sorting by Group Size"))
 		{
 			confirm = confirmWindow();		// CALL TO CONFIRM WINDOW
@@ -368,6 +369,34 @@ public class Menu_GUI extends BusGUI implements ActionListener
 				underConstruction();		// CALL TO UNDER CONSTRUCTION
 			}
 		}
+	}
+	
+	public static int calculateTotCost()
+	/**********************************************************/
+	/* PRECONDITION - NEEDS TOTAL COST OF ALL SKI TRIPS 	  */
+	/* POSTCONDITION - CALCULATES TOTAL COST OF ALL SKI TRIPS */
+	/**********************************************************/
+	{
+		/********************/
+		/* VARIABLE SECTION */
+		/********************/
+		int cost;			// COST OF ALL SKI TRIPS
+		
+		cost = 0;			// INITIALIZES COST
+		
+		/*****************************************************/
+		/* FOR LOOP TO CALCULATE TOTAL COST OF ALL SKI TRIPS */
+		/*****************************************************/
+		for(int i = 0; i < custList.size(); i++)
+		{
+			String costi = custList.get(i).getCost();	// GETS COST OF EACH CUSTOMER
+			cost += Integer.parseInt(costi);			// PARSES STRING VALUE TO INT
+		}
+		
+		/******************/
+		/* RETURN SECTION */
+		/******************/
+		return cost;		// RETURNS COST	
 	}
 	
 	public static int confirmWindow()
@@ -579,6 +608,29 @@ public class Menu_GUI extends BusGUI implements ActionListener
 		/* RETURN SECTION */
 		/******************/
 		return str;			// RETURN STR
+	}
+	
+	public static void totalProfit()
+	/***************************************************************************/
+	/* PRECONDITION - NEEDS AN WINDOW TO DISPLAY TOTAL PROFIT OF ALL CUSTOMERS */
+	/* POSTCONDITION - CREATES WINDOW TO DISPLAY TOTAL PROFIT OF ALL CUSTOMERS */
+	/***************************************************************************/
+	{
+		/********************/
+		/* VARIABLE SECTION */
+		/********************/
+		int cost;		// REUSUABLE INTEGER VALUE FOR OUTPUT
+		
+		cost = calculateTotCost();	// CALL TO CALCULATE TOTAL COST	
+		
+		/***********************/
+		/* MAKES DIALOG WINDOW */
+		/***********************/ 
+		JOptionPane.showMessageDialog(
+				null,
+				"Total Cost of all Skip Trips is: $"+cost,
+				"Total Profit",
+				JOptionPane.INFORMATION_MESSAGE);
 	}
 	
 	public static void underConstruction()
