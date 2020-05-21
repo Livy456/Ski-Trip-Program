@@ -41,9 +41,14 @@ public class Modify extends Modify_Menu implements ActionListener
 		/*************************/
 		info = new JLabel("Modify the Customer");	// INSTANTIATES JLABEL
 		frame = new JFrame("Modify Customer");		// INSTANTIATES JFRAME
-		disName = new JLabel("");					// INSTANTIATES JLABEL
-		disSize = new JLabel("");					// INSTANTIATES JLABEL
-		disDate = new JLabel("");					// INSTANTIATES JLABEL
+		disName = new JLabel("Current Customer "+custNum+" Name: " + 
+							 custList.get(custNum-1).getName());	// INSTANTIATES JLABEL
+		disSize = new JLabel("Current Customer "+custNum+" Size: " +
+							 custList.get(custNum-1).getSize());	// INSTANTIATES JLABEL
+		disDate = new JLabel("Current Customer "+custNum+" Date: " +
+							 custList.get(custNum-1).getMonth() + "/" +
+							 custList.get(custNum).getDay() + "/" + 
+							 custList.get(custNum-1).getYear());	// INSTANTIATES JLABEL
 		warning = new Label("Name has to be < "+
 				"11 characters.");					// INSTANTIATES A LABEL	
 		warning2 = new Label("Group size has to " +
@@ -90,22 +95,22 @@ public class Modify extends Modify_Menu implements ActionListener
 		/* SETS BOUNDS FOR BUTTONS, JTEXTFIELD, LABEL */
 		/**********************************************/
 		returnB.setBounds(270, 320, 75, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		confirm.setBounds(370, 320, 100, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		quitB.setBounds(450, 320, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		confirm.setBounds(350, 320, 75, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		quitB.setBounds(430, 320, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		info.setBounds(80, 30, 500, 30);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		disName.setBounds(20, 230, 500, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		disSize.setBounds(20, 260, 500, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		disDate.setBounds(20, 290, 500, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		warning.setBounds(240, 80, 500, 30);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		warning2.setBounds(240, 110, 500, 30);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH) 
-		nameL.setBounds(20, 140, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		grpSzL.setBounds(20, 170, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		dateL.setBounds(20, 200, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		nameTF.setBounds(130, 140, 100, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		grpSzTF.setBounds(130, 170, 100, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		monthCB.setBounds(130, 200, 100, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		dayCB.setBounds(240, 200, 100, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		yearCB.setBounds(350, 200, 100, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		warning.setBounds(210, 80, 500, 30);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		warning2.setBounds(210, 110, 500, 30);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH) 
+		nameL.setBounds(20, 80, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		grpSzL.setBounds(20, 110, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		dateL.setBounds(20, 140, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		nameTF.setBounds(100, 80, 100, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		grpSzTF.setBounds(100, 110, 100, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		monthCB.setBounds(100, 140, 100, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		dayCB.setBounds(240, 140, 100, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		yearCB.setBounds(350, 140, 100, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 	
 		/**********************************************/
 		/* ADDS LISTENER TO BUTTON TO PERFORM ACTIONS */
@@ -195,7 +200,6 @@ public class Modify extends Modify_Menu implements ActionListener
 			}
 		}
 		
-		modify(name, month, day, year, size, num);	// CALL TO MODIFY
 		actionPerformedName(num);		// CALL TO ACTION PERFORMED NAME FOR MODIFY
 		actionPerformedSize(num);		// CALL TO ACTION PERFORMED SIZE FOR MODIFY
 		actionPerformedDate(num);		// CALL TO ACTION PERFORMED DATE FOR MODIFY
@@ -683,19 +687,5 @@ public class Modify extends Modify_Menu implements ActionListener
 		while((grpSz <= 0) || (grpSz > 400));
 		
 		custList.get(custNum - 1).setSize(grpSz);	// CALL TO SET SIZE
-	}
-	
-	public void modify(String name, String month, String day, String year,
-			   int size, int custNum)
-	/***********************************************************/
-	/* PRECONDITION - PROGRAM HAS A CUSTOMER NAME, DATE, AND   */
-	/* 				  SIZE NEEDS TO DISPLAY IT			   	   */
-	/* POSTCONDITION - FUNCTION DISPLAYS A CUSTOMER'S NAME,    */
-	/* 				   DATE, AND SIZE		   		   		   */
-	/***********************************************************/
-	{	
-		disName.setText("Current Customer "+custNum+" Name: "+name);					// SETS TEXT OF DISPLAY NAME LABEL
-		disSize.setText("Current Customer "+custNum+" Size: "+size);					// SETS TEXT OF DISPLAY SIZE LABEL
-		disDate.setText("Current Customer "+custNum+" Date: "+month+"/"+day+"/"+year);	// SETS TEXT OF DISPLAY DATE LABEL
 	}
 }
