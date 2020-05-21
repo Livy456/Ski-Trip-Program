@@ -40,14 +40,14 @@ public class Modify extends Modify_Menu implements ActionListener
 		/*************************/
 		info = new JLabel("Modify the Customer");	// INSTANTIATES JLABEL
 		frame = new JFrame("Modify Customer");		// INSTANTIATES JFRAME
-		disName = new JLabel("Current Customer "+custNum+" Name: " + 
-							 custList.get(custNum-1).getName());	// INSTANTIATES JLABEL
-		disSize = new JLabel("Current Customer "+custNum+" Size: " +
-							 custList.get(custNum-1).getSize());	// INSTANTIATES JLABEL
-		disDate = new JLabel("Current Customer "+custNum+" Date: " +
-							 custList.get(custNum-1).getMonth() + "/" +
-							 custList.get(custNum).getDay() + "/" + 
-							 custList.get(custNum-1).getYear());	// INSTANTIATES JLABEL
+		//disName = new JLabel("Current Customer "+custNum+" Name: " + 
+		//					 custList.get(custNum-1).getName());	// INSTANTIATES JLABEL
+		//disSize = new JLabel("Current Customer "+custNum+" Size: " +
+		//					 custList.get(custNum-1).getSize());	// INSTANTIATES JLABEL
+		//disDate = new JLabel("Current Customer "+custNum+" Date: " +
+		//					 custList.get(custNum-1).getMonth() + "/" +
+		//					 custList.get(custNum).getDay() + "/" + 
+		//					 custList.get(custNum-1).getYear());	// INSTANTIATES JLABEL
 		warning = new Label("Name has to be < "+
 				"11 characters.");					// INSTANTIATES A LABEL	
 		warning2 = new Label("Group size has to " +
@@ -61,7 +61,7 @@ public class Modify extends Modify_Menu implements ActionListener
 		/* CREATES A BLANK JFRAME */
 		/**************************/
 		frame.pack();							// SIZE OF THE FRAME
-		frame.setBounds(450, 100, 550, 450);	// SETS X POSITION, Y POSITION, LENGTH, WIDTH 
+		frame.setBounds(450, 100, 550, 550);	// SETS X POSITION, Y POSITION, LENGTH, WIDTH 
 		frame.setVisible(true);					// ALLOWS THE JFRAME TO BE VISIBLE
 		container.setLayout(null);				// SETS THE LAYOUT FOR THE JFRAME
 		container.setBackground(Color.WHITE);	// SETS THE BACKGROUND COLOR
@@ -71,9 +71,9 @@ public class Modify extends Modify_Menu implements ActionListener
 		/* SETS FONT OF THE LABEL */
 		/**************************/
 		info.setFont(font);			// SETS FONT OF INFO LABEL
-		disName.setFont(font);		// SETS FONT OF NAME DISPLAY LABEL		
-		disSize.setFont(font);		// SETS FONT OF SIZE DISPLAY LABEL
-		disDate.setFont(font);		// SETS FONT OF DATE DISPLAY LABEL
+		//disName.setFont(font);		// SETS FONT OF NAME DISPLAY LABEL		
+		//disSize.setFont(font);		// SETS FONT OF SIZE DISPLAY LABEL
+		//disDate.setFont(font);		// SETS FONT OF DATE DISPLAY LABEL
 		warning.setFont(font);		// SETS THE FONT OF THE WARNING LABEL
 		warning2.setFont(font);		// SETS THE FONT OF THE WARNING LABEL
 		
@@ -84,9 +84,9 @@ public class Modify extends Modify_Menu implements ActionListener
 		nameL.setForeground(Color.BLACK);		// SETS FOREGROUND COLOR OF NAME LABEL
 		grpSzL.setForeground(Color.BLACK);		// SETS FOREGROUND COLOR OF GROUP SIZE LABEL
 		dateL.setForeground(Color.BLACK);		// SETS FOREGROUND COLOR OF DATE LABEL
-		disName.setForeground(Color.BLACK);		// SETS FOREGROUND COLOR OF DISPLAY NAME LABEL
-		disSize.setForeground(Color.BLACK);		// SETS FOREGROUND COLOR OF DISPLAY SIZE LABEL
-		disDate.setForeground(Color.BLACK);		// SETS FOREGROUND COLOR OF DISPLAY DATE LABEL
+		//disName.setForeground(Color.BLACK);		// SETS FOREGROUND COLOR OF DISPLAY NAME LABEL
+		//disSize.setForeground(Color.BLACK);		// SETS FOREGROUND COLOR OF DISPLAY SIZE LABEL
+		//disDate.setForeground(Color.BLACK);		// SETS FOREGROUND COLOR OF DISPLAY DATE LABEL
 		
 		/**********************************************/
 		/* SETS BOUNDS FOR BUTTONS, JTEXTFIELD, LABEL */
@@ -95,9 +95,9 @@ public class Modify extends Modify_Menu implements ActionListener
 		confirm.setBounds(350, 320, 100, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		quitB.setBounds(455, 320, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		info.setBounds(20, 30, 500, 30);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		disName.setBounds(20, 230, 500, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		disSize.setBounds(20, 260, 500, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		disDate.setBounds(20, 290, 500, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		//disName.setBounds(20, 230, 500, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		//disSize.setBounds(20, 260, 500, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		//disDate.setBounds(20, 290, 500, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		warning.setBounds(210, 80, 500, 30);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		warning2.setBounds(210, 110, 500, 30);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH) 
 		nameL.setBounds(20, 80, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
@@ -123,9 +123,9 @@ public class Modify extends Modify_Menu implements ActionListener
 		container.add(quitB);		// ADDS QUIT BUTTON TO CONTAINER
 		container.add(confirm);		// ADDS CONFRIM BUTTON TO CONTAINER
 		container.add(info);		// ADDS INFO LABEL TO CONTAINER
-		container.add(disName);		// ADDS DISPLAY NAME LABEL TO CONTAINER
-		container.add(disSize);		// ADDS DISPLAY SIZE LABEL TO CONTAINER
-		container.add(disDate);		// ADDS DISPLAY DATE LABEL TO CONTAINER
+		//container.add(disName);		// ADDS DISPLAY NAME LABEL TO CONTAINER
+		//container.add(disSize);		// ADDS DISPLAY SIZE LABEL TO CONTAINER
+		//container.add(disDate);		// ADDS DISPLAY DATE LABEL TO CONTAINER
 		container.add(warning);		// ADDS WARNING LABEL TO CONTAINER
 		container.add(warning2);	// ADDS WARNING 2 LABEL TO CONTAINER
 		container.add(nameL);		// ADDS NAME LABEL TO CONTAINER
