@@ -54,7 +54,7 @@ public class Modify_Menu extends Menu_GUI implements ActionListener
 	protected JFrame frame;					// CREATES A JFRAME 
 	protected static Container container;	// CREATES A CONTAINER
 	protected Font font;					// CREATES A FONT
-	protected int custNum;					// INTEGER VALUE FOR CUSTOMER NUMBER
+	protected static int custNum;			// INTEGER VALUE FOR CUSTOMER NUMBER
 	
 	public Modify_Menu()
 	/************************************************/
@@ -144,7 +144,6 @@ public class Modify_Menu extends Menu_GUI implements ActionListener
 		/* VARIABLE SECTION */
 		/********************/
 		String action;		// STRING TO REPRESENT WHICH BUTTON WAS PRESSED
-		int custNum;		// NUMBER FOR THE CUSTOMER IN ARRAYLIST
 		int confirm;		// REUSUABLE INT INPUT FOR CONFIRMING AN ACTION
 		
 		confirm = 1;						// INITIALIZES CONFIRM
