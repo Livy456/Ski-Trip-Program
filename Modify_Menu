@@ -3,7 +3,7 @@
 /* OLIVIA DIAS				   			  */
 /* FINAL PROJECT		   	 			  */
 /* PROGRAM 12							  */
-/* MAY 11, 2020		   			  	 	  */
+/* APRIL 9, 2020		   			  	  */
 /******************************************/
 /******************************************/
 /* THIS IS A PROGRAM TO MAKE AN OBJECT	  */
@@ -21,15 +21,42 @@ import java.awt.event.ActionEvent;			// IMPORTS ACTION EVENT
 import java.awt.event.ActionListener;		// IMPORTS ACTION LISTENER
 import java.util.ArrayList;
 
-public class Modify extends Modify_Menu implements ActionListener
-{
+public class Modify_Menu extends Menu_GUI implements ActionListener
+{	
+	final static String message1 = "Input Name(10 characters or less): ";
+	final static String message2 = "Input Size(between 1 and 400): ";
+	final static String message3 = "Select a Date: ";
+	final static String heading1 = "Input Name";
+	final static String heading2 = "Input Size";
+	final static String heading3 = "Input Date";
+	final static String error1 = "ERROR!!! Customer number is not on the list!!!";
+	final static String error2 = "ERROR!!! Finish filling in the information!!!";
+	final static String error3 = "ERROR!!! You have no customers to view!!!";
+	final static String error4 = "ERROR!!! Name has to be less than 10 characters";
+	final static String error5 = "ERROR!!! Size has to be between 1 and 400";
+	final static String error6 = "ERROR!!! Need to change one of the fields for the customer!!!";
+	final static String error7 = "ERROR!!! Date has to be changed!!!"; 
+
 	/*****************************/
 	/* INSTANCE VARIABLE SECTION */
 	/*****************************/
-	private Label warning;		// CREATES A LABEL FOR INPUT CONSTRAINTS
-	private Label warning2;		// CREATES A LABEL FOR INPUT CONSTRAINTS
+	protected JButton returnB;				// CREATES A BUTTON FOR REUTNRING TO HOME MENU
+	protected JButton enter;				// CREATES A BUTTON FOR ENTERING WHICH CUSTOMER INFO TO MODIFY
+	protected JButton quitB;				// CREATES A BUTTON TO QUIT PROGRAM 
+	protected JButton view;					// CREATES A BUTTON FOR VIEWING LIST OF CUSTOMERS
+	protected JButton confirm;				// CREATES A BUTTON FOR CONFIMRING THE CHANGE TO CUSTOMER INFO
+	private JTextField modify;				// CREATES A JTEXTFIELD FOR MODIFYING CUSTOMER INFO
+	protected JLabel info;					// CREATES A LABEL FOR ADDITIONAL INFORMATION
+	private JLabel custnum;					// CREATES A LABEL FOR CUSTOMER NUMBER
+	protected JLabel disName;				// CREATES A LABEL TO DISPLAY CUSTOMER'S OLD NAME
+	protected JLabel disSize;				// CREATES A LABEL TO DISPLAY CUSTOMER'S OLD SIZE
+	protected JLabel disDate;				// CREATES A LABEL TO DISPLAY CUSTOMER'S OLD DATE
+	protected JFrame frame;					// CREATES A JFRAME 
+	protected static Container container;	// CREATES A CONTAINER
+	protected Font font;					// CREATES A FONT
+	protected static int custNum;			// INTEGER VALUE FOR CUSTOMER NUMBER
 	
-	public Modify()
+	public Modify_Menu()
 	/************************************************/
 	/* DEFAULT CONSTRUCTOR - IT CREATES A FRAME FOR */
 	/*						 CONTENT PANE			*/
@@ -38,17 +65,20 @@ public class Modify extends Modify_Menu implements ActionListener
 		/*************************/
 		/* INSTANTIATION SECTION */
 		/*************************/
-		info = new JLabel("Modify the Customer");	// INSTANTIATES JLABEL
-		frame = new JFrame("Modify Customer");		// INSTANTIATES JFRAME
-		warning = new Label("Name has to be < "+
-				"11 characters.");					// INSTANTIATES A LABEL	
-		warning2 = new Label("Group size has to " +
-				 "be between 1 - 400.");			// INSTANTIATES A LABEL
-		confirm = new JButton("Confirm");			// INSTANTIATES JBUTTON
+		returnB = new JButton("Return");			// INSTANTIATES JBUTTON
+		enter = new JButton("Enter");				// INSTANTIATES JBUTTON
+		quitB = new JButton("Quit");				// INSTANTIATES JBUTTON
+		view = new JButton("Customer List");		// INSTANTIATES JBUTTON
+		modify = new JTextField("");				// INSTANTIATES JTEXTFIELD
+		info = new JLabel("Enter the customer "+
+						 "number that you want "+
+						 "to modify.");				// INSTANTIATES JLABEL
+		custnum = new JLabel("Customer Number");	// INSTANTIATES JLABEL
+		frame = new JFrame("Modify Menu");			// INSTANTIATES JFRAME
 		container = frame.getContentPane();			// CREATES A CONTENT PANE
 		font = new Font("Times New Roman", 
 						Font.BOLD, 15);				// INSTANTIATES FONT 
-				
+		
 		/**************************/
 		/* CREATES A BLANK JFRAME */
 		/**************************/
@@ -56,66 +86,51 @@ public class Modify extends Modify_Menu implements ActionListener
 		frame.setBounds(450, 150, 500, 450);	// SETS X POSITION, Y POSITION, LENGTH, WIDTH 
 		frame.setVisible(true);					// ALLOWS THE JFRAME TO BE VISIBLE
 		container.setLayout(null);				// SETS THE LAYOUT FOR THE JFRAME
-		container.setBackground(Color.WHITE);	// SETS THE BACKGROUND COLOR
+		container.setBackground(Color.YELLOW);	// SETS THE BACKGROUND COLOR
 		frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);// ALLOWS THE JFRAME TO BE CLOSED
-		
+	
 		/**************************/
 		/* SETS FONT OF THE LABEL */
 		/**************************/
-		info.setFont(font);			// SETS FONT OF INFO LABEL
-		warning.setFont(font);		// SETS THE FONT OF THE WARNING LABEL
-		warning2.setFont(font);		// SETS THE FONT OF THE WARNING LABEL
+		info.setFont(font);				// SETS FONT OF INFO LABEL
+		view.setFont(font);				// SETS FONT OF VIEW BUTTON 
 		
 		/**************************************/
 		/* SETS FOREGROUND COLOR OF THE LABEL */
 		/**************************************/
-		info.setForeground(Color.BLACK);		// SETS FOREGROUND COLOR OF INFO LABEL 
-		nameL.setForeground(Color.BLACK);		// SETS FOREGROUND COLOR OF NAME LABEL
-		grpSzL.setForeground(Color.BLACK);		// SETS FOREGROUND COLOR OF GROUP SIZE LABEL
-		dateL.setForeground(Color.BLACK);		// SETS FOREGROUND COLOR OF DATE LABEL
+		info.setForeground(Color.BLACK);		// SETS FOREGROUND COLOR OF INFO LABEL
+		custnum.setForeground(Color.BLACK);		// SETS FOREGROUND COLOR OF CUSTOMER NUMBER
 		
 		/**********************************************/
 		/* SETS BOUNDS FOR BUTTONS, JTEXTFIELD, LABEL */
 		/**********************************************/
-		returnB.setBounds(270, 320, 75, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		confirm.setBounds(350, 320, 100, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		quitB.setBounds(455, 320, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		info.setBounds(20, 30, 500, 30);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		warning.setBounds(210, 80, 500, 30);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		warning2.setBounds(210, 110, 500, 30);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH) 
-		nameL.setBounds(20, 80, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		grpSzL.setBounds(20, 110, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		dateL.setBounds(20, 140, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		nameTF.setBounds(100, 80, 100, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		grpSzTF.setBounds(100, 110, 100, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		monthCB.setBounds(100, 140, 100, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		dayCB.setBounds(210, 140, 100, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		yearCB.setBounds(320, 140, 100, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		returnB.setBounds(370, 320, 75, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		enter.setBounds(240, 80, 100, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		quitB.setBounds(450, 320, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		info.setBounds(80, 30, 500, 30);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		custnum.setBounds(20, 80, 200, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		view.setBounds(350, 80, 150, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		modify.setBounds(130, 80, 100, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 	
 		/**********************************************/
 		/* ADDS LISTENER TO BUTTON TO PERFORM ACTIONS */
 		/**********************************************/
-		confirm.addActionListener(this);	// ADDS ACTIONLISTENER TO MAKE AN EVENT OCCUR ONCE BUTTON IS PUSHED 
+		enter.addActionListener(this);		// ADDS ACTIONLISTENER TO MAKE AN EVENT OCCUR ONCE BUTTON IS PUSHED 
 		returnB.addActionListener(this);	// ADDS ACTIONLISTENER TO MAKE AN EVENT OCCUR ONCE BUTTON IS PUSHED
 		quitB.addActionListener(this);		// ADDS ACTIONLISTENER TO MAKE AN EVENT OCCUR ONCE BUTTON IS PUSHED
-
+		view.addActionListener(this);		// ADDS ACTIONLISTENER TO MAKE AN EVENT OCCUR ONCE BUTTON IS PUSHED
+		modify.addActionListener(this);		// ADDS ACTIONLISTENER TO MAKE AN EVENT OCCUR ONCE BUTTON IS PUSHED
+		
 		/*************************/
 		/* ADDS BUTTONS TO FRAME */
 		/*************************/
 		container.add(returnB);		// ADDS RETURN BUTTON TO CONTAINER
 		container.add(quitB);		// ADDS QUIT BUTTON TO CONTAINER
-		container.add(confirm);		// ADDS CONFRIM BUTTON TO CONTAINER
+		container.add(enter);		// ADDS ENTER BUTTON TO CONTAINER
+		container.add(view);		// ADDS VIEW BUTTON TO CONTAINER
 		container.add(info);		// ADDS INFO LABEL TO CONTAINER
-		container.add(warning);		// ADDS WARNING LABEL TO CONTAINER
-		container.add(warning2);	// ADDS WARNING 2 LABEL TO CONTAINER
-		container.add(nameL);		// ADDS NAME LABEL TO CONTAINER
-		container.add(grpSzL);		// ADDS GROUP SIZE LABEL TO CONTAINER
-		container.add(dateL);		// ADDS DATE LABEL TO CONTAINER
-		container.add(nameTF);		// ADDS NAME TEXT FIELD TO CONTAINER
-		container.add(grpSzTF);		// ADDS GROUP SIZE TEXT FIELD TO CONTAINER
-		container.add(monthCB);		// ADDS MONTH COMBO BOX TO CONTAINER
-		container.add(dayCB);		// ADDS DAY COMBO BOX TO CONTAINER
-		container.add(yearCB);		// ADDS YEAR COMBO BOX TO CONTAINER
+		container.add(custnum);		// ADDS CUSTOMER NUMBER LABEL TO CONTAINER
+		container.add(modify);		// ADDS MODFIY TEXT FIELD TO CONTAINER
 	}
 	
 	public void actionPerformed(ActionEvent event)
@@ -131,8 +146,8 @@ public class Modify extends Modify_Menu implements ActionListener
 		String action;		// STRING TO REPRESENT WHICH BUTTON WAS PRESSED
 		int confirm;		// REUSUABLE INT INPUT FOR CONFIRMING AN ACTION
 		
-		confirm = 1;							// INITIALIZES CONFIRM
-		action = event.getActionCommand();		// CALL TO GET ACTION COMMAND
+		confirm = 1;						// INITIALIZES CONFIRM
+		action = event.getActionCommand();	// CALL TO GET ACTION COMMAND
 		
 		/****************************************************/
 		/* IF STATEMENT TO CHECK IF QUIT BUTTON WAS PRESSED */	
@@ -163,496 +178,124 @@ public class Modify extends Modify_Menu implements ActionListener
 			if(confirm == 0)
 			{
 				frame.dispose();		// DISPOSES THE REMOVE MENU WINDOW
-				new Modify_Menu();		// CREATES A NEW MENU WINDOW
+				new Menu_GUI();			// CREATES A NEW MENU WINDOW
 			}
 		}
-		
-		actionPerformedName();		// CALL TO ACTION PERFORMED NAME FOR MODIFY
-		actionPerformedSize();		// CALL TO ACTION PERFORMED SIZE FOR MODIFY
-		actionPerformedDate();		// CALL TO ACTION PERFORMED DATE FOR MODIFY
-		
-		/************************************************************/
-		/* ELSE IF STATEMENT TO CHECK IF CONFIRM BUTTON WAS PRESSED */	
-		/************************************************************/
-		if(action == "Confirm")
-		{
-			confirm = confirmWindow();	// CALL TO CONFIRM WINDOW
-
-			/******************************************************/
-			/* IF STATEMENT TO CONFIRM ACTION OF QUITTING PROGRAM */	
-			/******************************************************/
-			if(confirm == 0)
-			{
-				/*********************************************************************/
-				/* IF STATEMENT TO CHECK IF NOTHING WAS CHANGED IN OTHER TEXT FIELDS */	
-				/*********************************************************************/
-				if((nameTF.getText() == "") && (grpSzTF.getText() == "") && 
-				   (monthCB.getSelectedItem() == "") && (dayCB.getSelectedItem() == "")
-				   && (yearCB.getSelectedItem() == ""))
-				{
-					errorMessage(error6);
-				}
 				
-				/****************************************************************************/
-				/* ELSE IF STATEMENT TO CHECK IF SOMETHING WAS CHANGED IN OTHER TEXT FIELDS */	
-				/****************************************************************************/
-				else if ((nameTF.getText() != "") || (grpSzTF.getText() != "") || 
-						 (monthCB.getSelectedItem() != "") || (dayCB.getSelectedItem() != "")
-						 || (yearCB.getSelectedItem() != ""))
-				{
-					frame.dispose();	// GETS RID OF FRAME
-					new Menu_GUI();		// NEW MENU FRAME IS INSTANTIATED
-				}
-			}
+		actionPerformedInt();	// CALL TO ACTION PERFORMED INT
+		
+		/*****************************************************/
+		/* IF STATEMENT TO CHECK IF ENTER BUTTON WAS PRESSED */	
+		/*****************************************************/
+		if (action == "Enter")
+		{
+			frame.dispose();	// DISPOSES THE MODIFY MENU WINDOW
+			new Modify();		// CREATES A NEW MODIFY WINDOW
 		}
+		
+		/*********************************************************/
+		/* ELSE IF STATEMENT TO CHECK IF VIEW BUTTON WAS PRESSED */	
+		/*********************************************************/
+		else if (action == "Customer List")
+		{
+			frame.dispose();			// DISPOSES THE REMOVE MENU WINDOW
+			updateMenu(heading1);		// CALL TO UPDATE MENU
+			new Modify_Menu();			// RECREATES THE REMOVE MENU WINDOW
+		}
+		
 	}
 	
-	public void actionPerformedDate()
-	/************************************************************/
-	/* PRECONDITION - PROGRAM HAS A CUSTOMER SIZE THAT NEEDS TO */ 
-	/* 				  BE MODIFIED 			   					*/
-	/* POSTCONDITION - FUNCTION CREATES AN ACTION EVENT FOR     */
-	/* 				   MODIFIYING CUSTOMER SIZE			   		*/
-	/************************************************************/
+	public void actionPerformedInt()
+	/*************************************************/
+	/* PRECONDITION - NEEDS INTEGER VALUE	 		 */
+	/* POSTCONDITION - GETS INTEGER VALUE			 */
+	/*************************************************/
 	{
 		/********************/
 		/* VARIABLE SECTION */
 		/********************/
-		Object month;		// REUSUABLE OBJECT INPUT
-		Object day;			// REUSUABLE OBJECT INPUT
-		Object year;		// REUSUABLE OBJECT INPUT
-		String date;		// REUSUABLE STRING INPUT
-				
-		/*****************************/
-		/* LOOP UNTIL VALUE IS VALID */
-		/*****************************/
-		do
-		{
-			/*******************************/
-			/* INPUTS MONTH, DAY, AND YEAR */
-			/*******************************/
-			month = monthCB.getSelectedItem();	// CALL TO GET SELECTED ITEM 
-												// FROM MONTH DROP-DOWN LIST	
-			day = dayCB.getSelectedItem();		// CALL TO GET SELECTED ITEM 
-												// FROM DAY DROP-DOWN LIST		
-			year = yearCB.getSelectedItem();	// CALL TO GET SELECTED ITEM 
-												// FROM YEAR DROP-DOWN LIST	
-			
-			/************************************/
-			/* IF STATEMENT TO ERROR CHECK DATE */
-			/************************************/
-			if((month.equals("02")) && (day.equals("29")) && (year.equals("2021")))
-			{
-				errorMessage(error6);		// CALL TO ERROR MESSAGE
-				monthCB.setSelectedItem("");// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				dayCB.setSelectedItem("");	// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				yearCB.setSelectedItem(""); // RESETS SELECTED ITEM ON DROP-DOWN LIST
-			}
-			
-			/************************************/
-			/* IF STATEMENT TO ERROR CHECK DATE */
-			/************************************/
-			else if((month.equals("02")) && (day.equals("29")) && (year.equals("2022")))
-			{
-				errorMessage(error6);		// CALL TO ERROR MESSAGE
-				monthCB.setSelectedItem("");// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				dayCB.setSelectedItem("");	// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				yearCB.setSelectedItem(""); // RESETS SELECTED ITEM ON DROP-DOWN LIST
-			}
-			
-			/************************************/
-			/* IF STATEMENT TO ERROR CHECK DATE */
-			/************************************/
-			else if((month.equals("02")) && (day.equals("29")) && (year.equals("2023")))
-			{
-				errorMessage(error6);		// CALL TO ERROR MESSAGE
-				monthCB.setSelectedItem("");// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				dayCB.setSelectedItem("");	// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				yearCB.setSelectedItem(""); // RESETS SELECTED ITEM ON DROP-DOWN LIST
-			}
-			
-			/************************************/
-			/* IF STATEMENT TO ERROR CHECK DATE */
-			/************************************/
-			else if((month.equals("02")) && (day.equals("29")) && (year.equals("2025")))
-			{
-				errorMessage(error6);		// CALL TO ERROR MESSAGE
-				monthCB.setSelectedItem("");// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				dayCB.setSelectedItem("");	// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				yearCB.setSelectedItem(""); // RESETS SELECTED ITEM ON DROP-DOWN LIST
-			}
-			
-			/************************************/
-			/* IF STATEMENT TO ERROR CHECK DATE */
-			/************************************/
-			else if((month.equals("02")) && (day.equals("29")) && (year.equals("2026")))
-			{
-				errorMessage(error6);		// CALL TO ERROR MESSAGE
-				monthCB.setSelectedItem("");// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				dayCB.setSelectedItem("");	// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				yearCB.setSelectedItem(""); // RESETS SELECTED ITEM ON DROP-DOWN LIST
-			}
-			
-			/************************************/
-			/* IF STATEMENT TO ERROR CHECK DATE */
-			/************************************/
-			else if((month.equals("02")) && (day.equals("29")) && (year.equals("2027")))
-			{
-				errorMessage(error6);		// CALL TO ERROR MESSAGE
-				monthCB.setSelectedItem("");// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				dayCB.setSelectedItem("");	// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				yearCB.setSelectedItem(""); // RESETS SELECTED ITEM ON DROP-DOWN LIST
-			}
-			
-			/************************************/
-			/* IF STATEMENT TO ERROR CHECK DATE */
-			/************************************/
-			else if((month.equals("02")) && (day.equals("29")) && (year.equals("2029")))
-			{
-				errorMessage(error6);		// CALL TO ERROR MESSAGE
-				monthCB.setSelectedItem("");// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				dayCB.setSelectedItem("");	// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				yearCB.setSelectedItem(""); // RESETS SELECTED ITEM ON DROP-DOWN LIST
-			}
-			
-			/************************************/
-			/* IF STATEMENT TO ERROR CHECK DATE */
-			/************************************/
-			else if((month.equals("02")) && (day.equals("29")) && (year.equals("2030")))
-			{
-				errorMessage(error6);		// CALL TO ERROR MESSAGE
-				monthCB.setSelectedItem("");// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				dayCB.setSelectedItem("");	// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				yearCB.setSelectedItem(""); // RESETS SELECTED ITEM ON DROP-DOWN LIST
-			}
-			
-			/************************************/
-			/* IF STATEMENT TO ERROR CHECK DATE */
-			/************************************/
-			else if((month.equals("02")) && (day.equals("29")) && (year.equals("2031")))
-			{
-				errorMessage(error6);		// CALL TO ERROR MESSAGE
-				monthCB.setSelectedItem("");// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				dayCB.setSelectedItem("");	// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				yearCB.setSelectedItem(""); // RESETS SELECTED ITEM ON DROP-DOWN LIST
-			}
-			
-			/************************************/
-			/* IF STATEMENT TO ERROR CHECK DATE */
-			/************************************/
-			else if((month.equals("02")) && (day.equals("29")) && (year.equals("2033")))
-			{
-				errorMessage(error6);		// CALL TO ERROR MESSAGE
-				monthCB.setSelectedItem("");// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				dayCB.setSelectedItem("");	// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				yearCB.setSelectedItem(""); // RESETS SELECTED ITEM ON DROP-DOWN LIST
-			}
-			
-			/************************************/
-			/* IF STATEMENT TO ERROR CHECK DATE */
-			/************************************/
-			else if((month.equals("02")) && (day.equals("29")) && (year.equals("2034")))
-			{
-				errorMessage(error6);		// CALL TO ERROR MESSAGE
-				monthCB.setSelectedItem("");// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				dayCB.setSelectedItem("");	// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				yearCB.setSelectedItem(""); // RESETS SELECTED ITEM ON DROP-DOWN LIST
-			}
-			
-			/************************************/
-			/* IF STATEMENT TO ERROR CHECK DATE */
-			/************************************/
-			else if((month.equals("02")) && (day.equals("29")) && (year.equals("2035")))
-			{
-				errorMessage(error6);		// CALL TO ERROR MESSAGE
-				monthCB.setSelectedItem("");// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				dayCB.setSelectedItem("");	// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				yearCB.setSelectedItem(""); // RESETS SELECTED ITEM ON DROP-DOWN LIST
-			}
-			
-			/************************************/
-			/* IF STATEMENT TO ERROR CHECK DATE */
-			/************************************/
-			else if((month.equals("02")) && (day.equals("29")) && (year.equals("2037")))
-			{
-				errorMessage(error6);		// CALL TO ERROR MESSAGE
-				monthCB.setSelectedItem("");// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				dayCB.setSelectedItem("");	// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				yearCB.setSelectedItem(""); // RESETS SELECTED ITEM ON DROP-DOWN LIST
-			}
-			
-			/************************************/
-			/* IF STATEMENT TO ERROR CHECK DATE */
-			/************************************/
-			else if((month.equals("02")) && (day.equals("29")) && (year.equals("2038")))
-			{
-				errorMessage(error6);		// CALL TO ERROR MESSAGE
-				monthCB.setSelectedItem("");// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				dayCB.setSelectedItem("");	// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				yearCB.setSelectedItem(""); // RESETS SELECTED ITEM ON DROP-DOWN LIST
-			}
-			
-			/************************************/
-			/* IF STATEMENT TO ERROR CHECK DATE */
-			/************************************/
-			else if((month.equals("02")) && (day.equals("29")) && (year.equals("2039")))
-			{
-				errorMessage(error6);		// CALL TO ERROR MESSAGE
-				monthCB.setSelectedItem("");// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				dayCB.setSelectedItem("");	// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				yearCB.setSelectedItem(""); // RESETS SELECTED ITEM ON DROP-DOWN LIST
-			}
-			
-			/************************************/
-			/* IF STATEMENT TO ERROR CHECK DATE */
-			/************************************/
-			else if((month.equals("02")) && (day.equals("29")) && (year.equals("2041")))
-			{
-				errorMessage(error6);		// CALL TO ERROR MESSAGE
-				monthCB.setSelectedItem("");// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				dayCB.setSelectedItem("");	// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				yearCB.setSelectedItem(""); // RESETS SELECTED ITEM ON DROP-DOWN LIST
-			}
-			
-			/************************************/
-			/* IF STATEMENT TO ERROR CHECK DATE */
-			/************************************/
-			else if((month.equals("02")) && (day.equals("29")) && (year.equals("2042")))
-			{
-				errorMessage(error6);		// CALL TO ERROR MESSAGE
-				monthCB.setSelectedItem("");// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				dayCB.setSelectedItem("");	// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				yearCB.setSelectedItem(""); // RESETS SELECTED ITEM ON DROP-DOWN LIST
-			}
-			
-			/************************************/
-			/* IF STATEMENT TO ERROR CHECK DATE */
-			/************************************/
-			else if((month.equals("02")) && (day.equals("29")) && (year.equals("2043")))
-			{
-				errorMessage(error6);		// CALL TO ERROR MESSAGE
-				monthCB.setSelectedItem("");// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				dayCB.setSelectedItem("");	// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				yearCB.setSelectedItem(""); // RESETS SELECTED ITEM ON DROP-DOWN LIST
-			}
-			
-			/************************************/
-			/* IF STATEMENT TO ERROR CHECK DATE */
-			/************************************/
-			else if((month.equals("02")) && (day.equals("29")) && (year.equals("2045")))
-			{
-				errorMessage(error6);		// CALL TO ERROR MESSAGE
-				monthCB.setSelectedItem("");// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				dayCB.setSelectedItem("");	// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				yearCB.setSelectedItem(""); // RESETS SELECTED ITEM ON DROP-DOWN LIST
-			}
-			
-			/************************************/
-			/* IF STATEMENT TO ERROR CHECK DATE */
-			/************************************/
-			else if((month.equals("02")) && (day.equals("29")) && (year.equals("2046")))
-			{
-				errorMessage(error6);		// CALL TO ERROR MESSAGE
-				monthCB.setSelectedItem("");// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				dayCB.setSelectedItem("");	// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				yearCB.setSelectedItem(""); // RESETS SELECTED ITEM ON DROP-DOWN LIST
-			}
-			
-			/************************************/
-			/* IF STATEMENT TO ERROR CHECK DATE */
-			/************************************/
-			else if((month.equals("02")) && (day.equals("29")) && (year.equals("2047")))
-			{
-				errorMessage(error6);		// CALL TO ERROR MESSAGE
-				monthCB.setSelectedItem("");// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				dayCB.setSelectedItem("");	// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				yearCB.setSelectedItem(""); // RESETS SELECTED ITEM ON DROP-DOWN LIST
-			}
-			
-			/************************************/
-			/* IF STATEMENT TO ERROR CHECK DATE */
-			/************************************/
-			else if((month.equals("02")) && (day.equals("29")) && (year.equals("2049")))
-			{
-				errorMessage(error6);		// CALL TO ERROR MESSAGE
-				monthCB.setSelectedItem("");// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				dayCB.setSelectedItem("");	// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				yearCB.setSelectedItem(""); // RESETS SELECTED ITEM ON DROP-DOWN LIST
-			}
-			
-			/*****************************************/
-			/* ELSE IF STATEMENT TO ERROR CHECK DATE */
-			/*****************************************/
-			else if((month.equals("02")) && (day.equals("30")))
-			{
-				errorMessage(error5);		// CALL TO ERROR MESSAGE
-				monthCB.setSelectedItem("");// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				dayCB.setSelectedItem("");	// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				yearCB.setSelectedItem(""); // RESETS SELECTED ITEM ON DROP-DOWN LIST
-			}
-			
-			/*****************************************/
-			/* ELSE IF STATEMENT TO ERROR CHECK DATE */
-			/*****************************************/
-			else if((month.equals("02")) && (day.equals("31")))
-			{
-				errorMessage(error5);		// CALL TO ERROR MESSAGE
-				monthCB.setSelectedItem("");// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				dayCB.setSelectedItem("");	// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				yearCB.setSelectedItem(""); // RESETS SELECTED ITEM ON DROP-DOWN LIST
-			}
-			
-			/*****************************************/
-			/* ELSE IF STATEMENT TO ERROR CHECK DATE */
-			/*****************************************/
-			else if((month.equals("04")) && (day.equals("31")))
-			{
-				errorMessage(error4);		// CALL TO ERROR MESSAGE
-				monthCB.setSelectedItem("");// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				dayCB.setSelectedItem("");	// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				yearCB.setSelectedItem(""); // RESETS SELECTED ITEM ON DROP-DOWN LIST
-			}
-			
-			/*****************************************/
-			/* ELSE IF STATEMENT TO ERROR CHECK DATE */
-			/*****************************************/
-			else if((month.equals("06")) && (day.equals("31")))
-			{
-				errorMessage(error4);		// CALL TO ERROR MESSAGE
-				monthCB.setSelectedItem("");// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				dayCB.setSelectedItem("");	// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				yearCB.setSelectedItem(""); // RESETS SELECTED ITEM ON DROP-DOWN LIST
-			}
-			
-			/*****************************************/
-			/* ELSE IF STATEMENT TO ERROR CHECK DATE */
-			/*****************************************/
-			else if((month.equals("09")) && (day.equals("31")))
-			{
-				errorMessage(error4);		// CALL TO ERROR MESSAGE
-				monthCB.setSelectedItem("");// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				dayCB.setSelectedItem("");	// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				yearCB.setSelectedItem(""); // RESETS SELECTED ITEM ON DROP-DOWN LIST
-			}
-			
-			/*****************************************/
-			/* ELSE IF STATEMENT TO ERROR CHECK DATE */
-			/*****************************************/
-			else if((month.equals("11")) && (day.equals("31")))
-			{
-				errorMessage(error4);		// CALL TO ERROR MESSAGE
-				monthCB.setSelectedItem("");// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				dayCB.setSelectedItem("");	// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				yearCB.setSelectedItem(""); // RESETS SELECTED ITEM ON DROP-DOWN LIST
-			}
-			
-			date = "" + month + "/" + day + "/" + year;
-		}
-		while((month.equals("02")) && (day.equals("29")) && (year.equals("2021")) || 
-			  (month.equals("02")) && (day.equals("29")) && (year.equals("2022")) ||
-			  (month.equals("02")) && (day.equals("29")) && (year.equals("2023")) ||
-			  (month.equals("02")) && (day.equals("29")) && (year.equals("2025")) ||
-			  (month.equals("02")) && (day.equals("29")) && (year.equals("2026")) ||
-			  (month.equals("02")) && (day.equals("29")) && (year.equals("2027")) ||
-			  (month.equals("02")) && (day.equals("29")) && (year.equals("2029")) ||
-			  (month.equals("02")) && (day.equals("29")) && (year.equals("2030")) ||
-			  (month.equals("02")) && (day.equals("29")) && (year.equals("2031")) ||
-			  (month.equals("02")) && (day.equals("29")) && (year.equals("2033")) ||
-			  (month.equals("02")) && (day.equals("29")) && (year.equals("2034")) ||
-			  (month.equals("02")) && (day.equals("29")) && (year.equals("2035")) ||
-			  (month.equals("02")) && (day.equals("29")) && (year.equals("2037")) ||
-			  (month.equals("02")) && (day.equals("29")) && (year.equals("2038")) ||
-			  (month.equals("02")) && (day.equals("29")) && (year.equals("2039")) ||
-			  (month.equals("02")) && (day.equals("29")) && (year.equals("2041")) ||
-			  (month.equals("02")) && (day.equals("29")) && (year.equals("2042")) ||
-			  (month.equals("02")) && (day.equals("29")) && (year.equals("2043")) ||
-			  (month.equals("02")) && (day.equals("29")) && (year.equals("2045")) ||
-			  (month.equals("02")) && (day.equals("29")) && (year.equals("2046")) ||
-			  (month.equals("02")) && (day.equals("29")) && (year.equals("2047")) ||
-			  (month.equals("02")) && (day.equals("29")) && (year.equals("2049")) ||
-			  (month.equals("02")) && (day.equals("30")) || 
-			  (month.equals("02")) && (day.equals("31")) ||
-			  (month.equals("4")) && (day.equals("31")) || 
-			  (month.equals("6")) && (day.equals("31")) ||
-			  (month.equals("9")) && (day.equals("31")) || 
-			  (month.equals("11")) && (day.equals("31")));
-		
-		custList.get(custNum - 1).setMonth((String)month);	// CALL TO SET MONTH
-		custList.get(custNum - 1).setDay((String)day);		// CALL TO SET DAY
-		custList.get(custNum - 1).setYear((String)year);	// CALL TO SET YEAR
-		custList.get(custNum - 1).setDate(date);			// CALL TO SET DATE
-	}
-
-	public void actionPerformedName()
-	/************************************************************/
-	/* PRECONDITION - PROGRAM HAS A CUSTOMER NAME THAT NEEDS TO */ 
-	/* 				  BE MODIFIED 			   					*/
-	/* POSTCONDITION - FUNCTION CREATES AN ACTION EVENT FOR     */
-	/* 				   MODIFIYING CUSTOMER NAME			   		*/
-	/************************************************************/
-	{
-		/********************/
-		/* VARIABLE SECTION */
-		/********************/
-		String name;		// REUSUABLE STRING INPUT
+		String numi;		// REUSUABLE OBJECT INPUT
+		int num;			// REUSUABLE INT VALUE
 		
 		/*****************************/
 		/* LOOP UNTIL VALUE IS VALID */
 		/*****************************/
 		do
 		{
-			/*******************/
-			/* INPUTS GROUP ID */
-			/*******************/
-			name = nameTF.getText();		// CALL TO GET TEXT INPUTTED BY USER
+			/*******************************/
+			/* IF STATEMENT TO ERROR CHECK */
+			/*******************************/
+			if(custList.size() < 1)
+			{
+				errorMessage(error3); 	// CALL TO ERROR MESSAGE
+			}
+			
+			numi = modify.getText();		// CALL TO GET TEXT INPUTTED BY USER
+			num = Integer.parseInt(numi);	// PARSES STRING TO AN INTEGER
 			
 			/*******************************/
 			/* IF STATEMENT TO ERROR CHECK */
 			/*******************************/
-			if (name.length() > 10)
+			if((num < 1) || (num > custList.size()))
 			{
-				nameTF.setText("");			// CLEARS THE TEXT FIELD
-				errorMessage(error1);		// CALL TO ERROR MESSAGE
+				modify.setText("");		// CLEARS THE TEXT FIELD
+				errorMessage(error1);	// CALL TO ERROR MESSAGE
 			}
 		}
-		while(name.length() > 10);
+		while((num < 1) || (num > custList.size()));
 		
-		custList.get(custNum - 1).setName(name);	// CALL TO SET NAME
+		custNum = num;
 	}
 	
-	public void actionPerformedSize()
-	/************************************************************/
-	/* PRECONDITION - PROGRAM HAS A CUSTOMER SIZE THAT NEEDS TO */ 
-	/* 				  BE MODIFIED 			   					*/
-	/* POSTCONDITION - FUNCTION CREATES AN ACTION EVENT FOR     */
-	/* 				   MODIFIYING CUSTOMER SIZE			   		*/
-	/************************************************************/
+	public static int confirmWindow()
+	/************************************************/
+	/* PRECONDITION - NEEDS CONFIRM DIALOG BOX		*/
+	/* POSTCONDITION - CREATES WINDOW TO CONFIRM IF	*/
+	/* 				   USER WANTS TO CONFIRM ACTION	*/
+	/************************************************/
 	{
 		/********************/
 		/* VARIABLE SECTION */
 		/********************/
-		String grp;			// REUSUABLE STRING INPUT
-		int grpSz;			// REUSUABLE INT VALUE
+		int num;			// INTEGER ANSWER TO MODIFY PROGRAM
 		
-		/*****************************/
-		/* LOOP UNTIL VALUE IS VALID */
-		/*****************************/
-		do
-		{
-			grp = grpSzTF.getText();			// CALL TO GET TEXT INPUTTED BY USER
-			grpSz = Integer.parseInt(grp);		// PARSES STRING TO AN INTEGER
-			
-			/*******************************/
-			/* IF STATEMENT TO ERROR CHECK */
-			/*******************************/
-			if((grpSz <= 0) ||(grpSz > 400))
-			{
-				grpSzTF.setText("");			// CLEARS THE TEXT FIELD 
-				errorMessage(error3);			// CALL TO ERROR MESSAGE
-			}
-		}
-		while((grpSz <= 0) || (grpSz > 400));
+		/*******************************/
+		/* MAKES CONFIRM DIALOG WINDOW */
+		/*******************************/
+		num = JOptionPane.showConfirmDialog(
+				null,
+				"Do you really want to do this?",
+				"Confirm Window",
+				JOptionPane.YES_NO_OPTION,
+				JOptionPane.QUESTION_MESSAGE);
 		
-		custList.get(custNum - 1).setSize(grpSz);	// CALL TO SET SIZE
+		/******************/
+		/* RETURN SECTION */
+		/******************/
+		return num;			// RETURNS NUM
+	}
+	
+	public static void updateMenu(String hdstr)
+	/*****************************************************************/
+	/* PRECONDITION - NEEDS AN UPDATE WINDOW OF ALL CUSTOMERS 		 */
+	/* POSTCONDITION - CREATES WINDOW TO TELL USER ALL THE CUSTOMERS */
+	/*****************************************************************/
+	{
+		/********************/
+		/* VARIABLE SECTION */
+		/********************/
+		String str;			// USED FOR REUSABLE OUTPUT
+		
+		str = printArray();	// CALL TO PRINT ARRAY
+		
+		/***********************/
+		/* MAKES DIALOG WINDOW */
+		/***********************/ 
+		JOptionPane.showMessageDialog(
+				null,
+				hdstr + "\n"+
+				str,
+				"Customer List",
+				JOptionPane.INFORMATION_MESSAGE);
 	}
 }
