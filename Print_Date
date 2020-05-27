@@ -113,17 +113,86 @@ public class Print_Date extends Menu_GUI implements ActionListener
 		/*************************/
 		/* ADDS BUTTONS TO FRAME */
 		/*************************/
-		container.add(returnB);		// ADDS INSERT BUTTON TO CONTAINER
+		container.add(returnB);		// ADDS RETURN BUTTON TO CONTAINER
 		container.add(quitB);		// ADDS QUIT BUTTON TO CONTAINER
-		container.add(enterB);		// ADDS MODIFY BUTTON TO CONTAINER
-		container.add(info);		// ADDS COST BUTTON TO CONTAINER
-		container.add(monthCB);		// ADDS BUS BUTTON TO CONTAINER
-		container.add(dayCB);		// ADDS PROFIT BY DATE BUTTON TO CONTAINER
-		container.add(yearCB);		// ADDS TOTAL PROFIT BUTTON TO CONTAINER
+		container.add(enterB);		// ADDS ENTER BUTTON TO CONTAINER
+		container.add(info);		// ADDS INFO LABEL TO CONTAINER
+		container.add(monthCB);		// ADDS MONTH COMBOBOX TO CONTAINER
+		container.add(dayCB);		// ADDS DAY COMBOBOX TO CONTAINER
+		container.add(yearCB);		// ADDS YEAR COMBOBOX TO CONTAINER
 	}
 	
 	public void actionPerformed(ActionEvent event)
+	/*******************************************/
+	/* PRECONDITION - PROGRAM HAS A BUTTON	   */
+	/* POSTCONDITION - FUNCTION CREATES AN	   */
+	/* 				   ACTION EVENT FOR BUTTON */
+	/*******************************************/
 	{
+		/********************/
+		/* VARIABLE SECTION */
+		/********************/
+		String action; 		// STRING TO REPRESENT WHICH BUTTON WAS PRESSED
+		int confirm; 		// REUSUABLE INT INPUT FOR CONFIRMING AN ACTION
 		
+		confirm = 1;		// INITIALIZES CONFIRM
+		action = event.getActionCommand();	// CALL TO GET ACTION COMMAND
+		
+		/****************************************************/
+		/* IF STATEMENT TO CHECK IF QUIT BUTTON WAS PRESSED */	
+		/****************************************************/
+		if(action.equals("Quit"))
+		{
+			confirm = confirmWindow();		// CALL TO CONFIRM WINDOW
+			
+			/******************************************************/
+			/* IF STATEMENT TO CONFIRM ACTION OF QUITTING PROGRAM */	
+			/******************************************************/
+			if(confirm == 0)
+			{
+				System.exit(0);		// TERMINATES PROGRAM
+			}
+		}
+		
+		/***********************************************************/
+		/* ELSE IF STATEMENT TO CHECK IF RETURN BUTTON WAS PRESSED */	
+		/***********************************************************/
+		else if(action.equals("Return"))
+		{
+			confirm = confirmWindow();		// CALL TO CONFIRM WIDNOW
+			
+			/************************************************************/
+			/* IF STATEMENT TO CONFIRM ACTION OF RETURNING TO MAIN MENU */	
+			/************************************************************/
+			if(confirm == 0)
+			{
+				frame.dispose();	// DISPOSES OF PRINT_DATE FRAME
+				new Menu_GUI();		// CREATES A NEW MENU GUI WINDOW
+			}
+		}
+		
+		/**********************************************************/
+		/* ELSE IF STATEMENT TO CHECK IF ENTER BUTTON WAS PRESSED */	
+		/**********************************************************/
+		else if(action.equals("Enter"))
+		{
+			/****************************************************************/
+			/* IF STATEMENT TO CHECK IF MONTH, DAY, AND YEAR WERE FILLED IN */	
+			/****************************************************************/
+			if ((monthCB.getSelectedItem() == "") || (dayCB.getSelectedItem() == "") || 
+				(yearCB.getSelectedItem() == ""))
+			{
+				
+			}
+			
+			/*********************************************************************/
+			/* ELSE IF STATEMENT TO CHECK IF MONTH, DAY, AND YEAR WERE FILLED IN */	
+			/*********************************************************************/
+			else if((monthCB.getSelectedItem() != "") && (dayCB.getSelectedItem() != "") && 
+				(yearCB.getSelectedItem() != ""))
+			{
+				
+			}
+		}
 	}
 }
