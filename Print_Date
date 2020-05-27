@@ -182,7 +182,7 @@ public class Print_Date extends Menu_GUI implements ActionListener
 			if ((monthCB.getSelectedItem() == "") || (dayCB.getSelectedItem() == "") || 
 				(yearCB.getSelectedItem() == ""))
 			{
-				
+				errorMessage(error2);		// CALL TO ERROR MESSAGE
 			}
 			
 			/*********************************************************************/
@@ -191,7 +191,7 @@ public class Print_Date extends Menu_GUI implements ActionListener
 			else if((monthCB.getSelectedItem() != "") && (dayCB.getSelectedItem() != "") && 
 				(yearCB.getSelectedItem() != ""))
 			{
-				printDateCost();
+				printDateCost();			// CALL TO PRINT DATE COST
 			}
 		}
 	}
@@ -253,6 +253,9 @@ public class Print_Date extends Menu_GUI implements ActionListener
 	/* 				   FOR A SPECIFIC DATE 							 */
 	/*****************************************************************/
 	{
-		
+		/********************/
+		/* VARIABLE SECTION */
+		/********************/
+		String costdf;
 	}
 }
