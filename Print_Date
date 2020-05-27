@@ -1,0 +1,36 @@
+/******************************************/
+/* USER DESCRIPTION SECTION 			  */
+/* OLIVIA DIAS				   			  */
+/* FINAL PROJECT		   	 			  */
+/* PROGRAM 12							  */
+/* MAY 18, 2020			   			  	  */
+/******************************************/
+/******************************************/
+/* THIS IS A PROGRAM TO MAKE AN OBJECT	  */
+/* HAVE INSTANCE VARIABLES, CONSTRUCTORS, */
+/* AND METHODS SO THE CLIENT CAN HAVE A   */
+/* SWING GUI  							  */
+/******************************************/
+
+/******************/
+/* IMPORT SECTION */
+/******************/
+import javax.swing.*;					// IMPORTS SWING
+import java.awt.*;						// IMPORTS AWT
+import java.awt.event.ActionEvent;		// IMPORTS ACTION EVENT
+import java.awt.event.ActionListener;	// IMPORTS ACTION LISTENER		
+import java.text.DecimalFormat;			// IMPORTS DECIMAL FORMAT
+
+public class Print_Date implements ActionListener
+{
+	
+	public Print_Date()
+	{
+		
+	}
+	
+	public void actionPerformed(ActionEvent event)
+	{
+		
+	}
+}
