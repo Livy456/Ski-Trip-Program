@@ -38,8 +38,8 @@ public class Customer implements Ski_Interface
 	private double cost;		// INSTANCE VARIABLE FOR USER'S COST
 	private double refund;		// INSTANE VARIABLE FOR REFUNDS
 	DecimalFormat df = new DecimalFormat("0.00");	// INSTANTIATES DECIMALFORMAT
-	private Random generator = new Random();	// INSTANCE VARIABLE FOR RANDOM NUMBER 
-												// GENERATOR
+	private Random generator = new Random();		// INSTANCE VARIABLE FOR RANDOM NUMBER 
+													// GENERATOR
 	
 	public Customer()
 	/**************************************************/
@@ -310,7 +310,7 @@ public class Customer implements Ski_Interface
 		/********************/
 		/* VARIABLE SECTION */
 		/********************/
-		String costdf;		// STRING REPRESENTATION OF COST
+		String costdf;				// STRING REPRESENTATION OF COST
 		
 		/***********************************/
 		/* CALCULATES COST OF THE SKI TRIP */
@@ -323,23 +323,23 @@ public class Customer implements Ski_Interface
 		/***************************************************/
 		if (remainder >= 10)
 		{
-			cost = 49.99 * grpsize;		// CALCULATES COST WITHOUT REFUNDS
+			cost = 49.99 * grpsize;	// CALCULATES COST WITHOUT REFUNDS
 		}
 		
-		/***************************************************/
+		/*****************************************************/
 		/* ELSE STATEMENT TO CALCULATE IF REFUNDS ARE NEEDED */	
-		/***************************************************/
+		/*****************************************************/
 		else
 		{
 			cost = 49.99 * (grpsize - remainder);	// CALCULATES COST WITH REFUNDS
 		}
-		
-		costdf = df.format(cost);	// FORMATS COST	
-		
+				
+		costdf = df.format(cost);	// FORMATS COST TO TWO DECIMAL PLACES
+	
 		/******************/
 		/* RETURN SECTION */
 		/******************/
-		return costdf;			// RETURNS COST
+		return costdf;		// RETURNS COST
 	}
 	
 	public double getRefund()
@@ -354,7 +354,7 @@ public class Customer implements Ski_Interface
 		/***************************************************/
 		if (remainder >= 10)
 		{
-			refund = 0.00;		// CALCULATES COST WITHOUT REFUNDS
+			refund = 0.00;	// CALCULATES COST WITHOUT REFUNDS
 		}
 		
 		/***************************************/
@@ -380,10 +380,10 @@ public class Customer implements Ski_Interface
 		/********************/
 		/* VARIABLE SECTION */
 		/********************/
-		String str; 			// STRING REPRESENTATION OF OBJECT
-		String costdf;			// STRING REPRESENTATION OF COST
-		
-		costdf = getCost();		// CALL TO GET COST
+		String str; 				// STRING REPRESENTATION OF OBJECT
+		String costdf;				// STRING REPRESENTATION OF COST
+
+		costdf = getCost();			// GETS COST OF SKI TRIP
 		
 		/*****************************************/
 		/* MAKES STRING REPRESENTATION OF OBJECT */
