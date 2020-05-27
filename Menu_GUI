@@ -19,6 +19,7 @@ import javax.swing.*;					// IMPORTS SWING
 import java.awt.*;						// IMPORTS AWT
 import java.awt.event.ActionEvent;		// IMPORTS ACTION EVENT
 import java.awt.event.ActionListener;	// IMPORTS ACTION LISTENER		
+import java.text.DecimalFormat;
 
 public class Menu_GUI extends BusGUI implements ActionListener
 {	
@@ -49,6 +50,7 @@ public class Menu_GUI extends BusGUI implements ActionListener
 	private Font font;				// CREATES A FONT
 	private JFrame frame;			// CREATES A JFRAME
 	private Container container;	// CREATES A CONTAINER
+	private static DecimalFormat df = new DecimalFormat("0.00");	// INSTANTIATES DECIMALFORMAT
 	 
 	public Menu_GUI()
 	/************************************************/
@@ -371,7 +373,7 @@ public class Menu_GUI extends BusGUI implements ActionListener
 		}
 	}
 	
-	public static int calculateTotCost()
+	public static double calculateTotCost()
 	/**********************************************************/
 	/* PRECONDITION - NEEDS TOTAL COST OF ALL SKI TRIPS 	  */
 	/* POSTCONDITION - CALCULATES TOTAL COST OF ALL SKI TRIPS */
@@ -380,13 +382,13 @@ public class Menu_GUI extends BusGUI implements ActionListener
 		/********************/
 		/* VARIABLE SECTION */
 		/********************/
-		String costi;
-		int cost;			// COST OF ALL SKI TRIPS
-		int num;
+		String costi;		// STRING REPRESENTATION OF COST
+		double cost;		// COST OF ALL SKI TRIPS
+		double num;			// COST OF ONE SKI TRIP
 		
-		costi = "";
-		num = 0;
-		cost = 0;			// INITIALIZES COST
+		costi = "";			// INITIALIZES THE STRING FORM OF COST
+		num = 0.00;			// INITIALIZES A SINGLE COST
+		cost = 0.00;		// INITIALIZES TOTAL COST
 		
 		/*****************************************************/
 		/* FOR LOOP TO CALCULATE TOTAL COST OF ALL SKI TRIPS */
@@ -394,15 +396,8 @@ public class Menu_GUI extends BusGUI implements ActionListener
 		for(int i = 0; i < custList.size(); i++)
 		{
 			costi = custList.get(i).getCost();	// GETS COST OF EACH CUSTOMER
-			
-			/****************************************/
-			/* FOR LOOP TO GET COST OF ONE CUSTOMER */
-			/****************************************/
-			for(int j = 0; j < costi.length(); j++)
-			{
-				num = Integer.parseInt(costi);		// PARSES STRING VALUE TO INT
-				cost+=num;
-			}
+			num = Double.parseDouble(costi);	// PARSES STRING VALUE TO INT
+			cost+=num;							// TOTALS COST 
 		}
 		
 		/******************/
@@ -631,16 +626,18 @@ public class Menu_GUI extends BusGUI implements ActionListener
 		/********************/
 		/* VARIABLE SECTION */
 		/********************/
-		int cost;		// REUSUABLE INTEGER VALUE FOR OUTPUT
+		String costdf;		// STRING REPRESENTATION OF COST
+		double cost;		// REUSUABLE INTEGER VALUE FOR OUTPUT
 		
 		cost = calculateTotCost();	// CALL TO CALCULATE TOTAL COST	
+		costdf = df.format(cost);	// FORMATS COST TO TWO DECIMAL PLACES
 		
 		/***********************/
 		/* MAKES DIALOG WINDOW */
 		/***********************/ 
 		JOptionPane.showMessageDialog(
 				null,
-				"Total Cost of all Skip Trips is: $"+cost,
+				"Total Cost of all Skip Trips is: $"+costdf,
 				"Total Profit",
 				JOptionPane.INFORMATION_MESSAGE);
 	}
