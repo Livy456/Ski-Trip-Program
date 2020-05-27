@@ -380,8 +380,12 @@ public class Menu_GUI extends BusGUI implements ActionListener
 		/********************/
 		/* VARIABLE SECTION */
 		/********************/
+		String costi;
 		int cost;			// COST OF ALL SKI TRIPS
+		int num;
 		
+		costi = "";
+		num = 0;
 		cost = 0;			// INITIALIZES COST
 		
 		/*****************************************************/
@@ -389,8 +393,16 @@ public class Menu_GUI extends BusGUI implements ActionListener
 		/*****************************************************/
 		for(int i = 0; i < custList.size(); i++)
 		{
-			String costi = custList.get(i).getCost();	// GETS COST OF EACH CUSTOMER
-			cost += Integer.parseInt(costi);			// PARSES STRING VALUE TO INT
+			costi = custList.get(i).getCost();	// GETS COST OF EACH CUSTOMER
+			
+			/****************************************/
+			/* FOR LOOP TO GET COST OF ONE CUSTOMER */
+			/****************************************/
+			for(int j = 0; j < costi.length(); j++)
+			{
+				num = Integer.parseInt(costi);		// PARSES STRING VALUE TO INT
+				cost+=num;
+			}
 		}
 		
 		/******************/
@@ -409,7 +421,7 @@ public class Menu_GUI extends BusGUI implements ActionListener
 		/********************/
 		/* VARIABLE SECTION */
 		/********************/
-		int num;		// INTEGER ANSWER TO MODIFY PROGRAM
+		int num;			// INTEGER ANSWER TO MODIFY PROGRAM
 		
 		/*******************************/
 		/* MAKES CONFIRM DIALOG WINDOW */
@@ -526,7 +538,7 @@ public class Menu_GUI extends BusGUI implements ActionListener
 				/*****************************************************/
 				else if (name.length() == 4)
 				{
-					name += "          ";
+					name += "         ";
 				}
 				
 				/*****************************************************/
@@ -558,7 +570,7 @@ public class Menu_GUI extends BusGUI implements ActionListener
 				/*****************************************************/
 				else if (name.length() == 8)
 				{
-					name += "  ";
+					name += "   ";
 				}
 				
 				/*****************************************************/
