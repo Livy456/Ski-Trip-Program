@@ -19,7 +19,7 @@ import javax.swing.*;					// IMPORTS SWING
 import java.awt.*;						// IMPORTS AWT
 import java.awt.event.ActionEvent;		// IMPORTS ACTION EVENT
 import java.awt.event.ActionListener;	// IMPORTS ACTION LISTENER		
-import java.text.DecimalFormat;
+import java.text.DecimalFormat;			// IMPORTS DECIMAL FORMAT
 
 public class Menu_GUI extends BusGUI implements ActionListener
 {	
@@ -396,8 +396,57 @@ public class Menu_GUI extends BusGUI implements ActionListener
 		for(int i = 0; i < custList.size(); i++)
 		{
 			costi = custList.get(i).getCost();	// GETS COST OF EACH CUSTOMER
-			num = Double.parseDouble(costi);	// PARSES STRING VALUE TO INT
+			num = Double.parseDouble(costi);	// PARSES STRING VALUE TO DOUBLE
 			cost+=num;							// TOTALS COST 
+		}
+		
+		/******************/
+		/* RETURN SECTION */
+		/******************/
+		return cost;		// RETURNS COST	
+	}
+	
+	public static double calculateDateCost(String month, String day, String year)
+	/******************************************************************************/
+	/* PRECONDITION - NEEDS TOTAL COST OF ALL SKI TRIPS FOR A SPECIFIC DATE 	  */
+	/* POSTCONDITION - CALCULATES TOTAL COST OF ALL SKI TRIPS FOR A SPECIFIC DATE */
+	/******************************************************************************/
+	{
+		/********************/
+		/* VARIABLE SECTION */
+		/********************/
+		String costi;		// STRING REPRESENTATION OF COST
+		double cost;		// COST OF ALL SKI TRIPS FOR A SPECIFIC DATE 
+		double num;			// COST OF ONE SKI TRIP FOR A SPECIFIC DATE
+		String mn;			// MONTH OF SKI TRIP
+		String dy;			// DAY OF SKI TRIP
+		String yr;			// YEAR OF SKI TRIP
+		
+		costi = "";			// INITIALIZES THE STRING FORM OF COST
+		mn = "";			// INITIALIZES THE MONTH
+		dy = "";			// INITIALIZES THE DAY
+		yr = "";			// INITIALIZES THE YEAR
+		cost = 0.00;		// INITIALIZES TOTAL COST FOR A SPECIFIC DATE
+		num = 0.00;			// INITIALIZES A SINGLE COST FOR A SPECIFIC DATE
+		
+		/*************************************************************************/
+		/* FOR LOOP TO CALCULATE TOTAL COST OF ALL SKI TRIPS FOR A SPECIFIC DATE */
+		/*************************************************************************/
+		for(int i = 0; i < custList.size(); i++)
+		{
+			mn = custList.get(i).getMonth();	// GETS MONTH FROM CURRENT CUSTOMER
+			dy = custList.get(i).getDay();		// GETS DAY FROM CURRENT CUSTOMER
+			yr = custList.get(i).getYear();		// GETS YEAR FROM CURRENT CUSTOMER
+			
+			/***********************************************************/
+			/* IF STATEMENT TO CHECK IF DATE MATCHES THE SELECTED DATE */	
+			/***********************************************************/
+			if((mn.equals(month)) && (dy.equals(day)) && (yr.equals(year)))
+			{
+				costi = custList.get(i).getCost();	// GETS COST OF EACH CUSTOMER
+				num = Double.parseDouble(costi);	// PARSES STRING VALUE TO DOUBLE
+				cost+=num;							// TOTALS COST 
+			}
 		}
 		
 		/******************/
@@ -637,7 +686,8 @@ public class Menu_GUI extends BusGUI implements ActionListener
 		/***********************/ 
 		JOptionPane.showMessageDialog(
 				null,
-				"Total Cost of all Skip Trips is: $"+costdf,
+				"Total Cost of all Skip Trips"+
+				"\n$"+costdf,
 				"Total Profit",
 				JOptionPane.INFORMATION_MESSAGE);
 	}
