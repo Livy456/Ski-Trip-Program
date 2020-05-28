@@ -298,8 +298,8 @@ public class Menu_GUI extends BusGUI implements ActionListener
 			/************************************************************************/
 			if (confirm == 0)
 			{
-				//frame.dispose();			// DISPOSES OF MENU_GUI FRAME
-				underConstruction();		// CALL TO UNDER CONSTRUCTION
+				frame.dispose();		// DISPOSES OF MENU_GUI FRAME
+				new Print_Date();		// INSTANTIATES PRINT DATE MENU
 			}
 		}
 		
