@@ -325,7 +325,7 @@ public class Print_Date extends Menu_GUI implements ActionListener
 		/***********************/ 
 		JOptionPane.showMessageDialog(
 				null,
-				"The total cost for the date " + date + " is\n" + 
+				"The total cost for the date " + date.toString() + " is\n" + 
 				"$" + costdf,
 				"Print Cost for Specific Date",
 				JOptionPane.INFORMATION_MESSAGE);
