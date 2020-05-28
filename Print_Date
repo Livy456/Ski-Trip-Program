@@ -20,6 +20,7 @@ import java.awt.*;						// IMPORTS AWT
 import java.awt.event.ActionEvent;		// IMPORTS ACTION EVENT
 import java.awt.event.ActionListener;	// IMPORTS ACTION LISTENER		
 import java.text.DecimalFormat;			// IMPORTS DECIMAL FORMAT
+import java.util.*;						// IMPORTS UTIL FOR ARRAYS AND ARRAYLISTS
 
 public class Print_Date extends Menu_GUI implements ActionListener
 {
@@ -29,28 +30,13 @@ public class Print_Date extends Menu_GUI implements ActionListener
 	private JButton returnB;		// CREATES A BUTTON TO RETURN TO MAIN MENU 
 	private JButton quitB;			// CREATES A BUTTON TO QUIT PROGRAM 
 	private JButton enterB;			// CREATES A BUTTON TO ENTER SPECIFIC DATE 
-	private JComboBox monthCB;		// CREATES A COMBO BOX FOR MONTH
-	private JComboBox dayCB;		// CREATES A COMBO BOX FOR DAY
-	private JComboBox yearCB;		// CREATES A COMBO BOX FOR YEAR
+	private JComboBox dateCB;		// CREATES A COMBO BOX FOR DATE
 	private JLabel info;			// CREATES A LABEL FOR INFORMATION
 	private Font font;				// CREATES A FONT
 	private JFrame frame;			// CREATES A JFRAME
 	private Container container;	// CREATES A CONTAINER
 	private static DecimalFormat df = new DecimalFormat("0.00");	// INSTANTIATES DECIMALFORMAT
-	private String[] months = {"", "01", "02", "03", "04", "05", "06",
-			   "07", "08", "09", "10", "11", "12"};		// CREATES AN ARRAY FOR MONTHS
-	private String[] years = {"", "2020", "2021", "2022", "2023", "2024",
-			  "2025", "2026", "2027", "2028", "2029",
-			  "2030", "2031", "2032", "2033", "2034",
-			  "2035", "2036", "2037", "2038", "2039",
-			  "2040", "2041", "2042", "2043", "2044",
-			  "2045", "2046", "2047", "2048", "2049"};	// CREATES AN ARRAY FOR YEARS
-	private String[] days = {"", "01", "02", "03", "04", "05",
-			 "06", "07", "08", "09", "10",
-			 "11", "12", "13", "14", "15",
-			 "16", "17", "18", "19", "20",
-			 "21", "22", "23", "24", "25",
-			 "26", "27", "28", "29", "30", "31"};		// CREATES AN ARRAY FOR DAYS
+	private Object[] date = arrayDate();	// CREATES AN ARRAY FOR DATE
 	
 	public Print_Date()
 	/************************************************/
@@ -67,6 +53,7 @@ public class Print_Date extends Menu_GUI implements ActionListener
 		returnB = new JButton("Return");						// INSTANTIATES A BUTTON
 		quitB = new JButton("Quit");							// INSTANTIATES A BUTTON
 		enterB = new JButton("Enter");							// INSTANTIATES A BUTTON
+		dateCB = new JComboBox(date);							// INSTANTIATES A COMBO BOX
 		container = frame.getContentPane();						// INSTANTIATES A CONTAINER
 		font = new Font("Times New Roman", 
 						Font.BOLD, 15);							// INSTANTIATES A FONT
@@ -96,13 +83,10 @@ public class Print_Date extends Menu_GUI implements ActionListener
 		/**********************************************/
 		returnB.setBounds(260, 270, 80, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		quitB.setBounds(370, 270, 80, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		enterB.setBounds(320, 50, 80, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		enterB.setBounds(200, 50, 80, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		info.setBounds(40, 30, 500, 30);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		monthCB.setBounds(80, 50, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		dayCB.setBounds(160, 50, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		yearCB.setBounds(240, 50, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		dateCB.setBounds(100, 50, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 
-		
 		/**********************************************/
 		/* ADDS LISTENER TO BUTTON TO PERFORM ACTIONS */
 		/**********************************************/
@@ -117,9 +101,7 @@ public class Print_Date extends Menu_GUI implements ActionListener
 		container.add(quitB);		// ADDS QUIT BUTTON TO CONTAINER
 		container.add(enterB);		// ADDS ENTER BUTTON TO CONTAINER
 		container.add(info);		// ADDS INFO LABEL TO CONTAINER
-		container.add(monthCB);		// ADDS MONTH COMBOBOX TO CONTAINER
-		container.add(dayCB);		// ADDS DAY COMBOBOX TO CONTAINER
-		container.add(yearCB);		// ADDS YEAR COMBOBOX TO CONTAINER
+		container.add(dateCB);		// ADDS DATE COMBOBOX TO CONTAINER
 	}
 	
 	public void actionPerformed(ActionEvent event)
@@ -196,6 +178,43 @@ public class Print_Date extends Menu_GUI implements ActionListener
 		}
 	}
 	
+	public void actionPerformedDate()
+	
+	{
+		
+	}
+	
+	public Object[] arrayDate()
+	{
+		Object date;
+		Object[] dateArray;
+		ArrayList<Object> dateList; 
+		
+		dateList = new ArrayList();
+		date = "";
+		
+		for(int i = 0; i < custList.size(); i++)
+		{
+			date = custList.get(i).getDate();
+			
+			for(int j = 0; j < dateList.size(); j++)
+			{
+				Object dt = dateList.get(i); 
+				
+				if(!(date.equals(dt)))
+				{
+					dateList.add(date);
+				}
+			}
+	
+		}
+		
+		dateArray = new Object[dateList.size()];
+		dateArray = dateList.toArray();
+		
+		return dateArray;
+	}
+	
 	public static double calculateDateCost(String month, String day, String year)
 	/******************************************************************************/
 	/* PRECONDITION - NEEDS TOTAL COST OF ALL SKI TRIPS FOR A SPECIFIC DATE 	  */
@@ -257,5 +276,8 @@ public class Print_Date extends Menu_GUI implements ActionListener
 		/* VARIABLE SECTION */
 		/********************/
 		String costdf;
+		double cost;
+		
+		cost = 0.00;
 	}
 }
