@@ -76,16 +76,16 @@ public class Print_Date extends Menu_GUI implements ActionListener
 		/**************************************/
 		/* SETS FOREGROUND COLOR OF THE LABEL */
 		/**************************************/
-		info.setForeground(Color.WHITE);		// SETS FOREGROUND COLOR OF HEADING LABEL
+		info.setForeground(Color.BLACK);		// SETS FOREGROUND COLOR OF HEADING LABEL
 			
 		/**********************************************/
 		/* SETS BOUNDS FOR BUTTONS, JTEXTFIELD, LABEL */
 		/**********************************************/
-		returnB.setBounds(260, 270, 80, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		returnB.setBounds(285, 270, 80, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		quitB.setBounds(370, 270, 80, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		enterB.setBounds(200, 50, 80, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		enterB.setBounds(225, 70, 80, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		info.setBounds(40, 30, 500, 30);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		dateCB.setBounds(100, 50, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		dateCB.setBounds(80, 70, 100, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 
 		/**********************************************/
 		/* ADDS LISTENER TO BUTTON TO PERFORM ACTIONS */
@@ -211,6 +211,7 @@ public class Print_Date extends Menu_GUI implements ActionListener
 		ArrayList<Object> dateList; // ALL DATES OF SKI TRIP AS AN ARRAYLIST
 		
 		dateList = new ArrayList(); // INSTANIATES ARRAYLIST	
+		dateList.add("");			// ADDS AN EMPTY SPACE IN ARRAYLIST
 		date = "";					// INITIALIZES DATE	
 		
 		/**************************************************/
@@ -223,7 +224,7 @@ public class Print_Date extends Menu_GUI implements ActionListener
 			/******************************************************/
 			/* FOR LOOP TO CHECK EACH VALUE OF ARRAYLIST OF DATES */
 			/******************************************************/
-			for(int j = 0; j < dateList.size(); j++)
+			for(int j = 0; j < dateList.size()-1; j++)
 			{
 				Object dt = dateList.get(i); 	// GETS EACH ARRAYLIST VALUE
 				
@@ -237,9 +238,7 @@ public class Print_Date extends Menu_GUI implements ActionListener
 			}
 		}
 		
-		dateArray = new Object[dateList.size()+1];	// INSTANIATES ARRAY AND 
-													// ADDS SPACE FOR EMPTY STRING
-		dateArray[0] = "";							// MAKES FIRST ELEMENT EMPTY
+		dateArray = new Object[dateList.size()];	// INSTANIATES ARRAY AND 
 		dateArray = dateList.toArray();				// CONVERTS ARRAYLIST TO AN ARRAY
 		
 		/******************/
