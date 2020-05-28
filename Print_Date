@@ -209,7 +209,8 @@ public class Print_Date extends Menu_GUI implements ActionListener
 		/********************/
 		/* VARIABLE SECTION */
 		/********************/
-		Object date;				// REUSUABLE VALUE FOR DATE
+		Object date;				// REUSUABLE VALUE FOR DATE OF SKI TRIP
+		Object dt;					// REUSUABLE VALUE FOR ELEMENT IN ARRAYLIST
 		Object[] dateArray;			// ALL DATES OF SKI TRIP AS AN ARRAY
 		ArrayList<Object> dateList; // ALL DATES OF SKI TRIP AS AN ARRAYLIST
 		
@@ -224,8 +225,33 @@ public class Print_Date extends Menu_GUI implements ActionListener
 		{
 			date = custList.get(i).getDate();	// CALL TO GET DATE
 			dateList.add(date);		// ADDS UNIQUE DATE TO ARRAYLIST
+			int count = 0;			// NUMBER OF TIMES AN ELEMENT APPEARS IN ARRAYLIST
+			
+			/**************************************************/
+			/* FOR LOOP TO GO THROUGH EVERY DATE FOR SKI TRIP */
+			/**************************************************/
+			for(int j = 0; j < dateList.size(); j++)
+			{
+				dt = dateList.get(j);	// GETS ELEMENT FROM ARRAYLIST
+				
+				/****************************************************************/
+				/* IF STATEMENT TO CHECK IF ELEMENT HAS APPEARED MORE THAN ONCE */	
+				/****************************************************************/
+				if(date.equals(dt))
+				{
+					count++;	// INCREMENTS OCCURENCES OF AN ELEMENT
+				}
+			
+				/*****************************************************/
+				/* IF STATEMENT TO GET RID OF REOCCURENCE OF ELEMENT */	
+				/*****************************************************/
+				if(count >=2)
+				{
+					dateList.remove(j);	// REMOVES ELEMENT THAT REOCCURED
+					j--;				// MAKES SURE INDEX DOES NOT SKIP ELEMENTS
+				}
+			}
 		}
-		
 		
 		dateArray = new Object[dateList.size()];	// INSTANIATES ARRAY AND 
 		dateArray = dateList.toArray();				// CONVERTS ARRAYLIST TO AN ARRAY
