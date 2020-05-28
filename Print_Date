@@ -116,6 +116,7 @@ public class Print_Date extends Menu_GUI implements ActionListener
 		/********************/
 		String action; 		// STRING TO REPRESENT WHICH BUTTON WAS PRESSED
 		Object dt;			// REUSUABLE OBJECT VALUE FOR DATE
+		String dt2;			// STRING REPRESENTATION OF OBJECT VALUE FOR DATE
 		int confirm; 		// REUSUABLE INT INPUT FOR CONFIRMING AN ACTION
 		double cost;		// REUSUABLE DOUBLE VALUE FOR COST
 		
@@ -155,7 +156,8 @@ public class Print_Date extends Menu_GUI implements ActionListener
 			}
 		}
 		
-		dt = actionPerformedDate();	// CALL TO ACTION PERFORMED DATE
+		dt = actionPerformedDate();		// CALL TO ACTION PERFORMED DATE
+		dt2 = (String) dt;				// CONVERTS TO STRING
 		cost = calculateDateCost(dt);	// CALL TO CALCULATE DATE COST
 		
 		/*****************************************************/
@@ -176,7 +178,7 @@ public class Print_Date extends Menu_GUI implements ActionListener
 			/*********************************************************************/
 			else if(dateCB.getSelectedItem() != "")
 			{
-				printDateCost(cost);		// CALL TO PRINT DATE COST
+				printDateCost(cost, dt2);		// CALL TO PRINT DATE COST
 			}
 		}
 	}
@@ -305,7 +307,7 @@ public class Print_Date extends Menu_GUI implements ActionListener
 		return cost;		// RETURNS COST	
 	}
 	
-	public void printDateCost(double cost)
+	public void printDateCost(double cost, String dt)
 	/*****************************************************************/
 	/* PRECONDITION - NEEDS TO PRINT OUT TOTAL COST OF ALL SKI TRIPS */ 
 	/* 				  FOR A SPECIFIC DATE 	  						 */
@@ -325,7 +327,7 @@ public class Print_Date extends Menu_GUI implements ActionListener
 		/***********************/ 
 		JOptionPane.showMessageDialog(
 				null,
-				"The total cost for the date " + date.toString() + " is\n" + 
+				"The total cost for the date of " + dt + " is\n" + 
 				"$" + costdf,
 				"Print Cost for Specific Date",
 				JOptionPane.INFORMATION_MESSAGE);
