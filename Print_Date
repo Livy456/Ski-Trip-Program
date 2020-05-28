@@ -166,8 +166,7 @@ public class Print_Date extends Menu_GUI implements ActionListener
 			/****************************************************************/
 			/* IF STATEMENT TO CHECK IF MONTH, DAY, AND YEAR WERE FILLED IN */	
 			/****************************************************************/
-			if ((monthCB.getSelectedItem() == "") || (dayCB.getSelectedItem() == "") || 
-				(yearCB.getSelectedItem() == ""))
+			if (dateCB.getSelectedItem() == "")
 			{
 				errorMessage(error2);	// CALL TO ERROR MESSAGE
 			}
@@ -175,8 +174,7 @@ public class Print_Date extends Menu_GUI implements ActionListener
 			/*********************************************************************/
 			/* ELSE IF STATEMENT TO CHECK IF MONTH, DAY, AND YEAR WERE FILLED IN */	
 			/*********************************************************************/
-			else if((monthCB.getSelectedItem() != "") && (dayCB.getSelectedItem() != "") && 
-				(yearCB.getSelectedItem() != ""))
+			else if(dateCB.getSelectedItem() != "")
 			{
 				printDateCost(cost);		// CALL TO PRINT DATE COST
 			}
@@ -195,7 +193,7 @@ public class Print_Date extends Menu_GUI implements ActionListener
 		Object date;		// REUSUABLE VALUE FOR DATE
 		
 		date = dateCB.getSelectedItem();	// GETS SELECTED ITEM FROM COMBO BOX
-		
+			
 		/******************/
 		/* RETURN SECTION */
 		/******************/
@@ -224,24 +222,10 @@ public class Print_Date extends Menu_GUI implements ActionListener
 		/**************************************************/
 		for(int i = 0; i < custList.size(); i++)
 		{
-			date = custList.get(i).getDate();		// CALL TO GET DATE
-			
-			/******************************************************/
-			/* FOR LOOP TO CHECK EACH VALUE OF ARRAYLIST OF DATES */
-			/******************************************************/
-			for(int j = 0; j < dateList.size()-1; j++)
-			{
-				Object dt = dateList.get(i); 	// GETS EACH ARRAYLIST VALUE
-				
-				/*******************************************************/
-				/* IF STATEMENT TO CHECK ADD UNIQUE DATES TO ARRAYLIST */	
-				/*******************************************************/
-				if(!(date.equals(dt)))
-				{
-					dateList.add(date);		// ADDS UNIQUE DATE TO ARRAYLIST
-				}
-			}
+			date = custList.get(i).getDate();	// CALL TO GET DATE
+			dateList.add(date);		// ADDS UNIQUE DATE TO ARRAYLIST
 		}
+		
 		
 		dateArray = new Object[dateList.size()];	// INSTANIATES ARRAY AND 
 		dateArray = dateList.toArray();				// CONVERTS ARRAYLIST TO AN ARRAY
