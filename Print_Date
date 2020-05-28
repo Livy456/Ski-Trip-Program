@@ -85,7 +85,7 @@ public class Print_Date extends Menu_GUI implements ActionListener
 		quitB.setBounds(370, 270, 80, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		enterB.setBounds(225, 70, 80, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		info.setBounds(40, 30, 500, 30);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		dateCB.setBounds(80, 70, 100, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		dateCB.setBounds(100, 70, 100, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 
 		/**********************************************/
 		/* ADDS LISTENER TO BUTTON TO PERFORM ACTIONS */
@@ -115,7 +115,9 @@ public class Print_Date extends Menu_GUI implements ActionListener
 		/* VARIABLE SECTION */
 		/********************/
 		String action; 		// STRING TO REPRESENT WHICH BUTTON WAS PRESSED
+		Object dt;			// REUSUABLE OBJECT VALUE FOR DATE
 		int confirm; 		// REUSUABLE INT INPUT FOR CONFIRMING AN ACTION
+		double cost;		// REUSUABLE DOUBLE VALUE FOR COST
 		
 		confirm = 1;		// INITIALIZES CONFIRM
 		action = event.getActionCommand();	// CALL TO GET ACTION COMMAND
@@ -153,10 +155,13 @@ public class Print_Date extends Menu_GUI implements ActionListener
 			}
 		}
 		
-		/**********************************************************/
-		/* ELSE IF STATEMENT TO CHECK IF ENTER BUTTON WAS PRESSED */	
-		/**********************************************************/
-		else if(action.equals("Enter"))
+		dt = actionPerformedDate();	// CALL TO ACTION PERFORMED DATE
+		cost = calculateDateCost(dt);	// CALL TO CALCULATE DATE COST
+		
+		/*****************************************************/
+		/* IF STATEMENT TO CHECK IF ENTER BUTTON WAS PRESSED */	
+		/*****************************************************/
+		if(action.equals("Enter"))
 		{
 			/****************************************************************/
 			/* IF STATEMENT TO CHECK IF MONTH, DAY, AND YEAR WERE FILLED IN */	
@@ -173,7 +178,7 @@ public class Print_Date extends Menu_GUI implements ActionListener
 			else if((monthCB.getSelectedItem() != "") && (dayCB.getSelectedItem() != "") && 
 				(yearCB.getSelectedItem() != ""))
 			{
-				printDateCost();		// CALL TO PRINT DATE COST
+				printDateCost(cost);		// CALL TO PRINT DATE COST
 			}
 		}
 	}
@@ -290,7 +295,7 @@ public class Print_Date extends Menu_GUI implements ActionListener
 		return cost;		// RETURNS COST	
 	}
 	
-	public void printDateCost()
+	public void printDateCost(double cost)
 	/*****************************************************************/
 	/* PRECONDITION - NEEDS TO PRINT OUT TOTAL COST OF ALL SKI TRIPS */ 
 	/* 				  FOR A SPECIFIC DATE 	  						 */
@@ -301,12 +306,8 @@ public class Print_Date extends Menu_GUI implements ActionListener
 		/********************/
 		/* VARIABLE SECTION */
 		/********************/
-		Object date;		// REUSUABLE VALUE FOR DATE		
-		String costdf;		// STRING REPRESENTATION OF COST
-		double cost;		// COST OF ALL SKI TRIPS FOR A SPECIFIC DATE
+		String costdf;		// STRING REPRESENTATION OF COST		
 		
-		date = actionPerformedDate();	// CALL TO ACTION PERFORMED DATE
-		cost = calculateDateCost(date);	// CALL TO CALCULATE DATE COST
 		costdf = df.format(cost);		// FORMATS COST TO TWO DECIMAL PLACES
 		
 		/***********************/
