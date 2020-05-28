@@ -164,7 +164,7 @@ public class Print_Date extends Menu_GUI implements ActionListener
 			if ((monthCB.getSelectedItem() == "") || (dayCB.getSelectedItem() == "") || 
 				(yearCB.getSelectedItem() == ""))
 			{
-				errorMessage(error2);		// CALL TO ERROR MESSAGE
+				errorMessage(error2);	// CALL TO ERROR MESSAGE
 			}
 			
 			/*********************************************************************/
@@ -173,49 +173,82 @@ public class Print_Date extends Menu_GUI implements ActionListener
 			else if((monthCB.getSelectedItem() != "") && (dayCB.getSelectedItem() != "") && 
 				(yearCB.getSelectedItem() != ""))
 			{
-				printDateCost();			// CALL TO PRINT DATE COST
+				printDateCost();		// CALL TO PRINT DATE COST
 			}
 		}
 	}
 	
-	public void actionPerformedDate()
-	
+	public Object actionPerformedDate()
+	/****************************************************/
+	/* PRECONDITION - NEEDS DATE FOR OUTPUTTING COST 	*/
+	/* POSTCONDITION - RETURNS DATE FOR OUTPUTTING COST */
+	/****************************************************/
 	{
+		/********************/
+		/* VARIABLE SECTION */
+		/********************/
+		Object date;		// REUSUABLE VALUE FOR DATE
 		
+		date = dateCB.getSelectedItem();	// GETS SELECTED ITEM FROM COMBO BOX
+		
+		/******************/
+		/* RETURN SECTION */
+		/******************/
+		return date;			// RETURNS DT 
 	}
 	
 	public Object[] arrayDate()
+	/**********************************************************************/
+	/* PRECONDITION - NEEDS ARRAY OF ALL DATES ENTERED BY CUSTOMERS 	  */
+	/* POSTCONDITION - RETURNS AN ARRAY OF ALL DATES ENTERED BY CUSTOMERS */
+	/**********************************************************************/
 	{
-		Object date;
-		Object[] dateArray;
-		ArrayList<Object> dateList; 
+		/********************/
+		/* VARIABLE SECTION */
+		/********************/
+		Object date;				// REUSUABLE VALUE FOR DATE
+		Object[] dateArray;			// ALL DATES OF SKI TRIP AS AN ARRAY
+		ArrayList<Object> dateList; // ALL DATES OF SKI TRIP AS AN ARRAYLIST
 		
-		dateList = new ArrayList();
-		date = "";
+		dateList = new ArrayList(); // INSTANIATES ARRAYLIST	
+		date = "";					// INITIALIZES DATE	
 		
+		/**************************************************/
+		/* FOR LOOP TO GO THROUGH EVERY DATE FOR SKI TRIP */
+		/**************************************************/
 		for(int i = 0; i < custList.size(); i++)
 		{
-			date = custList.get(i).getDate();
+			date = custList.get(i).getDate();		// CALL TO GET DATE
 			
+			/******************************************************/
+			/* FOR LOOP TO CHECK EACH VALUE OF ARRAYLIST OF DATES */
+			/******************************************************/
 			for(int j = 0; j < dateList.size(); j++)
 			{
-				Object dt = dateList.get(i); 
+				Object dt = dateList.get(i); 	// GETS EACH ARRAYLIST VALUE
 				
+				/*******************************************************/
+				/* IF STATEMENT TO CHECK ADD UNIQUE DATES TO ARRAYLIST */	
+				/*******************************************************/
 				if(!(date.equals(dt)))
 				{
-					dateList.add(date);
+					dateList.add(date);		// ADDS UNIQUE DATE TO ARRAYLIST
 				}
 			}
-	
 		}
 		
-		dateArray = new Object[dateList.size()];
-		dateArray = dateList.toArray();
+		dateArray = new Object[dateList.size()+1];	// INSTANIATES ARRAY AND 
+													// ADDS SPACE FOR EMPTY STRING
+		dateArray[0] = "";							// MAKES FIRST ELEMENT EMPTY
+		dateArray = dateList.toArray();				// CONVERTS ARRAYLIST TO AN ARRAY
 		
-		return dateArray;
+		/******************/
+		/* RETURN SECTION */
+		/******************/
+		return dateArray;		// RETURNS DATE ARRAY	
 	}
 	
-	public static double calculateDateCost(String month, String day, String year)
+	public double calculateDateCost(Object date)
 	/******************************************************************************/
 	/* PRECONDITION - NEEDS TOTAL COST OF ALL SKI TRIPS FOR A SPECIFIC DATE 	  */
 	/* POSTCONDITION - CALCULATES TOTAL COST OF ALL SKI TRIPS FOR A SPECIFIC DATE */
@@ -227,14 +260,10 @@ public class Print_Date extends Menu_GUI implements ActionListener
 		String costi;		// STRING REPRESENTATION OF COST
 		double cost;		// COST OF ALL SKI TRIPS FOR A SPECIFIC DATE 
 		double num;			// COST OF ONE SKI TRIP FOR A SPECIFIC DATE
-		String mn;			// MONTH OF SKI TRIP
-		String dy;			// DAY OF SKI TRIP
-		String yr;			// YEAR OF SKI TRIP
+		Object dt;			// DATE OF SKI TRIP
 		
 		costi = "";			// INITIALIZES THE STRING FORM OF COST
-		mn = "";			// INITIALIZES THE MONTH
-		dy = "";			// INITIALIZES THE DAY
-		yr = "";			// INITIALIZES THE YEAR
+		dt = "";			// INITIALIZES THE MONTH
 		cost = 0.00;		// INITIALIZES TOTAL COST FOR A SPECIFIC DATE
 		num = 0.00;			// INITIALIZES A SINGLE COST FOR A SPECIFIC DATE
 		
@@ -243,14 +272,12 @@ public class Print_Date extends Menu_GUI implements ActionListener
 		/*************************************************************************/
 		for(int i = 0; i < custList.size(); i++)
 		{
-			mn = custList.get(i).getMonth();	// GETS MONTH FROM CURRENT CUSTOMER
-			dy = custList.get(i).getDay();		// GETS DAY FROM CURRENT CUSTOMER
-			yr = custList.get(i).getYear();		// GETS YEAR FROM CURRENT CUSTOMER
+			dt = custList.get(i).getDate();	// GETS DATE FROM CURRENT CUSTOMER
 			
 			/***********************************************************/
 			/* IF STATEMENT TO CHECK IF DATE MATCHES THE SELECTED DATE */	
 			/***********************************************************/
-			if((mn.equals(month)) && (dy.equals(day)) && (yr.equals(year)))
+			if(dt.equals(date))
 			{
 				costi = custList.get(i).getCost();	// GETS COST OF EACH CUSTOMER
 				num = Double.parseDouble(costi);	// PARSES STRING VALUE TO DOUBLE
@@ -264,7 +291,7 @@ public class Print_Date extends Menu_GUI implements ActionListener
 		return cost;		// RETURNS COST	
 	}
 	
-	public static void printDateCost()
+	public void printDateCost()
 	/*****************************************************************/
 	/* PRECONDITION - NEEDS TO PRINT OUT TOTAL COST OF ALL SKI TRIPS */ 
 	/* 				  FOR A SPECIFIC DATE 	  						 */
@@ -275,9 +302,22 @@ public class Print_Date extends Menu_GUI implements ActionListener
 		/********************/
 		/* VARIABLE SECTION */
 		/********************/
-		String costdf;
-		double cost;
+		Object date;		// REUSUABLE VALUE FOR DATE		
+		String costdf;		// STRING REPRESENTATION OF COST
+		double cost;		// COST OF ALL SKI TRIPS FOR A SPECIFIC DATE
 		
-		cost = 0.00;
+		date = actionPerformedDate();	// CALL TO ACTION PERFORMED DATE
+		cost = calculateDateCost(date);	// CALL TO CALCULATE DATE COST
+		costdf = df.format(cost);		// FORMATS COST TO TWO DECIMAL PLACES
+		
+		/***********************/
+		/* MAKES DIALOG WINDOW */
+		/***********************/ 
+		JOptionPane.showMessageDialog(
+				null,
+				"The total cost for the date " + date + " is\n" + 
+				"$" + costdf,
+				"Print Cost for Specific Date",
+				JOptionPane.INFORMATION_MESSAGE);
 	}
 }
