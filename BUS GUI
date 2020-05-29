@@ -762,8 +762,7 @@ public class BusGUI implements ActionListener
 		/*******************************/
 		num = JOptionPane.showConfirmDialog(
 				null,
-				"Do you really want to do this? Once you do this" + "\n" + 
-				"you cannot undo this action.",
+				"Do you really want to do this?",
 				"Confirm Window",
 				JOptionPane.YES_NO_OPTION,
 				JOptionPane.QUESTION_MESSAGE);
