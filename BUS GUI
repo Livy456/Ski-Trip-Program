@@ -50,6 +50,7 @@ public class BusGUI implements ActionListener
 	/*****************************/
 	private JButton enterB;				// CREATES A BUTTON FOR ENTERING INFORMATION FOR PROGRAM	
 	private JButton quitB;				// CREATES A BUTTON TO QUIT PROGRAM 
+	private JButton returnB;			// CREATES A BUTTON TO RETURN TO MAIN SKI TRIP MENU
 	protected static JComboBox monthCB;	// CREATES A COMBO BOX(DROP-DOWN LIST) FOR MONTH
 	protected static JComboBox dayCB;	// CREATES A COMBO BOX FOR DAY
 	protected static JComboBox yearCB;	// CREATES A COMBO BOX FOR YEAR
@@ -93,6 +94,7 @@ public class BusGUI implements ActionListener
 		/*************************/
 		enterB = new JButton("Enter");		// INSTANTIATES A JBUTTON 
 		quitB = new JButton("Quit");		// INSTANTIATES A JBUTTON 
+		returnB = new JButton("Return");	// INSTANTIATES A JBUTTON
 		customer = new Customer();			// INSTANTIATES A CUSTOMER		
 		nameTF = new JTextField();			// INSTANTIATES A JTEXTFIELD
 		grpSzTF = new JTextField();			// INSTANTIATES A JTEXTFIELD 
@@ -152,8 +154,9 @@ public class BusGUI implements ActionListener
 		/**********************************************/
 		/* SETS BOUNDS FOR BUTTONS, JTEXTFIELD, LABEL */
 		/**********************************************/
-		enterB.setBounds(260, 190, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		enterB.setBounds(180, 190, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		quitB.setBounds(340, 190, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		returnB.setBounds(260, 190, 75, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		nameTF.setBounds(80, 80, 100, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		grpSzTF.setBounds(80, 110, 100, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		monthCB.setBounds(80, 140, 100, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
@@ -172,6 +175,7 @@ public class BusGUI implements ActionListener
 		/**********************************************/
 		enterB.addActionListener(this);		// ADDS ACTIONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED
 		quitB.addActionListener(this);		// ADDS ACITONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED
+		returnB.addActionListener(this);	// ADDS ACTIONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED
 		nameTF.addActionListener(this);		// ADDS ACITONLISTENER TO MAKE AN EVENT ONCE TEXT IS WRITTEN
 		grpSzTF.addActionListener(this);	// ADDS ACITONLISTENER TO MAKE AN EVENT ONCE TEXT IS WRITTEN
 		monthCB.addActionListener(this);	// ADDS ACITONLISTENER TO MAKE AN EVENT ONCE ITEM IS SELECTED
@@ -183,6 +187,7 @@ public class BusGUI implements ActionListener
 		/*************************/
 		container.add(enterB);		// ADDS ENTER BUTTON TO CONTAINER
 		container.add(quitB);		// ADDS QUIT BUTTON TO CONTAINER
+		container.add(returnB);		// ADDS RETURN BUTTON TO CONTAINER
 		container.add(nameTF);		// ADDS NAME TEXT FIELD TO CONTAINER
 		container.add(grpSzTF);		// ADDS GROUP SIZE TEXT FIELD TO CONTAINER
 		container.add(monthCB);		// ADDS MONTH COMBO BOX TO CONTAINER
@@ -232,6 +237,23 @@ public class BusGUI implements ActionListener
 			}
 		}
 		
+		/***********************************************************/
+		/* ELSE IF STATEMENT TO CHECK IF RETURN BUTTON WAS PRESSED */	
+		/***********************************************************/
+		else if (action.equals("Return"))
+		{
+			confirm = confirmWindow();	// CALL TO CONFIRM WINDOW
+			
+			/************************************************************/
+			/* IF STATEMENT TO CONFIRM ACTION OF RETURNING TO MAIN MENU */	
+			/************************************************************/
+			if(confirm == 0)
+			{
+				frame.dispose();		// GETS RID OF THE OLD FRAME
+				new Menu_GUI();			// INSTANTIATES MENU GUI FRAME
+			}
+		}
+		
 		actionPerformedName(event);		// CALL TO ACTION PERFORMED FOR NAME
 		actionPerformedSize(event);		// CALL TO ACTION PERFORMED FOR GROUP SIZE
 		actionPerformedDate(event);		// CALL TO ACTION PERFORMED FOR DATE
@@ -259,11 +281,19 @@ public class BusGUI implements ActionListener
 					&& (monthCB.getSelectedItem() != null) && (dayCB.getSelectedItem() != null) 
 					&& (yearCB.getSelectedItem() != null))
 			{
-				frame.dispose();		// GETS RID OF THE OLD FRAME
-				custList.add(customer);	// ADDS CUSTOMER TO ARRAYLIST
-				str = printArray(custList);
-				System.out.println(str);
-				new Menu_GUI(); 		// INSTANTIATES A NEW FRAME
+				confirm = confirmWindow();	// CALL TO CONFIRM WINDOW
+				
+				/************************************************************/
+				/* IF STATEMENT TO CONFIRM ACTION OF ENTERING CUSTOMER INFO */	
+				/************************************************************/
+				if(confirm == 0)
+				{
+					frame.dispose();		// GETS RID OF THE OLD FRAME
+					custList.add(customer);	// ADDS CUSTOMER TO ARRAYLIST
+					str = printArray(custList);
+					System.out.println(str);
+					new Menu_GUI(); 		// INSTANTIATES A NEW FRAME
+				}
 			}
 		}
 	}
