@@ -19,15 +19,18 @@ import javax.swing.*;						// IMPORTS SWING
 import java.awt.*;							// IMPORTS AWT
 import java.awt.event.ActionEvent;			// IMPORTS ACTION EVENT
 import java.awt.event.ActionListener;		// IMPORTS ACTION LISTENER
-import java.util.ArrayList;
+import java.util.ArrayList;					// IMPORTS ARRAYLIST
 
 public class Modify extends Modify_Menu implements ActionListener
 {
 	/*****************************/
 	/* INSTANCE VARIABLE SECTION */
 	/*****************************/
-	private Label warning;		// CREATES A LABEL FOR INPUT CONSTRAINTS
-	private Label warning2;		// CREATES A LABEL FOR INPUT CONSTRAINTS
+	private JLabel warning;		// CREATES A JLABEL FOR INPUT CONSTRAINTS
+	private JLabel warning2;	// CREATES A JLABEL FOR INPUT CONSTRAINTS
+	private JLabel disName;		// CREATES A JLABEL FOR DISPLAYING NAME
+	private JLabel disSize;		// CREATES A JLABEL FOR DISPLAYING SIZE
+	private JLabel disDate;		// CREATES A JLABEL FOR DISPLAYING DATE
 	
 	public Modify()
 	/************************************************/
@@ -40,9 +43,15 @@ public class Modify extends Modify_Menu implements ActionListener
 		/*************************/
 		info = new JLabel("Modify the Customer");	// INSTANTIATES JLABEL
 		frame = new JFrame("Modify Customer");		// INSTANTIATES JFRAME
-		warning = new Label("Name has to be < "+
+		disName = new JLabel("Customer Name: " + 
+							 custList.get(custNum-1).getName());	// INSTANTIATES JLABEL
+		disSize = new JLabel("Customer Size: " + 
+							 custList.get(custNum-1).getSize());	// INSTANTIATES JLABEL
+		disDate = new JLabel("Customer Date: " + 
+							 custList.get(custNum-1).getDate());	// INSTANTIATES JLABEL
+		warning = new JLabel("Name has to be < "+
 				"11 characters.");					// INSTANTIATES A LABEL	
-		warning2 = new Label("Group size has to " +
+		warning2 = new JLabel("Group size has to " +
 				 "be between 1 - 400.");			// INSTANTIATES A LABEL
 		confirm = new JButton("Confirm");			// INSTANTIATES JBUTTON
 		container = frame.getContentPane();			// CREATES A CONTENT PANE
@@ -63,6 +72,9 @@ public class Modify extends Modify_Menu implements ActionListener
 		/* SETS FONT OF THE LABEL */
 		/**************************/
 		info.setFont(font);			// SETS FONT OF INFO LABEL
+		disName.setFont(font);		// SETS FONT OF NAME LABEL
+		disSize.setFont(font);		// SETS FONT OF SIZE LABEL
+		disDate.setFont(font);		// SETS FONT OF DATE LABEL
 		warning.setFont(font);		// SETS THE FONT OF THE WARNING LABEL
 		warning2.setFont(font);		// SETS THE FONT OF THE WARNING LABEL
 		
@@ -70,6 +82,11 @@ public class Modify extends Modify_Menu implements ActionListener
 		/* SETS FOREGROUND COLOR OF THE LABEL */
 		/**************************************/
 		info.setForeground(Color.BLACK);		// SETS FOREGROUND COLOR OF INFO LABEL 
+		disName.setForeground(Color.BLACK);		// SETS FOREGROUND COLOR OF DISPLAY NAME LABEL
+		disSize.setForeground(Color.BLACK);		// SETS FOREGROUND COLOR OF DISPLAY SIZE LABEL
+		disDate.setForeground(Color.BLACK);		// SETS FOREGROUND COLOR OF DISPLAY DATE LABEL
+		warning.setForeground(Color.BLACK);		// SETS FOREGROUND COLOR OF WARNING LABEL
+		warning2.setForeground(Color.BLACK);	// SETS FOREGROUND COLOR OF WARNING2 LABEL
 		nameL.setForeground(Color.BLACK);		// SETS FOREGROUND COLOR OF NAME LABEL
 		grpSzL.setForeground(Color.BLACK);		// SETS FOREGROUND COLOR OF GROUP SIZE LABEL
 		dateL.setForeground(Color.BLACK);		// SETS FOREGROUND COLOR OF DATE LABEL
@@ -77,10 +94,13 @@ public class Modify extends Modify_Menu implements ActionListener
 		/**********************************************/
 		/* SETS BOUNDS FOR BUTTONS, JTEXTFIELD, LABEL */
 		/**********************************************/
-		returnB.setBounds(270, 320, 75, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		confirm.setBounds(350, 320, 100, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		quitB.setBounds(455, 320, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		returnB.setBounds(325, 320, 75, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		confirm.setBounds(230, 320, 90, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		quitB.setBounds(405, 320, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		info.setBounds(20, 30, 500, 30);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		disName.setBounds(20, 170, 500, 30);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		disSize.setBounds(20, 200, 500, 30);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		disDate.setBounds(20, 230, 500, 30);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		warning.setBounds(210, 80, 500, 30);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		warning2.setBounds(210, 110, 500, 30);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH) 
 		nameL.setBounds(20, 80, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
@@ -106,6 +126,9 @@ public class Modify extends Modify_Menu implements ActionListener
 		container.add(quitB);		// ADDS QUIT BUTTON TO CONTAINER
 		container.add(confirm);		// ADDS CONFRIM BUTTON TO CONTAINER
 		container.add(info);		// ADDS INFO LABEL TO CONTAINER
+		container.add(disName);		// ADDS DISPLAY NAME LABEL TO CONTAINER
+		container.add(disSize);		// ADDS DISPLAY SIZE LABEL TO CONTAINER	
+		container.add(disDate);		// ADDS DISPLAY DATE LABEL TO CONTAINER
 		container.add(warning);		// ADDS WARNING LABEL TO CONTAINER
 		container.add(warning2);	// ADDS WARNING 2 LABEL TO CONTAINER
 		container.add(nameL);		// ADDS NAME LABEL TO CONTAINER
@@ -186,9 +209,9 @@ public class Modify extends Modify_Menu implements ActionListener
 				/*********************************************************************/
 				/* IF STATEMENT TO CHECK IF NOTHING WAS CHANGED IN OTHER TEXT FIELDS */	
 				/*********************************************************************/
-				if((nameTF.getText() == "") && (grpSzTF.getText() == "") && 
-				   (monthCB.getSelectedItem() == "") && (dayCB.getSelectedItem() == "")
-				   && (yearCB.getSelectedItem() == ""))
+				if((nameTF.getText() == "") || (grpSzTF.getText() == "")  || 
+				   (monthCB.getSelectedItem() == null)  || (dayCB.getSelectedItem() == null)
+				   || (yearCB.getSelectedItem() == null))
 				{
 					errorMessage(error6);
 				}
@@ -196,9 +219,9 @@ public class Modify extends Modify_Menu implements ActionListener
 				/****************************************************************************/
 				/* ELSE IF STATEMENT TO CHECK IF SOMETHING WAS CHANGED IN OTHER TEXT FIELDS */	
 				/****************************************************************************/
-				else if ((nameTF.getText() != "") || (grpSzTF.getText() != "") || 
-						 (monthCB.getSelectedItem() != "") || (dayCB.getSelectedItem() != "")
-						 || (yearCB.getSelectedItem() != ""))
+				else if ((nameTF.getText() != "") && (grpSzTF.getText() != "") &&
+						 (monthCB.getSelectedItem() != null) && (dayCB.getSelectedItem() != null)
+						 && (yearCB.getSelectedItem() != null))
 				{
 					frame.dispose();	// GETS RID OF FRAME
 					new Menu_GUI();		// NEW MENU FRAME IS INSTANTIATED
