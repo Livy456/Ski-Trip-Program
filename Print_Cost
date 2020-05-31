@@ -25,5 +25,44 @@ import java.util.*;						// IMPORTS UTIL FOR ARRAYS AND ARRAYLISTS
 
 public class Print_Cost extends Menu_GUI implements ActionListener
 {
-
+	/*****************************/
+	/* INSTANCE VARIABLE SECTION */
+	/*****************************/
+	private JButton returnB;		// CREATES A BUTTON TO RETURN TO MAIN MENU 
+	private JButton quitB;			// CREATES A BUTTON TO QUIT PROGRAM 
+	private JButton enterB;			// CREATES A BUTTON TO ENTER SPECIFIC DATE 
+	private JComboBox dateCB;		// CREATES A COMBO BOX FOR DATE
+	private JLabel info;			// CREATES A LABEL FOR INFORMATION
+	private Font font;				// CREATES A FONT
+	private JFrame frame;			// CREATES A JFRAME
+	private Container container;	// CREATES A CONTAINER
+	private static DecimalFormat df = new DecimalFormat("0.00");	// INSTANTIATES DECIMALFORMAT
+	private String[] customer = arrayCust();	// CREATES AN ARRAY FOR DATE
+	
+	public Print_Cost()
+	{
+		
+	}
+	
+	public void ActionPerformed(ActionEvent event)
+	{
+		
+	}
+	
+	public String[] arrayCust()
+	{
+		String[] cust;
+		
+		cust = new String[custList.size()];
+		
+		for(int i = 0; i < custList.size(); i++)
+		{
+			cust[i] = "Customer " + i + ": " + custList.get(i).getID() + "\t" +
+					  custList.get(i).getName() + "\t" + 
+					  custList.get(i).getSize() + "\t" + 
+					  custList.get(i).getDate();
+		}
+		
+		return cust;
+	}
 }
