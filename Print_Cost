@@ -37,7 +37,8 @@ public class Print_Cost extends Menu_GUI implements ActionListener
 	private JFrame frame;			// CREATES A JFRAME
 	private Container container;	// CREATES A CONTAINER
 	private static DecimalFormat df = new DecimalFormat("0.00");	// INSTANTIATES DECIMALFORMAT
-	private String[] customer = arrayCust();	// CREATES AN ARRAY FOR ALL CUSTOMERS
+	private String[] customer = {"1", "2"};
+			//arrayCust();	// CREATES AN ARRAY FOR ALL CUSTOMERS
 	
 	public Print_Cost()
 	/************************************************/
@@ -50,7 +51,7 @@ public class Print_Cost extends Menu_GUI implements ActionListener
 		/*************************/
 		frame = new JFrame("Ski Trip Print Menu");				// INSTANTIATES A FRAME
 		info = new JLabel("Prints Cost of Customer going "+
-						  "\n" + "on Ski Trip");			// INSTANTIATES A LABEL
+						  "\n" + "on Ski Trip");				// INSTANTIATES A LABEL
 		returnB = new JButton("Return");						// INSTANTIATES A BUTTON
 		quitB = new JButton("Quit");							// INSTANTIATES A BUTTON
 		enterB = new JButton("Enter");							// INSTANTIATES A BUTTON
@@ -77,16 +78,16 @@ public class Print_Cost extends Menu_GUI implements ActionListener
 		/**************************************/
 		/* SETS FOREGROUND COLOR OF THE LABEL */
 		/**************************************/
-		info.setForeground(Color.BLACK);		// SETS FOREGROUND COLOR OF HEADING LABEL
+		info.setForeground(Color.WHITE);		// SETS FOREGROUND COLOR OF HEADING LABEL
 			
 		/**********************************************/
 		/* SETS BOUNDS FOR BUTTONS, JTEXTFIELD, LABEL */
 		/**********************************************/
 		returnB.setBounds(285, 270, 80, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		quitB.setBounds(370, 270, 80, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		enterB.setBounds(225, 70, 80, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		enterB.setBounds(280, 70, 80, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		info.setBounds(40, 30, 500, 30);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		custCB.setBounds(100, 70, 100, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		custCB.setBounds(50, 70, 200, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 
 		/**********************************************/
 		/* ADDS LISTENER TO BUTTON TO PERFORM ACTIONS */
@@ -115,10 +116,10 @@ public class Print_Cost extends Menu_GUI implements ActionListener
 		/********************/
 		/* VARIABLE SECTION */
 		/********************/
+		Object cst;			// OBJECT REPRESENTATION OF CUSTOMER INFORMATION
 		String action; 		// STRING TO REPRESENT WHICH BUTTON WAS PRESSED
-		String cst;			// STRING REPRESENTATION OF CUSTOMER INFORMATION
-		int confirm; 		// REUSUABLE INT INPUT FOR CONFIRMING AN ACTION
 		String cost;		// REUSUABLE DOUBLE VALUE FOR COST
+		int confirm; 		// REUSUABLE INT INPUT FOR CONFIRMING AN ACTION
 		
 		confirm = 1;		// INITIALIZES CONFIRM
 		action = event.getActionCommand();	// CALL TO GET ACTION COMMAND
@@ -138,11 +139,11 @@ public class Print_Cost extends Menu_GUI implements ActionListener
 				System.exit(0);		// TERMINATES PROGRAM
 			}
 		}
-		
+		System.out.println("Return Section");
 		/***********************************************************/
 		/* ELSE IF STATEMENT TO CHECK IF RETURN BUTTON WAS PRESSED */	
 		/***********************************************************/
-		else if(action.equals("Return"))
+		if(action.equals("Return"))
 		{
 			confirm = confirmWindow();		// CALL TO CONFIRM WIDNOW
 			
@@ -156,14 +157,17 @@ public class Print_Cost extends Menu_GUI implements ActionListener
 			}
 		}
 		
-		cst = actionPerformedCust();		// CALL TO ACTION PERFORMED DATE
-		cost = calculateCost(cst);	// CALL TO CALCULATE DATE COST
-		
+		cst = actionPerformedCust();	// CALL TO ACTION PERFORMED DATE
+		System.out.println("Action Performed");
+		cost = calculateCost(cst);		// CALL TO CALCULATE DATE COST
+		System.out.println("Calculate Cost");
 		/*****************************************************/
 		/* IF STATEMENT TO CHECK IF ENTER BUTTON WAS PRESSED */	
 		/*****************************************************/
 		if(action.equals("Enter"))
 		{
+			System.out.println("Enter Section");
+			
 			/****************************************************************/
 			/* IF STATEMENT TO CHECK IF MONTH, DAY, AND YEAR WERE FILLED IN */	
 			/****************************************************************/
@@ -177,22 +181,30 @@ public class Print_Cost extends Menu_GUI implements ActionListener
 			/*********************************************************************/
 			else if(custCB.getSelectedItem() != "")
 			{
+				System.out.println("This works!!!");
 				printCost(cost);		// CALL TO PRINT DATE COST
 			}
 		}
 	}
 	
-	public String actionPerformedCust()
+	public Object actionPerformedCust()
+	/********************************************************/
+	/* PRECONDITION - NEEDS A CUSTOMER FOR OUTPUTTING COST 	*/
+	/* POSTCONDITION - RETURNS SELECTED CUSTOMER FOR  		*/
+	/* 				   OUTPUTTING COST 						*/
+	/********************************************************/
 	{
-		Object numi;
-		String num;
+		/********************/
+		/* VARIABLE SECTION */
+		/********************/
+		Object numi;		// REUSUABLE VALUE FOR DATE
 		
-		num = "";
+		numi = custCB.getSelectedItem();	// GETS SELECTED ITEM FROM COMBO BOX
 		
-		numi = custCB.getSelectedItem();
-		num = (String) numi;
-		
-		return num;
+		/******************/
+		/* RETURN SECTION */
+		/******************/
+		return numi;		// RETURNS NUMI
 	}
 	
 	public String[] arrayCust()
@@ -204,31 +216,43 @@ public class Print_Cost extends Menu_GUI implements ActionListener
 		/********************/
 		/* VARIABLE SECTION */
 		/********************/
-		String[] cust;		// ARRAY OF ALL CUSTOMERS
+		String[] cust;			// ARRAY OF ALL CUSTOMERS
+		ArrayList <String> cst;	// ARRAYLIST REPRESENTATION OF CUSTOMER
 		
-		cust = new String[custList.size()];	// INSTANTIATES CUSTOMER
+		cst = new ArrayList<String>();		// INSTANTIATES CST
+		cst.add("");				// ADDS A BLANK SPACE TO CST
 		
 		/***********************************************************/
 		/* FOR LOOP TO GO THROUGH EVERY CUSTOMER GOING ON SKI TRIP */
 		/***********************************************************/
 		for(int i = 0; i < custList.size(); i++)
 		{
-			cust[i] = "Customer " + i + ": " + custList.get(i).getID() + " \t" +
-					  custList.get(i).getName() + " \t" + 
-					  custList.get(i).getSize() + " \t" + 
-					  custList.get(i).getDate();	// ASSIGNS EACH ELEMENT IN ARRAY
+			cst.add("" + custList.get(i).getID() + " " +
+					  custList.get(i).getName() + " " + 
+					  custList.get(i).getSize() + " " + 
+					  custList.get(i).getDate());	// ASSIGNS EACH ELEMENT IN ARRAYLIST
 													// TO CUSTOMER INFO 
 		}
 		
+		cust = new String[cst.size()];	// INSTANTIATES CUSTOMER
+		cust = (String[]) cst.toArray();			// CONVERTS ARRAYLIST TO AN ARRAY
+				
 		/******************/
 		/* RETURN SECTION */
 		/******************/
 		return cust;		// RETURNS CUST
 	}
 	
-	public String calculateCost(String numi)
+	public String calculateCost(Object numi)
+	/******************************************************************************/
+	/* PRECONDITION - NEEDS TOTAL COST OF ALL SKI TRIPS FOR A SPECIFIC DATE 	  */
+	/* POSTCONDITION - CALCULATES TOTAL COST OF ALL SKI TRIPS FOR A SPECIFIC DATE */
+	/******************************************************************************/
 	{
-		String cust;
+		/********************/
+		/* VARIABLE SECTION */
+		/********************/
+		Object cust;
 		String cost;
 		
 		cust = "";
@@ -236,11 +260,11 @@ public class Print_Cost extends Menu_GUI implements ActionListener
 		
 		for(int i = 0; i < customer.length; i++)
 		{
-			cust = customer[i]; 
+			cust = "" + i;
 					
-			if (numi.equals(cust))
+			if (cust.equals(numi))
 			{
-				cost = custList.get(i).getCost();
+				cost = custList.get(i-1).getCost();
 			}
 		}
 		
