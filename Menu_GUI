@@ -264,8 +264,9 @@ public class Menu_GUI extends BusGUI implements ActionListener
 			/**************************************************************/
 			if (confirm == 0)
 			{
-				frame.dispose();			// DISPOSES OF MENU_GUI FRAME
-				new Print_Cost();			// CREATES PRINT COST WINDOW
+				frame.dispose();	// DISPOSES OF MENU_GUI FRAME
+				printCost();		// CALL TO PRINT COST
+				new Menu_GUI();		// RECREATES MENU GUI WINDOW
 			}
 		}
 		
@@ -615,6 +616,30 @@ public class Menu_GUI extends BusGUI implements ActionListener
 		/* RETURN SECTION */
 		/******************/
 		return str;			// RETURN STR
+	}
+	
+	public static void printCost()
+	/********************************************************************/
+	/* PRECONDITION - NEEDS AN WINDOW TO DISPLAY COST FOR EACH CUSTOMER */
+	/* POSTCONDITION - CREATES WINDOW TO DISPLAY COST FOR EACH CUSTOMER */
+	/********************************************************************/
+	{
+		/********************/
+		/* VARIABLE SECTION */
+		/********************/
+		String str;			// STRING REPRESENTATION OF CUSTOMER INFORMATION
+		
+		str = printArray();	// CALL TO PRINT ARRAY
+		
+		/***********************/
+		/* MAKES DIALOG WINDOW */
+		/***********************/ 
+		JOptionPane.showMessageDialog(
+				null,
+				"Cost for each Customer going on a ski trip " +
+				"\n" + str,
+				"Cost of Ski Trip",
+				JOptionPane.INFORMATION_MESSAGE);
 	}
 	
 	public static void totalProfit()
