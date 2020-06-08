@@ -20,6 +20,7 @@ import java.awt.*;						// IMPORTS AWT
 import java.awt.event.ActionEvent;		// IMPORTS ACTION EVENT
 import java.awt.event.ActionListener;	// IMPORTS ACTION LISTENER		
 import java.text.DecimalFormat;			// IMPORTS DECIMAL FORMAT
+import java.util.*;						// IMPORTS ARRAYLIST
 
 public class Menu_GUI extends BusGUI implements ActionListener
 {	
@@ -640,6 +641,42 @@ public class Menu_GUI extends BusGUI implements ActionListener
 				"\n" + str,
 				"Cost of Ski Trip",
 				JOptionPane.INFORMATION_MESSAGE);
+	}
+	
+	public static ArrayList<Customer> sortDate()
+	{
+		ArrayList<Customer> cust;
+		
+		cust = new ArrayList<Customer>();
+		
+		return cust;
+	}
+	
+	public static ArrayList<Customer> sortSize()
+	{
+		ArrayList<Customer> cust;
+		
+		cust = new ArrayList<Customer>();
+		
+		return cust;
+	}
+	
+	public static ArrayList<Customer> sortID()
+	{
+		ArrayList<Customer> cust;
+		
+		cust = new ArrayList<Customer>();
+		
+		return cust;
+	}
+	
+	public static ArrayList<Customer> sortAlpha()
+	{
+		ArrayList<Customer> cust;
+		
+		cust = new ArrayList<Customer>();
+		
+		return cust;
 	}
 	
 	public static void totalProfit()
