@@ -644,12 +644,53 @@ public class Menu_GUI extends BusGUI implements ActionListener
 	}
 	
 	public static ArrayList<Customer> sortDate()
+	/********************************************************************/
+	/* PRECONDITION - NEEDS AN ARRAYLIST OF CUSTOMERS SORTED BY DATE 	*/
+	/* POSTCONDITION - CREATES AN ARRAYLIST OF CUSTOMERS SORTED BY DATE */
+	/********************************************************************/
 	{
+		/********************/
+		/* VARIABLE SECTION */
+		/********************/
 		ArrayList<Customer> cust;
 		
-		cust = new ArrayList<Customer>();
+		cust = new ArrayList<Customer>();	// INSTANTIATES CUST
+		cust = custList;
 		
-		return cust;
+		/***********************************************/
+		/* FOR LOOP TO PRINT OUT ARRAYLIST OF CUSTOMER */
+		/***********************************************/
+		for(int i = 0; i < cust.size()-1; i++)
+		{
+			String month1 = cust.get(i).getMonth();
+			String day1 = cust.get(i).getDay();
+			String year1 = cust.get(i).getYear();
+			String month2 = cust.get(i+1).getMonth();
+			String day2 = cust.get(i+1).getDay();
+			String year2 = cust.get(i+1).getYear();
+			
+			int m1 = Integer.parseInt(month1);
+			int d1 = Integer.parseInt(day1);
+			int y1 = Integer.parseInt(year1);
+			int m2 = Integer.parseInt(month2);
+			int d2 = Integer.parseInt(day2);
+			int y2 = Integer.parseInt(year2);
+			
+			if(y1 > y2)
+			{
+				
+			}
+			
+			if(y1 < y2)
+			{
+				
+			}
+		}
+		
+		/******************/
+		/* RETURN SECTION */
+		/******************/
+		return cust;		// RETURNS CUST
 	}
 	
 	public static ArrayList<Customer> sortSize()
