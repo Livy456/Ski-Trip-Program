@@ -652,24 +652,26 @@ public class Menu_GUI extends BusGUI implements ActionListener
 		/********************/
 		/* VARIABLE SECTION */
 		/********************/
-		ArrayList<Customer> cust;
+		ArrayList<Customer> cust;		// A COPY OF ARRAYLIST OF CUSTOMERS
+		ArrayList<Customer> sort;		// SORTED ARRAYLIST OF CUSTOMERS BY DATE
 		
 		cust = new ArrayList<Customer>();	// INSTANTIATES CUST
-		cust = custList;
+		sort = new ArrayList<Customer>();	// INSTANTIATES SORT
+		cust = custList;	// COPIES CUSTLIST
 		
 		/***********************************************/
 		/* FOR LOOP TO PRINT OUT ARRAYLIST OF CUSTOMER */
 		/***********************************************/
 		for(int i = 0; i < cust.size()-1; i++)
 		{
-			String month1 = cust.get(i).getMonth();
-			String day1 = cust.get(i).getDay();
-			String year1 = cust.get(i).getYear();
-			String month2 = cust.get(i+1).getMonth();
-			String day2 = cust.get(i+1).getDay();
-			String year2 = cust.get(i+1).getYear();
+			String month1 = cust.get(i).getMonth();		// DECLARES AND INITALIZES MONTH1 TO VALUE FROM GET MONTH
+			String day1 = cust.get(i).getDay();			// DECLARES AND INITIALIZES DAY1 TO VALUE FROM GET DAY
+			String year1 = cust.get(i).getYear();		// DECLARES AND INITIALIZES YEAR1 TO VALUE FROM GET YEAR
+			String month2 = cust.get(i+1).getMonth();	// DECLARES AND INITIALIZES MONTH2 TO VALUE FROM GET M0NTH
+			String day2 = cust.get(i+1).getDay();		// DECLARES AND INITIALIZES DAY2 TO VALUE FROM GET DAY
+			String year2 = cust.get(i+1).getYear();		// DECLARES AND INITIALIZES YEAR2 TO VALUE FROM GET YEAR
 			
-			int m1 = Integer.parseInt(month1);
+			int m1 = Integer.parseInt(month1);			// 
 			int d1 = Integer.parseInt(day1);
 			int y1 = Integer.parseInt(year1);
 			int m2 = Integer.parseInt(month2);
