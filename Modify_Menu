@@ -29,10 +29,10 @@ public class Modify_Menu extends Menu_GUI implements ActionListener
 	final static String error1 = "ERROR!!! Customer number is not on the list!!!";
 	final static String error2 = "ERROR!!! Finish filling in the information!!!";
 	final static String error3 = "ERROR!!! You have no customers to view!!!";
-	final static String error4 = "ERROR!!! Name has to be less than 10 characters";
+	final static String error4 = "ERROR!!! Name has to be less than 20 characters";
 	final static String error5 = "ERROR!!! Size has to be between 1 and 400";
-	final static String error6 = "ERROR!!! Need to change one of the fields for the customer!!!";
-	final static String error7 = "ERROR!!! Date has to be changed!!!"; 
+	final static String error6 = "ERROR!!! Date needs to be changed!!!";
+	final static String error7 = "ERROR!!! Date has already past!!!"; 
 
 	/*****************************/
 	/* INSTANCE VARIABLE SECTION */
