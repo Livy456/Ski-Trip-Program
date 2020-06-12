@@ -199,29 +199,30 @@ public class Modify extends Modify_Menu implements ActionListener
 		/************************************************************/
 		if(action == "Confirm")
 		{
-			confirm = confirmWindow();	// CALL TO CONFIRM WINDOW
-
-			/******************************************************/
-			/* IF STATEMENT TO CONFIRM ACTION OF QUITTING PROGRAM */	
-			/******************************************************/
-			if(confirm == 0)
+			
+			/*********************************************************************/
+			/* IF STATEMENT TO CHECK IF NOTHING WAS CHANGED IN OTHER TEXT FIELDS */	
+			/*********************************************************************/
+			if((nameTF.getText().equals("")) || (grpSzTF.getText() == "")  || 
+			   (monthCB.getSelectedItem() == null)  || (dayCB.getSelectedItem() == null)
+			   || (yearCB.getSelectedItem() == null))
 			{
-				/*********************************************************************/
-				/* IF STATEMENT TO CHECK IF NOTHING WAS CHANGED IN OTHER TEXT FIELDS */	
-				/*********************************************************************/
-				if((nameTF.getText().equals("")) || (grpSzTF.getText() == "")  || 
-				   (monthCB.getSelectedItem() == null)  || (dayCB.getSelectedItem() == null)
-				   || (yearCB.getSelectedItem() == null))
-				{
-					errorMessage(error6);
-				}
+				errorMessage(error6);
+			}
+
+			/****************************************************************************/
+			/* ELSE IF STATEMENT TO CHECK IF SOMETHING WAS CHANGED IN OTHER TEXT FIELDS */	
+			/****************************************************************************/
+			else if ((nameTF.getText() != "") && (grpSzTF.getText() != "") &&
+					 (monthCB.getSelectedItem() != null) && (dayCB.getSelectedItem() != null)
+					 && (yearCB.getSelectedItem() != null))
+			{
+				confirm = confirmWindow();	// CALL TO CONFIRM WINDOW
 				
-				/****************************************************************************/
-				/* ELSE IF STATEMENT TO CHECK IF SOMETHING WAS CHANGED IN OTHER TEXT FIELDS */	
-				/****************************************************************************/
-				else if ((nameTF.getText() != "") && (grpSzTF.getText() != "") &&
-						 (monthCB.getSelectedItem() != null) && (dayCB.getSelectedItem() != null)
-						 && (yearCB.getSelectedItem() != null))
+				/******************************************************/
+				/* IF STATEMENT TO CONFIRM ACTION OF QUITTING PROGRAM */	
+				/******************************************************/
+				if(confirm == 0)
 				{
 					frame.dispose();	// GETS RID OF FRAME
 					new Menu_GUI();		// NEW MENU FRAME IS INSTANTIATED
