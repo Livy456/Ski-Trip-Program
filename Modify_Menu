@@ -23,9 +23,6 @@ import java.util.ArrayList;
 
 public class Modify_Menu extends Menu_GUI implements ActionListener
 {	
-	final static String message1 = "Input Name(10 characters or less): ";
-	final static String message2 = "Input Size(between 1 and 400): ";
-	final static String message3 = "Select a Date: ";
 	final static String heading1 = "Input Name";
 	final static String heading2 = "Input Size";
 	final static String heading3 = "Input Date";
