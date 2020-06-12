@@ -203,11 +203,11 @@ public class Modify extends Modify_Menu implements ActionListener
 			/*********************************************************************/
 			/* IF STATEMENT TO CHECK IF NOTHING WAS CHANGED IN OTHER TEXT FIELDS */	
 			/*********************************************************************/
-			if((nameTF.getText().equals("")) || (grpSzTF.getText() == "")  || 
+			if((nameTF.getText().equals("")) || (grpSzTF.getText().equals("")) || 
 			   (monthCB.getSelectedItem() == null)  || (dayCB.getSelectedItem() == null)
 			   || (yearCB.getSelectedItem() == null))
 			{
-				errorMessage(error6);
+				errorMessage(error2);
 			}
 
 			/****************************************************************************/
@@ -509,7 +509,7 @@ public class Modify extends Modify_Menu implements ActionListener
 			/*****************************************/
 			else if((month.equals("02")) && (day.equals("30")))
 			{
-				errorMessage(error5);		// CALL TO ERROR MESSAGE
+				errorMessage(error6);		// CALL TO ERROR MESSAGE
 				monthCB.setSelectedItem("");// RESETS SELECTED ITEM ON DROP-DOWN LIST
 				dayCB.setSelectedItem("");	// RESETS SELECTED ITEM ON DROP-DOWN LIST
 				yearCB.setSelectedItem(""); // RESETS SELECTED ITEM ON DROP-DOWN LIST
@@ -520,7 +520,7 @@ public class Modify extends Modify_Menu implements ActionListener
 			/*****************************************/
 			else if((month.equals("02")) && (day.equals("31")))
 			{
-				errorMessage(error5);		// CALL TO ERROR MESSAGE
+				errorMessage(error6);		// CALL TO ERROR MESSAGE
 				monthCB.setSelectedItem("");// RESETS SELECTED ITEM ON DROP-DOWN LIST
 				dayCB.setSelectedItem("");	// RESETS SELECTED ITEM ON DROP-DOWN LIST
 				yearCB.setSelectedItem(""); // RESETS SELECTED ITEM ON DROP-DOWN LIST
@@ -542,7 +542,7 @@ public class Modify extends Modify_Menu implements ActionListener
 			/*****************************************/
 			else if((month.equals("06")) && (day.equals("31")))
 			{
-				errorMessage(error4);		// CALL TO ERROR MESSAGE
+				errorMessage(error6);		// CALL TO ERROR MESSAGE
 				monthCB.setSelectedItem("");// RESETS SELECTED ITEM ON DROP-DOWN LIST
 				dayCB.setSelectedItem("");	// RESETS SELECTED ITEM ON DROP-DOWN LIST
 				yearCB.setSelectedItem(""); // RESETS SELECTED ITEM ON DROP-DOWN LIST
@@ -553,7 +553,7 @@ public class Modify extends Modify_Menu implements ActionListener
 			/*****************************************/
 			else if((month.equals("09")) && (day.equals("31")))
 			{
-				errorMessage(error4);		// CALL TO ERROR MESSAGE
+				errorMessage(error6);		// CALL TO ERROR MESSAGE
 				monthCB.setSelectedItem("");// RESETS SELECTED ITEM ON DROP-DOWN LIST
 				dayCB.setSelectedItem("");	// RESETS SELECTED ITEM ON DROP-DOWN LIST
 				yearCB.setSelectedItem(""); // RESETS SELECTED ITEM ON DROP-DOWN LIST
@@ -564,7 +564,7 @@ public class Modify extends Modify_Menu implements ActionListener
 			/*****************************************/
 			else if((month.equals("11")) && (day.equals("31")))
 			{
-				errorMessage(error4);		// CALL TO ERROR MESSAGE
+				errorMessage(error6);		// CALL TO ERROR MESSAGE
 				monthCB.setSelectedItem("");// RESETS SELECTED ITEM ON DROP-DOWN LIST
 				dayCB.setSelectedItem("");	// RESETS SELECTED ITEM ON DROP-DOWN LIST
 				yearCB.setSelectedItem(""); // RESETS SELECTED ITEM ON DROP-DOWN LIST
@@ -825,13 +825,13 @@ public class Modify extends Modify_Menu implements ActionListener
 			/*******************************/
 			/* IF STATEMENT TO ERROR CHECK */
 			/*******************************/
-			if (name.length() > 10)
+			if (name.length() > 20)
 			{
 				nameTF.setText("");			// CLEARS THE TEXT FIELD
 				errorMessage(error1);		// CALL TO ERROR MESSAGE
 			}
 		}
-		while(name.length() > 10);
+		while(name.length() > 20);
 		
 		custList.get(custNum - 1).setName(name);	// CALL TO SET NAME
 	}
@@ -861,10 +861,10 @@ public class Modify extends Modify_Menu implements ActionListener
 			/*******************************/
 			/* IF STATEMENT TO ERROR CHECK */
 			/*******************************/
-			if((grpSz <= 0) ||(grpSz > 400))
+			if((grpSz <= 0) || (grpSz > 400))
 			{
 				grpSzTF.setText("");			// CLEARS THE TEXT FIELD 
-				errorMessage(error3);			// CALL TO ERROR MESSAGE
+				errorMessage(error5);			// CALL TO ERROR MESSAGE
 			}
 		}
 		while((grpSz <= 0) || (grpSz > 400));
