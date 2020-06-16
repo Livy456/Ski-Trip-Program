@@ -66,7 +66,7 @@ public class Menu_GUI extends BusGUI implements ActionListener
 		insertB = new JButton("Insert");					// INSTANTIATES A JBUTTON
 		removeB = new JButton("Remove");					// INSTANTIATES A JBUTTON 
 		modifyB = new JButton("Modify");					// INSTANTIATES A JBUTTON 
-		quitB = new JButton("Quit");						// INSTANTIATES A JBUTTON 
+		quitB = new JButton("Quit Program");				// INSTANTIATES A JBUTTON 
 		costB = new JButton("Cost");						// INSTANTIATES A JBUTTON 
 		busDtB = new JButton("Sorting by Bus Date");		// INSTANTIATES A JBUTTON 
 		profitDtB = new JButton("Profit by Date");			// INSTANTIATES A JBUTTON 
@@ -128,7 +128,7 @@ public class Menu_GUI extends BusGUI implements ActionListener
 		alphB.setBounds(240, 270, 180, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		numB.setBounds(50, 300, 180, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		grpB.setBounds(240, 300, 180, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		quitB.setBounds(370, 370, 100, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		quitB.setBounds(340, 370, 120, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		heading.setBounds(170, 20, 400, 50);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		changeCust.setBounds(20, 70, 500, 50);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		cost.setBounds(20, 150, 500, 50);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
@@ -191,7 +191,7 @@ public class Menu_GUI extends BusGUI implements ActionListener
 		/****************************************************/
 		/* IF STATEMENT TO CHECK IF QUIT BUTTON WAS PRESSED */	
 		/****************************************************/
-		if (action.equals("Quit"))
+		if (action.equals("Quit Program"))
 		{
 			confirm = confirmWindow();	// CALL TO CONFIRM WINDOW
 			
@@ -225,18 +225,10 @@ public class Menu_GUI extends BusGUI implements ActionListener
 		/* ELSE IF STATEMENT TO CHECK IF REMOVE BUTTON WAS PRESSED */	
 		/***********************************************************/
 		else if (action.equals("Remove"))
-		{
-			confirm = confirmWindow();		// CALL TO CONFIRM WINDOW
-			
-			/*******************************************************/
-			/* IF STATEMENT TO CONFIRM ACTION OF REMOVING CUSTOMER */	
-			/*******************************************************/
-			if (confirm == 0)
-			{	
-				frame.dispose();			// DISPOSES OF MENU_GUI FRAME
-				updateMenu(heading1);		// CALL TO UPDATE MENU
-				new Remove_Menu();			// CREATES THE REMOVE MENU GUI
-			}			
+		{	
+			frame.dispose();			// DISPOSES OF MENU_GUI FRAME
+			updateMenu(heading1);		// CALL TO UPDATE MENU
+			new Remove_Menu();			// CREATES THE REMOVE MENU GUI			
 		}
 		
 		/**********************************************************/
@@ -244,17 +236,9 @@ public class Menu_GUI extends BusGUI implements ActionListener
 		/**********************************************************/
 		else if (action.equals("Modify"))
 		{
-			confirm = confirmWindow();		// CALL TO CONFIRM WINDOW
-			
-			/********************************************************/
-			/* IF STATEMENT TO CONFIRM ACTION OF MODIFYING CUSTOMER */	
-			/********************************************************/
-			if (confirm == 0)
-			{
-				frame.dispose();			// DISPOSES OF MENU_GUI FRAME
-				updateMenu(heading2);		// CALL TO UPDATE MENU
-				new Modify_Menu();			// INSTANTIATES MODIFY MENU
-			}
+			frame.dispose();			// DISPOSES OF MENU_GUI FRAME
+			updateMenu(heading2);		// CALL TO UPDATE MENU
+			new Modify_Menu();			// INSTANTIATES MODIFY MENU
 		}
 		
 		/********************************************************/
@@ -338,18 +322,18 @@ public class Menu_GUI extends BusGUI implements ActionListener
 		if (action.equals("Sorting by Bus Date"))
 		{
 			confirm = confirmWindow();		// CALL TO CONFIRM WINDOW
-			//sortCustDt = new ArrayList<Customer>();
+			sortCustDt = new ArrayList<Customer>();
 			
 			/*********************************************************************/
 			/* IF STATEMENT TO CONFIRM ACTION OF SORTING BY BUS DATE OF SKI TRIP */	
 			/*********************************************************************/
 			if (confirm == 0)
 			{
-			//	sortCustDt = sortDate();	// CALL TO SORT DATE
+				sortCustDt = sortDate();	// CALL TO SORT DATE
 				frame.dispose();			// DISPOSES OF MENU_GUI FRAME
-			//	printSorted(sortCustDt);	// CALL TO PRINT SORTED
+				printSorted(sortCustDt);	// CALL TO PRINT SORTED
 			//	new Menu_GUI();				// CREATES A NEW MENU GUI WINDOW
-				underConstruction();	// CALL TO UNDER CONSTRUCTION
+			//l	underConstruction();	// CALL TO UNDER CONSTRUCTION
 				new Menu_GUI();		// CREATES A NEW MENU GUI WINDOW
 			}
 		}
@@ -786,7 +770,7 @@ public class Menu_GUI extends BusGUI implements ActionListener
 		int id;				// USED FOR CUSTOMER ID
 		int num;			// USED FOR CUSTOMER NUMBER
 		
-		str = "Customer number          Group ID          Name                 " +
+		str = "Customer number          Group ID          Name               " +
 			  "Date                        Size                Cost\n\n";	// INITIALIZES THE STRING
 		
 		/***********************************************/
@@ -908,7 +892,7 @@ public class Menu_GUI extends BusGUI implements ActionListener
 			/********************************************************/
 			if(size < 10)
 			{
-				str+= "                    " +  cust.get(i).getCost() + "\n";
+				str+= "                    $" +  cust.get(i).getCost() + "\n";
 			}
 			
 			/*********************************************************/
@@ -917,7 +901,7 @@ public class Menu_GUI extends BusGUI implements ActionListener
 			/*********************************************************/
 			else if((size >= 10) && (size < 100))
 			{
-				str+= "                  " +  cust.get(i).getCost() + "\n";
+				str+= "                  $" +  cust.get(i).getCost() + "\n";
 			}
 			
 			/*******************************************************/
@@ -926,7 +910,7 @@ public class Menu_GUI extends BusGUI implements ActionListener
 			/*******************************************************/
 			else
 			{
-				str+= "                " +  cust.get(i).getCost() + "\n";	// CREATES A STRING 
+				str+= "                $" +  cust.get(i).getCost() + "\n";	// CREATES A STRING 
 																				// REPRESENTATION OF ARRAYLIST
 			}
 		}
@@ -982,6 +966,7 @@ public class Menu_GUI extends BusGUI implements ActionListener
 		for(int i = 0; i < custList.size(); i++)
 		{
 			cust.add(custList.get(i));
+			System.out.println(customer.toString());
 		}
 		
 		Customer customer = cust.get(0);	// ASSIGNS CUSTOMER TO FIRST ELEMENT IN CUST ARRAYLIST
@@ -992,22 +977,21 @@ public class Menu_GUI extends BusGUI implements ActionListener
 		if(cust.size() == 1)
 		{
 			customer = cust.remove(0);	// REMOVES LAST CUSTOMER FROM CUST
-			sort.add(0, customer);		// ADDS CLOSEST DATE TO SORT 
+			sort.add(customer);		// ADDS CLOSEST DATE TO SORT 
+			System.out.println("Size = 1");
 		}
 		
-		for(int i = 0; i < custList.size(); i++)
+		for(int i = 0; i < cust.size(); i++)
 		{
-			customer = custList.get(i);
+			customer = cust.get(i);
 			
 			if (cust.size() > 1)
 			{
 				/*************************************************/
 				/* WHILE LOOP TO CREATE SORTED ARRAYLIST BY DATE */
 				/*************************************************/
-				for(int j = 0; j < cust.size()-1; j++)
-				{
-					int next = j + 1;
-					
+				for(int j = 1; j < cust.size()-1; j++)
+				{					
 					//System.out.println("Index:" + in);
 					//System.out.println("Next:"+ next);
 					//System.out.println("Size:" + cust.size());
@@ -1015,9 +999,9 @@ public class Menu_GUI extends BusGUI implements ActionListener
 					//System.out.println("Next Cust Date:" + cust.get(next).getDate());
 			
 					
-					String mnthi = cust.get(next).getMonth();	// GETS MONTH OF ELEMENT TO THE RIGHT
-					String dyi = cust.get(next).getDay();		// GETS DAY OF ELEMENT TO THE RIGHT
-					String yri = cust.get(next).getYear();		// GETS YEAR OF ELEMENT TO THE RIGHT
+					String mnthi = cust.get(j).getMonth();	// GETS MONTH OF ELEMENT TO THE RIGHT
+					String dyi = cust.get(j).getDay();		// GETS DAY OF ELEMENT TO THE RIGHT
+					String yri = cust.get(j).getYear();		// GETS YEAR OF ELEMENT TO THE RIGHT
 					int mnth = Integer.parseInt(mnthi);			// CONVERTS STRING TO AN INT
 					int dy = Integer.parseInt(dyi);				// CONVERTS STRING TO AN INT
 					int yr = Integer.parseInt(yri);				// CONVERTS STRING TO AN INT
@@ -1032,40 +1016,32 @@ public class Menu_GUI extends BusGUI implements ActionListener
 					/*********************************************************************/
 					/* IF STATEMENT TO CHECK IF CURRENT CUSTOMER HAS A FURTHER AWAY DATE */
 					/*********************************************************************/
-					if(year > yr)
+					if(year < yr)
 					{
-						customer = cust.get(next);	// CUSTOMER EQUALS ELEMENT TO RIGHT	
+						customer = cust.get(j);	// CUSTOMER EQUALS ELEMENT TO RIGHT	
 					}
 			
 					/*********************************************************************/
 					/* IF STATEMENT TO CHECK IF CURRENT CUSTOMER HAS A FURTHER AWAY DATE */
 					/*********************************************************************/
-					else if((year == yr) && (month > mnth))
+					else if((year == yr) && (month < mnth))
 					{
-						customer = cust.get(next);	// CUSTOMER EQUALS ELEMENT TO RIGHT	
+						customer = cust.get(j);	// CUSTOMER EQUALS ELEMENT TO RIGHT	
 					}
 				
 					/*********************************************************************/
 					/* IF STATEMENT TO CHECK IF CURRENT CUSTOMER HAS A FURTHER AWAY DATE */
 					/*********************************************************************/
-					else if((year == yr) && (month == mnth) && (day > dy))
+					else if((year == yr) && (month == mnth) && (day < dy))
 					{
-						customer = cust.get(next);	// CUSTOMER EQUALS ELEMENT TO RIGHT	
-					}
-				
-					/*********************************************/
-					/* ELSE STATEMENT TO CHNAGE CURRENT CUSTOMER */
-					/*********************************************/
-					else
-					{
-						customer = cust.get(next);	// CUSTOMER EQUALS ELEMENT TO RIGHT
+						customer = cust.get(j);	// CUSTOMER EQUALS ELEMENT TO RIGHT	
 					}	
 				}
 			}
 			
 			if(cust.size() > 1)
 			{
-				sort.add(customer);	// ADDS CUSTOMER TO FIRST INDEX OF SORT
+				sort.add(0, customer);	// ADDS CUSTOMER TO FIRST INDEX OF SORT
 				cust.remove(customer);	// REMOVES CUSTOMER WITH FURTHEST AWAY DATE
 				System.out.println("Removed: " + customer.toString());
 			}
@@ -1076,6 +1052,8 @@ public class Menu_GUI extends BusGUI implements ActionListener
 				sort.add(customer);		// ADDS CLOSEST DATE TO SORT 
 				System.out.println("Last Removed: " + customer.toString());
 			}
+			
+			i--;
 		}
 		
 		/******************/
