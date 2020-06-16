@@ -983,14 +983,14 @@ public class Menu_GUI extends BusGUI implements ActionListener
 		
 		for(int i = 0; i < cust.size(); i++)
 		{
-			customer = cust.get(i);
+			customer = cust.get(i);		// CALL TO GET CUSTOMER FROM
 			
-			if (cust.size() > 1)
-			{
+			//if (cust.size() > 1)
+			//{
 				/*************************************************/
 				/* WHILE LOOP TO CREATE SORTED ARRAYLIST BY DATE */
 				/*************************************************/
-				for(int j = 1; j < cust.size()-1; j++)
+				for(int j = 1; j < cust.size(); j++)
 				{					
 					//System.out.println("Index:" + in);
 					//System.out.println("Next:"+ next);
@@ -1037,19 +1037,16 @@ public class Menu_GUI extends BusGUI implements ActionListener
 						customer = cust.get(j);	// CUSTOMER EQUALS ELEMENT TO RIGHT	
 					}	
 				}
-			}
 			
-			if(cust.size() > 1)
-			{
-				sort.add(0, customer);	// ADDS CUSTOMER TO FIRST INDEX OF SORT
-				cust.remove(customer);	// REMOVES CUSTOMER WITH FURTHEST AWAY DATE
-				System.out.println("Removed: " + customer.toString());
-			}
+			// if(cust.size() > 1)
+			//{
+			sort.add(0, customer);	// ADDS CUSTOMER TO FIRST INDEX OF SORT
+			cust.remove(customer);	// REMOVES CUSTOMER WITH FURTHEST AWAY DATE
+			System.out.println("Removed: " + customer.toString());
+			//}
 			
-			else if(cust.size() == 1)
+			if(cust.size() == 1)
 			{
-				customer = cust.remove(0);	// REMOVES LAST CUSTOMER FROM CUST
-				sort.add(0, customer);		// ADDS CLOSEST DATE TO SORT 
 				System.out.println("Last Removed: " + customer.toString());
 			}
 			
