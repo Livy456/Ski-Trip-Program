@@ -353,8 +353,8 @@ public class Menu_GUI extends BusGUI implements ActionListener
 				frame.dispose();			// DISPOSES OF MENU_GUI FRAME
 			//	printSorted(sortCustID);	// CALL TO PRINT SORTED
 			//	new Menu_GUI();				// CREATES A NEW MENU GUI WINDOW
-				underConstruction();	// CALL TO UNDER CONSTRUCTION
-				new Menu_GUI();		// CREATES A NEW MENU GUI WINDOW
+				underConstruction();		// CALL TO UNDER CONSTRUCTION
+				new Menu_GUI();			// CREATES A NEW MENU GUI WINDOW
 			}
 		}
 		
@@ -1059,7 +1059,33 @@ public class Menu_GUI extends BusGUI implements ActionListener
 		
 		cust = new ArrayList<Customer>();
 		
+		cust = custList;
+		
 		// INSERTION SORTING TECHNIQUE
+		// Has to iterate through each element
+		// loop through all previous elements i = j j-- to check each element 
+		// until the selected element is less than the element after it
+		
+		for(int i = 1; i < cust.size(); i++)
+		{
+			int index = i - 1;
+			int id = cust.get(i).getID();
+			int id2 = cust.get(index).getID();
+			System.out.println("Selected ID: " + id);
+			System.out.println("Compared ID: " + id2);
+			
+			while ((index > 0) || (id < id2))
+			{
+				Customer customer = cust.get(index);
+				id2 = customer.getID();
+				index--;
+				System.out.println("Compared ID: " + id2);
+			}
+			
+			cust.set(index, cust.get(i));
+			cust.set(i, cust.get(index));
+			//System.out.println("");
+		}
 		
 		return cust;
 	}
