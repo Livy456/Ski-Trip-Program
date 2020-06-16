@@ -192,26 +192,12 @@ public class Customer implements Ski_Interface
 		return date;		// RETURNS DATE
 	}
 	
-	public void setID()
+	public void setID(int i)
 	/************************************************/
 	/* PRECONDITION - PROGRAM NEEDS A ID			*/
 	/* POSTCONDITION - FUNCTION SETS VALUE OF ID	*/
 	/************************************************/
-	{
-		/********************/
-		/* VARIABLE SECTION */
-		/********************/
-		int i;		// REUSUABLE INTEGER VALUE
-		
-		/********************************************/
-		/* LOOP UNTIL VALUE IS A THREE DIGIT NUMBER */
-		/********************************************/
-		do
-		{
-			i = generator.nextInt(1000);	// GENERATES A RANDOM INTEGER
-		}
-		while((i < 100) || (i > 999)); 
-		
+	{	
 		id = i;		// SETS ID TO ID VALUE INPUTTED FROM CLIENT
 	}
 	
