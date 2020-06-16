@@ -15,11 +15,7 @@
 /******************/
 /* IMPORT SECTION */
 /******************/
-import java.awt.*;					// IMPORTS AWT
-import java.awt.event.*;			// IMPORTS EVENTS
-import javax.swing.*;				// IMPORTS SWING
 import java.text.DecimalFormat;		// IMPORTS DECIMAL FORMAT
-import java.util.Random;			// IMPORTS RANDOM
 
 public class Customer implements Ski_Interface
 {
@@ -38,8 +34,6 @@ public class Customer implements Ski_Interface
 	private double cost;		// INSTANCE VARIABLE FOR USER'S COST
 	private double refund;		// INSTANE VARIABLE FOR REFUNDS
 	DecimalFormat df = new DecimalFormat("0.00");	// INSTANTIATES DECIMALFORMAT
-	private Random generator = new Random();		// INSTANCE VARIABLE FOR RANDOM NUMBER 
-													// GENERATOR
 	
 	public Customer()
 	/**************************************************/
