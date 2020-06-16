@@ -21,6 +21,7 @@ import java.awt.event.ActionListener;	// IMPORTS ACTION LISTENER
 import java.awt.event.*;				// IMPORTS EVENT
 import javax.swing.*;					// IMPORTS SWING
 import java.util.ArrayList;				// IMPORTS ARRAYLIST
+import java.util.Random;
 import java.text.DecimalFormat;			// IMPORTS DECIMAL FORMAT
 
 public class BusGUI implements ActionListener 
@@ -65,6 +66,7 @@ public class BusGUI implements ActionListener
 	private Container container;		// CREATES A CONTAINER
 	private Font font;					// CREATES A FONT FOR LABELS
 	protected static Customer customer;	// CREATES AN INSTANCE OF CUSTOMER
+	private Random generator = new Random();		// INSTANCE VARIABLE FOR RANDOM NUMBER GENERATOR
 	protected static ArrayList <Customer> custList = new ArrayList<Customer>();	// CREATES AN ARRAYLIST OF CUSTOMER
 	private String[] months = {"", "01", "02", "03", "04", "05", "06",
 							   "07", "08", "09", "10", "11", "12"};		// CREATES AN ARRAY FOR MONTHS
@@ -153,7 +155,7 @@ public class BusGUI implements ActionListener
 		/* SETS BOUNDS FOR BUTTONS, JTEXTFIELD, LABEL */
 		/**********************************************/
 		enterB.setBounds(160, 190, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		quitB.setBounds(320, 190, 120, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		quitB.setBounds(320, 190, 110, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		returnB.setBounds(240, 190, 75, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		nameTF.setBounds(80, 80, 100, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		grpSzTF.setBounds(80, 110, 100, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
@@ -255,7 +257,7 @@ public class BusGUI implements ActionListener
 		actionPerformedName(event);		// CALL TO ACTION PERFORMED FOR NAME
 		actionPerformedSize(event);		// CALL TO ACTION PERFORMED FOR GROUP SIZE
 		actionPerformedDate(event);		// CALL TO ACTION PERFORMED FOR DATE
-		customer.setID();				// CALL TO SET GROUP ID
+		actionPerformedID(event);		// CALL TO ACTION PERFORMED FOR GROUP ID
 		
 		/**********************************************************/
 		/* ELSE IF STATEMENT TO CHECK IF ENTER BUTTON WAS PRESSED */	
@@ -862,6 +864,49 @@ public class BusGUI implements ActionListener
 		customer.setDay((String)day);		// CALL TO SET DAY
 		customer.setYear((String)year);		// CALL TO SET YEAR
 		customer.setDate(date);				// CALL TO SET DATE
+	}
+	
+	public void actionPerformedID(ActionEvent event)
+	/*****************************************************/
+	/* PRECONDITION - PROGRAM HAS A TEXT FIELD FOR NAME  */
+	/* POSTCONDITION - FUNCTION CREATES AN ACTION EVENT  */
+	/* 				   FOR TEXT FIELD FOR NAME			 */
+	/*****************************************************/
+	{
+		/********************/
+		/* VARIABLE SECTION */
+		/********************/
+		int i;			// REUSUABLE INTEGER VALUE
+		boolean repeat;	// REUSUABLE BOOLEAN TO SEE IF ANY GROUP ID'S ARE REPEATED
+		
+		repeat = false;	// INITIALIZES REPEAT
+		
+		/*****************************************************/
+		/* DO-WHILE LOOP UNTIL VALUE IS A THREE DIGIT NUMBER */
+		/*****************************************************/
+		do
+		{
+			i = generator.nextInt(1000);	// GENERATES A RANDOM INTEGER
+			
+			/**************************************/
+			/* FOR LOOP TO CHECK EACH CUSTOMER ID */
+			/**************************************/
+			for(int j = 0; j < custList.size(); j++)
+			{
+				int id = custList.get(j).getID();		// CALL TO GET ID OF CUSTOMER
+				
+				/**************************************************/
+				/* IF STATEMENT TO CHECK FOR SAME GROUP ID VALUES */
+				/**************************************************/
+				if(i == id)
+				{
+					repeat = true;	// REPEATED GROUP ID FOUND
+				}
+			}
+		}
+		while((repeat) && ((i < 100) || (i > 999))); 
+		
+		customer.setID(i);	// CALL TO SET GROUP ID
 	}
 	
 	public void actionPerformedName(ActionEvent event)
