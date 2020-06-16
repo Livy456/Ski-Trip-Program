@@ -31,7 +31,7 @@ public interface Ski_Interface
 	public String getYear();
 	public void setDate(Object dt);
 	public Object getDate();
-	public void setID();
+	public void setID(int i);
 	public int getID();
 	public void setSize(int grp);
 	public int getSize();
