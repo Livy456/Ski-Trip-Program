@@ -25,24 +25,22 @@ import java.text.DecimalFormat;			// IMPORTS DECIMAL FORMAT
 
 public class BusGUI implements ActionListener 
 {	
-	private static final long serialVersionUID = 1L;	// SERIALIZES CLASS
+	//private static final long serialVersionUID = 1L;	// SERIALIZES CLASS
 	
 	/*****************/
 	/* FINAL SECTION */
 	/*****************/
 	final static String message1 = "Input your Group Name: ";
-	final static String message2 = "Input the group ID number(three digit number between 100 - 999): ";
 	final static String message3 = "Input the number of people in your group (must be greater than 0): ";
 	final static String heading1= "Input Name";
 	final static String heading2 = "Input Group ID";
 	final static String heading3 = "Input Group Size";
-	final static String error1 = "ERROR!!! Name can not be more than 10 characters!!!";
-	final static String error2 = "ERROR!!! Number must be between 100 and 999!!!";
+	final static String error1 = "ERROR!!! Name can not be more than 20 characters!!!";
 	final static String error3 = "ERROR!!! Number must be greater than 0 and less than or equal to 400!!!";
 	final static String error4 = "ERROR!!! This month can not be chosen with this day!!!";
 	final static String error5 = "ERROR!!! This day can not be chosen with this month!!!";
 	final static String error6 = "ERROR!!! This day can not be chosen with this year!!!";
-	final static String error7 = "ERROR!!! This year can not be chosen with this day";
+	final static String error7 = "ERROR!!! This date has already past!!!";
 	final static String error8 = "ERROR!!! You need to finish filling out information!!!";
 	
 	/*****************************/
@@ -67,7 +65,7 @@ public class BusGUI implements ActionListener
 	private Container container;		// CREATES A CONTAINER
 	private Font font;					// CREATES A FONT FOR LABELS
 	protected static Customer customer;	// CREATES AN INSTANCE OF CUSTOMER
-	protected static ArrayList <Customer> custList = new ArrayList();	// CREATES AN ARRAYLIST OF CUSTOMER
+	protected static ArrayList <Customer> custList = new ArrayList<Customer>();	// CREATES AN ARRAYLIST OF CUSTOMER
 	private String[] months = {"", "01", "02", "03", "04", "05", "06",
 							   "07", "08", "09", "10", "11", "12"};		// CREATES AN ARRAY FOR MONTHS
 	private String[] years = {"", "2020", "2021", "2022", "2023", "2024",
@@ -93,7 +91,7 @@ public class BusGUI implements ActionListener
 		/* INSTANTIATION SECTION */
 		/*************************/
 		enterB = new JButton("Enter");		// INSTANTIATES A JBUTTON 
-		quitB = new JButton("Quit");		// INSTANTIATES A JBUTTON 
+		quitB = new JButton("Quit Program");// INSTANTIATES A JBUTTON 
 		returnB = new JButton("Return");	// INSTANTIATES A JBUTTON
 		customer = new Customer();			// INSTANTIATES A CUSTOMER		
 		nameTF = new JTextField();			// INSTANTIATES A JTEXTFIELD
@@ -114,7 +112,7 @@ public class BusGUI implements ActionListener
 						 "necessary information " +
 						 "into the fields below.");	// INSTANTIATES A LABEL
 		warning = new Label("Name has to be < "+
-							"11 characters.");		// INSTANTIATES A LABEL	
+							"21 characters.");		// INSTANTIATES A LABEL	
 		warning2 = new Label("Group size has to " +
 							 "be between 1 - 400.");// INSTANTIATES A LABEL
 		container = frame.getContentPane();			// CREATES A CONTENT PANE, WHICH  
@@ -154,9 +152,9 @@ public class BusGUI implements ActionListener
 		/**********************************************/
 		/* SETS BOUNDS FOR BUTTONS, JTEXTFIELD, LABEL */
 		/**********************************************/
-		enterB.setBounds(180, 190, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		quitB.setBounds(340, 190, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		returnB.setBounds(260, 190, 75, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		enterB.setBounds(160, 190, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		quitB.setBounds(320, 190, 120, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		returnB.setBounds(240, 190, 75, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		nameTF.setBounds(80, 80, 100, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		grpSzTF.setBounds(80, 110, 100, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		monthCB.setBounds(80, 140, 100, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
@@ -224,7 +222,7 @@ public class BusGUI implements ActionListener
 		/****************************************************/
 		/* IF STATEMENT TO CHECK IF QUIT BUTTON WAS PRESSED */	
 		/****************************************************/
-		if (action.equals("Quit"))
+		if (action.equals("Quit Program"))
 		{
 			confirm = confirmWindow();	// CALL TO CONFIRM WINDOW
 			
@@ -267,7 +265,7 @@ public class BusGUI implements ActionListener
 			/*****************************************************/
 			/* IF STATEMENT TO CHECK IF ENTER BUTTON WAS PRESSED */	
 			/*****************************************************/
-			if((nameTF.getText() == "") || (grpSzTF.getText() == "") 
+			if((nameTF.getText().equals("")) || (grpSzTF.getText() == "") 
 				|| (monthCB.getSelectedItem() == "") || (dayCB.getSelectedItem() == "") 
 				|| (yearCB.getSelectedItem() == ""))
 			{
@@ -637,6 +635,182 @@ public class BusGUI implements ActionListener
 				yearCB.setSelectedItem(""); // RESETS SELECTED ITEM ON DROP-DOWN LIST
 			}
 			
+			/*****************************************/
+			/* ELSE IF STATEMENT TO ERROR CHECK DATE */
+			/*****************************************/
+			else if((month.equals("01")) && (year.equals("2020")))
+			{
+				errorMessage(error7);		// CALL TO ERROR MESSAGE
+				monthCB.setSelectedItem("");// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				dayCB.setSelectedItem("");	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				yearCB.setSelectedItem(""); // RESETS SELECTED ITEM ON DROP-DOWN LIST
+			}
+			
+			/*****************************************/
+			/* ELSE IF STATEMENT TO ERROR CHECK DATE */
+			/*****************************************/
+			else if((month.equals("02")) && (year.equals("2020")))
+			{
+				errorMessage(error7);		// CALL TO ERROR MESSAGE
+				monthCB.setSelectedItem("");// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				dayCB.setSelectedItem("");	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				yearCB.setSelectedItem(""); // RESETS SELECTED ITEM ON DROP-DOWN LIST
+			}
+			
+			/*****************************************/
+			/* ELSE IF STATEMENT TO ERROR CHECK DATE */
+			/*****************************************/
+			else if((month.equals("03")) && (year.equals("2020")))
+			{
+				errorMessage(error7);		// CALL TO ERROR MESSAGE
+				monthCB.setSelectedItem("");// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				dayCB.setSelectedItem("");	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				yearCB.setSelectedItem(""); // RESETS SELECTED ITEM ON DROP-DOWN LIST
+			}
+			
+			/*****************************************/
+			/* ELSE IF STATEMENT TO ERROR CHECK DATE */
+			/*****************************************/
+			else if((month.equals("04")) && (year.equals("2020")))
+			{
+				errorMessage(error7);		// CALL TO ERROR MESSAGE
+				monthCB.setSelectedItem("");// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				dayCB.setSelectedItem("");	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				yearCB.setSelectedItem(""); // RESETS SELECTED ITEM ON DROP-DOWN LIST
+			}
+			
+			/*****************************************/
+			/* ELSE IF STATEMENT TO ERROR CHECK DATE */
+			/*****************************************/
+			else if((month.equals("05")) && (year.equals("2020")))
+			{
+				errorMessage(error7);		// CALL TO ERROR MESSAGE
+				monthCB.setSelectedItem("");// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				dayCB.setSelectedItem("");	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				yearCB.setSelectedItem(""); // RESETS SELECTED ITEM ON DROP-DOWN LIST
+			}
+			
+			/*****************************************/
+			/* ELSE IF STATEMENT TO ERROR CHECK DATE */
+			/*****************************************/
+			else if((month.equals("06")) && (day.equals("01")) && (year.equals("2020")))
+			{
+				errorMessage(error7);		// CALL TO ERROR MESSAGE
+				monthCB.setSelectedItem("");// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				dayCB.setSelectedItem("");	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				yearCB.setSelectedItem(""); // RESETS SELECTED ITEM ON DROP-DOWN LIST
+			}
+			
+			/*****************************************/
+			/* ELSE IF STATEMENT TO ERROR CHECK DATE */
+			/*****************************************/
+			else if((month.equals("06")) && (day.equals("02")) && (year.equals("2020")))
+			{
+				errorMessage(error7);		// CALL TO ERROR MESSAGE
+				monthCB.setSelectedItem("");// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				dayCB.setSelectedItem("");	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				yearCB.setSelectedItem(""); // RESETS SELECTED ITEM ON DROP-DOWN LIST
+			}
+			
+			/*****************************************/
+			/* ELSE IF STATEMENT TO ERROR CHECK DATE */
+			/*****************************************/
+			else if((month.equals("06")) && (day.equals("03")) && (year.equals("2020")))
+			{
+				errorMessage(error7);		// CALL TO ERROR MESSAGE
+				monthCB.setSelectedItem("");// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				dayCB.setSelectedItem("");	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				yearCB.setSelectedItem(""); // RESETS SELECTED ITEM ON DROP-DOWN LIST
+			}
+			
+			/*****************************************/
+			/* ELSE IF STATEMENT TO ERROR CHECK DATE */
+			/*****************************************/
+			else if((month.equals("06")) && (day.equals("04")) && (year.equals("2020")))
+			{
+				errorMessage(error7);		// CALL TO ERROR MESSAGE
+				monthCB.setSelectedItem("");// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				dayCB.setSelectedItem("");	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				yearCB.setSelectedItem(""); // RESETS SELECTED ITEM ON DROP-DOWN LIST
+			}
+			
+			/*****************************************/
+			/* ELSE IF STATEMENT TO ERROR CHECK DATE */
+			/*****************************************/
+			else if((month.equals("06")) && (day.equals("05")) && (year.equals("2020")))
+			{
+				errorMessage(error7);		// CALL TO ERROR MESSAGE
+				monthCB.setSelectedItem("");// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				dayCB.setSelectedItem("");	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				yearCB.setSelectedItem(""); // RESETS SELECTED ITEM ON DROP-DOWN LIST
+			}
+			
+			/*****************************************/
+			/* ELSE IF STATEMENT TO ERROR CHECK DATE */
+			/*****************************************/
+			else if((month.equals("06")) && (day.equals("06")) && (year.equals("2020")))
+			{
+				errorMessage(error7);		// CALL TO ERROR MESSAGE
+				monthCB.setSelectedItem("");// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				dayCB.setSelectedItem("");	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				yearCB.setSelectedItem(""); // RESETS SELECTED ITEM ON DROP-DOWN LIST
+			}
+			
+			/*****************************************/
+			/* ELSE IF STATEMENT TO ERROR CHECK DATE */
+			/*****************************************/
+			else if((month.equals("06")) && (day.equals("07")) && (year.equals("2020")))
+			{
+				errorMessage(error7);		// CALL TO ERROR MESSAGE
+				monthCB.setSelectedItem("");// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				dayCB.setSelectedItem("");	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				yearCB.setSelectedItem(""); // RESETS SELECTED ITEM ON DROP-DOWN LIST
+			}
+			
+			/*****************************************/
+			/* ELSE IF STATEMENT TO ERROR CHECK DATE */
+			/*****************************************/
+			else if((month.equals("06")) && (day.equals("08")) && (year.equals("2020")))
+			{
+				errorMessage(error7);		// CALL TO ERROR MESSAGE
+				monthCB.setSelectedItem("");// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				dayCB.setSelectedItem("");	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				yearCB.setSelectedItem(""); // RESETS SELECTED ITEM ON DROP-DOWN LIST
+			}
+			
+			/*****************************************/
+			/* ELSE IF STATEMENT TO ERROR CHECK DATE */
+			/*****************************************/
+			else if((month.equals("06")) && (day.equals("09")) && (year.equals("2020")))
+			{
+				errorMessage(error7);		// CALL TO ERROR MESSAGE
+				monthCB.setSelectedItem("");// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				dayCB.setSelectedItem("");	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				yearCB.setSelectedItem(""); // RESETS SELECTED ITEM ON DROP-DOWN LIST
+			}
+			
+			/*****************************************/
+			/* ELSE IF STATEMENT TO ERROR CHECK DATE */
+			/*****************************************/
+			else if((month.equals("06")) && (day.equals("10")) && (year.equals("2020")))
+			{
+				errorMessage(error7);		// CALL TO ERROR MESSAGE
+				monthCB.setSelectedItem("");// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				dayCB.setSelectedItem("");	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				yearCB.setSelectedItem(""); // RESETS SELECTED ITEM ON DROP-DOWN LIST
+			}
+			
+			/*****************************************/
+			/* ELSE IF STATEMENT TO ERROR CHECK DATE */
+			/*****************************************/
+			else if((month.equals("06")) && (day.equals("11")) && (year.equals("2020")))
+			{
+				errorMessage(error7);		// CALL TO ERROR MESSAGE
+				monthCB.setSelectedItem("");// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				dayCB.setSelectedItem("");	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				yearCB.setSelectedItem(""); // RESETS SELECTED ITEM ON DROP-DOWN LIST
+			}
+			
 			date = "" + month + "/" + day + "/" + year;
 		}
 		while((month.equals("02")) && (day.equals("29")) && (year.equals("2021")) || 
@@ -663,10 +837,26 @@ public class BusGUI implements ActionListener
 			  (month.equals("02")) && (day.equals("29")) && (year.equals("2049")) ||
 			  (month.equals("02")) && (day.equals("30")) || 
 			  (month.equals("02")) && (day.equals("31")) ||
-			  (month.equals("4")) && (day.equals("31")) || 
-			  (month.equals("6")) && (day.equals("31")) ||
-			  (month.equals("9")) && (day.equals("31")) || 
-			  (month.equals("11")) && (day.equals("31")));
+			  (month.equals("04")) && (day.equals("31")) || 
+			  (month.equals("06")) && (day.equals("31")) ||
+			  (month.equals("09")) && (day.equals("31")) || 
+			  (month.equals("11")) && (day.equals("31")) || 
+			  (month.equals("01")) && (year.equals("2020")) ||
+			  (month.equals("02")) && (year.equals("2020")) ||
+			  (month.equals("03")) && (year.equals("2020")) ||
+			  (month.equals("04")) && (year.equals("2020")) ||
+			  (month.equals("05")) && (year.equals("2020")) ||
+			  (month.equals("06")) && (day.equals("01")) && (year.equals("2020")) ||
+			  (month.equals("06")) && (day.equals("02")) && (year.equals("2020")) ||
+			  (month.equals("06")) && (day.equals("03")) && (year.equals("2020")) || 
+			  (month.equals("06")) && (day.equals("04")) && (year.equals("2020")) ||
+			  (month.equals("06")) && (day.equals("05")) && (year.equals("2020")) ||
+			  (month.equals("06")) && (day.equals("06")) && (year.equals("2020")) ||
+			  (month.equals("06")) && (day.equals("07")) && (year.equals("2020")) ||
+			  (month.equals("06")) && (day.equals("08")) && (year.equals("2020")) ||
+			  (month.equals("06")) && (day.equals("09")) && (year.equals("2020")) ||
+			  (month.equals("06")) && (day.equals("10")) && (year.equals("2020")) ||
+			  (month.equals("06")) && (day.equals("11")) && (year.equals("2020")));
 		
 		customer.setMonth((String)month);	// CALL TO SET MONTH
 		customer.setDay((String)day);		// CALL TO SET DAY
@@ -699,13 +889,13 @@ public class BusGUI implements ActionListener
 			/*******************************/
 			/* IF STATEMENT TO ERROR CHECK */
 			/*******************************/
-			if (name.length() > 10)
+			if (name.length() > 20)
 			{
 				nameTF.setText("");			// CLEARS THE TEXT FIELD
 				errorMessage(error1);		// CALL TO ERROR MESSAGE
 			}
 		}
-		while(name.length() > 10);
+		while(name.length() > 20);
 		
 		customer.setName(name);				// CALL TO SET NAME
 	}
