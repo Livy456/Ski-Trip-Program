@@ -94,9 +94,9 @@ public class Modify extends Modify_Menu implements ActionListener
 		/**********************************************/
 		/* SETS BOUNDS FOR BUTTONS, JTEXTFIELD, LABEL */
 		/**********************************************/
-		returnB.setBounds(325, 320, 75, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		confirm.setBounds(230, 320, 90, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		quitB.setBounds(405, 320, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		returnB.setBounds(265, 320, 75, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		confirm.setBounds(170, 320, 90, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		quitB.setBounds(345, 320, 120, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		info.setBounds(20, 30, 500, 30);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		disName.setBounds(20, 170, 500, 30);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		disSize.setBounds(20, 200, 500, 30);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
@@ -160,7 +160,7 @@ public class Modify extends Modify_Menu implements ActionListener
 		/****************************************************/
 		/* IF STATEMENT TO CHECK IF QUIT BUTTON WAS PRESSED */	
 		/****************************************************/
-		if(action == "Quit")
+		if(action == "Quit Program")
 		{
 			confirm = confirmWindow();	// CALL TO CONFIRM WINDOW
 			
