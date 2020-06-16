@@ -1049,7 +1049,7 @@ public class Menu_GUI extends BusGUI implements ActionListener
 			else if(cust.size() == 1)
 			{
 				customer = cust.remove(0);	// REMOVES LAST CUSTOMER FROM CUST
-				sort.add(customer);		// ADDS CLOSEST DATE TO SORT 
+				sort.add(0, customer);		// ADDS CLOSEST DATE TO SORT 
 				System.out.println("Last Removed: " + customer.toString());
 			}
 			
