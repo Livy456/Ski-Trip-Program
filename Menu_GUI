@@ -740,12 +740,18 @@ public class Menu_GUI extends BusGUI implements ActionListener
 	/* POSTCONDITION - CREATES AN ARRAYLIST OF CUSTOMERS SORTED ALPHABETICALLY */
 	/***************************************************************************/
 	{
-		ArrayList<Customer> cust;
-		
+		/********************/
+		/* VARIABLE SECTION */
+		/********************/
+		ArrayList<Customer> cust;	// SORTED ARRAYLIST OF CUSTOMERS
+
 		cust = new ArrayList<Customer>();
 		// MAKE EVERY CHARACTER IN THE NAME UPPERCASE SO THAT YOU CAN COMPARE
 		// NAMES THAT HAVE THE SAME FIRST LETTER
 		
+		/******************/
+		/* RETURN SECTION */
+		/******************/
 		return cust;
 	}
 	
@@ -773,13 +779,7 @@ public class Menu_GUI extends BusGUI implements ActionListener
 		dayi = "";			// INITIALIZES DAYI
 		yeari = "";			// INITIALIZES YEARI
 		
-		/***************************************************/
-		/* FOR LOOP TO ADD EACH CUSTOMER TO CUST ARRAYLIST */
-		/***************************************************/
-		for(int i = 0; i < custList.size(); i++)
-		{
-			cust.add(custList.get(i));	// CALL TO ADD EACH CUSTOMER FROM CUSTLIST TO CUST
-		}
+		cust = custList;
 		
 		Customer customer = cust.get(0);	// ASSIGNS CUSTOMER TO FIRST ELEMENT IN CUST ARRAYLIST
 		
@@ -789,7 +789,7 @@ public class Menu_GUI extends BusGUI implements ActionListener
 		if(cust.size() == 1)
 		{
 			customer = cust.remove(0);	// REMOVES LAST CUSTOMER FROM CUST
-			sort.add(customer);		// ADDS CLOSEST DATE TO SORT 
+			sort.add(customer);			// ADDS CLOSEST DATE TO SORT 
 		}
 		
 		/**********************************************/
@@ -856,41 +856,48 @@ public class Menu_GUI extends BusGUI implements ActionListener
 	}
 	
 	public static ArrayList<Customer> sortID()
+	/************************************************************************/
+	/* PRECONDITION - NEEDS AN ARRAYLIST OF CUSTOMERS SORTED BY GROUP ID 	*/
+	/* POSTCONDITION - CREATES AN ARRAYLIST OF CUSTOMERS SORTED BY GROUP ID */
+	/************************************************************************/
 	{
-		ArrayList<Customer> cust;
+		/********************/
+		/* VARIABLE SECTION */
+		/********************/
+		ArrayList<Customer> cust;	// SORTED ARRAYLIST OF CUSTOMERS
 		
-		cust = new ArrayList<Customer>();
+		cust = new ArrayList<Customer>();	// INSTANTIATES CUST ARRAYLIST
 		
 		cust = custList;
 		
-		// INSERTION SORTING TECHNIQUE
-		// Has to iterate through each element
-		// loop through all previous elements i = j j-- to check each element 
-		// until the selected element is less than the element after it
-		
+		/**********************************************/
+		/* FOR LOOP TO ITERATE THROUGH CUST ARRAYLIST */
+		/**********************************************/
 		for(int i = 1; i < cust.size(); i++)
 		{
-			int index = i - 1;
-			Customer customer2 = cust.get(i);
-			int id = cust.get(i).getID();
-			System.out.println("Selected ID: " + id);
-			int id2 = cust.get(index).getID();
+			int index = i - 1;					// INDEX OF ELEMENT TO LEFT OF CURRENT INDEX
+			Customer customer2 = cust.get(i);	// CURRENT CUSTOMER
+			int id = cust.get(i).getID();		// ID OF CURRENT CUSTOMER
+			int id2 = cust.get(index).getID();	// ID OF CUSTOMER TO LEFT
 			
+			/*************************************************************************************/
+			/* WHILE LOOP TO CHECK IF ELEMENTS TO LEFT OF INDEX ARE GREATER THAN CURRENT ELEMENT */
+			/*************************************************************************************/
 			while((index >=0) && (id < id2))
 			{
-				Customer customer = cust.get(index);
-				id2 = customer.getID();
-				cust.set(index+1, customer);
-				index--;
-				
-				System.out.println("Compared ID: " + id2);
+				Customer customer = cust.get(index);	// CUSTOMER TO LEFT
+				id2 = customer.getID();					// CALL TO GET ID
+				cust.set(index+1, customer);			// MOVES COMPARED CUSTOMER TO RIGHT
+				index--;	// DECREMENTER
 			}
 			
-			cust.set(index +1, customer2);
-			//System.out.println("");
+			cust.set(index+1, customer2);	// MOVES CURRENT CUSTOMER TO SORTED INDEX
 		}
 		
-		return cust;
+		/******************/
+		/* RETURN SECTION */
+		/******************/
+		return cust;		// RETURNS CUST
 	}
 	
 	public static ArrayList<Customer> sortSize()
@@ -899,13 +906,19 @@ public class Menu_GUI extends BusGUI implements ActionListener
 	/* POSTCONDITION - CREATES AN ARRAYLIST OF CUSTOMERS SORTED BY GROUP SIZE */
 	/**************************************************************************/
 	{
-		ArrayList<Customer> cust;
+		/********************/
+		/* VARIABLE SECTION */
+		/********************/
+		ArrayList<Customer> cust;	// SORTED ARRAYLIST OF CUSTOMERS
 		
-		cust = new ArrayList<Customer>();
+		cust = new ArrayList<Customer>();	// INSTANTIATES CUST ARRAYLIST
 		
 		cust = custList;
 
-		return cust;
+		/******************/
+		/* RETURN SECTION */
+		/******************/
+		return cust;		// RETURNS CUST
 	}
 	
 	public static void totalProfit()
