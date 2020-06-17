@@ -779,7 +779,13 @@ public class Menu_GUI extends BusGUI implements ActionListener
 		dayi = "";			// INITIALIZES DAYI
 		yeari = "";			// INITIALIZES YEARI
 		
-		cust = custList;
+		/*****************************************/
+		/* FOR LOOP TO ADD ALL CUSTOMERS TO CUST */
+		/*****************************************/
+		for(int i = 0; i < custList.size(); i++)
+		{
+			cust.add(custList.get(i));
+		}
 		
 		Customer customer = cust.get(0);	// ASSIGNS CUSTOMER TO FIRST ELEMENT IN CUST ARRAYLIST
 		
