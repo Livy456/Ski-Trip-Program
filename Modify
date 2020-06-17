@@ -41,8 +41,9 @@ public class Modify extends Modify_Menu implements ActionListener
 		/*************************/
 		/* INSTANTIATION SECTION */
 		/*************************/
-		info = new JLabel("Modify the Customer");	// INSTANTIATES JLABEL
-		frame = new JFrame("Modify Customer");		// INSTANTIATES JFRAME
+		returnB = new JButton("Return to Modify Menu");	// INSTANTIATES JBUTTON
+		info = new JLabel("Modify the Customer");		// INSTANTIATES JLABEL
+		frame = new JFrame("Modify Customer");			// INSTANTIATES JFRAME
 		disName = new JLabel("Customer Name: " + 
 							 custList.get(custNum-1).getName());	// INSTANTIATES JLABEL
 		disSize = new JLabel("Customer Size: " + 
@@ -176,7 +177,7 @@ public class Modify extends Modify_Menu implements ActionListener
 		/***********************************************************/
 		/* ELSE IF STATEMENT TO CHECK IF RETURN BUTTON WAS PRESSED */	
 		/***********************************************************/
-		else if (action == "Return")
+		else if (action == "Return to Modify Menu")
 		{
 			confirm = confirmWindow();	// CALL TO CONFIRM WINDOW
 			
