@@ -183,6 +183,7 @@ public class Menu_GUI extends BusGUI implements ActionListener
 		ArrayList<Customer> sortCustAlph;
 		ArrayList<Customer> sortCustSz;
 		ArrayList<Customer> sortCustID;
+		ArrayList<Customer> cust;
 		String action; 		// STRING TO REPRESENT WHICH BUTTON WAS PRESSED
 		int confirm; 		// REUSUABLE INT INPUT FOR CONFIRMING AN ACTION
 		
@@ -360,17 +361,26 @@ public class Menu_GUI extends BusGUI implements ActionListener
 		if (action.equals("Sorting by Group Size"))
 		{
 			confirm = confirmWindow();				// CALL TO CONFIRM WINDOW
-			sortCustSz = new ArrayList<Customer>();	// INSTANTIATES ARRAYLIST
+			//sortCustSz = new ArrayList<Customer>();	// INSTANTIATES ARRAYLIST
+			cust = new ArrayList<Customer>();		// INSTANTIATES ARRAYLIST
+			
+			/*****************************************/
+			/* FOR LOOP TO ADD ALL CUSTOMERS TO CUST */
+			/*****************************************/
+			for(int i = 0; i < custList.size(); i++)
+			{
+				cust.add(custList.get(i));
+			}
 			
 			/*******************************************************************************/
 			/* IF STATEMENT TO CONFIRM ACTION OF VIEWING SORTING BY GROUP SIZE OF SKI TRIP */	
 			/*******************************************************************************/
 			if (confirm == 0)
 			{
-				sortCustSz = sortSize();	// CALL TO SORT SIZE
-				frame.dispose();			// DISPOSES OF MENU_GUI FRAME
-				printSorted(sortCustSz);	// CALL TO PRINT SORTED
-				new Menu_GUI();				// CREATES A NEW MENU GUI WINDOW
+				mergeSortSize(cust, 0, cust.size()-1);	// CALL TO SORT SIZE
+				frame.dispose();						// DISPOSES OF MENU_GUI FRAME
+				printSorted(cust);						// CALL TO PRINT SORTED
+				new Menu_GUI();							// CREATES A NEW MENU GUI WINDOW
 			}
 		}
 	}
@@ -832,18 +842,18 @@ public class Menu_GUI extends BusGUI implements ActionListener
 						customer = cust.get(j);	// CUSTOMER EQUALS ELEMENT TO RIGHT	
 					}
 			
-					/*********************************************************************/
-					/* IF STATEMENT TO CHECK IF CURRENT CUSTOMER HAS A FURTHER AWAY DATE */
-					/*********************************************************************/
+					/**************************************************************************/
+					/* ELSE IF STATEMENT TO CHECK IF CURRENT CUSTOMER HAS A FURTHER AWAY DATE */
+					/**************************************************************************/
 					else if((year == yr) && (month < mnth))
 					{
 						customer = cust.get(j);	// CUSTOMER EQUALS ELEMENT TO RIGHT	
 					}
 				
-					/*********************************************************************/
-					/* IF STATEMENT TO CHECK IF CURRENT CUSTOMER HAS A FURTHER AWAY DATE */
-					/*********************************************************************/
-					else if((year == yr) && (month == mnth) && (day < dy))
+					/**************************************************************************/
+					/* ELSE IF STATEMENT TO CHECK IF CURRENT CUSTOMER HAS A FURTHER AWAY DATE */
+					/**************************************************************************/
+					else if((year == yr) && (month == mnth) && (day <= dy))
 					{
 						customer = cust.get(j);	// CUSTOMER EQUALS ELEMENT TO RIGHT	
 					}	
@@ -906,26 +916,119 @@ public class Menu_GUI extends BusGUI implements ActionListener
 		return cust;		// RETURNS CUST
 	}
 	
-	public static ArrayList<Customer> sortSize()
-	/**************************************************************************/
-	/* PRECONDITION - NEEDS AN ARRAYLIST OF CUSTOMERS SORTED BY GROUP SIZE 	  */
-	/* POSTCONDITION - CREATES AN ARRAYLIST OF CUSTOMERS SORTED BY GROUP SIZE */
-	/**************************************************************************/
+	public static void mergeSize(ArrayList<Customer> cust, int bIndex, int mid, int eIndex)
 	{
-		/********************/
-		/* VARIABLE SECTION */
-		/********************/
-		ArrayList<Customer> cust;	// SORTED ARRAYLIST OF CUSTOMERS
+		ArrayList<Customer> lower;
+		ArrayList<Customer> upper;
 		
-		cust = new ArrayList<Customer>();	// INSTANTIATES CUST ARRAYLIST
+		int len1 = mid - bIndex - 1;
+		int len2 = eIndex - mid;
 		
-		cust = custList;
-
-		/******************/
-		/* RETURN SECTION */
-		/******************/
-		return cust;		// RETURNS CUST
+		System.out.println("Len1:" + len1);
+		System.out.println("Len2:" + len2);
+		System.out.println("bIndex:" + bIndex);
+		System.out.println("eIndex:" + eIndex);
+		System.out.println("mid:" + mid);
+		lower = new ArrayList<Customer>();
+		upper = new ArrayList<Customer>();
+		
+		for(int i = 0; i < len1; i++)
+		{
+			lower.add(cust.get(bIndex+i));
+		}
+		
+		for(int i = 0; i < len2; i++)
+		{
+			upper.add(cust.get(mid+1+i));
+		}
+		
+		int i;
+		int j;
+		int k;
+		
+		i = 0;
+		j = 0;
+		k = mid;
+		
+		while((i < len1) && (j < len2))
+		{
+			if((lower.get(i).getSize()) <= (upper.get(j).getSize()))
+			{
+				cust.set(k, lower.get(i));
+				i++;
+			}
+			
+			else
+			{
+				cust.set(k, upper.get(j));
+				j++;
+			}
+			
+			k++;
+		}
+		
+		while(i < len1)
+		{
+			cust.set(k,  lower.get(i));
+			i++;
+			k++;
+		}
+		
+		while(j < len2)
+		{
+			cust.set(k, upper.get(j));
+			j++;
+			k++;
+		}
+		
+		
+		// Printing out lower ArrayList
+		String str = "";
+		for(int m = 0; m < lower.size(); m++)
+		{
+			str+= "" + lower.get(m).getSize();
+		}
+		// Printing out upper ArrayList
+		String str2 = "";
+		for(int q = 0; q < upper.size(); q++)
+		{
+			str2+= "" + upper.get(q).getSize();
+		}
+		String str3 = "";
+		for(int l = 0; l < cust.size(); l++)
+		{
+			str3+= " "+ cust.get(l).getSize();
+		}
+		System.out.println("Lower ArrayList:" + str);
+		System.out.println("Upper ArrayList:" + str2);
+		System.out.println("Merged Customer ArrayList" + str3);
 	}
+	
+	public static void mergeSortSize(ArrayList<Customer> cust, int bIndex, int eIndex)
+	/**********************************************************/
+	/* PRECONDITION - NEEDS TO DIVIDE AN ARRAYLIST INTO TWO   */
+	/* 				  SUBARRAYS, SORT THEM, AND MERGE THEM    */
+	/* POSTCONDITION - CREATES A DIVIDE AN ARRAYLIST INTO TWO */
+	/* 				   SUBARRAYS, SORT THEM, AND MERGE THEM   */
+	/**********************************************************/
+	{
+		
+		if(bIndex < eIndex)
+		{
+			int mid = (bIndex+eIndex) / 2;
+			//Error Checking for Values for MID, BINDEX, AND EINDEX
+			System.out.println("Mid in Divide and Conquer:" + mid);
+			System.out.println("bIndex in  Divide and Conquer:" + bIndex);
+			System.out.println("eIndex in Divide and Conquer:" + eIndex);
+			
+			mergeSortSize(cust, bIndex, mid);		// RECURSIVE CALL FOR FIRST HALF OF ARRAYLIST
+			mergeSortSize(cust, mid + 1, eIndex);	// RECURSIVE CALL FOR SECOND HALF OF ARRAYLIST
+			
+			mergeSize(cust, bIndex, mid, eIndex);	// CALL TO MERGE SIZE TO MERGE SORTED SUBARRAYLIST
+		}
+	}
+	
+	
 	
 	public static void totalProfit()
 	/***************************************************************************/
