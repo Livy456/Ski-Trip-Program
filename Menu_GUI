@@ -891,23 +891,46 @@ public class Menu_GUI extends BusGUI implements ActionListener
 		/**********************************************/
 		for(int i = 1; i < cust.size(); i++)
 		{
-			int index = i - 1;					// INDEX OF ELEMENT TO LEFT OF CURRENT INDEX
-			Customer customer2 = cust.get(i);	// CURRENT CUSTOMER
-			int id = cust.get(i).getID();		// ID OF CURRENT CUSTOMER
-			int id2 = cust.get(index).getID();	// ID OF CUSTOMER TO LEFT
+			int index;			// INDEX OF ELEMENT TO LEFT OF CURRENT INDEX
+			Customer customer2;	// CURRENT CUSTOMER
+			int id;				// ID OF CURRENT CUSTOMER
+			int id2;			// ID OF CUSTOMER TO LEFT
+			
+			index = i - 1;
+			customer2 = cust.get(i);
+			id = cust.get(i).getID();
+			id2 = cust.get(index).getID();
 			
 			/*************************************************************************************/
 			/* WHILE LOOP TO CHECK IF ELEMENTS TO LEFT OF INDEX ARE GREATER THAN CURRENT ELEMENT */
 			/*************************************************************************************/
-			while((index >=0) && (id < id2))
+			while((index >= 0))
 			{
 				Customer customer = cust.get(index);	// CUSTOMER TO LEFT
 				id2 = customer.getID();					// CALL TO GET ID
-				cust.set(index+1, customer);			// MOVES COMPARED CUSTOMER TO RIGHT
+				
+				/********************************************************/
+				/* IF STATEMENT TO CHECK IF CUSTOMERS SHOULD BE SWAPPED */
+				/********************************************************/
+				if(id < id2)
+				{
+					cust.set(index+1, customer);	// MOVES COMPARED CUSTOMER TO RIGHT
+					cust.set(index, customer2);		// MOVES CUSTOMER2 TO LEFT		
+				}
+				
 				index--;	// DECREMENTER
 			}
 			
 			cust.set(index+1, customer2);	// MOVES CURRENT CUSTOMER TO SORTED INDEX
+			System.out.println("Customer being moved" + customer2);
+			
+			// ERROR CHECKING
+			String str = "";
+			for(int j = 0; j < cust.size(); j++)
+			{
+				str+= "" + cust.get(j).getID() + " ";
+			}
+			System.out.println("Current customer ID list:" + str);
 		}
 		
 		/******************/
@@ -1020,15 +1043,13 @@ public class Menu_GUI extends BusGUI implements ActionListener
 			System.out.println("Mid in Divide and Conquer:" + mid);
 			System.out.println("bIndex in  Divide and Conquer:" + bIndex);
 			System.out.println("eIndex in Divide and Conquer:" + eIndex);
-			
+				
 			mergeSortSize(cust, bIndex, mid);		// RECURSIVE CALL FOR FIRST HALF OF ARRAYLIST
 			mergeSortSize(cust, mid + 1, eIndex);	// RECURSIVE CALL FOR SECOND HALF OF ARRAYLIST
-			
-			mergeSize(cust, bIndex, mid, eIndex);	// CALL TO MERGE SIZE TO MERGE SORTED SUBARRAYLIST
+		
+			mergeSize(cust, bIndex, mid, eIndex);	// CALL TO MERGE SIZE TO MERGE SORTED SUBARRAYLIST	
 		}
 	}
-	
-	
 	
 	public static void totalProfit()
 	/***************************************************************************/
