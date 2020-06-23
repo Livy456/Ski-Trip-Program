@@ -11,24 +11,16 @@
 /* IMPLEMENT AND DEFINE   				  */
 /******************************************/
 
-/******************/
-/* IMPORT SECTION */
-/******************/
-import java.awt.*;					// IMPORTS AWT
-import java.awt.event.*;			// IMPORTS EVENTS
-import javax.swing.*;				// IMPORTS SWING
-import java.text.DecimalFormat;		// IMPORTS DECIMAL FORMAT
-
 public interface Ski_Interface 
 {
 	public void setName(String nm);
 	public String getName();
 	public void setMonth(String mn);
-	public String getMonth();
+	public Object getMonth();
 	public void setDay(String dy);
-	public String getDay();
+	public Object getDay();
 	public void setYear(String yr);
-	public String getYear();
+	public Object getYear();
 	public void setDate(Object dt);
 	public Object getDate();
 	public void setID(int i);
