@@ -886,6 +886,7 @@ public class BusGUI implements ActionListener
 		/*****************************************************/
 		do
 		{
+			repeat = false;
 			i = generator.nextInt(1000);	// GENERATES A RANDOM INTEGER
 			
 			/**************************************/
