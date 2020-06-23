@@ -28,9 +28,9 @@ public class Modify extends Modify_Menu implements ActionListener
 	/*****************************/
 	private JLabel warning;		// CREATES A JLABEL FOR INPUT CONSTRAINTS
 	private JLabel warning2;	// CREATES A JLABEL FOR INPUT CONSTRAINTS
-	private JLabel disName;		// CREATES A JLABEL FOR DISPLAYING NAME
-	private JLabel disSize;		// CREATES A JLABEL FOR DISPLAYING SIZE
-	private JLabel disDate;		// CREATES A JLABEL FOR DISPLAYING DATE
+	//private JLabel disName;		// CREATES A JLABEL FOR DISPLAYING NAME
+//	private JLabel disSize;		// CREATES A JLABEL FOR DISPLAYING SIZE
+	//private JLabel disDate;		// CREATES A JLABEL FOR DISPLAYING DATE
 	
 	public Modify()
 	/************************************************/
@@ -44,12 +44,8 @@ public class Modify extends Modify_Menu implements ActionListener
 		returnB = new JButton("Return to Modify Menu");	// INSTANTIATES JBUTTON
 		info = new JLabel("Modify the Customer");		// INSTANTIATES JLABEL
 		frame = new JFrame("Modify Customer");			// INSTANTIATES JFRAME
-		disName = new JLabel("Customer Name: " + 
-							 custList.get(custNum-1).getName());	// INSTANTIATES JLABEL
-		disSize = new JLabel("Customer Size: " + 
-							 custList.get(custNum-1).getSize());	// INSTANTIATES JLABEL
-		disDate = new JLabel("Customer Date: " + 
-							 custList.get(custNum-1).getDate());	// INSTANTIATES JLABEL
+		nameTF = new JTextField("" + custList.get(custNum-1).getName());	// INSTANTIATES JTEXTFIELD
+		grpSzTF = new JTextField("" + custList.get(custNum-1).getSize());	// INSTANTIATES JTEXTFIELD
 		warning = new JLabel("Name has to be < "+
 				"21 characters.");					// INSTANTIATES A LABEL	
 		warning2 = new JLabel("Group size has to " +
@@ -58,7 +54,10 @@ public class Modify extends Modify_Menu implements ActionListener
 		container = frame.getContentPane();			// CREATES A CONTENT PANE
 		font = new Font("Times New Roman", 
 						Font.BOLD, 15);				// INSTANTIATES FONT 
-				
+		monthCB.setSelectedItem(custList.get(custNum-1).getMonth());	// SETS SELECTED ITEM TO PREVIOUS CUSTOMER MONTH VALUE
+		dayCB.setSelectedItem(custList.get(custNum-1).getDay());		// SETS SELECTED ITEM TO PREVIOUS CUSTOMER DAY VALUE
+		yearCB.setSelectedItem(custList.get(custNum-1).getYear());		// SETS SELECTED ITEM TO PREVIOUS CUSTOMER YEAR VALUE
+
 		/**************************/
 		/* CREATES A BLANK JFRAME */
 		/**************************/
@@ -73,9 +72,9 @@ public class Modify extends Modify_Menu implements ActionListener
 		/* SETS FONT OF THE LABEL */
 		/**************************/
 		info.setFont(font);			// SETS FONT OF INFO LABEL
-		disName.setFont(font);		// SETS FONT OF NAME LABEL
-		disSize.setFont(font);		// SETS FONT OF SIZE LABEL
-		disDate.setFont(font);		// SETS FONT OF DATE LABEL
+//		disName.setFont(font);		// SETS FONT OF NAME LABEL
+//		disSize.setFont(font);		// SETS FONT OF SIZE LABEL
+//		disDate.setFont(font);		// SETS FONT OF DATE LABEL
 		warning.setFont(font);		// SETS THE FONT OF THE WARNING LABEL
 		warning2.setFont(font);		// SETS THE FONT OF THE WARNING LABEL
 		
@@ -83,9 +82,9 @@ public class Modify extends Modify_Menu implements ActionListener
 		/* SETS FOREGROUND COLOR OF THE LABEL */
 		/**************************************/
 		info.setForeground(Color.BLACK);		// SETS FOREGROUND COLOR OF INFO LABEL 
-		disName.setForeground(Color.BLACK);		// SETS FOREGROUND COLOR OF DISPLAY NAME LABEL
-		disSize.setForeground(Color.BLACK);		// SETS FOREGROUND COLOR OF DISPLAY SIZE LABEL
-		disDate.setForeground(Color.BLACK);		// SETS FOREGROUND COLOR OF DISPLAY DATE LABEL
+//		disName.setForeground(Color.BLACK);		// SETS FOREGROUND COLOR OF DISPLAY NAME LABEL
+//		disSize.setForeground(Color.BLACK);		// SETS FOREGROUND COLOR OF DISPLAY SIZE LABEL
+//		disDate.setForeground(Color.BLACK);		// SETS FOREGROUND COLOR OF DISPLAY DATE LABEL
 		warning.setForeground(Color.BLACK);		// SETS FOREGROUND COLOR OF WARNING LABEL
 		warning2.setForeground(Color.BLACK);	// SETS FOREGROUND COLOR OF WARNING2 LABEL
 		nameL.setForeground(Color.BLACK);		// SETS FOREGROUND COLOR OF NAME LABEL
@@ -99,9 +98,9 @@ public class Modify extends Modify_Menu implements ActionListener
 		confirm.setBounds(365, 280, 110, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		quitB.setBounds(365, 320, 110, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		info.setBounds(20, 30, 500, 30);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		disName.setBounds(20, 170, 500, 30);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		disSize.setBounds(20, 200, 500, 30);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		disDate.setBounds(20, 230, 500, 30);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+//		disName.setBounds(20, 170, 500, 30);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+//		disSize.setBounds(20, 200, 500, 30);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+//		disDate.setBounds(20, 230, 500, 30);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		warning.setBounds(210, 80, 500, 30);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		warning2.setBounds(210, 110, 500, 30);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH) 
 		nameL.setBounds(20, 80, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
@@ -127,9 +126,9 @@ public class Modify extends Modify_Menu implements ActionListener
 		container.add(quitB);		// ADDS QUIT BUTTON TO CONTAINER
 		container.add(confirm);		// ADDS CONFRIM BUTTON TO CONTAINER
 		container.add(info);		// ADDS INFO LABEL TO CONTAINER
-		container.add(disName);		// ADDS DISPLAY NAME LABEL TO CONTAINER
-		container.add(disSize);		// ADDS DISPLAY SIZE LABEL TO CONTAINER	
-		container.add(disDate);		// ADDS DISPLAY DATE LABEL TO CONTAINER
+//		container.add(disName);		// ADDS DISPLAY NAME LABEL TO CONTAINER
+//		container.add(disSize);		// ADDS DISPLAY SIZE LABEL TO CONTAINER	
+//		container.add(disDate);		// ADDS DISPLAY DATE LABEL TO CONTAINER
 		container.add(warning);		// ADDS WARNING LABEL TO CONTAINER
 		container.add(warning2);	// ADDS WARNING 2 LABEL TO CONTAINER
 		container.add(nameL);		// ADDS NAME LABEL TO CONTAINER
@@ -247,7 +246,14 @@ public class Modify extends Modify_Menu implements ActionListener
 		Object day;			// REUSUABLE OBJECT INPUT
 		Object year;		// REUSUABLE OBJECT INPUT
 		String date;		// REUSUABLE STRING INPUT
-				
+		Object mth;			// PREVIOUS MONTH VALUE OF CUSTOMER BEING MODIFIED
+		Object dy;			// PREVIOUS DAY VALUE OF CUSTOMER BEING MODIFIED
+		Object yr;			// PREVIOUS YEAR VALUE OF CUSTOMER BEING MODIFIED
+		
+		mth = custList.get(custNum-1).getMonth();	// GETS MONTH
+		dy = custList.get(custNum-1).getDay();		// GETS DAY
+		yr = custList.get(custNum-1).getYear();		// GETS YEAR		
+			
 		/*****************************/
 		/* LOOP UNTIL VALUE IS VALID */
 		/*****************************/
@@ -268,10 +274,10 @@ public class Modify extends Modify_Menu implements ActionListener
 			/************************************/
 			if((month.equals("02")) && (day.equals("29")) && (year.equals("2021")))
 			{
-				errorMessage(error6);		// CALL TO ERROR MESSAGE
-				monthCB.setSelectedItem("");// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				dayCB.setSelectedItem("");	// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				yearCB.setSelectedItem(""); // RESETS SELECTED ITEM ON DROP-DOWN LIST
+				errorMessage(error6);			// CALL TO ERROR MESSAGE
+				monthCB.setSelectedItem(mth);	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				dayCB.setSelectedItem(dy);		// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				yearCB.setSelectedItem(yr); 	// RESETS SELECTED ITEM ON DROP-DOWN LIST
 			}
 			
 			/************************************/
@@ -279,10 +285,10 @@ public class Modify extends Modify_Menu implements ActionListener
 			/************************************/
 			else if((month.equals("02")) && (day.equals("29")) && (year.equals("2022")))
 			{
-				errorMessage(error6);		// CALL TO ERROR MESSAGE
-				monthCB.setSelectedItem("");// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				dayCB.setSelectedItem("");	// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				yearCB.setSelectedItem(""); // RESETS SELECTED ITEM ON DROP-DOWN LIST
+				errorMessage(error6);			// CALL TO ERROR MESSAGE
+				monthCB.setSelectedItem(mth);	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				dayCB.setSelectedItem(dy);		// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				yearCB.setSelectedItem(yr); 	// RESETS SELECTED ITEM ON DROP-DOWN LIST
 			}
 			
 			/************************************/
@@ -290,10 +296,10 @@ public class Modify extends Modify_Menu implements ActionListener
 			/************************************/
 			else if((month.equals("02")) && (day.equals("29")) && (year.equals("2023")))
 			{
-				errorMessage(error6);		// CALL TO ERROR MESSAGE
-				monthCB.setSelectedItem("");// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				dayCB.setSelectedItem("");	// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				yearCB.setSelectedItem(""); // RESETS SELECTED ITEM ON DROP-DOWN LIST
+				errorMessage(error6);			// CALL TO ERROR MESSAGE
+				monthCB.setSelectedItem(mth);	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				dayCB.setSelectedItem(dy);		// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				yearCB.setSelectedItem(yr); 	// RESETS SELECTED ITEM ON DROP-DOWN LIST
 			}
 			
 			/************************************/
@@ -301,10 +307,10 @@ public class Modify extends Modify_Menu implements ActionListener
 			/************************************/
 			else if((month.equals("02")) && (day.equals("29")) && (year.equals("2025")))
 			{
-				errorMessage(error6);		// CALL TO ERROR MESSAGE
-				monthCB.setSelectedItem("");// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				dayCB.setSelectedItem("");	// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				yearCB.setSelectedItem(""); // RESETS SELECTED ITEM ON DROP-DOWN LIST
+				errorMessage(error6);			// CALL TO ERROR MESSAGE
+				monthCB.setSelectedItem(mth);	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				dayCB.setSelectedItem(dy);		// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				yearCB.setSelectedItem(yr); 	// RESETS SELECTED ITEM ON DROP-DOWN LIST
 			}
 			
 			/************************************/
@@ -312,10 +318,10 @@ public class Modify extends Modify_Menu implements ActionListener
 			/************************************/
 			else if((month.equals("02")) && (day.equals("29")) && (year.equals("2026")))
 			{
-				errorMessage(error6);		// CALL TO ERROR MESSAGE
-				monthCB.setSelectedItem("");// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				dayCB.setSelectedItem("");	// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				yearCB.setSelectedItem(""); // RESETS SELECTED ITEM ON DROP-DOWN LIST
+				errorMessage(error6);			// CALL TO ERROR MESSAGE
+				monthCB.setSelectedItem(mth);	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				dayCB.setSelectedItem(dy);		// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				yearCB.setSelectedItem(yr); 	// RESETS SELECTED ITEM ON DROP-DOWN LIST
 			}
 			
 			/************************************/
@@ -323,10 +329,10 @@ public class Modify extends Modify_Menu implements ActionListener
 			/************************************/
 			else if((month.equals("02")) && (day.equals("29")) && (year.equals("2027")))
 			{
-				errorMessage(error6);		// CALL TO ERROR MESSAGE
-				monthCB.setSelectedItem("");// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				dayCB.setSelectedItem("");	// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				yearCB.setSelectedItem(""); // RESETS SELECTED ITEM ON DROP-DOWN LIST
+				errorMessage(error6);			// CALL TO ERROR MESSAGE
+				monthCB.setSelectedItem(mth);	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				dayCB.setSelectedItem(dy);		// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				yearCB.setSelectedItem(yr); 	// RESETS SELECTED ITEM ON DROP-DOWN LIST
 			}
 			
 			/************************************/
@@ -334,10 +340,10 @@ public class Modify extends Modify_Menu implements ActionListener
 			/************************************/
 			else if((month.equals("02")) && (day.equals("29")) && (year.equals("2029")))
 			{
-				errorMessage(error6);		// CALL TO ERROR MESSAGE
-				monthCB.setSelectedItem("");// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				dayCB.setSelectedItem("");	// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				yearCB.setSelectedItem(""); // RESETS SELECTED ITEM ON DROP-DOWN LIST
+				errorMessage(error6);			// CALL TO ERROR MESSAGE
+				monthCB.setSelectedItem(mth);	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				dayCB.setSelectedItem(dy);		// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				yearCB.setSelectedItem(yr); 	// RESETS SELECTED ITEM ON DROP-DOWN LIST
 			}
 			
 			/************************************/
@@ -345,10 +351,10 @@ public class Modify extends Modify_Menu implements ActionListener
 			/************************************/
 			else if((month.equals("02")) && (day.equals("29")) && (year.equals("2030")))
 			{
-				errorMessage(error6);		// CALL TO ERROR MESSAGE
-				monthCB.setSelectedItem("");// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				dayCB.setSelectedItem("");	// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				yearCB.setSelectedItem(""); // RESETS SELECTED ITEM ON DROP-DOWN LIST
+				errorMessage(error6);			// CALL TO ERROR MESSAGE
+				monthCB.setSelectedItem(mth);	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				dayCB.setSelectedItem(dy);		// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				yearCB.setSelectedItem(yr); 	// RESETS SELECTED ITEM ON DROP-DOWN LIST
 			}
 			
 			/************************************/
@@ -356,10 +362,10 @@ public class Modify extends Modify_Menu implements ActionListener
 			/************************************/
 			else if((month.equals("02")) && (day.equals("29")) && (year.equals("2031")))
 			{
-				errorMessage(error6);		// CALL TO ERROR MESSAGE
-				monthCB.setSelectedItem("");// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				dayCB.setSelectedItem("");	// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				yearCB.setSelectedItem(""); // RESETS SELECTED ITEM ON DROP-DOWN LIST
+				errorMessage(error6);			// CALL TO ERROR MESSAGE
+				monthCB.setSelectedItem(mth);	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				dayCB.setSelectedItem(dy);		// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				yearCB.setSelectedItem(yr); 	// RESETS SELECTED ITEM ON DROP-DOWN LIST
 			}
 			
 			/************************************/
@@ -367,10 +373,10 @@ public class Modify extends Modify_Menu implements ActionListener
 			/************************************/
 			else if((month.equals("02")) && (day.equals("29")) && (year.equals("2033")))
 			{
-				errorMessage(error6);		// CALL TO ERROR MESSAGE
-				monthCB.setSelectedItem("");// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				dayCB.setSelectedItem("");	// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				yearCB.setSelectedItem(""); // RESETS SELECTED ITEM ON DROP-DOWN LIST
+				errorMessage(error6);			// CALL TO ERROR MESSAGE
+				monthCB.setSelectedItem(mth);	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				dayCB.setSelectedItem(dy);		// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				yearCB.setSelectedItem(yr); 	// RESETS SELECTED ITEM ON DROP-DOWN LIST
 			}
 			
 			/************************************/
@@ -378,10 +384,10 @@ public class Modify extends Modify_Menu implements ActionListener
 			/************************************/
 			else if((month.equals("02")) && (day.equals("29")) && (year.equals("2034")))
 			{
-				errorMessage(error6);		// CALL TO ERROR MESSAGE
-				monthCB.setSelectedItem("");// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				dayCB.setSelectedItem("");	// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				yearCB.setSelectedItem(""); // RESETS SELECTED ITEM ON DROP-DOWN LIST
+				errorMessage(error6);			// CALL TO ERROR MESSAGE
+				monthCB.setSelectedItem(mth);	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				dayCB.setSelectedItem(dy);		// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				yearCB.setSelectedItem(yr); 	// RESETS SELECTED ITEM ON DROP-DOWN LIST
 			}
 			
 			/************************************/
@@ -389,10 +395,10 @@ public class Modify extends Modify_Menu implements ActionListener
 			/************************************/
 			else if((month.equals("02")) && (day.equals("29")) && (year.equals("2035")))
 			{
-				errorMessage(error6);		// CALL TO ERROR MESSAGE
-				monthCB.setSelectedItem("");// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				dayCB.setSelectedItem("");	// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				yearCB.setSelectedItem(""); // RESETS SELECTED ITEM ON DROP-DOWN LIST
+				errorMessage(error6);			// CALL TO ERROR MESSAGE
+				monthCB.setSelectedItem(mth);	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				dayCB.setSelectedItem(dy);		// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				yearCB.setSelectedItem(yr); 	// RESETS SELECTED ITEM ON DROP-DOWN LIST
 			}
 			
 			/************************************/
@@ -400,10 +406,10 @@ public class Modify extends Modify_Menu implements ActionListener
 			/************************************/
 			else if((month.equals("02")) && (day.equals("29")) && (year.equals("2037")))
 			{
-				errorMessage(error6);		// CALL TO ERROR MESSAGE
-				monthCB.setSelectedItem("");// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				dayCB.setSelectedItem("");	// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				yearCB.setSelectedItem(""); // RESETS SELECTED ITEM ON DROP-DOWN LIST
+				errorMessage(error6);			// CALL TO ERROR MESSAGE
+				monthCB.setSelectedItem(mth);	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				dayCB.setSelectedItem(dy);		// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				yearCB.setSelectedItem(yr); 	// RESETS SELECTED ITEM ON DROP-DOWN LIST
 			}
 			
 			/************************************/
@@ -411,10 +417,10 @@ public class Modify extends Modify_Menu implements ActionListener
 			/************************************/
 			else if((month.equals("02")) && (day.equals("29")) && (year.equals("2038")))
 			{
-				errorMessage(error6);		// CALL TO ERROR MESSAGE
-				monthCB.setSelectedItem("");// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				dayCB.setSelectedItem("");	// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				yearCB.setSelectedItem(""); // RESETS SELECTED ITEM ON DROP-DOWN LIST
+				errorMessage(error6);			// CALL TO ERROR MESSAGE
+				monthCB.setSelectedItem(mth);	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				dayCB.setSelectedItem(dy);		// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				yearCB.setSelectedItem(yr); 	// RESETS SELECTED ITEM ON DROP-DOWN LIST
 			}
 			
 			/************************************/
@@ -422,10 +428,10 @@ public class Modify extends Modify_Menu implements ActionListener
 			/************************************/
 			else if((month.equals("02")) && (day.equals("29")) && (year.equals("2039")))
 			{
-				errorMessage(error6);		// CALL TO ERROR MESSAGE
-				monthCB.setSelectedItem("");// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				dayCB.setSelectedItem("");	// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				yearCB.setSelectedItem(""); // RESETS SELECTED ITEM ON DROP-DOWN LIST
+				errorMessage(error6);			// CALL TO ERROR MESSAGE
+				monthCB.setSelectedItem(mth);	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				dayCB.setSelectedItem(dy);		// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				yearCB.setSelectedItem(yr); 	// RESETS SELECTED ITEM ON DROP-DOWN LIST
 			}
 			
 			/************************************/
@@ -433,10 +439,10 @@ public class Modify extends Modify_Menu implements ActionListener
 			/************************************/
 			else if((month.equals("02")) && (day.equals("29")) && (year.equals("2041")))
 			{
-				errorMessage(error6);		// CALL TO ERROR MESSAGE
-				monthCB.setSelectedItem("");// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				dayCB.setSelectedItem("");	// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				yearCB.setSelectedItem(""); // RESETS SELECTED ITEM ON DROP-DOWN LIST
+				errorMessage(error6);			// CALL TO ERROR MESSAGE
+				monthCB.setSelectedItem(mth);	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				dayCB.setSelectedItem(dy);		// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				yearCB.setSelectedItem(yr); 	// RESETS SELECTED ITEM ON DROP-DOWN LIST
 			}
 			
 			/************************************/
@@ -444,10 +450,10 @@ public class Modify extends Modify_Menu implements ActionListener
 			/************************************/
 			else if((month.equals("02")) && (day.equals("29")) && (year.equals("2042")))
 			{
-				errorMessage(error6);		// CALL TO ERROR MESSAGE
-				monthCB.setSelectedItem("");// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				dayCB.setSelectedItem("");	// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				yearCB.setSelectedItem(""); // RESETS SELECTED ITEM ON DROP-DOWN LIST
+				errorMessage(error6);			// CALL TO ERROR MESSAGE
+				monthCB.setSelectedItem(mth);	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				dayCB.setSelectedItem(dy);		// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				yearCB.setSelectedItem(yr); 	// RESETS SELECTED ITEM ON DROP-DOWN LIST
 			}
 			
 			/************************************/
@@ -455,10 +461,10 @@ public class Modify extends Modify_Menu implements ActionListener
 			/************************************/
 			else if((month.equals("02")) && (day.equals("29")) && (year.equals("2043")))
 			{
-				errorMessage(error6);		// CALL TO ERROR MESSAGE
-				monthCB.setSelectedItem("");// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				dayCB.setSelectedItem("");	// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				yearCB.setSelectedItem(""); // RESETS SELECTED ITEM ON DROP-DOWN LIST
+				errorMessage(error6);			// CALL TO ERROR MESSAGE
+				monthCB.setSelectedItem(mth);	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				dayCB.setSelectedItem(dy);		// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				yearCB.setSelectedItem(yr); 	// RESETS SELECTED ITEM ON DROP-DOWN LIST
 			}
 			
 			/************************************/
@@ -466,10 +472,10 @@ public class Modify extends Modify_Menu implements ActionListener
 			/************************************/
 			else if((month.equals("02")) && (day.equals("29")) && (year.equals("2045")))
 			{
-				errorMessage(error6);		// CALL TO ERROR MESSAGE
-				monthCB.setSelectedItem("");// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				dayCB.setSelectedItem("");	// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				yearCB.setSelectedItem(""); // RESETS SELECTED ITEM ON DROP-DOWN LIST
+				errorMessage(error6);			// CALL TO ERROR MESSAGE
+				monthCB.setSelectedItem(mth);	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				dayCB.setSelectedItem(dy);		// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				yearCB.setSelectedItem(yr); 	// RESETS SELECTED ITEM ON DROP-DOWN LIST
 			}
 			
 			/************************************/
@@ -477,10 +483,10 @@ public class Modify extends Modify_Menu implements ActionListener
 			/************************************/
 			else if((month.equals("02")) && (day.equals("29")) && (year.equals("2046")))
 			{
-				errorMessage(error6);		// CALL TO ERROR MESSAGE
-				monthCB.setSelectedItem("");// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				dayCB.setSelectedItem("");	// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				yearCB.setSelectedItem(""); // RESETS SELECTED ITEM ON DROP-DOWN LIST
+				errorMessage(error6);			// CALL TO ERROR MESSAGE
+				monthCB.setSelectedItem(mth);	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				dayCB.setSelectedItem(dy);		// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				yearCB.setSelectedItem(yr); 	// RESETS SELECTED ITEM ON DROP-DOWN LIST
 			}
 			
 			/************************************/
@@ -488,10 +494,10 @@ public class Modify extends Modify_Menu implements ActionListener
 			/************************************/
 			else if((month.equals("02")) && (day.equals("29")) && (year.equals("2047")))
 			{
-				errorMessage(error6);		// CALL TO ERROR MESSAGE
-				monthCB.setSelectedItem("");// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				dayCB.setSelectedItem("");	// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				yearCB.setSelectedItem(""); // RESETS SELECTED ITEM ON DROP-DOWN LIST
+				errorMessage(error6);			// CALL TO ERROR MESSAGE
+				monthCB.setSelectedItem(mth);	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				dayCB.setSelectedItem(dy);		// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				yearCB.setSelectedItem(yr); 	// RESETS SELECTED ITEM ON DROP-DOWN LIST
 			}
 			
 			/************************************/
@@ -499,10 +505,10 @@ public class Modify extends Modify_Menu implements ActionListener
 			/************************************/
 			else if((month.equals("02")) && (day.equals("29")) && (year.equals("2049")))
 			{
-				errorMessage(error6);		// CALL TO ERROR MESSAGE
-				monthCB.setSelectedItem("");// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				dayCB.setSelectedItem("");	// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				yearCB.setSelectedItem(""); // RESETS SELECTED ITEM ON DROP-DOWN LIST
+				errorMessage(error6);			// CALL TO ERROR MESSAGE
+				monthCB.setSelectedItem(mth);	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				dayCB.setSelectedItem(dy);		// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				yearCB.setSelectedItem(yr); 	// RESETS SELECTED ITEM ON DROP-DOWN LIST
 			}
 			
 			/*****************************************/
@@ -510,10 +516,10 @@ public class Modify extends Modify_Menu implements ActionListener
 			/*****************************************/
 			else if((month.equals("02")) && (day.equals("30")))
 			{
-				errorMessage(error6);		// CALL TO ERROR MESSAGE
-				monthCB.setSelectedItem("");// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				dayCB.setSelectedItem("");	// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				yearCB.setSelectedItem(""); // RESETS SELECTED ITEM ON DROP-DOWN LIST
+				errorMessage(error6);			// CALL TO ERROR MESSAGE
+				monthCB.setSelectedItem(mth);	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				dayCB.setSelectedItem(dy);		// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				yearCB.setSelectedItem(yr); 	// RESETS SELECTED ITEM ON DROP-DOWN LIST
 			}
 			
 			/*****************************************/
@@ -521,10 +527,10 @@ public class Modify extends Modify_Menu implements ActionListener
 			/*****************************************/
 			else if((month.equals("02")) && (day.equals("31")))
 			{
-				errorMessage(error6);		// CALL TO ERROR MESSAGE
-				monthCB.setSelectedItem("");// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				dayCB.setSelectedItem("");	// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				yearCB.setSelectedItem(""); // RESETS SELECTED ITEM ON DROP-DOWN LIST
+				errorMessage(error6);			// CALL TO ERROR MESSAGE
+				monthCB.setSelectedItem(mth);	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				dayCB.setSelectedItem(dy);		// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				yearCB.setSelectedItem(yr); 	// RESETS SELECTED ITEM ON DROP-DOWN LIST
 			}
 			
 			/*****************************************/
@@ -532,10 +538,10 @@ public class Modify extends Modify_Menu implements ActionListener
 			/*****************************************/
 			else if((month.equals("04")) && (day.equals("31")))
 			{
-				errorMessage(error4);		// CALL TO ERROR MESSAGE
-				monthCB.setSelectedItem("");// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				dayCB.setSelectedItem("");	// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				yearCB.setSelectedItem(""); // RESETS SELECTED ITEM ON DROP-DOWN LIST
+				errorMessage(error4);			// CALL TO ERROR MESSAGE
+				monthCB.setSelectedItem(mth);	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				dayCB.setSelectedItem(dy);		// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				yearCB.setSelectedItem(yr); 	// RESETS SELECTED ITEM ON DROP-DOWN LIST
 			}
 			
 			/*****************************************/
@@ -543,10 +549,10 @@ public class Modify extends Modify_Menu implements ActionListener
 			/*****************************************/
 			else if((month.equals("06")) && (day.equals("31")))
 			{
-				errorMessage(error6);		// CALL TO ERROR MESSAGE
-				monthCB.setSelectedItem("");// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				dayCB.setSelectedItem("");	// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				yearCB.setSelectedItem(""); // RESETS SELECTED ITEM ON DROP-DOWN LIST
+				errorMessage(error6);			// CALL TO ERROR MESSAGE
+				monthCB.setSelectedItem(mth);	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				dayCB.setSelectedItem(dy);		// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				yearCB.setSelectedItem(yr); 	// RESETS SELECTED ITEM ON DROP-DOWN LIST
 			}
 			
 			/*****************************************/
@@ -554,10 +560,10 @@ public class Modify extends Modify_Menu implements ActionListener
 			/*****************************************/
 			else if((month.equals("09")) && (day.equals("31")))
 			{
-				errorMessage(error6);		// CALL TO ERROR MESSAGE
-				monthCB.setSelectedItem("");// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				dayCB.setSelectedItem("");	// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				yearCB.setSelectedItem(""); // RESETS SELECTED ITEM ON DROP-DOWN LIST
+				errorMessage(error6);			// CALL TO ERROR MESSAGE
+				monthCB.setSelectedItem(mth);	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				dayCB.setSelectedItem(dy);		// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				yearCB.setSelectedItem(yr); 	// RESETS SELECTED ITEM ON DROP-DOWN LIST
 			}
 			
 			/*****************************************/
@@ -565,10 +571,10 @@ public class Modify extends Modify_Menu implements ActionListener
 			/*****************************************/
 			else if((month.equals("11")) && (day.equals("31")))
 			{
-				errorMessage(error6);		// CALL TO ERROR MESSAGE
-				monthCB.setSelectedItem("");// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				dayCB.setSelectedItem("");	// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				yearCB.setSelectedItem(""); // RESETS SELECTED ITEM ON DROP-DOWN LIST
+				errorMessage(error6);			// CALL TO ERROR MESSAGE
+				monthCB.setSelectedItem(mth);	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				dayCB.setSelectedItem(dy);		// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				yearCB.setSelectedItem(yr); 	// RESETS SELECTED ITEM ON DROP-DOWN LIST
 			}
 			
 			/*****************************************/
@@ -576,10 +582,10 @@ public class Modify extends Modify_Menu implements ActionListener
 			/*****************************************/
 			else if((month.equals("01")) && (year.equals("2020")))
 			{
-				errorMessage(error7);		// CALL TO ERROR MESSAGE
-				monthCB.setSelectedItem("");// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				dayCB.setSelectedItem("");	// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				yearCB.setSelectedItem(""); // RESETS SELECTED ITEM ON DROP-DOWN LIST
+				errorMessage(error7);			// CALL TO ERROR MESSAGE
+				monthCB.setSelectedItem(mth);	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				dayCB.setSelectedItem(dy);		// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				yearCB.setSelectedItem(yr); 	// RESETS SELECTED ITEM ON DROP-DOWN LIST
 			}
 			
 			/*****************************************/
@@ -587,10 +593,10 @@ public class Modify extends Modify_Menu implements ActionListener
 			/*****************************************/
 			else if((month.equals("02")) && (year.equals("2020")))
 			{
-				errorMessage(error7);		// CALL TO ERROR MESSAGE
-				monthCB.setSelectedItem("");// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				dayCB.setSelectedItem("");	// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				yearCB.setSelectedItem(""); // RESETS SELECTED ITEM ON DROP-DOWN LIST
+				errorMessage(error7);			// CALL TO ERROR MESSAGE
+				monthCB.setSelectedItem(mth);	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				dayCB.setSelectedItem(dy);		// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				yearCB.setSelectedItem(yr); 	// RESETS SELECTED ITEM ON DROP-DOWN LIST
 			}
 			
 			/*****************************************/
@@ -598,10 +604,10 @@ public class Modify extends Modify_Menu implements ActionListener
 			/*****************************************/
 			else if((month.equals("03")) && (year.equals("2020")))
 			{
-				errorMessage(error7);		// CALL TO ERROR MESSAGE
-				monthCB.setSelectedItem("");// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				dayCB.setSelectedItem("");	// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				yearCB.setSelectedItem(""); // RESETS SELECTED ITEM ON DROP-DOWN LIST
+				errorMessage(error7);			// CALL TO ERROR MESSAGE
+				monthCB.setSelectedItem(mth);	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				dayCB.setSelectedItem(dy);		// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				yearCB.setSelectedItem(yr); 	// RESETS SELECTED ITEM ON DROP-DOWN LIST
 			}
 			
 			/*****************************************/
@@ -609,10 +615,10 @@ public class Modify extends Modify_Menu implements ActionListener
 			/*****************************************/
 			else if((month.equals("04")) && (year.equals("2020")))
 			{
-				errorMessage(error7);		// CALL TO ERROR MESSAGE
-				monthCB.setSelectedItem("");// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				dayCB.setSelectedItem("");	// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				yearCB.setSelectedItem(""); // RESETS SELECTED ITEM ON DROP-DOWN LIST
+				errorMessage(error7);			// CALL TO ERROR MESSAGE
+				monthCB.setSelectedItem(mth);	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				dayCB.setSelectedItem(dy);		// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				yearCB.setSelectedItem(yr); 	// RESETS SELECTED ITEM ON DROP-DOWN LIST
 			}
 			
 			/*****************************************/
@@ -620,10 +626,10 @@ public class Modify extends Modify_Menu implements ActionListener
 			/*****************************************/
 			else if((month.equals("05")) && (year.equals("2020")))
 			{
-				errorMessage(error7);		// CALL TO ERROR MESSAGE
-				monthCB.setSelectedItem("");// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				dayCB.setSelectedItem("");	// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				yearCB.setSelectedItem(""); // RESETS SELECTED ITEM ON DROP-DOWN LIST
+				errorMessage(error7);			// CALL TO ERROR MESSAGE
+				monthCB.setSelectedItem(mth);	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				dayCB.setSelectedItem(dy);		// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				yearCB.setSelectedItem(yr); 	// RESETS SELECTED ITEM ON DROP-DOWN LIST
 			}
 			
 			/*****************************************/
@@ -631,10 +637,10 @@ public class Modify extends Modify_Menu implements ActionListener
 			/*****************************************/
 			else if((month.equals("06")) && (day.equals("01")) && (year.equals("2020")))
 			{
-				errorMessage(error7);		// CALL TO ERROR MESSAGE
-				monthCB.setSelectedItem("");// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				dayCB.setSelectedItem("");	// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				yearCB.setSelectedItem(""); // RESETS SELECTED ITEM ON DROP-DOWN LIST
+				errorMessage(error7);			// CALL TO ERROR MESSAGE
+				monthCB.setSelectedItem(mth);	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				dayCB.setSelectedItem(dy);		// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				yearCB.setSelectedItem(yr); 	// RESETS SELECTED ITEM ON DROP-DOWN LIST
 			}
 			
 			/*****************************************/
@@ -642,10 +648,10 @@ public class Modify extends Modify_Menu implements ActionListener
 			/*****************************************/
 			else if((month.equals("06")) && (day.equals("02")) && (year.equals("2020")))
 			{
-				errorMessage(error7);		// CALL TO ERROR MESSAGE
-				monthCB.setSelectedItem("");// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				dayCB.setSelectedItem("");	// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				yearCB.setSelectedItem(""); // RESETS SELECTED ITEM ON DROP-DOWN LIST
+				errorMessage(error7);			// CALL TO ERROR MESSAGE
+				monthCB.setSelectedItem(mth);	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				dayCB.setSelectedItem(dy);		// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				yearCB.setSelectedItem(yr); 	// RESETS SELECTED ITEM ON DROP-DOWN LIST
 			}
 			
 			/*****************************************/
@@ -653,10 +659,10 @@ public class Modify extends Modify_Menu implements ActionListener
 			/*****************************************/
 			else if((month.equals("06")) && (day.equals("03")) && (year.equals("2020")))
 			{
-				errorMessage(error7);		// CALL TO ERROR MESSAGE
-				monthCB.setSelectedItem("");// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				dayCB.setSelectedItem("");	// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				yearCB.setSelectedItem(""); // RESETS SELECTED ITEM ON DROP-DOWN LIST
+				errorMessage(error7);			// CALL TO ERROR MESSAGE
+				monthCB.setSelectedItem(mth);	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				dayCB.setSelectedItem(dy);		// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				yearCB.setSelectedItem(yr); 	// RESETS SELECTED ITEM ON DROP-DOWN LIST
 			}
 			
 			/*****************************************/
@@ -664,10 +670,10 @@ public class Modify extends Modify_Menu implements ActionListener
 			/*****************************************/
 			else if((month.equals("06")) && (day.equals("04")) && (year.equals("2020")))
 			{
-				errorMessage(error7);		// CALL TO ERROR MESSAGE
-				monthCB.setSelectedItem("");// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				dayCB.setSelectedItem("");	// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				yearCB.setSelectedItem(""); // RESETS SELECTED ITEM ON DROP-DOWN LIST
+				errorMessage(error7);			// CALL TO ERROR MESSAGE
+				monthCB.setSelectedItem(mth);	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				dayCB.setSelectedItem(dy);		// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				yearCB.setSelectedItem(yr); 	// RESETS SELECTED ITEM ON DROP-DOWN LIST
 			}
 			
 			/*****************************************/
@@ -675,10 +681,10 @@ public class Modify extends Modify_Menu implements ActionListener
 			/*****************************************/
 			else if((month.equals("06")) && (day.equals("05")) && (year.equals("2020")))
 			{
-				errorMessage(error7);		// CALL TO ERROR MESSAGE
-				monthCB.setSelectedItem("");// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				dayCB.setSelectedItem("");	// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				yearCB.setSelectedItem(""); // RESETS SELECTED ITEM ON DROP-DOWN LIST
+				errorMessage(error7);			// CALL TO ERROR MESSAGE
+				monthCB.setSelectedItem(mth);	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				dayCB.setSelectedItem(dy);		// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				yearCB.setSelectedItem(yr); 	// RESETS SELECTED ITEM ON DROP-DOWN LIST
 			}
 			
 			/*****************************************/
@@ -686,10 +692,10 @@ public class Modify extends Modify_Menu implements ActionListener
 			/*****************************************/
 			else if((month.equals("06")) && (day.equals("06")) && (year.equals("2020")))
 			{
-				errorMessage(error7);		// CALL TO ERROR MESSAGE
-				monthCB.setSelectedItem("");// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				dayCB.setSelectedItem("");	// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				yearCB.setSelectedItem(""); // RESETS SELECTED ITEM ON DROP-DOWN LIST
+				errorMessage(error7);			// CALL TO ERROR MESSAGE
+				monthCB.setSelectedItem(mth);	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				dayCB.setSelectedItem(dy);		// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				yearCB.setSelectedItem(yr); 	// RESETS SELECTED ITEM ON DROP-DOWN LIST
 			}
 			
 			/*****************************************/
@@ -697,10 +703,10 @@ public class Modify extends Modify_Menu implements ActionListener
 			/*****************************************/
 			else if((month.equals("06")) && (day.equals("07")) && (year.equals("2020")))
 			{
-				errorMessage(error7);		// CALL TO ERROR MESSAGE
-				monthCB.setSelectedItem("");// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				dayCB.setSelectedItem("");	// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				yearCB.setSelectedItem(""); // RESETS SELECTED ITEM ON DROP-DOWN LIST
+				errorMessage(error7);			// CALL TO ERROR MESSAGE
+				monthCB.setSelectedItem(mth);	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				dayCB.setSelectedItem(dy);		// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				yearCB.setSelectedItem(yr); 	// RESETS SELECTED ITEM ON DROP-DOWN LIST
 			}
 			
 			/*****************************************/
@@ -708,10 +714,10 @@ public class Modify extends Modify_Menu implements ActionListener
 			/*****************************************/
 			else if((month.equals("06")) && (day.equals("08")) && (year.equals("2020")))
 			{
-				errorMessage(error7);		// CALL TO ERROR MESSAGE
-				monthCB.setSelectedItem("");// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				dayCB.setSelectedItem("");	// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				yearCB.setSelectedItem(""); // RESETS SELECTED ITEM ON DROP-DOWN LIST
+				errorMessage(error7);			// CALL TO ERROR MESSAGE
+				monthCB.setSelectedItem(mth);	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				dayCB.setSelectedItem(dy);		// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				yearCB.setSelectedItem(yr); 	// RESETS SELECTED ITEM ON DROP-DOWN LIST
 			}
 			
 			/*****************************************/
@@ -719,10 +725,10 @@ public class Modify extends Modify_Menu implements ActionListener
 			/*****************************************/
 			else if((month.equals("06")) && (day.equals("09")) && (year.equals("2020")))
 			{
-				errorMessage(error7);		// CALL TO ERROR MESSAGE
-				monthCB.setSelectedItem("");// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				dayCB.setSelectedItem("");	// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				yearCB.setSelectedItem(""); // RESETS SELECTED ITEM ON DROP-DOWN LIST
+				errorMessage(error7);			// CALL TO ERROR MESSAGE
+				monthCB.setSelectedItem(mth);	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				dayCB.setSelectedItem(dy);		// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				yearCB.setSelectedItem(yr); 	// RESETS SELECTED ITEM ON DROP-DOWN LIST
 			}
 			
 			/*****************************************/
@@ -730,10 +736,10 @@ public class Modify extends Modify_Menu implements ActionListener
 			/*****************************************/
 			else if((month.equals("06")) && (day.equals("10")) && (year.equals("2020")))
 			{
-				errorMessage(error7);		// CALL TO ERROR MESSAGE
-				monthCB.setSelectedItem("");// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				dayCB.setSelectedItem("");	// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				yearCB.setSelectedItem(""); // RESETS SELECTED ITEM ON DROP-DOWN LIST
+				errorMessage(error7);			// CALL TO ERROR MESSAGE
+				monthCB.setSelectedItem(mth);	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				dayCB.setSelectedItem(dy);		// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				yearCB.setSelectedItem(yr); 	// RESETS SELECTED ITEM ON DROP-DOWN LIST
 			}
 			
 			/*****************************************/
@@ -741,10 +747,10 @@ public class Modify extends Modify_Menu implements ActionListener
 			/*****************************************/
 			else if((month.equals("06")) && (day.equals("11")) && (year.equals("2020")))
 			{
-				errorMessage(error7);		// CALL TO ERROR MESSAGE
-				monthCB.setSelectedItem("");// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				dayCB.setSelectedItem("");	// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				yearCB.setSelectedItem(""); // RESETS SELECTED ITEM ON DROP-DOWN LIST
+				errorMessage(error7);			// CALL TO ERROR MESSAGE
+				monthCB.setSelectedItem(mth);	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				dayCB.setSelectedItem(dy);		// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				yearCB.setSelectedItem(yr); 	// RESETS SELECTED ITEM ON DROP-DOWN LIST
 			}
 			
 			date = "" + month + "/" + day + "/" + year;
@@ -794,10 +800,10 @@ public class Modify extends Modify_Menu implements ActionListener
 			  (month.equals("06")) && (day.equals("10")) && (year.equals("2020")) ||
 			  (month.equals("06")) && (day.equals("11")) && (year.equals("2020")));
 		
-		custList.get(custNum-1).setMonth((String)month);	// CALL TO SET MONTH
-		custList.get(custNum-1).setDay((String)day);		// CALL TO SET DAY
-		custList.get(custNum-1).setYear((String)year);		// CALL TO SET YEAR
-		custList.get(custNum-1).setDate(date);				// CALL TO SET DATE
+		custList.get(custNum-1).setMonth(month);	// CALL TO SET MONTH
+		custList.get(custNum-1).setDay(day);		// CALL TO SET DAY
+		custList.get(custNum-1).setYear(year);		// CALL TO SET YEAR
+		custList.get(custNum-1).setDate(date);		// CALL TO SET DATE
 	}
 
 	public void actionPerformedName()
@@ -812,6 +818,9 @@ public class Modify extends Modify_Menu implements ActionListener
 		/* VARIABLE SECTION */
 		/********************/
 		String name;		// REUSUABLE STRING INPUT
+		String nm;			// PREVIOUS NAME VALUE OF CUSTOMER BEING MODIFIED
+		
+		nm = custList.get(custNum - 1).getName();	// GETS NAME
 		
 		/*****************************/
 		/* LOOP UNTIL VALUE IS VALID */
@@ -828,8 +837,8 @@ public class Modify extends Modify_Menu implements ActionListener
 			/*******************************/
 			if (name.length() > 20)
 			{
-				nameTF.setText("");			// CLEARS THE TEXT FIELD
-				errorMessage(error1);		// CALL TO ERROR MESSAGE
+				nameTF.setText(nm);		// CLEARS THE TEXT FIELD
+				errorMessage(error1);	// CALL TO ERROR MESSAGE
 			}
 		}
 		while(name.length() > 20);
@@ -848,8 +857,13 @@ public class Modify extends Modify_Menu implements ActionListener
 		/********************/
 		/* VARIABLE SECTION */
 		/********************/
-		String grp;			// REUSUABLE STRING INPUT
-		int grpSz;			// REUSUABLE INT VALUE
+		String grp;		// REUSUABLE STRING INPUT
+		String sz;		// PREVIOUS GROUP SIZE VALUE OF CUSTOMER BEING MODIFIED
+		int size;		// INTEGER VALUE OF PREVIOUS GROUP SIZE OF CUSTOMER BEING MODIFIED
+		int grpSz;		// REUSUABLE INT VALUE
+		
+		size = custList.get(custNum - 1).getSize();	// GETS SIZE				
+		sz = "" + size;	
 		
 		/*****************************/
 		/* LOOP UNTIL VALUE IS VALID */
@@ -864,7 +878,7 @@ public class Modify extends Modify_Menu implements ActionListener
 			/*******************************/
 			if((grpSz <= 0) || (grpSz > 400))
 			{
-				grpSzTF.setText("");			// CLEARS THE TEXT FIELD 
+				grpSzTF.setText(sz);			// CLEARS THE TEXT FIELD 
 				errorMessage(error5);			// CALL TO ERROR MESSAGE
 			}
 		}
