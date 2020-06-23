@@ -593,7 +593,7 @@ public class Menu_GUI extends BusGUI implements ActionListener
 		int id;				// USED FOR CUSTOMER ID
 		int num;			// USED FOR CUSTOMER NUMBER
 		
-		str = "Customer number          Group ID          Name               " +
+		str = "Customer number          Group ID          Name                 " +
 			  "Date                        Size                Cost\n\n";	// INITIALIZES THE STRING
 		
 		/***********************************************/
@@ -941,7 +941,7 @@ public class Menu_GUI extends BusGUI implements ActionListener
 		ArrayList<Customer> lower;
 		ArrayList<Customer> upper;
 		
-		int len1 = mid - bIndex - 1;
+		int len1 = mid - bIndex;
 		int len2 = eIndex - mid;
 		
 		System.out.println("Len1:" + len1);
@@ -1006,13 +1006,13 @@ public class Menu_GUI extends BusGUI implements ActionListener
 		String str = "";
 		for(int m = 0; m < lower.size(); m++)
 		{
-			str+= "" + lower.get(m).getSize();
+			str+= " " + lower.get(m).getSize();
 		}
 		// Printing out upper ArrayList
 		String str2 = "";
 		for(int q = 0; q < upper.size(); q++)
 		{
-			str2+= "" + upper.get(q).getSize();
+			str2+= " " + upper.get(q).getSize();
 		}
 		String str3 = "";
 		for(int l = 0; l < cust.size(); l++)
@@ -1033,19 +1033,21 @@ public class Menu_GUI extends BusGUI implements ActionListener
 	/**********************************************************/
 	{
 		
-		if(bIndex < eIndex)
+		if(bIndex >= eIndex)
 		{
-			int mid = (bIndex+eIndex) / 2;
-			//Error Checking for Values for MID, BINDEX, AND EINDEX
-			System.out.println("Mid in Divide and Conquer:" + mid);
-			System.out.println("bIndex in  Divide and Conquer:" + bIndex);
-			System.out.println("eIndex in Divide and Conquer:" + eIndex);
-				
-			mergeSortSize(cust, bIndex, mid);		// RECURSIVE CALL FOR FIRST HALF OF ARRAYLIST
-			mergeSortSize(cust, mid + 1, eIndex);	// RECURSIVE CALL FOR SECOND HALF OF ARRAYLIST
-		
-			mergeSize(cust, bIndex, mid, eIndex);	// CALL TO MERGE SIZE TO MERGE SORTED SUBARRAYLIST	
+			return;
 		}
+		
+		int mid = bIndex+ (eIndex - bIndex) / 2;
+		//Error Checking for Values for MID, BINDEX, AND EINDEX
+		System.out.println("Mid in Divide and Conquer:" + mid);
+		System.out.println("bIndex in  Divide and Conquer:" + bIndex);
+		System.out.println("eIndex in Divide and Conquer:" + eIndex);
+			
+		mergeSortSize(cust, bIndex, mid);		// RECURSIVE CALL FOR FIRST HALF OF ARRAYLIST
+		mergeSortSize(cust, mid + 1, eIndex);	// RECURSIVE CALL FOR SECOND HALF OF ARRAYLIST
+	
+		mergeSize(cust, bIndex, mid, eIndex);	// CALL TO MERGE SIZE TO MERGE SORTED SUBARRAYLIST
 	}
 	
 	public static void totalProfit()
