@@ -50,9 +50,9 @@ public class BusGUI implements ActionListener
 	private JButton enterB;				// CREATES A BUTTON FOR ENTERING INFORMATION FOR PROGRAM	
 	private JButton quitB;				// CREATES A BUTTON TO QUIT PROGRAM 
 	private JButton returnB;			// CREATES A BUTTON TO RETURN TO MAIN SKI TRIP MENU
-	protected static JComboBox monthCB;	// CREATES A COMBO BOX(DROP-DOWN LIST) FOR MONTH
-	protected static JComboBox dayCB;	// CREATES A COMBO BOX FOR DAY
-	protected static JComboBox yearCB;	// CREATES A COMBO BOX FOR YEAR
+	protected static JComboBox<String> monthCB;	// CREATES A COMBO BOX(DROP-DOWN LIST) FOR MONTH
+	protected static JComboBox<String> dayCB;	// CREATES A COMBO BOX FOR DAY
+	protected static JComboBox<String> yearCB;	// CREATES A COMBO BOX FOR YEAR
 	protected static JTextField nameTF;	// CREATES A TEXT FIELD FOR NAME 
 	protected static JTextField grpSzTF;// CREATES A TEXT FIELD FOR GROUP SIZE
 	protected static Label nameL;		// CREATES A LABEL FOR NAME
@@ -92,24 +92,24 @@ public class BusGUI implements ActionListener
 		/*************************/
 		/* INSTANTIATION SECTION */
 		/*************************/
-		enterB = new JButton("Enter");		// INSTANTIATES A JBUTTON 
-		quitB = new JButton("Quit Program");// INSTANTIATES A JBUTTON 
-		returnB = new JButton("Return");	// INSTANTIATES A JBUTTON
-		customer = new Customer();			// INSTANTIATES A CUSTOMER		
-		nameTF = new JTextField();			// INSTANTIATES A JTEXTFIELD
-		grpSzTF = new JTextField();			// INSTANTIATES A JTEXTFIELD 
-		monthCB = new JComboBox(months);	// INSTANTIATES A JCOMBOBOX
-		dayCB = new JComboBox(days);		// INSTANTIATES A JCOMBOBOX
-		yearCB = new JComboBox(years);		// INSTANTIATES A JCOMBOBOX
-		nameL = new Label("Name");			// INSTANTIATES A LABEL
-		grpSzL = new Label("Group Size");	// INSTANTIATES A LABEL
-		dateL = new Label("Date");			// INSTANTIATES A LABEL
-		frame =  new JFrame("Ski Trip");	// INSTANTIATES A BLANK JFRAME
+		enterB = new JButton("Enter");				// INSTANTIATES A JBUTTON 
+		quitB = new JButton("Quit Program");		// INSTANTIATES A JBUTTON 
+		returnB = new JButton("Return");			// INSTANTIATES A JBUTTON
+		customer = new Customer();					// INSTANTIATES A CUSTOMER		
+		nameTF = new JTextField();					// INSTANTIATES A JTEXTFIELD
+		grpSzTF = new JTextField();					// INSTANTIATES A JTEXTFIELD 
+		monthCB = new JComboBox<String>(months);	// INSTANTIATES A JCOMBOBOX
+		dayCB = new JComboBox<String>(days);		// INSTANTIATES A JCOMBOBOX
+		yearCB = new JComboBox<String>(years);		// INSTANTIATES A JCOMBOBOX
+		nameL = new Label("Name");					// INSTANTIATES A LABEL
+		grpSzL = new Label("Group Size");			// INSTANTIATES A LABEL
+		dateL = new Label("Date");					// INSTANTIATES A LABEL
+		frame =  new JFrame("Ski Trip");			// INSTANTIATES A BLANK JFRAME
 		font = new Font("Times New Roman", 
-						Font.BOLD, 12);		// INSTANTIATES FONT					
-		customer = new Customer();			// INSTANTIATES AN INSTANCE OF CUSTOMER
+						Font.BOLD, 12);				// INSTANTIATES FONT					
+		customer = new Customer();					// INSTANTIATES AN INSTANCE OF CUSTOMER
 		welcome = new Label("Welcome to the Ski "+
-							"Customer Input");	// INSTANTIATES A LABEL
+							"Customer Input");		// INSTANTIATES A LABEL
 		info = new Label("Please enter the " +
 						 "necessary information " +
 						 "into the fields below.");	// INSTANTIATES A LABEL
