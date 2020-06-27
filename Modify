@@ -246,19 +246,23 @@ public class Modify extends Modify_Menu implements ActionListener
 		Object day;			// REUSUABLE OBJECT INPUT
 		Object year;		// REUSUABLE OBJECT INPUT
 		String date;		// REUSUABLE STRING INPUT
-		Object mth;			// PREVIOUS MONTH VALUE OF CUSTOMER BEING MODIFIED
-		Object dy;			// PREVIOUS DAY VALUE OF CUSTOMER BEING MODIFIED
-		Object yr;			// PREVIOUS YEAR VALUE OF CUSTOMER BEING MODIFIED
+		String mth;			// PREVIOUS MONTH VALUE OF CUSTOMER BEING MODIFIED
+		String dy;			// PREVIOUS DAY VALUE OF CUSTOMER BEING MODIFIED
+		String yr;			// PREVIOUS YEAR VALUE OF CUSTOMER BEING MODIFIED
 		
 		mth = custList.get(custNum-1).getMonth();	// GETS MONTH
 		dy = custList.get(custNum-1).getDay();		// GETS DAY
 		yr = custList.get(custNum-1).getYear();		// GETS YEAR		
-			
+		
 		/*****************************/
 		/* LOOP UNTIL VALUE IS VALID */
 		/*****************************/
 		do
 		{
+			monthCB.setEnabled(true);
+			dayCB.setEnabled(true);
+			yearCB.setEnabled(true);
+			
 			/*******************************/
 			/* INPUTS MONTH, DAY, AND YEAR */
 			/*******************************/
@@ -800,10 +804,10 @@ public class Modify extends Modify_Menu implements ActionListener
 			  (month.equals("06")) && (day.equals("10")) && (year.equals("2020")) ||
 			  (month.equals("06")) && (day.equals("11")) && (year.equals("2020")));
 		
-		custList.get(custNum-1).setMonth(month);	// CALL TO SET MONTH
-		custList.get(custNum-1).setDay(day);		// CALL TO SET DAY
-		custList.get(custNum-1).setYear(year);		// CALL TO SET YEAR
-		custList.get(custNum-1).setDate(date);		// CALL TO SET DATE
+		custList.get(custNum-1).setMonth((String)month);	// CALL TO SET MONTH
+		custList.get(custNum-1).setDay((String)day);		// CALL TO SET DAY
+		custList.get(custNum-1).setYear((String)year);		// CALL TO SET YEAR
+		custList.get(custNum-1).setDate(date);				// CALL TO SET DATE
 	}
 
 	public void actionPerformedName()
