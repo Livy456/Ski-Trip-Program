@@ -23,9 +23,9 @@ public class Customer implements Ski_Interface
 	/* INSTANCE VARIABLE SECTION */
 	/*****************************/
 	private String name;		// INSTANCE VARIABLE FOR USER'S NAME	
-	private Object month;		// INSTANCE VARIABLE FOR MONTH OF SKI TRIP
-	private Object day;			// INSTANCE VARIABLE FOR DAY OF SKI TRIP
-	private Object year;		// INSTANCE VARIABLE FOR YEAR OF SKI TRIP
+	private String month;		// INSTANCE VARIABLE FOR MONTH OF SKI TRIP
+	private String day;			// INSTANCE VARIABLE FOR DAY OF SKI TRIP
+	private String year;		// INSTANCE VARIABLE FOR YEAR OF SKI TRIP
 	private Object date;		// INSTANCE VARIABLE FOR DATE OF SKI TRIP
 	private int id;				// INSTANCE VARIABLE FOR USER'S ID
 	private int grpsize;		// INSTANCE VARIABLE FOR USER'S GROUP SIZE
@@ -50,7 +50,7 @@ public class Customer implements Ski_Interface
 		grpsize = 0;		// INITIALIZES GROUPSIZE TO ZERO
 	}
 	
-	public Customer(String nm, Object mn, Object dy, Object yr, 
+	public Customer(String nm, String mn, String dy, String yr, 
 					Object dt, int i,int grp)
 	/*********************************************************************/
 	/* INITIALIZING CONSTRUCTOR - INITIALIZES NAME, DATE, ID, GROUPSIZE, */
@@ -102,7 +102,7 @@ public class Customer implements Ski_Interface
 		return name;		// RETURNS NAME
 	}
 	
-	public void setMonth(Object mn)
+	public void setMonth(String mn)
 	/************************************************/
 	/* PRECONDITION - PROGRAM HAS A MONTH			*/
 	/* POSTCONDITION - FUNCTION SETS VALUE OF MONTH	*/
@@ -111,7 +111,7 @@ public class Customer implements Ski_Interface
 		month = mn;		// SETS MONTH TO MONTH VALUE INPUTTED FROM CLIENT
 	}
 	
-	public Object getMonth()
+	public String getMonth()
 	/************************************************/
 	/* PRECONDITION - PROGRAM HAS A MONTH			*/
 	/* POSTCONDITION - FUNCTION RETURNS MONTH		*/
@@ -123,7 +123,7 @@ public class Customer implements Ski_Interface
 		return month;	// RETURNS MONTH
 	}
 	
-	public void setDay(Object dy)
+	public void setDay(String dy)
 	/************************************************/
 	/* PRECONDITION - PROGRAM HAS A DAY				*/
 	/* POSTCONDITION - FUNCTION SETS VALUE OF DAY	*/
@@ -132,7 +132,7 @@ public class Customer implements Ski_Interface
 		day = dy;		// SETS DAY TO DAY VALUE INPUTTED FROM CLIENT
 	}
 	
-	public Object getDay()
+	public String getDay()
 	/************************************************/
 	/* PRECONDITION - PROGRAM HAS A DAY				*/
 	/* POSTCONDITION - FUNCTION RETURNS DAY			*/
@@ -144,7 +144,7 @@ public class Customer implements Ski_Interface
 		return day;		// RETURNS DAY
 	}
 	
-	public void setYear(Object yr)
+	public void setYear(String yr)
 	/************************************************/
 	/* PRECONDITION - PROGRAM HAS A YEAR			*/
 	/* POSTCONDITION - FUNCTION SETS VALUE OF YEAR	*/
@@ -153,7 +153,7 @@ public class Customer implements Ski_Interface
 		year = yr;		// SETS YEAR TO YEAR VALUE INPUTTED FROM CLIENT
 	}
 	
-	public Object getYear()
+	public String getYear()
 	/************************************************/
 	/* PRECONDITION - PROGRAM HAS A YEAR			*/
 	/* POSTCONDITION - FUNCTION RETURNS YEAR		*/
