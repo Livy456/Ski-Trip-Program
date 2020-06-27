@@ -15,12 +15,12 @@ public interface Ski_Interface
 {
 	public void setName(String nm);
 	public String getName();
-	public void setMonth(Object mn);
-	public Object getMonth();
-	public void setDay(Object dy);
-	public Object getDay();
-	public void setYear(Object yr);
-	public Object getYear();
+	public void setMonth(String mn);
+	public String getMonth();
+	public void setDay(String dy);
+	public String getDay();
+	public void setYear(String yr);
+	public String getYear();
 	public void setDate(Object dt);
 	public Object getDate();
 	public void setID(int i);
