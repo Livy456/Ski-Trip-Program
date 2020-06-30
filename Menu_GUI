@@ -48,6 +48,7 @@ public class Menu_GUI extends BusGUI implements ActionListener
 	private JLabel changeCust;		// CREATES A LABEL FOR CHANGING CUSTOMER
 	private JLabel cost;			// CREATES A LABEL FOR COST
 	private JLabel print;			// CREATES A LABEL FOR PRINT
+	private JLabel displayCust;		// CREATES A LABEL FOR DISPLAYING CUSTOMERS INFORMATION
 	private Font font;				// CREATES A FONT
 	private JFrame frame;			// CREATES A JFRAME
 	private Container container;	// CREATES A CONTAINER
@@ -472,15 +473,25 @@ public class Menu_GUI extends BusGUI implements ActionListener
 		/* VARIABLE SECTION */
 		/********************/
 		String str;			// USED FOR REUSABLE OUTPUT
+		String cstNum;
+		String cstNm;
+		String cstId;
+		String cstSz;
+		String cstDt;
+		String cstCost;
 		String name;		// USED FOR CUSTOMER NAME 
 		Object date;		// USED FOR CUSTOMER DATE 
 		int size;			// USED FOR CUSTOMER SIZE
 		int id;				// USED FOR CUSTOMER ID
 		int num;			// USED FOR CUSTOMER NUMBER
 		
-		str = "Customer number            Group ID          Name                             " +
-			  " Date                        Size                Cost\n\n";	// INITIALIZES THE STRING
-		
+		cstNum = "<html><body><div height = '100px' width = '100px' align = 'left'>Customer number \tGroup ID</div></body></html>";
+		cstId = "<html><body><div height = '100px' width = '300px' align = 'right'>Group ID</div></body></html>";
+		cstNm = "<html><body><div width = '100px' align = 'left'>Name</div></body></html>";
+		cstDt = "<html><body><div width = '100px' align = 'left'>Date</div></body></html>";
+		cstSz = "<html><body><div width = '100px' align = 'right'>Size</div></body></html>";
+		cstCost	= "<html><body><div wifht = '100px' align = 'right'>Cost</div></body></html>"; // INITIALIZES THE STRING
+		str =  cstNum + cstId + cstNm + cstDt + cstSz + cstCost + "\n\n";
 		/***********************************************/
 		/* FOR LOOP TO PRINT OUT ARRAYLIST OF CUSTOMER */
 		/***********************************************/
@@ -923,7 +934,7 @@ public class Menu_GUI extends BusGUI implements ActionListener
 				if(index >= 0)
 				{
 					customer = cust.get(index);	// CUSTOMER TO LEFT
-					id2 = customer.getID();					// CALL TO GET ID
+					id2 = customer.getID();		// CALL TO GET ID
 				}
 			}
 			
@@ -938,94 +949,62 @@ public class Menu_GUI extends BusGUI implements ActionListener
 	
 	public static void mergeSize(ArrayList<Customer> cust, int bIndex, int mid, int eIndex)
 	{
-		ArrayList<Customer> lower;
-		ArrayList<Customer> upper;
+		// when adding elements to the lower and upper portion make sure that 
+		// they are sorted first and then go through the sorted versions and
+		// merge the two arrays
+		/********************/
+		/* VARIABLE SECTION */
+		/********************/
+		int len1;
+		int len2;
+		ArrayList<Customer> lower = new ArrayList<Customer>();
+		ArrayList<Customer> upper = new ArrayList<Customer>();
 		
-		int len1 = mid - bIndex;
-		int len2 = eIndex - mid;
+		len1 = mid - bIndex + 1;
+		len2 = eIndex - mid;
 		
-		System.out.println("Len1:" + len1);
-		System.out.println("Len2:" + len2);
-		System.out.println("bIndex:" + bIndex);
-		System.out.println("eIndex:" + eIndex);
-		System.out.println("mid:" + mid);
-		
-		lower = new ArrayList<Customer>();
-		upper = new ArrayList<Customer>();
-		
-		for(int i = 0; i < len1; i++)
+		if(mid == 0)
 		{
-			lower.add(cust.get(bIndex+i));
+			lower.add(cust.get(mid));
+			upper.add(cust.get(cust.size() / 2));
 		}
 		
-		for(int i = 0; i < len2; i++)
+		for(int i = 0; i < mid + 1; i++)
 		{
-			upper.add(cust.get(mid+1+i));
-		}
-		
-		int i;
-		int j;
-		int k;
-		
-		i = 0;
-		j = 0;
-		k = mid;
-		
-		while((i < len1) && (j < len2))
-		{
-			if((lower.get(i).getSize()) <= (upper.get(j).getSize()))
+			int size1 = cust.get(i).getSize();
+			int size2 = cust.get(i).getSize();
+			int index = i;
+			
+			while((index > 0) && (size1 < size2))
 			{
-				cust.set(k, lower.get(i));
-				i++;
+				// if the element to the left of the other element is greater
+				if (size2 > size1)
+				{
+					index--;
+				}
+				size2 = cust.get(index).getSize();
+				cust.get(index);
 			}
 			
-			else
-			{
-				cust.set(k, upper.get(j));
-				j++;
-			}
+			Customer customer = cust.get(i);
+			lower.add(index, customer);
+		}
+		
+		for(int j = mid+1; j < len2; j++)
+		{
 			
-			k++;
 		}
 		
-		while(i < len1)
+		if((len1 + len2) == cust.size())
 		{
-			cust.set(k,  lower.get(i));
-			i++;
-			k++;
+			// if lengths are the size of the ArrayList
+			// meaning that the two arrays have the two 
+			// halves of the full array
+			// so now it is fine to merge all the elements together
 		}
-		
-		while(j < len2)
-		{
-			cust.set(k, upper.get(j));
-			j++;
-			k++;
-		}
-		
-		
-		// Printing out lower ArrayList
-		String str = "";
-		for(int m = 0; m < lower.size(); m++)
-		{
-			str+= " " + lower.get(m).getSize();
-		}
-		// Printing out upper ArrayList
-		String str2 = "";
-		for(int q = 0; q < upper.size(); q++)
-		{
-			str2+= " " + upper.get(q).getSize();
-		}
-		String str3 = "";
-		for(int l = 0; l < cust.size(); l++)
-		{
-			str3+= " "+ cust.get(l).getSize();
-		}
-		System.out.println("Lower ArrayList:" + str);
-		System.out.println("Upper ArrayList:" + str2);
-		System.out.println("Merged Customer ArrayList" + str3);
 	}
 	
-	public static void mergeSortSize(ArrayList<Customer> cust, int bIndex, int eIndex)
+	public static ArrayList<Customer> mergeSortSize(ArrayList<Customer> cust, int bIndex, int eIndex)
 	/**********************************************************/
 	/* PRECONDITION - NEEDS TO DIVIDE AN ARRAYLIST INTO TWO   */
 	/* 				  SUBARRAYS, SORT THEM, AND MERGE THEM    */
@@ -1033,22 +1012,34 @@ public class Menu_GUI extends BusGUI implements ActionListener
 	/* 				   SUBARRAYS, SORT THEM, AND MERGE THEM   */
 	/**********************************************************/
 	{
+		ArrayList<Customer> cst;
+		ArrayList<Customer> lower;
+		ArrayList<Customer> upper;
+		int mid;
 		
-		if(bIndex >= eIndex)
+		cst = new ArrayList<Customer>();
+		lower = new ArrayList<Customer>();
+		upper = new ArrayList<Customer>();
+		mid = (bIndex + eIndex) / 2;
+		
+		if(eIndex > bIndex)
 		{
-			return;
+			mergeSortSize(cust, bIndex, mid);
+			
+			
+			
+			mergeSortSize(cust, mid+1, eIndex);
 		}
 		
-		int mid = bIndex+ (eIndex - bIndex) / 2;
-		//Error Checking for Values for MID, BINDEX, AND EINDEX
-		System.out.println("Mid in Divide and Conquer:" + mid);
-		System.out.println("bIndex in  Divide and Conquer:" + bIndex);
-		System.out.println("eIndex in Divide and Conquer:" + eIndex);
-			
-		mergeSortSize(cust, bIndex, mid);		// RECURSIVE CALL FOR FIRST HALF OF ARRAYLIST
-		mergeSortSize(cust, mid + 1, eIndex);	// RECURSIVE CALL FOR SECOND HALF OF ARRAYLIST
-	
-		mergeSize(cust, bIndex, mid, eIndex);	// CALL TO MERGE SIZE TO MERGE SORTED SUBARRAYLIST
+		// recursively calls cst
+		// returns the ArrayList to split up 
+		// calls merge at the end of this to merge the elements
+		// has to recursively divide the elements until down to the last element
+		// megeSize parameters could have an arrayList of lower-half and upper-half elements
+		
+		mergeSize(cst, bIndex, mid, eIndex);
+		
+		return cst;
 	}
 	
 	public static void totalProfit()
