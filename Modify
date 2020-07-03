@@ -248,10 +248,6 @@ public class Modify extends Modify_Menu implements ActionListener
 		/*****************************/
 		do
 		{
-		//	monthCB.setEnabled(true);	
-		//	dayCB.setEnabled(true);
-		//	yearCB.setEnabled(true);
-			
 			/*******************************/
 			/* INPUTS MONTH, DAY, AND YEAR */
 			/*******************************/
