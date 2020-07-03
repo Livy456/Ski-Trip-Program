@@ -1129,24 +1129,6 @@ public class Menu_GUI extends BusGUI implements ActionListener
 				JOptionPane.INFORMATION_MESSAGE);
 	}
 	
-	public static void underConstruction()
-	/****************************************************/
-	/* PRECONDITION - NEEDS UNDER CONSTRUCTION WINDOW 	*/
-	/* POSTCONDITION - CREATES WINDOW TO TELL USER		*/
-	/* 				   THAT THE SECTION THEY ARE TRYING */
-	/*  			   TO USE IS UNDER CONSTRUCTION 	*/
-	/****************************************************/
-	{
-		/***********************/
-		/* MAKES DIALOG WINDOW */
-		/***********************/ 
-		JOptionPane.showMessageDialog(
-				null,
-				"This part of the option menu is under construction",
-				"Under construction menu",
-				JOptionPane.INFORMATION_MESSAGE);
-	}
-	
 	public static void updateMenu(String hdstr)
 	/*****************************************************************/
 	/* PRECONDITION - NEEDS AN UPDATE WINDOW OF ALL CUSTOMERS 		 */
