@@ -765,10 +765,59 @@ public class Menu_GUI extends BusGUI implements ActionListener
 		/* VARIABLE SECTION */
 		/********************/
 		ArrayList<Customer> cust;	// SORTED ARRAYLIST OF CUSTOMERS
-
-		cust = new ArrayList<Customer>();
-		// MAKE EVERY CHARACTER IN THE NAME UPPERCASE SO THAT YOU CAN COMPARE
-		// NAMES THAT HAVE THE SAME FIRST LETTER
+		
+		cust = new ArrayList<Customer>();	// INSTANTIATES CUST ARRAYLIST
+		
+		/*****************************************/
+		/* FOR LOOP TO ADD ALL CUSTOMERS TO CUST */
+		/*****************************************/
+		for(int i = 0; i < custList.size(); i++)
+		{
+			cust.add(custList.get(i));	// ADDS CUSTOMER FROM CUSTLIST TO CUST
+		}
+		
+		/*****************************************/
+		/* FOR LOOP TO ADD ALL CUSTOMERS TO CUST */
+		/*****************************************/
+		for(int j = 1; j < cust.size(); j++)
+		{
+			int index; 				// INDEX OF ELEMENT TO LEFT OF CURRENT INDEX
+			String name;			// NAME OF CURRENT CUSTOMER
+			String name2;			// NAME OF CUSTOMER TO THE RIGHT
+			String upName;			// ALL UPPERCASE NAME OF CURRENT CUSTOMER
+			String upName2;			// ALL UPPERCASE NAME OF CUSTOMER TO THE RIGHT
+			Customer customer;		// CURRENT CUSTOMER
+			Customer customer2;		// CUSTOMER TO THE RIGHT
+	
+			index = j-1;
+			name = cust.get(j).getName();
+			name2 = cust.get(index).getName();
+			upName = name.toUpperCase();
+			upName2 = name2.toUpperCase();
+			customer = cust.get(j);
+			customer2 = cust.get(index);
+			
+			/*************************************************************************************/
+			/* WHILE LOOP TO CHECK IF ELEMENTS TO LEFT OF INDEX ARE GREATER THAN CURRENT ELEMENT */
+			/*************************************************************************************/
+			while((index >= 0) && (upName.compareTo(upName2) < 0))
+			{	
+				cust.set(index+1, customer2);	// MOVES COMPARED CUSTOMER TO THE RIGHT
+				index--;	// DECREMENTER
+				
+				/********************************************************/
+				/* IF STATEMENT TO MAKE SURE INDEX IS NOT OUT OF BOUNDS */
+				/********************************************************/
+				if(index >=0)
+				{
+					customer2 = cust.get(index);		// CUSTOMER TO LEFT
+					name2 = customer2.getName();		// NAME OF CUSTOMER TO LEFT
+					upName2 = name2.toUpperCase();		// ALL UPPERCASE NAME OF CUSTOMER TO LEFT
+				}
+			}
+			
+			cust.set(index+1, customer);	// MOVES CURRENT CUSTOMER TO SORTED INDEX
+		}
 		
 		/******************/
 		/* RETURN SECTION */
