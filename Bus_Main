@@ -1,6 +1,6 @@
 /******************************************/
 /* USER DESCRIPTION SECTION 			  */
-/* OLIVIA 				   			  */
+/* OLIVIA DIAS				   			  */
 /* FINAL PROJECT 		   	  			  */
 /* PROGRAM 12							  */
 /* FEBRUARY 10, 2020		   			  */
@@ -64,24 +64,6 @@ public class Bus_Main
 				"people, cost or refunds, and number of buses sorted. The customer will" + "\n" +
 				"allowed to remove, add, or modify their input information.",
 				"Program Description for Final Project",
-				JOptionPane.INFORMATION_MESSAGE);
-	}
-	
-	public static void underConstruction()
-	/****************************************************/
-	/* PRECONDITION - NEEDS UNDER CONSTRUCTION WINDOW 	*/
-	/* POSTCONDITION - CREATES WINDOW TO TELL USER		*/
-	/* 				   THAT THE SECTION THEY ARE TRYING */
-	/*  			   TO USE IS UNDER CONSTRUCTION 	*/
-	/****************************************************/
-	{
-		/***********************/
-		/* MAKES DIALOG WINDOW */
-		/***********************/ 
-		JOptionPane.showMessageDialog(
-				null,
-				"This part of the option menu is under construction",
-				"Under construction menu",
 				JOptionPane.INFORMATION_MESSAGE);
 	}
 }
