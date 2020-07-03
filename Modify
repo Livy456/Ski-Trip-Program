@@ -19,6 +19,7 @@ import javax.swing.*;						// IMPORTS SWING
 import java.awt.*;							// IMPORTS AWT
 import java.awt.event.ActionEvent;			// IMPORTS ACTION EVENT
 import java.awt.event.ActionListener;		// IMPORTS ACTION LISTENER
+import java.awt.event.ItemEvent;			// IMPORTS ITEM EVENT
 import java.util.ArrayList;					// IMPORTS ARRAYLIST
 
 public class Modify extends Modify_Menu implements ActionListener
@@ -28,9 +29,6 @@ public class Modify extends Modify_Menu implements ActionListener
 	/*****************************/
 	private JLabel warning;		// CREATES A JLABEL FOR INPUT CONSTRAINTS
 	private JLabel warning2;	// CREATES A JLABEL FOR INPUT CONSTRAINTS
-	//private JLabel disName;		// CREATES A JLABEL FOR DISPLAYING NAME
-//	private JLabel disSize;		// CREATES A JLABEL FOR DISPLAYING SIZE
-	//private JLabel disDate;		// CREATES A JLABEL FOR DISPLAYING DATE
 	
 	public Modify()
 	/************************************************/
@@ -54,9 +52,7 @@ public class Modify extends Modify_Menu implements ActionListener
 		container = frame.getContentPane();			// CREATES A CONTENT PANE
 		font = new Font("Times New Roman", 
 						Font.BOLD, 15);				// INSTANTIATES FONT 
-		monthCB.setSelectedItem(custList.get(custNum-1).getMonth());	// SETS SELECTED ITEM TO PREVIOUS CUSTOMER MONTH VALUE
 		dayCB.setSelectedItem(custList.get(custNum-1).getDay());		// SETS SELECTED ITEM TO PREVIOUS CUSTOMER DAY VALUE
-		yearCB.setSelectedItem(custList.get(custNum-1).getYear());		// SETS SELECTED ITEM TO PREVIOUS CUSTOMER YEAR VALUE
 
 		/**************************/
 		/* CREATES A BLANK JFRAME */
@@ -72,9 +68,6 @@ public class Modify extends Modify_Menu implements ActionListener
 		/* SETS FONT OF THE LABEL */
 		/**************************/
 		info.setFont(font);			// SETS FONT OF INFO LABEL
-//		disName.setFont(font);		// SETS FONT OF NAME LABEL
-//		disSize.setFont(font);		// SETS FONT OF SIZE LABEL
-//		disDate.setFont(font);		// SETS FONT OF DATE LABEL
 		warning.setFont(font);		// SETS THE FONT OF THE WARNING LABEL
 		warning2.setFont(font);		// SETS THE FONT OF THE WARNING LABEL
 		
@@ -82,9 +75,6 @@ public class Modify extends Modify_Menu implements ActionListener
 		/* SETS FOREGROUND COLOR OF THE LABEL */
 		/**************************************/
 		info.setForeground(Color.BLACK);		// SETS FOREGROUND COLOR OF INFO LABEL 
-//		disName.setForeground(Color.BLACK);		// SETS FOREGROUND COLOR OF DISPLAY NAME LABEL
-//		disSize.setForeground(Color.BLACK);		// SETS FOREGROUND COLOR OF DISPLAY SIZE LABEL
-//		disDate.setForeground(Color.BLACK);		// SETS FOREGROUND COLOR OF DISPLAY DATE LABEL
 		warning.setForeground(Color.BLACK);		// SETS FOREGROUND COLOR OF WARNING LABEL
 		warning2.setForeground(Color.BLACK);	// SETS FOREGROUND COLOR OF WARNING2 LABEL
 		nameL.setForeground(Color.BLACK);		// SETS FOREGROUND COLOR OF NAME LABEL
@@ -98,9 +88,6 @@ public class Modify extends Modify_Menu implements ActionListener
 		confirm.setBounds(365, 280, 110, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		quitB.setBounds(365, 320, 110, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		info.setBounds(20, 30, 500, 30);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-//		disName.setBounds(20, 170, 500, 30);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-//		disSize.setBounds(20, 200, 500, 30);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-//		disDate.setBounds(20, 230, 500, 30);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		warning.setBounds(210, 80, 500, 30);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		warning2.setBounds(210, 110, 500, 30);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH) 
 		nameL.setBounds(20, 80, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
@@ -118,7 +105,10 @@ public class Modify extends Modify_Menu implements ActionListener
 		confirm.addActionListener(this);	// ADDS ACTIONLISTENER TO MAKE AN EVENT OCCUR ONCE BUTTON IS PUSHED 
 		returnB.addActionListener(this);	// ADDS ACTIONLISTENER TO MAKE AN EVENT OCCUR ONCE BUTTON IS PUSHED
 		quitB.addActionListener(this);		// ADDS ACTIONLISTENER TO MAKE AN EVENT OCCUR ONCE BUTTON IS PUSHED
-
+		monthCB.addActionListener(this);	// ADDS ACTIONLISTENER TO MAKE AN EVENT OCCUR ONCE BUTTON IS PUSHED
+		dayCB.addActionListener(this);		// ADDS ACTIONLISTENER TO MAKE AN EVENT OCCUR ONCE BUTTON IS PUSHED
+		yearCB.addActionListener(this);		// ADDS ACTIONLISTENER TO MAKE AN EVENT OCCUR ONCE BUTTON IS PUSHED
+		
 		/*************************/
 		/* ADDS BUTTONS TO FRAME */
 		/*************************/
@@ -126,9 +116,6 @@ public class Modify extends Modify_Menu implements ActionListener
 		container.add(quitB);		// ADDS QUIT BUTTON TO CONTAINER
 		container.add(confirm);		// ADDS CONFRIM BUTTON TO CONTAINER
 		container.add(info);		// ADDS INFO LABEL TO CONTAINER
-//		container.add(disName);		// ADDS DISPLAY NAME LABEL TO CONTAINER
-//		container.add(disSize);		// ADDS DISPLAY SIZE LABEL TO CONTAINER	
-//		container.add(disDate);		// ADDS DISPLAY DATE LABEL TO CONTAINER
 		container.add(warning);		// ADDS WARNING LABEL TO CONTAINER
 		container.add(warning2);	// ADDS WARNING 2 LABEL TO CONTAINER
 		container.add(nameL);		// ADDS NAME LABEL TO CONTAINER
@@ -156,6 +143,7 @@ public class Modify extends Modify_Menu implements ActionListener
 		
 		confirm = 1;							// INITIALIZES CONFIRM
 		action = event.getActionCommand();		// CALL TO GET ACTION COMMAND
+		
 		
 		/****************************************************/
 		/* IF STATEMENT TO CHECK IF QUIT BUTTON WAS PRESSED */	
@@ -249,7 +237,8 @@ public class Modify extends Modify_Menu implements ActionListener
 		String mth;			// PREVIOUS MONTH VALUE OF CUSTOMER BEING MODIFIED
 		String dy;			// PREVIOUS DAY VALUE OF CUSTOMER BEING MODIFIED
 		String yr;			// PREVIOUS YEAR VALUE OF CUSTOMER BEING MODIFIED
-		
+		ItemEvent e;
+				
 		mth = custList.get(custNum-1).getMonth();	// GETS MONTH
 		dy = custList.get(custNum-1).getDay();		// GETS DAY
 		yr = custList.get(custNum-1).getYear();		// GETS YEAR		
@@ -259,9 +248,9 @@ public class Modify extends Modify_Menu implements ActionListener
 		/*****************************/
 		do
 		{
-			monthCB.setEnabled(true);
-			dayCB.setEnabled(true);
-			yearCB.setEnabled(true);
+		//	monthCB.setEnabled(true);	
+		//	dayCB.setEnabled(true);
+		//	yearCB.setEnabled(true);
 			
 			/*******************************/
 			/* INPUTS MONTH, DAY, AND YEAR */
@@ -272,6 +261,22 @@ public class Modify extends Modify_Menu implements ActionListener
 												// FROM DAY DROP-DOWN LIST		
 			year = yearCB.getSelectedItem();	// CALL TO GET SELECTED ITEM 
 												// FROM YEAR DROP-DOWN LIST	
+			
+			/**********************************************/
+			/* IF STATEMENT TO MAKE SURE DAY IS NOT BLANK */
+			/**********************************************/
+			if(month.equals(""))
+			{
+				monthCB.setSelectedItem(mth);		// RESETS SELECTED ITEM ON DROP-DOWN LIST
+			}
+			
+			/***********************************************/
+			/* IF STATEMENT TO MAKE SURE YEAR IS NOT BLANK */
+			/***********************************************/
+			if(year.equals(""))
+			{
+				yearCB.setSelectedItem(yr);		// RESETS SELECTED ITEM ON DROP-DOWN LIST
+			}
 			
 			/************************************/
 			/* IF STATEMENT TO ERROR CHECK DATE */
