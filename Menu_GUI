@@ -948,63 +948,137 @@ public class Menu_GUI extends BusGUI implements ActionListener
 	}
 	
 	public static void mergeSize(ArrayList<Customer> cust, int bIndex, int mid, int eIndex)
+	/********************************************************************************/
+	/* PRECONDITION - NEEDS TO MERGE LOWER AND UPPER SUBARRAY INTO ONE ARRAYLIST 	*/
+	/* POSTCONDITION - CREATES A MERGED LOWER AND UPPER SUBARRAY INTO ONE ARRAYLIST */
+	/********************************************************************************/
 	{
-		// when adding elements to the lower and upper portion make sure that 
-		// they are sorted first and then go through the sorted versions and
-		// merge the two arrays
 		/********************/
 		/* VARIABLE SECTION */
 		/********************/
-		int len1;
-		int len2;
-		ArrayList<Customer> lower = new ArrayList<Customer>();
-		ArrayList<Customer> upper = new ArrayList<Customer>();
+		int len1;					// LENGTH OF THE LOWER SUBARRAY
+		int len2;					// LENGTH OF THE UPPER SUBARRAY
+		int low;					// INDEX OF LOWER SUBARRAY
+		int up;						// INDEX OF UPPER SUBARRAY
+		int main;					// INDEX OF MAIN CUSTOMER ARRAY
+		ArrayList<Customer> lower;	// SUBARRAY OF LOWER PORTION OF CUSTOMER ARRAYLIST
+		ArrayList<Customer> upper;	// SUBARRAY OF UPPER PORTION OF CUSTOMER ARRAYLIST
 		
-		len1 = mid - bIndex + 1;
-		len2 = eIndex - mid;
+		len1 = mid - bIndex + 1;	// INITIALIZES LENGTH OF LOWER ARRAY
+		len2 = eIndex - mid;		// INITIALIZES LENFTH OF UPPER ARRAY
 		
-		if(mid == 0)
+		/*************************/
+		/* INSTANTIATION SECTION */
+		/*************************/
+		lower = new ArrayList<Customer>(len1);	// INSTANTIATES LOWER ARRAYLIST 
+		upper = new ArrayList<Customer>(len2);	// INSTANTIATES UPPER ARRAYLIST
+		
+		/***********************************************/
+		/* FOR LOOP TO ADD CUSTOMER TO LOWER ARRAYLIST */
+		/***********************************************/
+		for (int i = 0; i < len1; i++)
 		{
-			lower.add(cust.get(mid));
-			upper.add(cust.get(cust.size() / 2));
+			Customer customer = cust.get(i+ bIndex);	// CUSTOMER FROM CUST ARRAYLIST 
+			lower.add(i, customer);		// ADDS CUSTOMER FROM LOWER PART OF CUST TO LOWER ARRAYLIST
 		}
 		
-		for(int i = 0; i < mid + 1; i++)
+		/***********************************************/
+		/* FOR LOOP TO ADD CUSTOMER TO UPPER ARRAYLIST */
+		/***********************************************/
+		for(int j = 0; j < len2; j++)
 		{
-			int size1 = cust.get(i).getSize();
-			int size2 = cust.get(i).getSize();
-			int index = i;
+			Customer customer = cust.get(j+ mid+1);		// CUSTOMER FROM CUST ARRAYLIST 
+			upper.add(j, customer);		// ADDS CUSTOMER FROM UPPER PART OF CUST TO UPPER ARRAYLIST
+		}
+		
+		/************************************/
+		/* FOR LOOP TO SORT LOWER ARRAYLIST */
+		/************************************/
+		for(int i = 1; i < lower.size(); i++)
+		{
+			Customer customer = lower.get(i);		// CUSTOMER TO THE RIGHT
+			Customer customer2 = lower.get(i-1);	// CUSTOMER TO THE LEFT
 			
-			while((index > 0) && (size1 < size2))
+			/*********************************************************/
+			/* IF STATEMENT TO CHECK IF LOWER ARRAYLIST IS NUMERICAL */
+			/*********************************************************/
+			if(lower.get(i).getSize() < lower.get(i - 1).getSize())
 			{
-				// if the element to the left of the other element is greater
-				if (size2 > size1)
-				{
-					index--;
-				}
-				size2 = cust.get(index).getSize();
-				cust.get(index);
+				lower.set(i-1, customer);	// MOVES CUSTOMER UP ONE
+				lower.set(i, customer2);	// PUSHES CUSTOMER BACK ONE 
+			}
+		}
+		
+		/************************************/
+		/* FOR LOOP TO SORT UPPER ARRAYLIST */
+		/************************************/
+		for(int j = 1; j < upper.size(); j++)
+		{
+			Customer customer = upper.get(j);		// CUSTOMER TO THE RIGHT
+			Customer customer2 = upper.get(j-1);	// CUSTOMER TO THE LEFT
+			
+			/*********************************************************/
+			/* IF STATEMENT TO CHECK IF UPPER ARRAYLIST IS NUMERICAL */
+			/*********************************************************/
+			if(upper.get(j).getSize() < upper.get(j-1).getSize())
+			{
+				upper.set(j-1, customer);	// MOVES CUSTOMER UP ONE
+				upper.set(j, customer2);	// PUSHES CUSTOMER BACK ONE 
+			}
+		}
+		
+		low = 0;		// LOWER INDEX
+		up = 0;			// UPPER INDEX
+		main = bIndex;	// CUSTOMER LIST INDEX
+
+		/*************************************************/
+		/* WHILE LOOP TO MERGE LOWER AND UPPER ARRAYLIST */
+		/*************************************************/
+		while((low < len1) && (up < len2))
+		{
+			/****************************************************************************************/
+			/* IF STATEMENT TO CHECK IF CUSTOMER'S SIZE IN LOWER IS LESS THAN UPPER CUSTOMER'S SIZE */
+			/****************************************************************************************/
+			if(lower.get(low).getSize() <= upper.get(up).getSize())
+			{
+				cust.set(main, lower.get(low));	// SETS CUST ARRAY TO LESSER CUSTOMER'S SIZE
+				low++;	// INCREASES INDEX OF LOWER SUBARRAYLIST
 			}
 			
-			Customer customer = cust.get(i);
-			lower.add(index, customer);
-		}
-		
-		for(int j = mid+1; j < len2; j++)
-		{
+			/******************************************************************************************/
+			/* ELSE STATEMENT TO CHECK IF CUSTOMER'S SIZE IN UPPER IS LESS THAN LOWER CUSTOMER'S SIZE */
+			/******************************************************************************************/
+			else
+			{
+				cust.set(main, upper.get(up));	// SETS CUST ARRAY TO LESSER CUSTOMER'S SIZE
+				up++;	// INCREASES INDEX OF UPPER SUBARRAYLIST
+			}
 			
+			main++;	// INCREASES INDEX OF CUST ARRAYLIST
 		}
 		
-		if((len1 + len2) == cust.size())
+		/*****************************************************************/
+		/* WHILE LOOP TO MERGE REST OF LOWER ARRAYLIST TO CUST ARRAYLIST */
+		/*****************************************************************/
+		while(low < len1)
 		{
-			// if lengths are the size of the ArrayList
-			// meaning that the two arrays have the two 
-			// halves of the full array
-			// so now it is fine to merge all the elements together
+			cust.set(main, lower.get(low));		// SETS CUST ARRAY TO LESSER CUSTOMER'S SIZE
+			low++;		// INCREASES INDEX OF LOWER SUBARRAYLIST
+			main++;		// INCREASES INDEX OF CUST ARRAYLIST
+		}
+			
+		/*****************************************************************/
+		/* WHILE LOOP TO MERGE REST OF UPPER ARRAYLIST TO CUST ARRAYLIST */
+		/*****************************************************************/
+		while (up < len2)
+		{
+			cust.set(main, upper.get(up));		// SETS CUST ARRAY TO LESSER CUSTOMER'S SIZE
+			up++;		// INCREASES INDEX OF UPPER SUBARRAYLIST
+			main++;		// INCREASES INDEX OF CUST ARRAYLIST
 		}
 	}
 	
-	public static ArrayList<Customer> mergeSortSize(ArrayList<Customer> cust, int bIndex, int eIndex)
+	public static void mergeSortSize(ArrayList<Customer> cust, int bIndex, int eIndex)
 	/**********************************************************/
 	/* PRECONDITION - NEEDS TO DIVIDE AN ARRAYLIST INTO TWO   */
 	/* 				  SUBARRAYS, SORT THEM, AND MERGE THEM    */
@@ -1012,34 +1086,21 @@ public class Menu_GUI extends BusGUI implements ActionListener
 	/* 				   SUBARRAYS, SORT THEM, AND MERGE THEM   */
 	/**********************************************************/
 	{
-		ArrayList<Customer> cst;
-		ArrayList<Customer> lower;
-		ArrayList<Customer> upper;
-		int mid;
+		/********************/
+		/* VARIABLE SECTION */
+		/********************/
+		int mid;			// FINDS MIDDLE OF CUST ARRAYLIST
 		
-		cst = new ArrayList<Customer>();
-		lower = new ArrayList<Customer>();
-		upper = new ArrayList<Customer>();
-		mid = (bIndex + eIndex) / 2;
-		
+		/***********************************************************/
+		/* IF STATEMENT TO CHECK IF LENGTH OF CUST IS AT LEAST ONE */
+		/***********************************************************/
 		if(eIndex > bIndex)
 		{
-			mergeSortSize(cust, bIndex, mid);
-			
-			
-			
-			mergeSortSize(cust, mid+1, eIndex);
+			mid = (bIndex + eIndex) / 2;			// INDEX OF MIDDLE OF CUST ARRAYLIST
+			mergeSortSize(cust, bIndex, mid);		// RECURSIVELY CALLS MERGE SORT SIZE
+			mergeSortSize(cust, mid+1, eIndex);		// RECURSIVELY CALLS MERGE SORT SIZE
+			mergeSize(cust, bIndex, mid, eIndex);	// CALL TO MERGE SIZE
 		}
-		
-		// recursively calls cst
-		// returns the ArrayList to split up 
-		// calls merge at the end of this to merge the elements
-		// has to recursively divide the elements until down to the last element
-		// megeSize parameters could have an arrayList of lower-half and upper-half elements
-		
-		mergeSize(cst, bIndex, mid, eIndex);
-		
-		return cst;
 	}
 	
 	public static void totalProfit()
