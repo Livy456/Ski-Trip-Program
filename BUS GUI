@@ -1,6 +1,6 @@
 /******************************************/
 /* USER DESCRIPTION SECTION 			  */
-/* LIVY456				   			  */
+/* OLIVIA DIAS				   			  */
 /* FINAL PROJECT		   	 			  */
 /* PROGRAM 12							  */
 /* MARCH 2, 2020		   			  	  */
@@ -32,7 +32,11 @@ public class BusGUI implements ActionListener
 	/* FINAL SECTION */
 	/*****************/
 	final static String message1 = "Input your Group Name: ";
+	final static String message2 = "Do you really want to do this?"; 
 	final static String message3 = "Input the number of people in your group (must be greater than 0): ";
+	final static String message4 = "Do you want to pick another date? ";
+	final static String message5 = "If you keep this date, then the " + "\n" + 
+								   "your excess team members will be given a refund.";
 	final static String heading1= "Input Name";
 	final static String heading2 = "Input Group ID";
 	final static String heading3 = "Input Group Size";
@@ -43,6 +47,7 @@ public class BusGUI implements ActionListener
 	final static String error6 = "ERROR!!! This day can not be chosen with this year!!!";
 	final static String error7 = "ERROR!!! This date has already past!!!";
 	final static String error8 = "ERROR!!! You need to finish filling out information!!!";
+	final static String error9 = "Max number of occupants for a bus has been met!!!";
 	
 	/*****************************/
 	/* INSTANCE VARIABLE SECTION */
@@ -226,7 +231,7 @@ public class BusGUI implements ActionListener
 		/****************************************************/
 		if (action.equals("Quit Program"))
 		{
-			confirm = confirmWindow();	// CALL TO CONFIRM WINDOW
+			confirm = confirmWindow(message2);	// CALL TO CONFIRM WINDOW
 			
 			/******************************************************/
 			/* IF STATEMENT TO CONFIRM ACTION OF QUITTING PROGRAM */	
@@ -242,7 +247,7 @@ public class BusGUI implements ActionListener
 		/***********************************************************/
 		else if (action.equals("Return"))
 		{
-			confirm = confirmWindow();	// CALL TO CONFIRM WINDOW
+			confirm = confirmWindow(message2);	// CALL TO CONFIRM WINDOW
 			
 			/************************************************************/
 			/* IF STATEMENT TO CONFIRM ACTION OF RETURNING TO MAIN MENU */	
@@ -281,7 +286,7 @@ public class BusGUI implements ActionListener
 					&& (monthCB.getSelectedItem() != "") && (dayCB.getSelectedItem() != "") 
 					&& (yearCB.getSelectedItem() != ""))
 			{
-				confirm = confirmWindow();	// CALL TO CONFIRM WINDOW
+				confirm = confirmWindow(message2);	// CALL TO CONFIRM WINDOW
 				
 				/************************************************************/
 				/* IF STATEMENT TO CONFIRM ACTION OF ENTERING CUSTOMER INFO */	
@@ -313,7 +318,11 @@ public class BusGUI implements ActionListener
 		Object day;			// REUSUABLE OBJECT INPUT
 		Object year;		// REUSUABLE OBJECT INPUT
 		String date;		// REUSUABLE STRING INPUT
-				
+		int sum;			// TOTAL NUMBER OF PEOPLE PER A DAY
+		int confirm;		// INTEGER VALUE FOR CONFIRM DIALOG
+		
+		sum = 0;	//INITIALIZES SUM
+		
 		/*****************************/
 		/* LOOP UNTIL VALUE IS VALID */
 		/*****************************/
@@ -328,6 +337,7 @@ public class BusGUI implements ActionListener
 												// FROM DAY DROP-DOWN LIST		
 			year = yearCB.getSelectedItem();	// CALL TO GET SELECTED ITEM 
 												// FROM YEAR DROP-DOWN LIST	
+			sum = customer.getSize();	// RESETS SUM COUNT	
 			
 			/************************************/
 			/* IF STATEMENT TO ERROR CHECK DATE */
@@ -814,8 +824,29 @@ public class BusGUI implements ActionListener
 			}
 			
 			date = "" + month + "/" + day + "/" + year;
+			
+			for(int i = 0; i < custList.size(); i++)
+			{
+				if(custList.get(i).getDate().equals(date))
+				{
+					sum += custList.get(i).getSize();
+				}
+			}
+			
+			if(sum > 400)
+			{
+				errorMessage(error9);		// CALL TO ERROR MESSAGE
+				confirm = confirmWindow(message4);	// CALL TO CONFIRM WINDOW
+				
+				if(confirm == 0)
+				{
+					monthCB.setSelectedItem("");
+					dayCB.setSelectedItem("");
+					yearCB.setSelectedItem("");
+				}
+			}
 		}
-		while((month.equals("02")) && (day.equals("29")) && (year.equals("2021")) || 
+		while((sum > 400) || (month.equals("02")) && (day.equals("29")) && (year.equals("2021")) || 
 			  (month.equals("02")) && (day.equals("29")) && (year.equals("2022")) ||
 			  (month.equals("02")) && (day.equals("29")) && (year.equals("2023")) ||
 			  (month.equals("02")) && (day.equals("29")) && (year.equals("2025")) ||
@@ -981,7 +1012,7 @@ public class BusGUI implements ActionListener
 		customer.setSize(grpSz);		// CALL TO SET SIZE
 	}
 	
-	public static int confirmWindow()
+	public static int confirmWindow(String str)
 	/************************************************/
 	/* PRECONDITION - NEEDS CONFIRM DIALOG BOX		*/
 	/* POSTCONDITION - CREATES WINDOW TO CONFIRM IF	*/
@@ -998,7 +1029,7 @@ public class BusGUI implements ActionListener
 		/*******************************/
 		num = JOptionPane.showConfirmDialog(
 				null,
-				"Do you really want to do this?",
+				str,
 				"Confirm Window",
 				JOptionPane.YES_NO_OPTION,
 				JOptionPane.QUESTION_MESSAGE);
