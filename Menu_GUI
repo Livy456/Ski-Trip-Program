@@ -1,6 +1,6 @@
 /******************************************/
 /* USER DESCRIPTION SECTION 			  */
-/* LIVY456				   			  */
+/* OLIVIA DIAS				   			  */
 /* FINAL PROJECT		   	 			  */
 /* PROGRAM 12							  */
 /* MARCH 8, 2020		   			  	  */
@@ -44,11 +44,11 @@ public class Menu_GUI extends BusGUI implements ActionListener
 	private JButton alphB;			// CREATES A BUTTON FOR SORTING ALPHABETICALLY
 	private JButton numB;			// CREATES A BUTTON FOR SORTING NUMERICALLY
 	private JButton grpB;			// CREATES A BUTTON FOR SORTING BY GROUP SIZE
+	private JButton busAmt;			// CREATES A BUTTON FOR DISPLAYING NUMBER OF BUSES FOR CUSTOMER
 	private JLabel heading;			// CREATES A LABEL FOR HEADING
 	private JLabel changeCust;		// CREATES A LABEL FOR CHANGING CUSTOMER
 	private JLabel cost;			// CREATES A LABEL FOR COST
 	private JLabel print;			// CREATES A LABEL FOR PRINT
-	private JLabel displayCust;		// CREATES A LABEL FOR DISPLAYING CUSTOMERS INFORMATION
 	private Font font;				// CREATES A FONT
 	private JFrame frame;			// CREATES A JFRAME
 	private Container container;	// CREATES A CONTAINER
@@ -75,6 +75,7 @@ public class Menu_GUI extends BusGUI implements ActionListener
 		alphB = new JButton("Sorting Alphabetically");		// INSTANTIATES A JBUTTON 
 		numB = new JButton("Sorting by Group ID");			// INSTANTIATES A JBUTTON 
 		grpB = new JButton("Sorting by Group Size");		// INSTANTIATES A JBUTTON 
+		busAmt = new JButton("Number of Buses");			// INSTANTIATES A JBUTTON
 		heading = new JLabel("Ski Trip Main Menu");			// INSTANTIATES A LABEL
 		changeCust = new JLabel("To add, remove, or modify " +
 							   "click one of " +
@@ -119,21 +120,22 @@ public class Menu_GUI extends BusGUI implements ActionListener
 		/**********************************************/
 		/* SETS BOUNDS FOR BUTTONS, JTEXTFIELD, LABEL */
 		/**********************************************/
-		insertB.setBounds(50, 110, 100, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		removeB.setBounds(160, 110, 100, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		modifyB.setBounds(270, 110, 100, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		costB.setBounds(50, 190, 100, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		profitDtB.setBounds(160, 190, 140, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		profitB.setBounds(310, 190, 100, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		busDtB.setBounds(50, 270, 180, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		alphB.setBounds(240, 270, 180, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		numB.setBounds(50, 300, 180, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		grpB.setBounds(240, 300, 180, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		insertB.setBounds(80, 110, 100, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		removeB.setBounds(190, 110, 100, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		modifyB.setBounds(300, 110, 100, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		costB.setBounds(80, 190, 150, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		profitDtB.setBounds(240, 190, 150, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		profitB.setBounds(80, 220, 150, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		busAmt.setBounds(240, 220, 150, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		busDtB.setBounds(50, 300, 180, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		alphB.setBounds(240, 300, 180, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		numB.setBounds(50, 330, 180, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		grpB.setBounds(240, 330, 180, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		quitB.setBounds(340, 370, 120, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		heading.setBounds(170, 20, 400, 50);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		changeCust.setBounds(20, 70, 500, 50);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		cost.setBounds(20, 150, 500, 50);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		print.setBounds(20, 230, 500, 50);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		print.setBounds(20, 260, 500, 50);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		
 		/**********************************************/
 		/* ADDS LISTENER TO BUTTON TO PERFORM ACTIONS */
@@ -149,6 +151,7 @@ public class Menu_GUI extends BusGUI implements ActionListener
 		alphB.addActionListener(this);		// ADDS ACITONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED
 		numB.addActionListener(this);		// ADDS ACITONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED
 		grpB.addActionListener(this);		// ADDS ACITONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED
+		busAmt.addActionListener(this);		// ADDS ACTIONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED 
 		
 		/*************************/
 		/* ADDS BUTTONS TO FRAME */
@@ -164,6 +167,7 @@ public class Menu_GUI extends BusGUI implements ActionListener
 		container.add(alphB);			// ADDS ALPHABETIC SORTING BUTTON TO CONTAINER
 		container.add(numB);			// ADDS NUMERIC SORTING BUTTON TO CONTAINER
 		container.add(grpB);			// ADDS GROUP SIZE SORTING BUTTON TO CONTAINER
+		container.add(busAmt);			// ADDS BUS AMOUNT BUTTON TO CONTAINER
 		container.add(heading);			// ADDS HEADING LABEL TO CONTAINER
 		container.add(changeCust);		// ADDS CHANGING CUSTOMER LABEL TO CONTAINER
 		container.add(cost);			// ADDS COST LABEL TO CONTAINER
@@ -362,15 +366,14 @@ public class Menu_GUI extends BusGUI implements ActionListener
 		if (action.equals("Sorting by Group Size"))
 		{
 			confirm = confirmWindow();				// CALL TO CONFIRM WINDOW
-			//sortCustSz = new ArrayList<Customer>();	// INSTANTIATES ARRAYLIST
-			cust = new ArrayList<Customer>();		// INSTANTIATES ARRAYLIST
+			sortCustSz = new ArrayList<Customer>();	// INSTANTIATES ARRAYLIST
 			
 			/*****************************************/
 			/* FOR LOOP TO ADD ALL CUSTOMERS TO CUST */
 			/*****************************************/
 			for(int i = 0; i < custList.size(); i++)
 			{
-				cust.add(custList.get(i));
+				sortCustSz.add(custList.get(i));
 			}
 			
 			/*******************************************************************************/
@@ -378,12 +381,130 @@ public class Menu_GUI extends BusGUI implements ActionListener
 			/*******************************************************************************/
 			if (confirm == 0)
 			{
-				mergeSortSize(cust, 0, cust.size()-1);	// CALL TO SORT SIZE
-				frame.dispose();						// DISPOSES OF MENU_GUI FRAME
-				printSorted(cust);						// CALL TO PRINT SORTED
-				new Menu_GUI();							// CREATES A NEW MENU GUI WINDOW
+				mergeSortSize(sortCustSz, 0, sortCustSz.size()-1);	// CALL TO SORT SIZE
+				frame.dispose();									// DISPOSES OF MENU_GUI FRAME
+				printSorted(sortCustSz);							// CALL TO PRINT SORTED
+				new Menu_GUI();										// CREATES A NEW MENU GUI WINDOW
 			}
 		}
+		
+		/***************************************************************/
+		/* IF STATEMENT TO CHECK IF NUMBER OF BUSES BUTTON WAS PRESSED */	
+		/***************************************************************/
+		if(action.equals("Number of Buses"))
+		{
+			/********************/
+			/* VARIABLE SECTION */
+			/********************/
+			Object date;		// REUSUABLE VALUE FOR DATE OF SKI TRIP
+			int bus;			// NUMBER OF BUSES FOR SPECIFIC DATE
+			
+			frame.dispose();		// DISPOSES MENU GUI FRAME
+			date = chooseDate();	// SPECIFIC CUSTOMER DATE
+			bus = calculateBusTot(date);	// TOTAL NUMBER OF BUSES FOR A SPECIFIC DATE
+			outputBus(bus, date);			// CALL TO OUTPUT BUS
+			new Menu_GUI();					// INSTANTIATE A NEW MENU GUI FRAME
+		}
+	}
+	
+	public static Object[] arrayDate()
+	/**********************************************************************/
+	/* PRECONDITION - NEEDS ARRAY OF ALL DATES ENTERED BY CUSTOMERS 	  */
+	/* POSTCONDITION - RETURNS AN ARRAY OF ALL DATES ENTERED BY CUSTOMERS */
+	/**********************************************************************/
+	{
+		/********************/
+		/* VARIABLE SECTION */
+		/********************/
+		Object date;				// REUSUABLE VALUE FOR DATE OF SKI TRIP
+		Object dt;					// REUSUABLE VALUE FOR ELEMENT IN ARRAYLIST
+		Object[] dateArray;			// ALL DATES OF SKI TRIP AS AN ARRAY
+		ArrayList<Object> dateList; // ALL DATES OF SKI TRIP AS AN ARRAYLIST
+		
+		dateList = new ArrayList(); // INSTANIATES ARRAYLIST	
+		dateList.add("");			// ADDS AN EMPTY SPACE IN ARRAYLIST
+		date = "";					// INITIALIZES DATE	
+		
+		/**************************************************/
+		/* FOR LOOP TO GO THROUGH EVERY DATE FOR SKI TRIP */
+		/**************************************************/
+		for(int i = 0; i < custList.size(); i++)
+		{
+			date = custList.get(i).getDate();	// CALL TO GET DATE
+			dateList.add(date);		// ADDS UNIQUE DATE TO ARRAYLIST
+			int count = 0;			// NUMBER OF TIMES AN ELEMENT APPEARS IN ARRAYLIST
+			
+			/**************************************************/
+			/* FOR LOOP TO GO THROUGH EVERY DATE FOR SKI TRIP */
+			/**************************************************/
+			for(int j = 0; j < dateList.size(); j++)
+			{
+				dt = dateList.get(j);	// GETS ELEMENT FROM ARRAYLIST
+				
+				/****************************************************************/
+				/* IF STATEMENT TO CHECK IF ELEMENT HAS APPEARED MORE THAN ONCE */	
+				/****************************************************************/
+				if(date.equals(dt))
+				{
+					count++;	// INCREMENTS OCCURENCES OF AN ELEMENT
+				}
+			
+				/*****************************************************/
+				/* IF STATEMENT TO GET RID OF REOCCURENCE OF ELEMENT */	
+				/*****************************************************/
+				if(count >=2)
+				{
+					dateList.remove(j);	// REMOVES ELEMENT THAT REOCCURED
+					j--;				// MAKES SURE INDEX DOES NOT SKIP ELEMENTS
+				}
+			}
+		}
+		
+		dateArray = new Object[dateList.size()];	// INSTANIATES ARRAY AND 
+		dateArray = dateList.toArray();				// CONVERTS ARRAYLIST TO AN ARRAY
+		
+		/******************/
+		/* RETURN SECTION */
+		/******************/
+		return dateArray;		// RETURNS DATE ARRAY	
+	}
+	
+	public int calculateBusTot(Object date)
+	/************************************************************************/
+	/* PRECONDITION - NEEDS TOTAL NUMBER OF BUSES FOR A SPECIFIC DATE 		*/
+	/* POSTCONDITION - CALCULATES TOTAL NUMBER OF BUSES FOR A SPECIFIC DATE */
+	/************************************************************************/
+	{
+		/********************/
+		/* VARIABLE SECTION */
+		/********************/
+		int bus;			// NUMBER OF BUSES NEEDED FOR A SPECIFIC DATE
+		int num;			// NUMBER OF BUSES NEEDED FOR A CUSTOMER
+		
+		bus = 0;			// INITIALIZES BUS
+		num = 0;			// INITIALIZES BUS
+		
+		/*************************************************************/
+		/* FOR LOOP TO CALCULATE NUMBER OF BUSES FOR A SPECIFIC DATE */
+		/*************************************************************/
+		for(int i = 0; i < custList.size(); i++)
+		{
+			Object cDate = custList.get(i).getDate();	// DATE OF CURRENT CUSTOMER
+			
+			/***********************************************/
+			/* IF STATEMENT TO CHECK IF DATES ARE THE SAME */
+			/***********************************************/
+			if(cDate.equals(date))
+			{
+				num = custList.get(i).getBus(); 		// GETS NUMBER OF BUSES 
+				bus+= num;	// TOTALS NUMBER OF BUSES
+			}
+		}
+			
+		/******************/
+		/* RETURN SECTION */
+		/******************/
+		return bus;			// RETURNS BUS
 	}
 	
 	public static double calculateTotCost()
@@ -417,6 +538,38 @@ public class Menu_GUI extends BusGUI implements ActionListener
 		/* RETURN SECTION */
 		/******************/
 		return cost;		// RETURNS COST	
+	}
+	
+	public Object chooseDate()
+	/*************************************************************************************/
+	/* PRECONDITION - NEEDS INPUT DIALOG BOX TO CHOOSE A DATE OF ONE OF THE CUSTOMERS 	 */
+	/* POSTCONDITION - CREATES INPUT DIALOG BOX TO CHOOSE A DATE OF ONE OF THE CUSTOMERS */
+	/*************************************************************************************/
+	{
+		/********************/
+		/* VARIABLE SECTION */
+		/********************/
+		Object date;		// DATE SELECTED BY USER
+		Object[] custDate;	// ARRAY OF UNIQUE CUSTOMER DATES
+		
+		custDate = arrayDate();		// CALL TO ARRAY DATE
+		
+		/*****************************/
+		/* MAKES INPUT DIALOG WINDOW */
+		/*****************************/
+		date = JOptionPane.showInputDialog(
+				new JDialog(),
+				"Select a customer date, to see how many buses will be used",
+				"Select Date",
+				JOptionPane.QUESTION_MESSAGE,
+				null,
+				custDate,
+				"");
+		
+		/***************/
+		/* RETURN DATE */
+		/***************/
+		return date;	// RETURNS DATE
 	}
 	
 	public static int confirmWindow()
@@ -1149,6 +1302,43 @@ public class Menu_GUI extends BusGUI implements ActionListener
 			mergeSortSize(cust, bIndex, mid);		// RECURSIVELY CALLS MERGE SORT SIZE
 			mergeSortSize(cust, mid+1, eIndex);		// RECURSIVELY CALLS MERGE SORT SIZE
 			mergeSize(cust, bIndex, mid, eIndex);	// CALL TO MERGE SIZE
+		}
+	}
+	
+	public static void outputBus(int bus, Object date)
+	/*****************************************************************/
+	/* PRECONDITION - NEEDS AN UPDATE WINDOW OF ALL CUSTOMERS 		 */
+	/* POSTCONDITION - CREATES WINDOW TO TELL USER ALL THE CUSTOMERS */
+	/*****************************************************************/
+	{	
+		/*************************************************************/
+		/* IF STATEMENT TO MAKE SURE OUTPUT IS GRAMMATICALLY CORRECT */
+		/*************************************************************/
+		if(bus > 1)
+		{	
+			/***********************/
+			/* MAKES DIALOG WINDOW */
+			/***********************/ 
+			JOptionPane.showMessageDialog(
+					null,
+					"The total number of buses for " + date + " is:" + "\n" + bus + " buses",
+					"Bus Amount",
+					JOptionPane.INFORMATION_MESSAGE);
+		}
+		
+		/***************************************************************/
+		/* ELSE STATEMENT TO MAKE SURE OUTPUT IS GRAMMATICALLY CORRECT */
+		/***************************************************************/
+		else
+		{
+			/***********************/
+			/* MAKES DIALOG WINDOW */
+			/***********************/ 
+			JOptionPane.showMessageDialog(
+					null,
+					"The total number of buses for " + date + " is:" + "\n" + bus + " bus",
+					"Bus Amount",
+					JOptionPane.INFORMATION_MESSAGE);
 		}
 	}
 	
