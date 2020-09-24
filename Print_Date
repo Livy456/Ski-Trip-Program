@@ -1,6 +1,6 @@
 /******************************************/
 /* USER DESCRIPTION SECTION 			  */
-/* OLIVIA DIAS				   			  */
+/* LIVY456				   			  */
 /* FINAL PROJECT		   	 			  */
 /* PROGRAM 12							  */
 /* MAY 18, 2020			   			  	  */
@@ -119,6 +119,7 @@ public class Print_Date extends Menu_GUI implements ActionListener
 		String dt2;			// STRING REPRESENTATION OF OBJECT VALUE FOR DATE
 		int confirm; 		// REUSUABLE INT INPUT FOR CONFIRMING AN ACTION
 		double cost;		// REUSUABLE DOUBLE VALUE FOR COST
+		int totSz;			// REUSUABLE INT VALUE FOR SIZE
 		
 		confirm = 1;		// INITIALIZES CONFIRM
 		action = event.getActionCommand();	// CALL TO GET ACTION COMMAND
@@ -159,6 +160,7 @@ public class Print_Date extends Menu_GUI implements ActionListener
 		dt = actionPerformedDate();		// CALL TO ACTION PERFORMED DATE
 		dt2 = (String) dt;				// CONVERTS TO STRING
 		cost = calculateDateCost(dt);	// CALL TO CALCULATE DATE COST
+		totSz = calculateDateSize(dt);	// CALL TO CALCULATE DATE SIZE
 		
 		/*****************************************************/
 		/* IF STATEMENT TO CHECK IF ENTER BUTTON WAS PRESSED */	
@@ -178,7 +180,7 @@ public class Print_Date extends Menu_GUI implements ActionListener
 			/*********************************************************************/
 			else if(dateCB.getSelectedItem() != "")
 			{
-				printDateCost(cost, dt2);		// CALL TO PRINT DATE COST
+				printDateCost(cost, dt2, totSz);		// CALL TO PRINT DATE COST
 			}
 		}
 	}
@@ -245,7 +247,44 @@ public class Print_Date extends Menu_GUI implements ActionListener
 		return cost;		// RETURNS COST	
 	}
 	
-	public void printDateCost(double cost, String dt)
+	public int calculateDateSize(Object date)
+	/******************************************************************************************/
+	/* PRECONDITION - NEEDS TOTAL NUMBER OF PEOPLE ON ALL SKI TRIPS FOR A SPECIFIC DATE 	  */
+	/* POSTCONDITION - CALCULATES TOTAL NUMBER OF PEOPLE ON ALL SKI TRIPS FOR A SPECIFIC DATE */
+	/******************************************************************************************/
+	{
+		/********************/
+		/* VARIABLE SECTION */
+		/********************/
+		int totSz;			// TOTAL NUMBER OF PEOPLE FOR SPECIFIC DATE
+		Object dt;			// DATE OF CURRENT CUSTOMER
+		
+		totSz = 0;	// INITIALIZES TOTAL SIZE
+		dt = "";	// INITIALIZES DATE
+		
+		/*************************************************************************************/
+		/* FOR LOOP TO CALCULATE TOTAL NUMBER OF PEOPLE ON ALL SKI TRIPS FOR A SPECIFIC DATE */
+		/*************************************************************************************/
+		for(int i = 0; i < custList.size(); i++)
+		{
+			dt = custList.get(i).getDate(); 	// CALL TO GET DATE
+			
+			/***********************************************************/
+			/* IF STATEMENT TO CHECK IF DATE MATCHES THE SELECTED DATE */	
+			/***********************************************************/
+			if(dt.equals(date))
+			{
+				totSz+=custList.get(i).getSize();	// TOTALS SIZE
+			}
+		}
+		
+		/******************/
+		/* RETURN SECTION */
+		/******************/
+		return totSz;		// RETURNS TOTAL SIZE
+	}
+	
+	public void printDateCost(double cost, String dt, int totSz)
 	/*****************************************************************/
 	/* PRECONDITION - NEEDS TO PRINT OUT TOTAL COST OF ALL SKI TRIPS */ 
 	/* 				  FOR A SPECIFIC DATE 	  						 */
@@ -256,8 +295,10 @@ public class Print_Date extends Menu_GUI implements ActionListener
 		/********************/
 		/* VARIABLE SECTION */
 		/********************/
-		String costdf;		// STRING REPRESENTATION OF COST		
+		String str;			// STRING REPRESENTATION OF ARRAYLIST
+		String costdf;		// STRING REPRESENTATION OF COST
 		
+		str = printDateInfo(dt);		// INITIALIZES STR
 		costdf = df.format(cost);		// FORMATS COST TO TWO DECIMAL PLACES
 		
 		/***********************/
@@ -265,9 +306,43 @@ public class Print_Date extends Menu_GUI implements ActionListener
 		/***********************/ 
 		JOptionPane.showMessageDialog(
 				null,
-				"The total cost for the date of " + dt + " is\n" + 
-				"$" + costdf,
+				"Company profit information for the date of " + dt + "\n" + 
+				str + "Total:                         " + totSz + "        $" + costdf,
 				"Print Cost for Specific Date",
 				JOptionPane.INFORMATION_MESSAGE);
+	}
+	
+	public String printDateInfo(String dt)
+	/*************************************************************/
+	/* PRECONDITION - NEEDS TO PRINT ARRAYLIST FOR SPECIFIC DATE */
+	/* POSTCONDITION - GETS ARRAYLIST FOR SPECIFIC DATE 		 */
+	/*************************************************************/
+	{
+		/********************/
+		/* VARIABLE SECTION */
+		/********************/
+		String str;			// USED FOR REUSABLE OUTPUT
+		
+		str = "ID       GROUP NAME         DATE       SIZE            AMOUNT DUE";			// INITIALIZES THE STRING
+		
+		/***********************************************/
+		/* FOR LOOP TO PRINT OUT ARRAYLIST OF CUSTOMER */
+		/***********************************************/
+		for (int i = 0; i < custList.size(); i++)
+		{
+			/***********************************************/
+			/* FOR LOOP TO PRINT OUT ARRAYLIST OF CUSTOMER */
+			/***********************************************/
+			if(custList.get(i).getDate().equals(dt))
+			{
+				str += custList.get(i).getID() + "      " 
+					+ custList.get(i).getName() + "      "
+					+ custList.get(i).getDate() + "      "
+					+ custList.get(i).getSize() + "      "
+					+ "$" + custList.get(i).getCost() + "\n";
+			}
+		}
+		
+		return str;
 	}
 }
