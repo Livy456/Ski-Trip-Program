@@ -1,6 +1,6 @@
 /******************************************/
 /* USER DESCRIPTION SECTION 			  */
-/* LIVY456				   			  */
+/* OLIVIA DIAS				   			  */
 /* FINAL PROJECT		   	 			  */
 /* PROGRAM 12							  */
 /* MARCH 8, 2020		   			  	  */
@@ -424,6 +424,8 @@ public class Menu_GUI extends BusGUI implements ActionListener
 		dateList = new ArrayList(); // INSTANIATES ARRAYLIST	
 		dateList.add("");			// ADDS AN EMPTY SPACE IN ARRAYLIST
 		date = "";					// INITIALIZES DATE	
+		
+		custList = sortDate();	// CALL TO SORT DATE
 		
 		/**************************************************/
 		/* FOR LOOP TO GO THROUGH EVERY DATE FOR SKI TRIP */
