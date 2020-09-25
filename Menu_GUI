@@ -1,6 +1,6 @@
 /******************************************/
 /* USER DESCRIPTION SECTION 			  */
-/* LIVY456				   			  */
+/* OLIVIA DIAS				   			  */
 /* FINAL PROJECT		   	 			  */
 /* PROGRAM 12							  */
 /* MARCH 8, 2020		   			  	  */
@@ -75,7 +75,7 @@ public class Menu_GUI extends BusGUI implements ActionListener
 		alphB = new JButton("Sorting Alphabetically");		// INSTANTIATES A JBUTTON 
 		numB = new JButton("Sorting by Group ID");			// INSTANTIATES A JBUTTON 
 		grpB = new JButton("Sorting by Group Size");		// INSTANTIATES A JBUTTON 
-		busAmt = new JButton("Number of Buses");			// INSTANTIATES A JBUTTON
+		busAmt = new JButton("Single Customer");			// INSTANTIATES A JBUTTON
 		heading = new JLabel("Ski Trip Main Menu");			// INSTANTIATES A LABEL
 		changeCust = new JLabel("To add, remove, or modify " +
 							   "click one of " +
@@ -391,18 +391,16 @@ public class Menu_GUI extends BusGUI implements ActionListener
 		/***************************************************************/
 		/* IF STATEMENT TO CHECK IF NUMBER OF BUSES BUTTON WAS PRESSED */	
 		/***************************************************************/
-		if(action.equals("Number of Buses"))
+		if(action.equals("Single Customer"))
 		{
 			/********************/
 			/* VARIABLE SECTION */
 			/********************/
-			Object date;		// REUSUABLE VALUE FOR DATE OF SKI TRIP
-			int bus;			// NUMBER OF BUSES FOR SPECIFIC DATE
+			Object custInfo;	// REUSUABLE VALUE FOR CUSTOMER INFORMATION
 			
-			frame.dispose();		// DISPOSES MENU GUI FRAME
-			date = chooseDate();	// SPECIFIC CUSTOMER DATE
-			bus = calculateBusTot(date);	// TOTAL NUMBER OF BUSES FOR A SPECIFIC DATE
-			outputBus(bus, date);			// CALL TO OUTPUT BUS
+			frame.dispose();				// DISPOSES MENU GUI FRAME
+			custInfo = chooseCustomer();	// CHOOSES SPECIFIC CUSTOMER 
+			outputCustInfo(custInfo);		// CALL TO OUTPUT CUSTOMER INFORMATION
 			new Menu_GUI();					// INSTANTIATE A NEW MENU GUI FRAME
 		}
 	}
@@ -542,36 +540,49 @@ public class Menu_GUI extends BusGUI implements ActionListener
 		return cost;		// RETURNS COST	
 	}
 	
-	public Object chooseDate()
-	/*************************************************************************************/
-	/* PRECONDITION - NEEDS INPUT DIALOG BOX TO CHOOSE A DATE OF ONE OF THE CUSTOMERS 	 */
-	/* POSTCONDITION - CREATES INPUT DIALOG BOX TO CHOOSE A DATE OF ONE OF THE CUSTOMERS */
-	/*************************************************************************************/
+	public Object chooseCustomer()
+	/*****************************************************************/
+	/* PRECONDITION - NEEDS INPUT DIALOG BOX TO CHOOSE A CUSTOMER 	 */
+	/* POSTCONDITION - CREATES INPUT DIALOG BOX TO CHOOSE A CUSTOMER */
+	/*****************************************************************/
 	{
 		/********************/
 		/* VARIABLE SECTION */
 		/********************/
-		Object date;		// DATE SELECTED BY USER
-		Object[] custDate;	// ARRAY OF UNIQUE CUSTOMER DATES
+		Object cstInfo;				// CUSTOMER SELECTED BY USER
+		Object[] custInfo;			// ARRAY OF ALL CUSTOMER INFO
+		ArrayList<Object> cstInfo2;	// ARRAYLIST OF ALL CUSTOMER INFO
 		
-		custDate = arrayDate();		// CALL TO ARRAY DATE
+		cstInfo2 = new ArrayList<Object>();	// INSTANTIATES ARRAYLIST
+		cstInfo2.add("");	// ADDS BLANK SPOT
+		
+		/********************************************************/
+		/* FOR LOOP TO ADD ALL CUSTOMERS TO CUST INFO ARRAYLIST */
+		/********************************************************/
+		for(int i = 0; i < custList.size(); i++)
+		{
+			cstInfo2.add(custList.get(i)); // ADDS CUSTOMER TO ARRAYLIST
+		}
+		
+		custInfo = new Object[custList.size()+1];	// INSTANTIATES ARRAY
+		custInfo = cstInfo2.toArray();	// CONVERTS ARRAYLIST TO AN ARRAY
 		
 		/*****************************/
 		/* MAKES INPUT DIALOG WINDOW */
 		/*****************************/
-		date = JOptionPane.showInputDialog(
+		cstInfo = JOptionPane.showInputDialog(
 				new JDialog(),
-				"Select a customer date, to see how many buses will be used",
-				"Select Date",
+				"Select a customer, to see all their information for the ski trip: ",
+				"Select Customer",
 				JOptionPane.QUESTION_MESSAGE,
 				null,
-				custDate,
+				custInfo,
 				"");
 		
 		/***************/
 		/* RETURN DATE */
 		/***************/
-		return date;	// RETURNS DATE
+		return cstInfo;	// RETURNS CUSTOMER INFO
 	}
 	
 	public static int confirmWindow()
@@ -1307,41 +1318,20 @@ public class Menu_GUI extends BusGUI implements ActionListener
 		}
 	}
 	
-	public static void outputBus(int bus, Object date)
+	public static void outputCustInfo(Object cstInfo)
 	/*****************************************************************/
 	/* PRECONDITION - NEEDS AN UPDATE WINDOW OF ALL CUSTOMERS 		 */
 	/* POSTCONDITION - CREATES WINDOW TO TELL USER ALL THE CUSTOMERS */
 	/*****************************************************************/
 	{	
-		/*************************************************************/
-		/* IF STATEMENT TO MAKE SURE OUTPUT IS GRAMMATICALLY CORRECT */
-		/*************************************************************/
-		if(bus > 1)
-		{	
-			/***********************/
-			/* MAKES DIALOG WINDOW */
-			/***********************/ 
-			JOptionPane.showMessageDialog(
-					null,
-					"The total number of buses for " + date + " is:" + "\n" + bus + " buses",
-					"Bus Amount",
-					JOptionPane.INFORMATION_MESSAGE);
-		}
-		
-		/***************************************************************/
-		/* ELSE STATEMENT TO MAKE SURE OUTPUT IS GRAMMATICALLY CORRECT */
-		/***************************************************************/
-		else
-		{
-			/***********************/
-			/* MAKES DIALOG WINDOW */
-			/***********************/ 
-			JOptionPane.showMessageDialog(
-					null,
-					"The total number of buses for " + date + " is:" + "\n" + bus + " bus",
-					"Bus Amount",
-					JOptionPane.INFORMATION_MESSAGE);
-		}
+		/***********************/
+		/* MAKES DIALOG WINDOW */
+		/***********************/ 
+		JOptionPane.showMessageDialog(
+				null,
+				"Customer Information: \n" + cstInfo,
+				"Bus Amount",
+				JOptionPane.INFORMATION_MESSAGE);
 	}
 	
 	public static void totalProfit()
