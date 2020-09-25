@@ -1,6 +1,6 @@
 /******************************************/
 /* USER DESCRIPTION SECTION 			  */
-/* OLIVIA DIAS				   			  */
+/* LIVY456				   			  */
 /* FINAL PROJECT		   	 			  */
 /* PROGRAM 12							  */
 /* MARCH 8, 2020		   			  	  */
@@ -68,7 +68,7 @@ public class Menu_GUI extends BusGUI implements ActionListener
 		removeB = new JButton("Remove");					// INSTANTIATES A JBUTTON 
 		modifyB = new JButton("Modify");					// INSTANTIATES A JBUTTON 
 		quitB = new JButton("Quit Program");				// INSTANTIATES A JBUTTON 
-		costB = new JButton("Cost");						// INSTANTIATES A JBUTTON 
+		costB = new JButton("DISPLAY SKI TRIPS");			// INSTANTIATES A JBUTTON 
 		busDtB = new JButton("Sorting by Bus Date");		// INSTANTIATES A JBUTTON 
 		profitDtB = new JButton("Profit by Date");			// INSTANTIATES A JBUTTON 
 		profitB = new JButton("Total Profit");				// INSTANTIATES A JBUTTON 
@@ -250,7 +250,7 @@ public class Menu_GUI extends BusGUI implements ActionListener
 		/********************************************************/
 		/*ELSE IF STATEMENT TO CHECK IF COST BUTTON WAS PRESSED */	
 		/********************************************************/
-		else if (action.equals("Cost"))
+		else if (action.equals("DISPLAY SKI TRIPS"))
 		{
 			confirm = confirmWindow();		// CALL TO CONFIRM WINDOW
 			
@@ -685,7 +685,7 @@ public class Menu_GUI extends BusGUI implements ActionListener
 			str+= " " + name;
 			str+= " " + date;
 			str+= " " + size;
-			str+= " " + custList.get(i).getCost() + "\n";
+			str+= " $" + custList.get(i).getCost() + "\n";
 			
 			str+= section;
 		}
