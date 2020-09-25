@@ -1,6 +1,6 @@
 /******************************************/
 /* USER DESCRIPTION SECTION 			  */
-/* OLIVIA DIAS				   			  */
+/* LIVY456				   			  */
 /* FINAL PROJECT		   	 			  */
 /* PROGRAM 12							  */
 /* MARCH 2, 2020		   			  	  */
@@ -18,25 +18,20 @@
 import java.awt.*;						// IMPORTS AWT
 import java.awt.event.ActionEvent;		// IMPORTS ACTION EVENT
 import java.awt.event.ActionListener;	// IMPORTS ACTION LISTENER	
-import java.awt.event.*;				// IMPORTS EVENT
 import javax.swing.*;					// IMPORTS SWING
 import java.util.ArrayList;				// IMPORTS ARRAYLIST
 import java.util.Random;
-import java.text.DecimalFormat;			// IMPORTS DECIMAL FORMAT
 
 public class BusGUI implements ActionListener 
-{	
-	//private static final long serialVersionUID = 1L;	// SERIALIZES CLASS
-	
+{		
 	/*****************/
 	/* FINAL SECTION */
 	/*****************/
 	final static String message1 = "Input your Group Name: ";
 	final static String message2 = "Do you really want to do this?"; 
 	final static String message3 = "Input the number of people in your group (must be greater than 0): ";
-	final static String message4 = "Do you want to pick another date? ";
-	final static String message5 = "If you keep this date, then the " + "\n" + 
-								   "your excess team members will be given a refund.";
+	final static String message4 = "Do you want to pick another date? \nIf you keep this date, " +
+								   "then some of your group members will be given a refund.";
 	final static String heading1= "Input Name";
 	final static String heading2 = "Input Group ID";
 	final static String heading3 = "Input Group Size";
@@ -220,6 +215,9 @@ public class BusGUI implements ActionListener
 		String action; 		// STRING TO REPRESENT WHICH BUTTON WAS PRESSED
 		String str;			// ERROR CHECKING ARRAYLIST
 		int confirm; 		// REUSUABLE INT INPUT FOR CONFIRMING AN ACTION
+		int sum;			// REUSUABLE INT FOR TOTAL SIZE OF GROUP FOR SPECIFIC DATE
+		
+		sum = 0;	// INITIALIZES AND RESETS SUM VALUE
 		
 		/************************************/
 		/* ASSIGNS BUTTON PRESSED TO ACTION */
@@ -263,7 +261,8 @@ public class BusGUI implements ActionListener
 		actionPerformedSize(event);		// CALL TO ACTION PERFORMED FOR GROUP SIZE
 		actionPerformedDate(event);		// CALL TO ACTION PERFORMED FOR DATE
 		actionPerformedID(event);		// CALL TO ACTION PERFORMED FOR GROUP ID
-		
+		sum = maxSize();				// CALL TO MAX SIZE
+
 		/**********************************************************/
 		/* ELSE IF STATEMENT TO CHECK IF ENTER BUTTON WAS PRESSED */	
 		/**********************************************************/
@@ -278,7 +277,38 @@ public class BusGUI implements ActionListener
 			{
 				errorMessage(error8);	// CALL TO ERROR MESSAGE
 			}
+			
+			/**********************************************************************/
+			/* ELSE IF STATEMENT TO CHECK IF MAX LIMIT OF 400 PEOPLE WAS EXCEEDED */	
+			/**********************************************************************/
+			else if(sum > 400)
+			{
+				errorMessage(error9);				// CALL TO ERROR MESSAGE
+				confirm = confirmWindow(message4);	// CALL TO CONFIRM WINDOW
 				
+				/************************************************************/
+				/* IF STATEMENT TO CONFIRM ACTION OF ENTERING CUSTOMER INFO */	
+				/************************************************************/
+				if(confirm == 1)
+				{
+					frame.dispose();		// DISPOSES FRAME
+					custList.add(customer);	// ADDS CUSTOMER TO ARRAYLIST
+					str = printArray(custList);
+					System.out.println(str);
+					new Menu_GUI();			// INSTANTIATES A NEW WINDOW
+				}
+				
+				/****************************************************************/
+				/* ELSE IF STATEMENT TO CONFIRM ACTION OF REDOING CUSTOMER DATE */	
+				/****************************************************************/
+				else if(confirm == 0)
+				{
+					monthCB.setSelectedItem("");	// CALL TO GET SELECTED ITEM
+					dayCB.setSelectedItem("");		// CALL TO GET SELECTED ITEM
+					yearCB.setSelectedItem("");		// CALL TO GET SELECTED ITEM
+				}
+			}
+			
 			/**********************************************************/
 			/* ELSE IF STATEMENT TO CHECK IF ENTER BUTTON WAS PRESSED */	
 			/**********************************************************/
@@ -290,7 +320,7 @@ public class BusGUI implements ActionListener
 				
 				/************************************************************/
 				/* IF STATEMENT TO CONFIRM ACTION OF ENTERING CUSTOMER INFO */	
-				/*****************************d*******************************/
+				/************************************************************/
 				if(confirm == 0)
 				{
 					frame.dispose();		// GETS RID OF THE OLD FRAME
@@ -318,10 +348,6 @@ public class BusGUI implements ActionListener
 		Object day;			// REUSUABLE OBJECT INPUT
 		Object year;		// REUSUABLE OBJECT INPUT
 		String date;		// REUSUABLE STRING INPUT
-		int sum;			// TOTAL NUMBER OF PEOPLE PER A DAY
-		int confirm;		// INTEGER VALUE FOR CONFIRM DIALOG
-		
-		sum = 0;	//INITIALIZES SUM
 		
 		/*****************************/
 		/* LOOP UNTIL VALUE IS VALID */
@@ -337,7 +363,6 @@ public class BusGUI implements ActionListener
 												// FROM DAY DROP-DOWN LIST		
 			year = yearCB.getSelectedItem();	// CALL TO GET SELECTED ITEM 
 												// FROM YEAR DROP-DOWN LIST	
-			sum = customer.getSize();	// RESETS SUM COUNT	
 			
 			/************************************/
 			/* IF STATEMENT TO ERROR CHECK DATE */
@@ -705,7 +730,7 @@ public class BusGUI implements ActionListener
 			/*****************************************/
 			/* ELSE IF STATEMENT TO ERROR CHECK DATE */
 			/*****************************************/
-			else if((month.equals("06")) && (day.equals("01")) && (year.equals("2020")))
+			else if((month.equals("06")) && (year.equals("2020")))
 			{
 				errorMessage(error7);		// CALL TO ERROR MESSAGE
 				monthCB.setSelectedItem("");// RESETS SELECTED ITEM ON DROP-DOWN LIST
@@ -716,7 +741,7 @@ public class BusGUI implements ActionListener
 			/*****************************************/
 			/* ELSE IF STATEMENT TO ERROR CHECK DATE */
 			/*****************************************/
-			else if((month.equals("06")) && (day.equals("02")) && (year.equals("2020")))
+			else if((month.equals("07")) && (year.equals("2020")))
 			{
 				errorMessage(error7);		// CALL TO ERROR MESSAGE
 				monthCB.setSelectedItem("");// RESETS SELECTED ITEM ON DROP-DOWN LIST
@@ -727,7 +752,7 @@ public class BusGUI implements ActionListener
 			/*****************************************/
 			/* ELSE IF STATEMENT TO ERROR CHECK DATE */
 			/*****************************************/
-			else if((month.equals("06")) && (day.equals("03")) && (year.equals("2020")))
+			else if((month.equals("08")) && (year.equals("2020")))
 			{
 				errorMessage(error7);		// CALL TO ERROR MESSAGE
 				monthCB.setSelectedItem("");// RESETS SELECTED ITEM ON DROP-DOWN LIST
@@ -738,7 +763,7 @@ public class BusGUI implements ActionListener
 			/*****************************************/
 			/* ELSE IF STATEMENT TO ERROR CHECK DATE */
 			/*****************************************/
-			else if((month.equals("06")) && (day.equals("04")) && (year.equals("2020")))
+			else if((month.equals("09")) && (year.equals("2020")))
 			{
 				errorMessage(error7);		// CALL TO ERROR MESSAGE
 				monthCB.setSelectedItem("");// RESETS SELECTED ITEM ON DROP-DOWN LIST
@@ -746,107 +771,9 @@ public class BusGUI implements ActionListener
 				yearCB.setSelectedItem(""); // RESETS SELECTED ITEM ON DROP-DOWN LIST
 			}
 			
-			/*****************************************/
-			/* ELSE IF STATEMENT TO ERROR CHECK DATE */
-			/*****************************************/
-			else if((month.equals("06")) && (day.equals("05")) && (year.equals("2020")))
-			{
-				errorMessage(error7);		// CALL TO ERROR MESSAGE
-				monthCB.setSelectedItem("");// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				dayCB.setSelectedItem("");	// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				yearCB.setSelectedItem(""); // RESETS SELECTED ITEM ON DROP-DOWN LIST
-			}
-			
-			/*****************************************/
-			/* ELSE IF STATEMENT TO ERROR CHECK DATE */
-			/*****************************************/
-			else if((month.equals("06")) && (day.equals("06")) && (year.equals("2020")))
-			{
-				errorMessage(error7);		// CALL TO ERROR MESSAGE
-				monthCB.setSelectedItem("");// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				dayCB.setSelectedItem("");	// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				yearCB.setSelectedItem(""); // RESETS SELECTED ITEM ON DROP-DOWN LIST
-			}
-			
-			/*****************************************/
-			/* ELSE IF STATEMENT TO ERROR CHECK DATE */
-			/*****************************************/
-			else if((month.equals("06")) && (day.equals("07")) && (year.equals("2020")))
-			{
-				errorMessage(error7);		// CALL TO ERROR MESSAGE
-				monthCB.setSelectedItem("");// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				dayCB.setSelectedItem("");	// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				yearCB.setSelectedItem(""); // RESETS SELECTED ITEM ON DROP-DOWN LIST
-			}
-			
-			/*****************************************/
-			/* ELSE IF STATEMENT TO ERROR CHECK DATE */
-			/*****************************************/
-			else if((month.equals("06")) && (day.equals("08")) && (year.equals("2020")))
-			{
-				errorMessage(error7);		// CALL TO ERROR MESSAGE
-				monthCB.setSelectedItem("");// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				dayCB.setSelectedItem("");	// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				yearCB.setSelectedItem(""); // RESETS SELECTED ITEM ON DROP-DOWN LIST
-			}
-			
-			/*****************************************/
-			/* ELSE IF STATEMENT TO ERROR CHECK DATE */
-			/*****************************************/
-			else if((month.equals("06")) && (day.equals("09")) && (year.equals("2020")))
-			{
-				errorMessage(error7);		// CALL TO ERROR MESSAGE
-				monthCB.setSelectedItem("");// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				dayCB.setSelectedItem("");	// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				yearCB.setSelectedItem(""); // RESETS SELECTED ITEM ON DROP-DOWN LIST
-			}
-			
-			/*****************************************/
-			/* ELSE IF STATEMENT TO ERROR CHECK DATE */
-			/*****************************************/
-			else if((month.equals("06")) && (day.equals("10")) && (year.equals("2020")))
-			{
-				errorMessage(error7);		// CALL TO ERROR MESSAGE
-				monthCB.setSelectedItem("");// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				dayCB.setSelectedItem("");	// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				yearCB.setSelectedItem(""); // RESETS SELECTED ITEM ON DROP-DOWN LIST
-			}
-			
-			/*****************************************/
-			/* ELSE IF STATEMENT TO ERROR CHECK DATE */
-			/*****************************************/
-			else if((month.equals("06")) && (day.equals("11")) && (year.equals("2020")))
-			{
-				errorMessage(error7);		// CALL TO ERROR MESSAGE
-				monthCB.setSelectedItem("");// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				dayCB.setSelectedItem("");	// RESETS SELECTED ITEM ON DROP-DOWN LIST
-				yearCB.setSelectedItem(""); // RESETS SELECTED ITEM ON DROP-DOWN LIST
-			}
-			
-			date = "" + month + "/" + day + "/" + year;
-			
-			for(int i = 0; i < custList.size(); i++)
-			{
-				if(custList.get(i).getDate().equals(date))
-				{
-					sum += custList.get(i).getSize();
-				}
-			}
-			
-			if(sum > 400)
-			{
-				errorMessage(error9);		// CALL TO ERROR MESSAGE
-				confirm = confirmWindow(message4);	// CALL TO CONFIRM WINDOW
-				
-				if(confirm == 0)
-				{
-					monthCB.setSelectedItem("");
-					dayCB.setSelectedItem("");
-					yearCB.setSelectedItem("");
-				}
-			}
+			date = "" + month + "/" + day + "/" + year;	
 		}
-		while((sum > 400) || (month.equals("02")) && (day.equals("29")) && (year.equals("2021")) || 
+		while((month.equals("02")) && (day.equals("29")) && (year.equals("2021")) || 
 			  (month.equals("02")) && (day.equals("29")) && (year.equals("2022")) ||
 			  (month.equals("02")) && (day.equals("29")) && (year.equals("2023")) ||
 			  (month.equals("02")) && (day.equals("29")) && (year.equals("2025")) ||
@@ -879,17 +806,10 @@ public class BusGUI implements ActionListener
 			  (month.equals("03")) && (year.equals("2020")) ||
 			  (month.equals("04")) && (year.equals("2020")) ||
 			  (month.equals("05")) && (year.equals("2020")) ||
-			  (month.equals("06")) && (day.equals("01")) && (year.equals("2020")) ||
-			  (month.equals("06")) && (day.equals("02")) && (year.equals("2020")) ||
-			  (month.equals("06")) && (day.equals("03")) && (year.equals("2020")) || 
-			  (month.equals("06")) && (day.equals("04")) && (year.equals("2020")) ||
-			  (month.equals("06")) && (day.equals("05")) && (year.equals("2020")) ||
-			  (month.equals("06")) && (day.equals("06")) && (year.equals("2020")) ||
-			  (month.equals("06")) && (day.equals("07")) && (year.equals("2020")) ||
-			  (month.equals("06")) && (day.equals("08")) && (year.equals("2020")) ||
-			  (month.equals("06")) && (day.equals("09")) && (year.equals("2020")) ||
-			  (month.equals("06")) && (day.equals("10")) && (year.equals("2020")) ||
-			  (month.equals("06")) && (day.equals("11")) && (year.equals("2020")));
+			  (month.equals("06")) && (year.equals("2020")) ||
+			  (month.equals("07")) && (year.equals("2020")) || 
+			  (month.equals("08")) && (year.equals("2020")) ||
+			  (month.equals("09")) && (year.equals("2020")));
 		
 		customer.setMonth((String)month);	// CALL TO SET MONTH
 		customer.setDay((String)day);		// CALL TO SET DAY
@@ -1054,6 +974,92 @@ public class BusGUI implements ActionListener
 				str,
 				"Error Message",
 				JOptionPane.ERROR_MESSAGE);
+	}
+	
+	public static int maxSize()
+	/********************************************************************/
+	/* PRECONDITION - NEEDS ERROR MESSAGE FOR INPUTS OF CUSTOMERS THAT	*/
+	/*  			  EXCEED 20 BUS LIMIT 								*/
+	/* POSTCONDITION - CREATES WIMDOW TO SHOW THE ERROR THE USER MADE 	*/
+	/********************************************************************/
+	{
+		/********************/
+		/* VARIABLE SECTION */
+		/********************/
+		ArrayList<Object> arrayDate;	// ARRAYLIST OF UNIQUE SKI TRIP DATES
+		Object date;					// DATE OF CURRENT CUSTOMER
+		int grp;						// SIZE OF GROUP FOR SPECIFIC DATE
+		
+		arrayDate = new ArrayList<Object>();	// INSTANTIATES ARRAY DATE
+		grp = 0;		// INITIALIZES AND RESETS GRP
+		
+		/************************************************/
+		/* IF STATEMENT TO NOT INDEX AN EMPTY ARRAYLIST */
+		/************************************************/
+		if(custList.size() > 0)
+		{
+			date = custList.get(0).getDate();		// CALL TO GET DATE
+			arrayDate.add(date);	// ADDS DATE TO ARRAY DATE
+		}
+				
+		/************************************************/
+		/* FOR LOOP TO CREATE ARRAYLIST OF UNIQUE DATES */
+		/************************************************/
+		for(int i = 1; i < custList.size(); i++)
+		{
+			date = custList.get(i).getDate();	// CALL TO GET DATE
+			
+			/******************************************/
+			/* FOR LOOP TO FIND UNIQUE SKI TRIP DATES */
+			/******************************************/
+			for (int j = 0; j < arrayDate.size(); j++)
+			{
+				/*******************************************/
+				/* IF STATEMENT TO CHECK IF DATE IS UNIQUE */
+				/*******************************************/
+				if(!(date.equals(arrayDate.get(j))))
+				{
+					arrayDate.add(date);	// ADDS DATE TO ARRAY DATE
+				}
+			}
+		}
+		
+		grp = customer.getSize();	// ADD CURRENT CUSTOMER SIZE
+		
+		/******************************************/
+		/* FOR LOOP TO FIND UNIQUE SKI TRIP DATES */
+		/******************************************/
+		for(int j = 0; j < arrayDate.size(); j++)
+		{
+			Object dt = arrayDate.get(j); // DECLARES AND INITIALIZES DT TO UNIQUE DATE VALUE
+			
+			/************************************************************/
+			/* IF STATEMENT TO CHECK IF DT EQUALS CURRENT CUSTOMER DATE */
+			/************************************************************/
+			if(dt.equals(customer.getDate()))
+			{
+
+				/******************************************************************/
+				/* FOR LOOP TO FIND MATCHING SKI TRIP DATES IN CUSTOMER ARRAYLIST */
+				/******************************************************************/
+				for(int k = 0; k < custList.size(); k++)
+				{
+				
+					/*********************************************************************/
+					/* IF STATEMENT TO CHECK IF A DATE FROM CUSTOMER ARRAYLIST EQUALS DT */
+					/*********************************************************************/
+					if(custList.get(k).getDate().equals(dt))
+					{
+						grp+=custList.get(k).getSize();	// ADDS GROUP SIZE FOR SKI TRIPS ON SAME DATE
+					}
+				}
+			}
+		}
+		
+		/******************/
+		/* RETURN SECTION */
+		/******************/
+		return grp;			// RETURNS GRP
 	}
 	
 	public static String printArray(ArrayList<Customer> custList)
