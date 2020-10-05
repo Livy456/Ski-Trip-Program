@@ -1,6 +1,6 @@
 /******************************************/
 /* USER DESCRIPTION SECTION 			  */
-/* LIVY456				   			  */
+/* LIVIY456				   			  */
 /* FINAL PROJECT		   	 			  */
 /* PROGRAM 12							  */
 /* MARCH 2, 2020		   			  	  */
@@ -20,7 +20,7 @@ import java.awt.event.ActionEvent;		// IMPORTS ACTION EVENT
 import java.awt.event.ActionListener;	// IMPORTS ACTION LISTENER	
 import javax.swing.*;					// IMPORTS SWING
 import java.util.ArrayList;				// IMPORTS ARRAYLIST
-import java.util.Random;
+import java.util.Random;				// IMPORTS RANDOM
 
 public class BusGUI implements ActionListener 
 {		
@@ -30,8 +30,6 @@ public class BusGUI implements ActionListener
 	final static String message1 = "Input your Group Name: ";
 	final static String message2 = "Do you really want to do this?"; 
 	final static String message3 = "Input the number of people in your group (must be greater than 0): ";
-	final static String message4 = "Do you want to pick another date? \nIf you keep this date, " +
-								   "then some of your group members will be given a refund.";
 	final static String heading1= "Input Name";
 	final static String heading2 = "Input Group ID";
 	final static String heading3 = "Input Group Size";
@@ -42,11 +40,15 @@ public class BusGUI implements ActionListener
 	final static String error6 = "ERROR!!! This day can not be chosen with this year!!!";
 	final static String error7 = "ERROR!!! This date has already past!!!";
 	final static String error8 = "ERROR!!! You need to finish filling out information!!!";
-	final static String error9 = "Max number of occupants for a bus has been met!!!";
+	final static String error9 = "Max number of buses has been exceeded!!!";
 	
 	/*****************************/
 	/* INSTANCE VARIABLE SECTION */
 	/*****************************/
+	private String message4 = "Do you want to pick another " +
+							  "date or another group size? \n" +
+			   				  "If you keep this date or " +
+							  "group size, then only ";	// CREATES A CONFIRM MESSAGE
 	private JButton enterB;				// CREATES A BUTTON FOR ENTERING INFORMATION FOR PROGRAM	
 	private JButton quitB;				// CREATES A BUTTON TO QUIT PROGRAM 
 	private JButton returnB;			// CREATES A BUTTON TO RETURN TO MAIN SKI TRIP MENU
@@ -215,9 +217,11 @@ public class BusGUI implements ActionListener
 		String action; 		// STRING TO REPRESENT WHICH BUTTON WAS PRESSED
 		String str;			// ERROR CHECKING ARRAYLIST
 		int confirm; 		// REUSUABLE INT INPUT FOR CONFIRMING AN ACTION
+		int excess;			// REUSUABLE INT FOR SKI TRIP MEMBERS THAT NEED A REFUND
 		int sum;			// REUSUABLE INT FOR TOTAL SIZE OF GROUP FOR SPECIFIC DATE
 		
 		sum = 0;	// INITIALIZES AND RESETS SUM VALUE
+		excess = 0;	// INITIALIZES AND RESETS EXCESS VALUE
 		
 		/************************************/
 		/* ASSIGNS BUTTON PRESSED TO ACTION */
@@ -283,8 +287,10 @@ public class BusGUI implements ActionListener
 			/**********************************************************************/
 			else if(sum > 400)
 			{
-				errorMessage(error9);				// CALL TO ERROR MESSAGE
-				confirm = confirmWindow(message4);	// CALL TO CONFIRM WINDOW
+				excess = customer.getSize()-(sum-400);	// NUMBER OF REFUNDS
+				errorMessage(error9);					// CALL TO ERROR MESSAGE
+				message4 += "" + excess + " members can go on the Ski Trip.";
+				confirm = confirmWindow(message4);		// CALL TO CONFIRM WINDOW
 				
 				/************************************************************/
 				/* IF STATEMENT TO CONFIRM ACTION OF ENTERING CUSTOMER INFO */	
@@ -306,6 +312,7 @@ public class BusGUI implements ActionListener
 					monthCB.setSelectedItem("");	// CALL TO GET SELECTED ITEM
 					dayCB.setSelectedItem("");		// CALL TO GET SELECTED ITEM
 					yearCB.setSelectedItem("");		// CALL TO GET SELECTED ITEM
+					grpSzTF.setText("");			// CALL TO SET TEXT
 				}
 			}
 			
@@ -986,76 +993,31 @@ public class BusGUI implements ActionListener
 		/********************/
 		/* VARIABLE SECTION */
 		/********************/
-		ArrayList<Object> arrayDate;	// ARRAYLIST OF UNIQUE SKI TRIP DATES
 		Object date;					// DATE OF CURRENT CUSTOMER
 		int grp;						// SIZE OF GROUP FOR SPECIFIC DATE
 		
-		arrayDate = new ArrayList<Object>();	// INSTANTIATES ARRAY DATE
 		grp = 0;		// INITIALIZES AND RESETS GRP
 		
-		/************************************************/
-		/* IF STATEMENT TO NOT INDEX AN EMPTY ARRAYLIST */
-		/************************************************/
-		if(custList.size() > 0)
-		{
-			date = custList.get(0).getDate();		// CALL TO GET DATE
-			arrayDate.add(date);	// ADDS DATE TO ARRAY DATE
-		}
-				
-		/************************************************/
-		/* FOR LOOP TO CREATE ARRAYLIST OF UNIQUE DATES */
-		/************************************************/
-		for(int i = 1; i < custList.size(); i++)
-		{
-			date = custList.get(i).getDate();	// CALL TO GET DATE
-			
-			/******************************************/
-			/* FOR LOOP TO FIND UNIQUE SKI TRIP DATES */
-			/******************************************/
-			for (int j = 0; j < arrayDate.size(); j++)
-			{
-				/*******************************************/
-				/* IF STATEMENT TO CHECK IF DATE IS UNIQUE */
-				/*******************************************/
-				if(!(date.equals(arrayDate.get(j))))
-				{
-					arrayDate.add(date);	// ADDS DATE TO ARRAY DATE
-				}
-			}
-		}
-		
-		grp = customer.getSize();	// ADD CURRENT CUSTOMER SIZE
+		date = customer.getDate();	// CALL TO GET DATE
 		
 		/******************************************/
 		/* FOR LOOP TO FIND UNIQUE SKI TRIP DATES */
 		/******************************************/
-		for(int j = 0; j < arrayDate.size(); j++)
+		for(int j = 0; j < custList.size(); j++)
 		{
-			Object dt = arrayDate.get(j); // DECLARES AND INITIALIZES DT TO UNIQUE DATE VALUE
+			Object dt = custList.get(j).getDate(); // DECLARES AND INITIALIZES DT TO UNIQUE DATE VALUE
 			
 			/************************************************************/
-			/* IF STATEMENT TO CHECK IF DT EQUALS CURRENT CUSTOMER DATE */
+			/* IF STATEMENT TO CHECK IF CURRENT CUSTOMER DATE EQUALS DT */
 			/************************************************************/
-			if(dt.equals(customer.getDate()))
-			{
-
-				/******************************************************************/
-				/* FOR LOOP TO FIND MATCHING SKI TRIP DATES IN CUSTOMER ARRAYLIST */
-				/******************************************************************/
-				for(int k = 0; k < custList.size(); k++)
-				{
-				
-					/*********************************************************************/
-					/* IF STATEMENT TO CHECK IF A DATE FROM CUSTOMER ARRAYLIST EQUALS DT */
-					/*********************************************************************/
-					if(custList.get(k).getDate().equals(dt))
-					{
-						grp+=custList.get(k).getSize();	// ADDS GROUP SIZE FOR SKI TRIPS ON SAME DATE
-					}
-				}
+			if(dt.equals(date))
+			{	
+				grp+=custList.get(j).getSize();	// ADDS GROUP SIZE FOR SKI TRIPS ON SAME DATE
 			}
 		}
 		
+		grp += customer.getSize();	// ADD CURRENT CUSTOMER SIZE
+
 		/******************/
 		/* RETURN SECTION */
 		/******************/
