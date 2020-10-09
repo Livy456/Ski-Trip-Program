@@ -18,6 +18,8 @@
 import java.awt.*;						// IMPORTS AWT
 import java.awt.event.ActionEvent;		// IMPORTS ACTION EVENT
 import java.awt.event.ActionListener;	// IMPORTS ACTION LISTENER	
+import java.text.DecimalFormat;
+
 import javax.swing.*;					// IMPORTS SWING
 import java.util.ArrayList;				// IMPORTS ARRAYLIST
 import java.util.Random;				// IMPORTS RANDOM
@@ -68,8 +70,9 @@ public class BusGUI implements ActionListener
 	private Container container;		// CREATES A CONTAINER
 	private Font font;					// CREATES A FONT FOR LABELS
 	protected static Customer customer;	// CREATES AN INSTANCE OF CUSTOMER
-	private Random generator = new Random();		// INSTANCE VARIABLE FOR RANDOM NUMBER GENERATOR
+	private Random generator = new Random(); // INSTANCE VARIABLE FOR RANDOM NUMBER GENERATOR
 	protected static ArrayList <Customer> custList = new ArrayList<Customer>();	// CREATES AN ARRAYLIST OF CUSTOMER
+	private static DecimalFormat df = new DecimalFormat("0.00");		// INSTANTIATES DECIMALFORMAT
 	private String[] months = {"", "01", "02", "03", "04", "05", "06",
 							   "07", "08", "09", "10", "11", "12"};		// CREATES AN ARRAY FOR MONTHS
 	private String[] years = {"", "2020", "2021", "2022", "2023", "2024",
@@ -216,12 +219,19 @@ public class BusGUI implements ActionListener
 		/********************/
 		String action; 		// STRING TO REPRESENT WHICH BUTTON WAS PRESSED
 		String str;			// ERROR CHECKING ARRAYLIST
+		String costdf;		// STRING REPRESENTATION OF COST
+		String message5;	// REFUND MESSAGE
 		int confirm; 		// REUSUABLE INT INPUT FOR CONFIRMING AN ACTION
 		int excess;			// REUSUABLE INT FOR SKI TRIP MEMBERS THAT ARE ABLE TO GO ON TRIP
+		int refund;			// REUSUABLE INT FOR CUSTOMER REFUNDS
 		int sum;			// REUSUABLE INT FOR TOTAL SIZE OF GROUP FOR SPECIFIC DATE
+		double cost;		// REUSUABLE DOUBLE FOR COST OF REFUNDS
 		
-		sum = 0;	// INITIALIZES AND RESETS SUM VALUE
+		costdf = "";// INITIALIZES AND RESETS COSTDF VALUE
+		cost = 0.0;	// INITIALIZES AND RESETS COST VALUE
 		excess = 0;	// INITIALIZES AND RESETS EXCESS VALUE
+		refund = 0;	// INITIALIZES AND RESETS REFUND VALUE
+		sum = 0;	// INITIALIZES AND RESETS SUM VALUE
 		
 		/************************************/
 		/* ASSIGNS BUTTON PRESSED TO ACTION */
@@ -297,11 +307,18 @@ public class BusGUI implements ActionListener
 				/************************************************************/
 				if(confirm == 1)
 				{
-					frame.dispose();		// DISPOSES FRAME
-					custList.add(customer);	// ADDS CUSTOMER TO ARRAYLIST
+					customer.setSize(excess);	// CALL TO SET SIZE
+					refund = sum - 400;			// CALCULATES NUMBER OF REFUNDED PEOPLE
+					cost = refund * 49.99;		// CALCULATES REFUND COST
+					costdf = df.format(cost);	// CALL TO FORMAT 
+					message5= "" + refund + " ski trip members will receive a refund. \n$" + 
+							   costdf + " will be returned.";
+					refundWindow(message5);		// CALL TO REFUND WINDOW
+					frame.dispose();			// DISPOSES FRAME
+					custList.add(customer);		// ADDS CUSTOMER TO ARRAYLIST
 					str = printArray(custList);
 					System.out.println(str);
-					new Menu_GUI();			// INSTANTIATES A NEW WINDOW
+					new Menu_GUI();				// INSTANTIATES A NEW WINDOW
 				}
 				
 				/****************************************************************/
@@ -1050,5 +1067,22 @@ public class BusGUI implements ActionListener
 		/* RETURN SECTION */
 		/******************/
 		return str;			// RETURN STR
+	}
+	
+	public static void refundWindow(String str)
+	/************************************************/
+	/* PRECONDITION - NEEDS DIALOG BOX FOR REFUNDS	*/
+	/* POSTCONDITION - CREATES WINDOW TO TELL USER	*/
+	/* 				   IF THEY WILL HAVE REFUNDS	*/
+	/************************************************/
+	{
+		/***********************/
+		/* MAKES REFUND WINDOW */
+		/***********************/
+		JOptionPane.showMessageDialog(
+				null,
+				str,
+				"Refund Window",
+				JOptionPane.INFORMATION_MESSAGE);
 	}
 }
