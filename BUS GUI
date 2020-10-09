@@ -1,6 +1,6 @@
 /******************************************/
 /* USER DESCRIPTION SECTION 			  */
-/* LIVIY456				   			  */
+/* LIVY456				   			  */
 /* FINAL PROJECT		   	 			  */
 /* PROGRAM 12							  */
 /* MARCH 2, 2020		   			  	  */
@@ -217,7 +217,7 @@ public class BusGUI implements ActionListener
 		String action; 		// STRING TO REPRESENT WHICH BUTTON WAS PRESSED
 		String str;			// ERROR CHECKING ARRAYLIST
 		int confirm; 		// REUSUABLE INT INPUT FOR CONFIRMING AN ACTION
-		int excess;			// REUSUABLE INT FOR SKI TRIP MEMBERS THAT NEED A REFUND
+		int excess;			// REUSUABLE INT FOR SKI TRIP MEMBERS THAT ARE ABLE TO GO ON TRIP
 		int sum;			// REUSUABLE INT FOR TOTAL SIZE OF GROUP FOR SPECIFIC DATE
 		
 		sum = 0;	// INITIALIZES AND RESETS SUM VALUE
@@ -287,9 +287,9 @@ public class BusGUI implements ActionListener
 			/**********************************************************************/
 			else if(sum > 400)
 			{
-				excess = customer.getSize()-(sum-400);	// NUMBER OF REFUNDS
+				excess = customer.getSize()-(sum-400);	// NUMBER OF AVAILABLE SPOTS LEFT FOR SKI TRIP
 				errorMessage(error9);					// CALL TO ERROR MESSAGE
-				message4 += "" + excess + " members can go on the Ski Trip.";
+				message4 += "" + excess + " group members can go on the Ski Trip.";
 				confirm = confirmWindow(message4);		// CALL TO CONFIRM WINDOW
 				
 				/************************************************************/
