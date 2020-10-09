@@ -19,16 +19,18 @@ import javax.swing.*;						// IMPORTS SWING
 import java.awt.*;							// IMPORTS AWT
 import java.awt.event.ActionEvent;			// IMPORTS ACTION EVENT
 import java.awt.event.ActionListener;		// IMPORTS ACTION LISTENER
-import java.awt.event.ItemEvent;			// IMPORTS ITEM EVENT
-import java.util.ArrayList;					// IMPORTS ARRAYLIST
 
 public class Modify extends Modify_Menu implements ActionListener
 {
 	/*****************************/
 	/* INSTANCE VARIABLE SECTION */
 	/*****************************/
-	private JLabel warning;		// CREATES A JLABEL FOR INPUT CONSTRAINTS
-	private JLabel warning2;	// CREATES A JLABEL FOR INPUT CONSTRAINTS
+	private JLabel warning;						// CREATES A JLABEL FOR INPUT CONSTRAINTS
+	private JLabel warning2;					// CREATES A JLABEL FOR INPUT CONSTRAINTS
+	private String message4 = "Do you want to pick another " +
+								"date or another group size? \n" +
+								"If you keep this date or " +
+								"group size, then only ";	// CREATES A CONFIRM MESSAGE
 	
 	public Modify()
 	/************************************************/
@@ -140,10 +142,13 @@ public class Modify extends Modify_Menu implements ActionListener
 		/********************/
 		String action;		// STRING TO REPRESENT WHICH BUTTON WAS PRESSED
 		int confirm;		// REUSUABLE INT INPUT FOR CONFIRMING AN ACTION
+		int excess;			// REUSUABLE INT FOR SKI TRIP MEMBERS THAT ARE ABLE TO GO ON TRIP 
+		int sum;			// REUSUABLE INT FOR TOTAL SIZE OF GROUP FOR SPECIFIC DATE 
 		
 		confirm = 1;							// INITIALIZES CONFIRM
+		excess = 0;								// INITIIALIZES EXCESS
 		action = event.getActionCommand();		// CALL TO GET ACTION COMMAND
-		
+		sum = 0;								// INITIALIZES SUM
 		
 		/****************************************************/
 		/* IF STATEMENT TO CHECK IF QUIT BUTTON WAS PRESSED */	
@@ -181,6 +186,7 @@ public class Modify extends Modify_Menu implements ActionListener
 		actionPerformedName();		// CALL TO ACTION PERFORMED NAME FOR MODIFY
 		actionPerformedSize();		// CALL TO ACTION PERFORMED SIZE FOR MODIFY
 		actionPerformedDate();		// CALL TO ACTION PERFORMED DATE FOR MODIFY
+		sum = maxSize();			// CALL TO MAX SIZE
 		
 		/************************************************************/
 		/* ELSE IF STATEMENT TO CHECK IF CONFIRM BUTTON WAS PRESSED */	
@@ -198,6 +204,41 @@ public class Modify extends Modify_Menu implements ActionListener
 				errorMessage(error2);
 			}
 
+			/*********************************************************/
+			/* ELSE IF STATEMENT TO CHECK IF CUSTOMER MAX IS REACHED */	
+			/*********************************************************/
+			else if(sum > 400)
+			{
+				excess = customer.getSize() - (sum - 400);	// NUMBER OF AVAILABLE SPOTS LEFT
+				errorMessage(error8);						// CALL TO ERROR MESSAGE
+				message4+= "" + excess + " group members can go on the Ski Trip.";
+				confirm = confirmWindow(message4 );			// CALL TO CONFIRM WINDOW
+				
+				/********************************************************************/
+				/* IF STATEMENT TO CONFIRM ACTION OF CHANGING DATE TO AVOID REFUNDS */	
+				/********************************************************************/
+				if(confirm == 0)
+				{
+					String mth = custList.get(custNum-1).getMonth();	// GETS MONTH
+					String dy = custList.get(custNum-1).getDay();		// GETS DAY
+					String yr = custList.get(custNum-1).getYear();		// GETS YEAR
+					String sz = "" + custList.get(custNum-1).getSize();	// GETS SIZE
+					monthCB.setSelectedItem(mth);	// CALL TO SET SELECTED ITEM
+					dayCB.setSelectedItem(dy);		// CALL TO SET SELECTED ITEM
+					yearCB.setSelectedItem(yr);		// CALL TO SET SELECTED ITEM
+					grpSzTF.setText(sz);			// CALL TO SET SELECTED ITEM
+				}
+				
+				/***************************************************************************/
+				/* ELSE IF STATEMENT TO CONFIRM ACTION OF KEEPING DATE AND GETTING REFUNDS */	
+				/***************************************************************************/
+				else if(confirm == 1)
+				{
+					frame.dispose();	// CALL TO DISPOSE WINDOW
+					new Menu_GUI();		// INSTANTIATES MENU GUI CLASS
+				}
+			}
+			
 			/****************************************************************************/
 			/* ELSE IF STATEMENT TO CHECK IF SOMETHING WAS CHANGED IN OTHER TEXT FIELDS */	
 			/****************************************************************************/
@@ -205,11 +246,12 @@ public class Modify extends Modify_Menu implements ActionListener
 					 (monthCB.getSelectedItem() != null) && (dayCB.getSelectedItem() != null)
 					 && (yearCB.getSelectedItem() != null))
 			{
+				
 				confirm = confirmWindow();	// CALL TO CONFIRM WINDOW
 				
-				/******************************************************/
-				/* IF STATEMENT TO CONFIRM ACTION OF QUITTING PROGRAM */	
-				/******************************************************/
+				/*******************************************************************/
+				/* IF STATEMENT TO CONFIRM ACTION OF MODIFIED CUSTOMER INFORMATION */	
+				/*******************************************************************/
 				if(confirm == 0)
 				{
 					frame.dispose();	// GETS RID OF FRAME
@@ -237,7 +279,6 @@ public class Modify extends Modify_Menu implements ActionListener
 		String mth;			// PREVIOUS MONTH VALUE OF CUSTOMER BEING MODIFIED
 		String dy;			// PREVIOUS DAY VALUE OF CUSTOMER BEING MODIFIED
 		String yr;			// PREVIOUS YEAR VALUE OF CUSTOMER BEING MODIFIED
-		ItemEvent e;
 				
 		mth = custList.get(custNum-1).getMonth();	// GETS MONTH
 		dy = custList.get(custNum-1).getDay();		// GETS DAY
