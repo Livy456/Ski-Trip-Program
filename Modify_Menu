@@ -19,7 +19,6 @@ import javax.swing.*;						// IMPORTS SWING
 import java.awt.*;							// IMPORTS AWT
 import java.awt.event.ActionEvent;			// IMPORTS ACTION EVENT
 import java.awt.event.ActionListener;		// IMPORTS ACTION LISTENER
-import java.util.ArrayList;
 
 public class Modify_Menu extends Menu_GUI implements ActionListener
 {	
@@ -33,6 +32,7 @@ public class Modify_Menu extends Menu_GUI implements ActionListener
 	final static String error5 = "ERROR!!! Size has to be between 1 and 400";
 	final static String error6 = "ERROR!!! Date needs to be changed!!!";
 	final static String error7 = "ERROR!!! Date has already past!!!"; 
+	final static String error8 = "Max number of buses has been exceeded!!!";
 
 	/*****************************/
 	/* INSTANCE VARIABLE SECTION */
