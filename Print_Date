@@ -1,6 +1,6 @@
 /******************************************/
 /* USER DESCRIPTION SECTION 			  */
-/* LIVY456 				   			  */
+/* OLIVIA DIAS				   			  */
 /* FINAL PROJECT		   	 			  */
 /* PROGRAM 12							  */
 /* MAY 18, 2020			   			  	  */
@@ -239,6 +239,14 @@ public class Print_Date extends Menu_GUI implements ActionListener
 			totBus+=1;
 		}
 		
+		/*****************************************************************/
+		/* IF STATEMENT TO CHECK IF MAX NUMBER OF CUSTOMERS WAS EXCEEDED */	
+		/*****************************************************************/
+		if(size > 400)
+		{
+			totBus = 20;
+		}
+		
 		/******************/
 		/* RETURN SECTION */
 		/******************/
@@ -449,5 +457,22 @@ public class Print_Date extends Menu_GUI implements ActionListener
 		/* RETURN SECTION */
 		/******************/
 		return str;			// RETURNS STR
+	}
+	
+	public static void refundWindow(String str)
+	/************************************************/
+	/* PRECONDITION - NEEDS DIALOG BOX FOR REFUNDS	*/
+	/* POSTCONDITION - CREATES WINDOW TO TELL USER	*/
+	/* 				   IF THEY WILL HAVE REFUNDS	*/
+	/************************************************/
+	{
+		/***********************/
+		/* MAKES REFUND WINDOW */
+		/***********************/
+		JOptionPane.showMessageDialog(
+				null,
+				str,
+				"Refund Window",
+				JOptionPane.INFORMATION_MESSAGE);
 	}
 }
