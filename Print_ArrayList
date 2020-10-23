@@ -1,0 +1,243 @@
+/******************************************/
+/* USER DESCRIPTION SECTION 			  */
+/* LIVY456				   			  */
+/* FINAL PROJECT		   	 			  */
+/* PROGRAM 12							  */
+/* OCTOBER 19, 2020		   			  	  */
+/******************************************/
+/******************************************/
+/* THIS IS A PROGRAM TO MAKE AN OBJECT	  */
+/* HAVE INSTANCE VARIABLES, CONSTRUCTORS, */
+/* AND METHODS SO THE CLIENT CAN HAVE A   */
+/* SWING GUI  							  */
+/******************************************/
+
+/******************/
+/* IMPORT SECTION */
+/******************/
+import javax.swing.*;					// IMPORTS SWING
+import java.awt.*;						// IMPORTS AWT
+import java.awt.event.ActionEvent;		// IMPORTS ACTION EVENT
+import java.awt.event.ActionListener;	// IMPORTS ACTION LISTENER		
+import java.util.*;						// IMPORTS ARRAYLIST
+
+public class Print_ArrayList extends Menu_GUI implements ActionListener
+{
+	/*****************************/
+	/* INSTANCE VARIABLE SECTION */
+	/*****************************/
+	private JButton next;			// CREATES A JBUTTON
+	private Font font;				// CREATES A FONT
+	private JFrame frame;			// CREATES A JFRAME
+	private Container container;	// CREATES A CONTAINER
+	private JLabel printID;			// CREATES A JLABEL
+	private JLabel printName;		// CREATES A JLABEL
+	private JLabel printcustNum;	// CREATES A JLABEL
+	private JLabel printSize;		// CREATES A JLABEL
+	private JLabel printDate;		// CREATES A JLABEL
+	private JLabel printCost;		// CREATES A LABEL
+	private JLabel custNum;			// CREATES A JLABEL
+	private JLabel grpID;			// CREATES A JLABEL
+	private JLabel grpSz;			// CREATES A JLABEL
+	private JLabel nm;				// CREATES A JLABEL
+	private JLabel dt;				// CREATES A JLABEL
+	private JLabel cst;				// CREATES A JLABEL
+	ArrayList<JLabel> allCust = new ArrayList<JLabel>();	// CREATES AN ARRAYLIST OF JLABELS
+	
+	public Print_ArrayList()
+	/************************************************/
+	/* DEFAULT CONSTRUCTOR - IT CREATES A FRAME FOR */
+	/*						 CONTENT PANE			*/
+	/************************************************/
+	{
+		/*************************/
+		/* INSTANTIATION SECTION */
+		/*************************/
+		next = new JButton("NEXT");							// INSTANTIATES A JBUTTON
+		custNum = new JLabel("Customer Number");			// INSTANTIATES A JLABEL
+		grpID = new JLabel("Group ID");						// INSTANTIATES A JLABEL
+		nm = new JLabel("Name");							// INSTANTIATES A JLABEL
+		dt = new JLabel("Date");							// INSTANTIATES A JLABEL
+		grpSz = new JLabel("Group Size");					// INSTANTIATES A JLABEL
+		cst = new JLabel("Cost");							// INSTANTIATES A JLABEL
+		font = new Font("Times New Roman",Font.BOLD,15);	// INSTANTIATES A FONT
+		frame = new JFrame("List of Ski Trip Members");		// INSTANTIATES A FRAME
+		container = frame.getContentPane();					// CREATES A CONTENT PANE, WHICH  
+															// HOLDS THE OBJECTS ON THE FRAME
+		
+		/*************************************/
+		/* CREATES A BLANK JFRAME AND JPANEL */
+		/*************************************/
+		frame.pack();							// SIZE OF THE FRAME
+		frame.setBounds(450, 150, 850, 400);// SETS X POSITION, Y POSITION, LENGTH,
+												// AND WIDTH OF THE JFRAME
+		frame.setVisible(true);					// ALLOWS THE JFRAME TO BE VISIBLE
+		container.setLayout(null);				// SETS THE LAYOUT FOR THE JFRAME
+		container.setBackground(Color.WHITE);	// SETS THE BACKGROUND COLOR
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);// ALLOWS THE JFRAME TO BE CLOSED
+		
+		/**************************/
+		/* SETS FONT OF THE LABEL */
+		/**************************/
+		custNum.setFont(font);		// SETS THE FONT OF THE CUSTOMER NUMBER LABEL
+		grpID.setFont(font);		// SETS THE FONT OF THE GROUP ID LABEL	
+		nm.setFont(font);			// SETS THE FONT OF THE NAME LABEL
+		dt.setFont(font);			// SETS THE FONT OF THE DATE LABEL
+		grpSz.setFont(font);		// SETS THE FONT OF THE GROUP SIZE LABEL
+		cst.setFont(font);			// SETS THE FONT OF THE COST LABEL
+		
+		/**************************/
+		/* SETS BOUNDS FOR BUTTON */
+		/**************************/
+		next.setBounds(750, 350, 75, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		custNum.setBounds(10, 10, 150, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		grpID.setBounds(170, 10, 150, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		nm.setBounds(300, 10, 230, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		dt.setBounds(540, 10, 90, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		grpSz.setBounds(640, 10, 110, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		cst.setBounds(760, 10, 100, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		
+		/**********************************************/
+		/* ADDS LISTENER TO BUTTON TO PERFORM ACTIONS */
+		/**********************************************/
+		next.addActionListener(this);		// ADDS ACTIONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED
+
+		/***********************************************************************/
+		/* FOR LOOP TO ADD PRINT CUSTOMER NUMBER LABELS TO ARRAYLIST OF LABELS */
+		/***********************************************************************/
+		for(int i=0;i<custList.size();i++)
+		{
+			int y = (i * 30) + 30;	// DECLARES Y VARIBALE FOR Y POSITION
+			int custNum = i+1;		// DELCARES CUSTOMER NUMBER
+			
+			/*********************************************************************/
+			/* IF STATEMENT TO CHECK IF CUSTOMER NUMBER IS A SINGLE DIGIT NUMBER */	
+			/*********************************************************************/
+			if(custNum < 10)
+			{
+				printcustNum = new JLabel("0"+custNum);	// INSTANTIATES A NEW PRINT CUSTOMER NUMBER LABEL
+			}
+			
+			/**************************************************************************/
+			/* ELSE IF STATEMENT TO CHECK IF CUSTOMER NUMBER IS A DOUBLE DIGIT NUMBER */	
+			/**************************************************************************/
+			else if(custNum >= 10)
+			{
+				printcustNum = new JLabel(""+custNum);			// INSTANTIATES A NEW PRINT CUSTOMER NUMBER LABEL
+			}
+			printcustNum.setBounds(10, y, 50, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+			printcustNum.setFont(font);	// SETS FONT
+			allCust.add(printcustNum);	// ADDS PRINT CUSTOMER NUMBER LABEL TO ARRAYLIST OF LABELS 
+		}
+		
+		/****************************************************************/
+		/* FOR LOOP TO ADD PRINT GROUP ID LABELS TO ARRAYLIST OF LABELS */
+		/****************************************************************/
+		for(int i=0;i<custList.size();i++)
+		{
+			int y = (i * 30) + 30;	// DECLARES Y VARIBALE FOR Y POSITION
+				
+			printID = new JLabel(""+custList.get(i).getID());	// INSTANTIATES A NEW PRINT ID LABEL
+			printID.setBounds(170, y, 150, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+			printID.setFont(font);				// SETS FONT
+			allCust.add(printID);				// ADDS PRINT ID LABEL TO ARRAYLIST OF LABELS 
+		}
+		
+		/************************************************************/
+		/* FOR LOOP TO ADD PRINT NAME LABELS TO ARRAYLIST OF LABELS */
+		/************************************************************/
+		for(int i=0;i<custList.size();i++)
+		{
+			int y = (i * 30) + 30;	// DECLARES Y VARIBALE FOR Y POSITION
+				
+			printName = new JLabel(""+custList.get(i).getName());// INSTANTIATES A NEW PRINT NAME LABEL
+			printName.setBounds(300, y, 230, 25);// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+			printName.setFont(font);			// SETS FONT
+			allCust.add(printName);				// ADDS PRINT NAME LABEL TO ARRAYLIST OF LABELS 
+		}
+		
+		/************************************************************/
+		/* FOR LOOP TO ADD PRINT DATE LABELS TO ARRAYLIST OF LABELS */
+		/************************************************************/
+		for(int i=0;i<custList.size();i++)
+		{
+			int y = (i * 30) + 30;	// DECLARES Y VARIBALE FOR Y POSITION
+				
+			printDate = new JLabel(""+custList.get(i).getDate());	// INSTANTIATES A NEW PRINT DATE LABEL
+			printDate.setBounds(540, y, 90, 25);// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+			printDate.setFont(font);			// SETS FONT
+			allCust.add(printDate);				// ADDS PRINT DATE LABEL TO ARRAYLIST OF LABELS 
+		}
+		
+		/************************************************************/
+		/* FOR LOOP TO ADD PRINT SIZE LABELS TO ARRAYLIST OF LABELS */
+		/************************************************************/
+		for(int i=0;i<custList.size();i++)
+		{
+			int y = (i * 30) + 30;	// DECLARES Y VARIBALE FOR Y POSITION
+				
+			printSize = new JLabel(""+custList.get(i).getSize());	// INSTANTIATES A NEW PRINT SIZE LABEL
+			printSize.setBounds(640, y, 110, 25);// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+			printSize.setFont(font);			// SETS FONT
+			allCust.add(printSize);				// ADDS PRINT SIZE LABEL TO ARRAYLIST OF LABELS 
+		}
+		
+		/************************************************************/
+		/* FOR LOOP TO ADD PRINT COST LABELS TO ARRAYLIST OF LABELS */
+		/************************************************************/
+		for(int i=0;i<custList.size();i++)
+		{
+			int y = (i * 30) + 30;	// DECLARES Y VARIBALE FOR Y POSITION
+				
+			printCost = new JLabel("$"+custList.get(i).getCost());	// INSTANTIATES A NEW PRINT COST LABEL
+			printCost.setBounds(760, y, 100, 25);// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+			printCost.setFont(font);			// SETS FONT
+			allCust.add(printCost);				// ADDS PRINT COST LABEL TO ARRAYLIST OF LABELS 
+		}
+		
+		/*************************/
+		/* ADDS BUTTONS TO FRAME */
+		/*************************/
+		container.add(next);		// ADDS NEXT BUTTON TO CONTAINER
+		container.add(custNum);		// ADDS CUSTOMER NUMBER LABEL TO CONTAINER
+		container.add(grpID);		// ADDS GROUP ID NUMBER LABEL TO CONTAINER
+		container.add(nm);			// ADDS GROUP NAME LABEL TO CONTAINER
+		container.add(grpSz);		// ADDS GROUP SIZE LABEL TO CONTAINER
+		container.add(dt);			// ADDS GROUP DATE LABEL TO CONTAINER
+		container.add(cst);			// ADDS GROUP COST LABEL TO CONTAINER
+		
+		/************************************************/
+		/* ENHANCED FOR LOOP TO ADD LABELS TO CONTAINER */
+		/************************************************/
+		for(JLabel j:allCust)
+		{
+			container.add(j);	// ADDS LABEL TO CONTAINER
+		}
+	}
+	public void actionPerformed(ActionEvent event)
+	/******************************************************/
+	/* PRECONDITION - PROGRAM HAS A BUTTON AND TEXT FIELD */
+	/* POSTCONDITION - FUNCTION CREATES AN ACTION 		  */
+	/* 				   EVENT FOR BUTTON AND TEXT FIELD	  */
+	/******************************************************/
+	{
+		/********************/
+		/* VARIABLE SECTION */
+		/********************/
+		String action;		// STRING TO REPRESENT WHICH BUTTON WAS PRESSED
+				
+		/************************************/
+		/* ASSIGNS BUTTON PRESSED TO ACTION */
+		/************************************/
+		action = event.getActionCommand();		// CALL TO GET ACTION COMMAND
+		
+		/****************************************************/
+		/* IF STATEMENT TO CHECK IF NEXT BUTTON WAS PRESSED */	
+		/****************************************************/
+		if(action.equals("NEXT"))
+		{
+			frame.dispose();		// GETS RID OF THE OLD FRAME
+			new Modify_Menu();		// INSTANTIATES MODIFY MENU FRAME
+		}
+	}
+}
