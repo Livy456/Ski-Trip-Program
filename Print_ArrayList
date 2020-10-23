@@ -69,7 +69,7 @@ public class Print_ArrayList extends Menu_GUI implements ActionListener
 		/* CREATES A BLANK JFRAME AND JPANEL */
 		/*************************************/
 		frame.pack();							// SIZE OF THE FRAME
-		frame.setBounds(450, 150, 850, 400);// SETS X POSITION, Y POSITION, LENGTH,
+		frame.setBounds(450, 150, 880, 450);// SETS X POSITION, Y POSITION, LENGTH,
 												// AND WIDTH OF THE JFRAME
 		frame.setVisible(true);					// ALLOWS THE JFRAME TO BE VISIBLE
 		container.setLayout(null);				// SETS THE LAYOUT FOR THE JFRAME
