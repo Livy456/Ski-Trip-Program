@@ -1,6 +1,6 @@
 /******************************************/
 /* USER DESCRIPTION SECTION 			  */
-/* LIVY456				   			  */
+/* OLIVIA DIAS				   			  */
 /* FINAL PROJECT		   	 			  */
 /* PROGRAM 12							  */
 /* OCTOBER 19, 2020		   			  	  */
@@ -27,6 +27,9 @@ public class Print_ArrayList extends Menu_GUI implements ActionListener
 	/* INSTANCE VARIABLE SECTION */
 	/*****************************/
 	private JButton next;			// CREATES A JBUTTON
+	private JButton quit;			// CREATES A JBUTTON
+	private JButton returnB;		// CREATES A JBUTTON
+	private JButton nextMenu;		// CREATES A JBUTTON
 	private Font font;				// CREATES A FONT
 	private JFrame frame;			// CREATES A JFRAME
 	private Container container;	// CREATES A CONTAINER
@@ -44,16 +47,28 @@ public class Print_ArrayList extends Menu_GUI implements ActionListener
 	private JLabel cst;				// CREATES A JLABEL
 	ArrayList<JLabel> allCust = new ArrayList<JLabel>();	// CREATES AN ARRAYLIST OF JLABELS
 	
-	public Print_ArrayList()
+	public Print_ArrayList(ArrayList<Customer>cust)
 	/************************************************/
 	/* DEFAULT CONSTRUCTOR - IT CREATES A FRAME FOR */
 	/*						 CONTENT PANE			*/
 	/************************************************/
 	{
+		// put the quit, return button on the right
+		// make the next button go to the next 10 customers for the ski trip,
+		// the next button on the left
+		// make an if statement to see what menuNum is and then 
+		// set a JButton's text to whatever number it is supposed to be
+		// this would be for the remove and modify section since there is
+		// a second window that proceeds
+		// for the sort printing hide the JButton to move to another window
+		
 		/*************************/
 		/* INSTANTIATION SECTION */
 		/*************************/
-		next = new JButton("NEXT");							// INSTANTIATES A JBUTTON
+		next = new JButton("Next");							// INSTANTIATES A JBUTTON
+		quit = new JButton("Quit");							// INSTANTIATES A JBUTTON
+		returnB = new JButton("Return");					// INSTANTIATES A JBUTTON
+		nextMenu = new JButton();							// INSTANTIATES A JBUTTON
 		custNum = new JLabel("Customer Number");			// INSTANTIATES A JLABEL
 		grpID = new JLabel("Group ID");						// INSTANTIATES A JLABEL
 		nm = new JLabel("Name");							// INSTANTIATES A JLABEL
@@ -61,7 +76,7 @@ public class Print_ArrayList extends Menu_GUI implements ActionListener
 		grpSz = new JLabel("Group Size");					// INSTANTIATES A JLABEL
 		cst = new JLabel("Cost");							// INSTANTIATES A JLABEL
 		font = new Font("Times New Roman",Font.BOLD,15);	// INSTANTIATES A FONT
-		frame = new JFrame("List of Ski Trip Members");		// INSTANTIATES A FRAME
+		frame = new JFrame("List of Ski Trip Customers");	// INSTANTIATES A FRAME
 		container = frame.getContentPane();					// CREATES A CONTENT PANE, WHICH  
 															// HOLDS THE OBJECTS ON THE FRAME
 		
@@ -69,12 +84,93 @@ public class Print_ArrayList extends Menu_GUI implements ActionListener
 		/* CREATES A BLANK JFRAME AND JPANEL */
 		/*************************************/
 		frame.pack();							// SIZE OF THE FRAME
-		frame.setBounds(450, 150, 880, 450);// SETS X POSITION, Y POSITION, LENGTH,
+		frame.setBounds(400, 150, 880, 450);// SETS X POSITION, Y POSITION, LENGTH,
 												// AND WIDTH OF THE JFRAME
 		frame.setVisible(true);					// ALLOWS THE JFRAME TO BE VISIBLE
 		container.setLayout(null);				// SETS THE LAYOUT FOR THE JFRAME
 		container.setBackground(Color.WHITE);	// SETS THE BACKGROUND COLOR
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);// ALLOWS THE JFRAME TO BE CLOSED
+		
+		/****************************************************************/
+		/*  IF STATEMENT TO CHECK IF MENU NUMBER IS FOR THE REMOVE MENU */
+		/****************************************************************/
+		if (menuNum == 1)
+		{
+			nextMenu.setText("Remove Menu");	// SETS TEXT TO REMOVE MENU
+			nextMenu.setVisible(true);			// DISPLAYS THE BUTTON
+		}
+		
+		
+		/*********************************************************************/
+		/*  ELSE IF STATEMENT TO CHECK IF MENU NUMBER IS FOR THE MODIFY MENU */
+		/*********************************************************************/
+		else if(menuNum == 2)
+		{
+			nextMenu.setText("Modify Menu");	// INSTANTIATES A JBUTTON FOR MODIFY MENU
+			nextMenu.setVisible(true);				// DISPLAYS THE BUTTON
+		}
+		
+		/************************************************************************************/
+		/*  ELSE IF STATEMENT TO CHECK IF MENU NUMBER IS FOR THE DISPLAY CUSTOMER LIST MENU */
+		/************************************************************************************/
+		else if(menuNum == 3)
+		{
+			nextMenu = new JButton("");		// INSTANTIATES A JBUTTON FOR DISPLAYING CUSTOMER LIST
+			nextMenu.setVisible(false);		// HIDES THE BUTTON
+		}
+		
+		/**********************************************************************************/
+		/*  ELSE IF STATEMENT TO CHECK IF MENU NUMBER IS FOR DISPLAYING TOTAL PROFIT MENU */
+		/**********************************************************************************/
+		else if(menuNum == 4)
+		{
+			nextMenu = new JButton("");		// INSTANTIATES A JBUTTON FOR DISPLAYING TOTAL PROFIT
+			nextMenu.setVisible(false);		// HIDES THE BUTTON
+		}
+		
+		/*********************************************************/
+		/*  ELSE IF STATEMENT TO CHECK IF MENU NUMBER IS FOR THE */
+		/* DISPLAY ALPHABETICAL CUSTOMER LIST MENU 				 */
+		/*********************************************************/
+		else if(menuNum == 5)
+		{
+			nextMenu = new JButton("");		// INSTANTIATES A JBUTTON FOR DISPLAYING 
+											// SORTED ALPHABETICAL CUSTOMER LIST
+			nextMenu.setVisible(false);		// HIDES THE BUTTON
+		}
+		
+		/********************************************************/
+		/* ELSE IF STATEMENT TO CHECK IF MENU NUMBER IS FOR THE */
+		/* DISPLAY SORTED DATE CUSTOMER LIST MENU 				*/
+		/********************************************************/
+		else if(menuNum == 6)
+		{
+			nextMenu = new JButton("");		// INSTANTIATES A JBUTTON FOR DISPLAYING 
+											// SORTED BY DATE CUSTOMER LIST
+			nextMenu.setVisible(false);		// HIDES THE BUTTON
+		}
+		
+		/*****************************************************************/
+		/*  ELSE IF STATEMENT TO CHECK IF MENU NUMBER IS FOR THE DISPLAY */
+		/* SORTED NUMERICAL ID CUSTOMER LIST MENU 						 */
+		/*****************************************************************/
+		else if(menuNum == 7)
+		{
+			nextMenu = new JButton("");		// INSTANTIATES A JBUTTON FOR DISPLAYING 
+											// SORTED NUMERICAL ID CUSTOMER LIST
+			nextMenu.setVisible(false);		// HIDES THE BUTTON
+		}
+		
+		/*****************************************************************/
+		/*  ELSE IF STATEMENT TO CHECK IF MENU NUMBER IS FOR THE DISPLAY */
+		/* SORTED NUMERICAL SIZE CUSTOMER LIST MENU 					 */
+		/*****************************************************************/
+		else if(menuNum == 8)
+		{
+			nextMenu = new JButton("");		// INSTANTIATES A JBUTTON FOR DISPLAYING 
+											// SORTED NUMERICAL SIZE CUSTOMER LIST
+			nextMenu.setVisible(false);		// HIDES THE BUTTON
+		}
 		
 		/**************************/
 		/* SETS FONT OF THE LABEL */
@@ -89,23 +185,29 @@ public class Print_ArrayList extends Menu_GUI implements ActionListener
 		/**************************/
 		/* SETS BOUNDS FOR BUTTON */
 		/**************************/
-		next.setBounds(750, 350, 75, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		custNum.setBounds(10, 10, 150, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		grpID.setBounds(170, 10, 150, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		nm.setBounds(300, 10, 230, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		dt.setBounds(540, 10, 90, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		grpSz.setBounds(640, 10, 110, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		cst.setBounds(760, 10, 100, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		next.setBounds(630, 345, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		quit.setBounds(710, 380, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		returnB.setBounds(630, 380, 75, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		nextMenu.setBounds(790, 380, 75, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		custNum.setBounds(10, 10, 150, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		grpID.setBounds(170, 10, 150, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		nm.setBounds(300, 10, 230, 25);			// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		dt.setBounds(540, 10, 90, 25);			// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		grpSz.setBounds(640, 10, 110, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		cst.setBounds(760, 10, 100, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		
 		/**********************************************/
 		/* ADDS LISTENER TO BUTTON TO PERFORM ACTIONS */
 		/**********************************************/
 		next.addActionListener(this);		// ADDS ACTIONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED
+		quit.addActionListener(this);		// ADDS ACTIONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED 
+		returnB.addActionListener(this);	// ADDS ACTIONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED
+		nextMenu.addActionListener(this);	// ADDS ACTIONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED
 
 		/***********************************************************************/
 		/* FOR LOOP TO ADD PRINT CUSTOMER NUMBER LABELS TO ARRAYLIST OF LABELS */
 		/***********************************************************************/
-		for(int i=0;i<custList.size();i++)
+		for(int i=0;i<cust.size();i++)
 		{
 			int y = (i * 30) + 30;	// DECLARES Y VARIBALE FOR Y POSITION
 			int custNum = i+1;		// DELCARES CUSTOMER NUMBER
@@ -133,11 +235,11 @@ public class Print_ArrayList extends Menu_GUI implements ActionListener
 		/****************************************************************/
 		/* FOR LOOP TO ADD PRINT GROUP ID LABELS TO ARRAYLIST OF LABELS */
 		/****************************************************************/
-		for(int i=0;i<custList.size();i++)
+		for(int i=0;i<cust.size();i++)
 		{
 			int y = (i * 30) + 30;	// DECLARES Y VARIBALE FOR Y POSITION
 				
-			printID = new JLabel(""+custList.get(i).getID());	// INSTANTIATES A NEW PRINT ID LABEL
+			printID = new JLabel(""+cust.get(i).getID());	// INSTANTIATES A NEW PRINT ID LABEL
 			printID.setBounds(170, y, 150, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 			printID.setFont(font);				// SETS FONT
 			allCust.add(printID);				// ADDS PRINT ID LABEL TO ARRAYLIST OF LABELS 
@@ -146,11 +248,11 @@ public class Print_ArrayList extends Menu_GUI implements ActionListener
 		/************************************************************/
 		/* FOR LOOP TO ADD PRINT NAME LABELS TO ARRAYLIST OF LABELS */
 		/************************************************************/
-		for(int i=0;i<custList.size();i++)
+		for(int i=0;i<cust.size();i++)
 		{
 			int y = (i * 30) + 30;	// DECLARES Y VARIBALE FOR Y POSITION
 				
-			printName = new JLabel(""+custList.get(i).getName());// INSTANTIATES A NEW PRINT NAME LABEL
+			printName = new JLabel(""+cust.get(i).getName());// INSTANTIATES A NEW PRINT NAME LABEL
 			printName.setBounds(300, y, 230, 25);// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 			printName.setFont(font);			// SETS FONT
 			allCust.add(printName);				// ADDS PRINT NAME LABEL TO ARRAYLIST OF LABELS 
@@ -159,11 +261,11 @@ public class Print_ArrayList extends Menu_GUI implements ActionListener
 		/************************************************************/
 		/* FOR LOOP TO ADD PRINT DATE LABELS TO ARRAYLIST OF LABELS */
 		/************************************************************/
-		for(int i=0;i<custList.size();i++)
+		for(int i=0;i<cust.size();i++)
 		{
 			int y = (i * 30) + 30;	// DECLARES Y VARIBALE FOR Y POSITION
 				
-			printDate = new JLabel(""+custList.get(i).getDate());	// INSTANTIATES A NEW PRINT DATE LABEL
+			printDate = new JLabel(""+cust.get(i).getDate());	// INSTANTIATES A NEW PRINT DATE LABEL
 			printDate.setBounds(540, y, 90, 25);// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 			printDate.setFont(font);			// SETS FONT
 			allCust.add(printDate);				// ADDS PRINT DATE LABEL TO ARRAYLIST OF LABELS 
@@ -172,11 +274,11 @@ public class Print_ArrayList extends Menu_GUI implements ActionListener
 		/************************************************************/
 		/* FOR LOOP TO ADD PRINT SIZE LABELS TO ARRAYLIST OF LABELS */
 		/************************************************************/
-		for(int i=0;i<custList.size();i++)
+		for(int i=0;i<cust.size();i++)
 		{
 			int y = (i * 30) + 30;	// DECLARES Y VARIBALE FOR Y POSITION
 				
-			printSize = new JLabel(""+custList.get(i).getSize());	// INSTANTIATES A NEW PRINT SIZE LABEL
+			printSize = new JLabel(""+cust.get(i).getSize());	// INSTANTIATES A NEW PRINT SIZE LABEL
 			printSize.setBounds(640, y, 110, 25);// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 			printSize.setFont(font);			// SETS FONT
 			allCust.add(printSize);				// ADDS PRINT SIZE LABEL TO ARRAYLIST OF LABELS 
@@ -185,11 +287,11 @@ public class Print_ArrayList extends Menu_GUI implements ActionListener
 		/************************************************************/
 		/* FOR LOOP TO ADD PRINT COST LABELS TO ARRAYLIST OF LABELS */
 		/************************************************************/
-		for(int i=0;i<custList.size();i++)
+		for(int i=0;i<cust.size();i++)
 		{
 			int y = (i * 30) + 30;	// DECLARES Y VARIBALE FOR Y POSITION
 				
-			printCost = new JLabel("$"+custList.get(i).getCost());	// INSTANTIATES A NEW PRINT COST LABEL
+			printCost = new JLabel("$"+cust.get(i).getCost());	// INSTANTIATES A NEW PRINT COST LABEL
 			printCost.setBounds(760, y, 100, 25);// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 			printCost.setFont(font);			// SETS FONT
 			allCust.add(printCost);				// ADDS PRINT COST LABEL TO ARRAYLIST OF LABELS 
@@ -199,6 +301,9 @@ public class Print_ArrayList extends Menu_GUI implements ActionListener
 		/* ADDS BUTTONS TO FRAME */
 		/*************************/
 		container.add(next);		// ADDS NEXT BUTTON TO CONTAINER
+		container.add(quit);		// ADDS QUIT BUTTON TO CONTAINER
+		container.add(returnB);		// ADDS RETURN BUTTON TO CONTAINER
+		container.add(nextMenu);	// ADDS NEXT MENU BUTTON TO CONTAINER
 		container.add(custNum);		// ADDS CUSTOMER NUMBER LABEL TO CONTAINER
 		container.add(grpID);		// ADDS GROUP ID NUMBER LABEL TO CONTAINER
 		container.add(nm);			// ADDS GROUP NAME LABEL TO CONTAINER
@@ -231,13 +336,53 @@ public class Print_ArrayList extends Menu_GUI implements ActionListener
 		/************************************/
 		action = event.getActionCommand();		// CALL TO GET ACTION COMMAND
 		
+		// have to change the if statement to make a new print_arraylist if 
+		// more than ten customers
+		
+		// make a quit and return button if statements
+		
+		/****************************************************/
+		/* IF STATEMENT TO CHECK IF QUIT BUTTON WAS PRESSED */	
+		/****************************************************/
+		if(action.equals("Quit"))
+		{
+			System.exit(0);		// EXITS THE PROGRAM
+		}
+		
+		/******************************************************/
+		/* IF STATEMENT TO CHECK IF RETURN BUTTON WAS PRESSED */	
+		/******************************************************/
+		if(action.equals("Return"))
+		{
+			frame.dispose();		// DISPOSES THE PRINT ARRAYLIST WINDOW
+			new Menu_GUI();			// MAKES A NEW MENU GUI
+		}
+		
+		/***********************************************************/
+		/* IF STATEMENT TO CHECK IF REMOVE MENU BUTTON WAS PRESSED */	
+		/***********************************************************/
+		if(action.equals("Remove Menu"))
+		{
+			frame.dispose();		// DISPOSES THE PRINT ARRAYLIST WINDOW
+			new Remove_Menu();		// CREATES A REMOVE MENU
+		}                                                                           
+		
+		/***********************************************************/
+		/* IF STATEMENT TO CHECK IF MODIFY MENU BUTTON WAS PRESSED */	
+		/***********************************************************/
+		if(action.equals("Modify Menu"))
+		{
+			frame.dispose();		// DISPOSES THE PRINT ARRAYLIST WINDOW
+			new Modify_Menu();		// CREATES A REMOVE MENU
+		}  
+		
 		/****************************************************/
 		/* IF STATEMENT TO CHECK IF NEXT BUTTON WAS PRESSED */	
 		/****************************************************/
-		if(action.equals("NEXT"))
-		{
-			frame.dispose();		// GETS RID OF THE OLD FRAME
-			new Modify_Menu();		// INSTANTIATES MODIFY MENU FRAME
-		}
+		//if(action.equals("Next"))
+		//{
+		//	frame.dispose();		// GETS RID OF THE OLD FRAME
+		//	new Modify_Menu();		// INSTANTIATES MODIFY MENU FRAME
+		//}		
 	}
 }
