@@ -184,9 +184,9 @@ public class Modify_Menu extends Menu_GUI implements ActionListener
 		/*********************************************************/
 		else if (action == "Customer List")
 		{
-			frame.dispose();			// DISPOSES THE REMOVE MENU WINDOW
-			updateMenu(heading1);		// CALL TO UPDATE MENU
-			new Modify_Menu();			// RECREATES THE REMOVE MENU WINDOW
+			frame.dispose();				// DISPOSES THE REMOVE MENU WINDOW
+			menuNum = 2;					// ASSIGNS MENU NUMBER TO PRINT CUSTOMER LIST MENU NUMBER
+			new Print_ArrayList(custList, menuNum); 	// CREATES THE PRINT ARRAYLIST GUI
 		}
 				
 		actionPerformedInt();	// CALL TO ACTION PERFORMED INT
@@ -269,29 +269,5 @@ public class Modify_Menu extends Menu_GUI implements ActionListener
 		/* RETURN SECTION */
 		/******************/
 		return num;			// RETURNS NUM
-	}
-	
-	public static void updateMenu(String hdstr)
-	/*****************************************************************/
-	/* PRECONDITION - NEEDS AN UPDATE WINDOW OF ALL CUSTOMERS 		 */
-	/* POSTCONDITION - CREATES WINDOW TO TELL USER ALL THE CUSTOMERS */
-	/*****************************************************************/
-	{
-		/********************/
-		/* VARIABLE SECTION */
-		/********************/
-		String str;			// USED FOR REUSABLE OUTPUT
-		
-		str = printArray();	// CALL TO PRINT ARRAY
-		
-		/***********************/
-		/* MAKES DIALOG WINDOW */
-		/***********************/ 
-		JOptionPane.showMessageDialog(
-				null,
-				hdstr + "\n"+
-				str,
-				"Customer List",
-				JOptionPane.INFORMATION_MESSAGE);
 	}
 }
