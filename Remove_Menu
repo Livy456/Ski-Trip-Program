@@ -1,6 +1,6 @@
 /******************************************/
 /* USER DESCRIPTION SECTION 			  */
-/* LIVY456				   			  */
+/* OLIVIA DIAS				   			  */
 /* FINAL PROJECT		   	 			  */
 /* PROGRAM 12							  */
 /* APRIL 6, 2020		   			  	  */
@@ -171,9 +171,9 @@ public class Remove_Menu extends Menu_GUI implements ActionListener
 		/*********************************************************/
 		else if (action == "Customer List")
 		{
-			frame.dispose();			// DISPOSES THE REMOVE MENU WINDOW
-			updateMenu(heading1);		// CALL TO UPDATE MENU
-			new Remove_Menu();			// RECREATES THE REMOVE MENU WINDOW
+			frame.dispose();				// DISPOSES THE REMOVE MENU WINDOW
+			menuNum = 1;					// ASSIGNS MENU NUMBER TO REMOVE MENU, MENU NUMBER
+			new Print_ArrayList(custList, menuNum);	// CREATES THE PRINT ARRAYLIST GUI
 		}
 		
 		/*************************************************************************/
@@ -273,7 +273,7 @@ public class Remove_Menu extends Menu_GUI implements ActionListener
 		custList.remove(num-1);		// CALL TO REMOVE CUSTOMER FROM ARRAY LIST
 	}
 	
-	public int confirmWindow(String str)
+	public static int confirmWindow(String str)
 	/************************************************/
 	/* PRECONDITION - NEEDS CONFIRM DIALOG BOX		*/
 	/* POSTCONDITION - CREATES WINDOW TO CONFIRM IF	*/
