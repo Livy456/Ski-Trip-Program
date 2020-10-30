@@ -33,6 +33,7 @@ public class Menu_GUI extends BusGUI implements ActionListener
 	/*****************************/
 	/* INSTANCE VARIABLE SECTION */
 	/*****************************/
+	protected int menuNum;			// MENU WINDOW NUMBER FOR THE PRINT_ARRAYLIST CLASS
 	private JButton insertB;		// CREATES A BUTTON FOR INSERT
 	private JButton removeB;		// CREATES A BUTTON FOR REMOVE
 	private JButton modifyB;		// CREATES A BUTTON TO MODIFY CUSTOMER  
@@ -68,7 +69,7 @@ public class Menu_GUI extends BusGUI implements ActionListener
 		removeB = new JButton("Remove");					// INSTANTIATES A JBUTTON 
 		modifyB = new JButton("Modify");					// INSTANTIATES A JBUTTON 
 		quitB = new JButton("Quit Program");				// INSTANTIATES A JBUTTON 
-		costB = new JButton("DISPLAY SKI TRIPS");			// INSTANTIATES A JBUTTON 
+		costB = new JButton("Display Ski Trips");			// INSTANTIATES A JBUTTON 
 		busDtB = new JButton("Sorting by Bus Date");		// INSTANTIATES A JBUTTON 
 		profitDtB = new JButton("Profit by Date");			// INSTANTIATES A JBUTTON 
 		profitB = new JButton("Total Profit");				// INSTANTIATES A JBUTTON 
@@ -184,11 +185,10 @@ public class Menu_GUI extends BusGUI implements ActionListener
 		/********************/
 		/* VARIABLE SECTION */
 		/********************/
-		ArrayList<Customer> sortCustDt;
-		ArrayList<Customer> sortCustAlph;
-		ArrayList<Customer> sortCustSz;
-		ArrayList<Customer> sortCustID;
-		ArrayList<Customer> cust;
+		ArrayList<Customer> sortCustDt;		// ARRAYLIST OF CUSTLIST SORTED BY SKI TRIP DATE
+		ArrayList<Customer> sortCustAlph;	// ARRAYLIST OF CUSTLIST SORTED ALPHABETICALLY
+		ArrayList<Customer> sortCustSz;		// ARRAYLIST OF CUSTLIST SORTED BY SKI TRIP GROUP SIZE
+		ArrayList<Customer> sortCustID;		// ARRAYLIST OF CUSTLIST SORTED BY SKI TRIP GROUP ID
 		String action; 		// STRING TO REPRESENT WHICH BUTTON WAS PRESSED
 		int confirm; 		// REUSUABLE INT INPUT FOR CONFIRMING AN ACTION
 		
@@ -214,17 +214,9 @@ public class Menu_GUI extends BusGUI implements ActionListener
 		/* ELSE IF STATEMENT TO CHECK IF INSERT BUTTON WAS PRESSED */	
 		/***********************************************************/
 		else if (action.equals("Insert"))
-		{
-			confirm = confirmWindow();	// CALL TO CONFIRM WINDOW
-			
-			/*****************************************************/
-			/* IF STATEMENT TO CONFIRM ACTION OF ADDING CUSTOMER */	
-			/*****************************************************/
-			if(confirm == 0)
-			{	
-				frame.dispose();		// DISPOSES OF MENU_GUI FRAME
-				new BusGUI();			// CREATES A NEW BUS GUI MENU
-			}	
+		{	
+			frame.dispose();		// DISPOSES OF MENU_GUI FRAME
+			new BusGUI();			// CREATES A NEW BUS GUI MENU	
 		}
 			
 		/***********************************************************/
@@ -232,9 +224,9 @@ public class Menu_GUI extends BusGUI implements ActionListener
 		/***********************************************************/
 		else if (action.equals("Remove"))
 		{	
-			frame.dispose();			// DISPOSES OF MENU_GUI FRAME
-			updateMenu(heading1);		// CALL TO UPDATE MENU
-			new Remove_Menu();			// CREATES THE REMOVE MENU GUI			
+			frame.dispose();				// DISPOSES OF MENU_GUI FRAME
+			menuNum = 1;					// ASSIGNS MENU NUMBER TO REMOVE MENU, MENU NUMBER
+			new Print_ArrayList(custList, menuNum);	// CREATES THE PRINT ARRAYLIST GUI	
 		}
 		
 		/**********************************************************/
@@ -242,15 +234,15 @@ public class Menu_GUI extends BusGUI implements ActionListener
 		/**********************************************************/
 		else if (action.equals("Modify"))
 		{
-			frame.dispose();			// DISPOSES OF MENU_GUI FRAME
-			updateMenu(heading2);		// CALL TO UPDATE MENU
-			new Modify_Menu();			// INSTANTIATES MODIFY MENU
+			frame.dispose();				// DISPOSES OF MENU_GUI FRAME
+			menuNum = 2;					// ASSIGNS MENU NUMBER TO MODIFY MENU NUMBER
+			new Print_ArrayList(custList, menuNum);	// CREATES THE PRINT ARRAYLIST GUI
 		}
 		
 		/********************************************************/
 		/*ELSE IF STATEMENT TO CHECK IF COST BUTTON WAS PRESSED */	
 		/********************************************************/
-		else if (action.equals("DISPLAY SKI TRIPS"))
+		else if (action.equals("Display Ski Trips"))
 		{
 			confirm = confirmWindow();		// CALL TO CONFIRM WINDOW
 			
@@ -259,9 +251,9 @@ public class Menu_GUI extends BusGUI implements ActionListener
 			/**************************************************************/
 			if (confirm == 0)
 			{
-				frame.dispose();	// DISPOSES OF MENU_GUI FRAME
-				printCost();		// CALL TO PRINT COST
-				new Menu_GUI();		// RECREATES MENU GUI WINDOW
+				frame.dispose();		// DISPOSES OF MENU_GUI FRAME
+				menuNum = 3;			// ASSIGNS MENU NUMBER TO PRINT CUSTOMER LIST MENU NUMBER
+				new Print_ArrayList(custList, menuNum);// CREATES THE PRINT ARRAYLIST GUI
 			}
 		}
 		
@@ -294,9 +286,9 @@ public class Menu_GUI extends BusGUI implements ActionListener
 			/**********************************************************************/
 			if (confirm == 0)
 			{
-				frame.dispose();	// DISPOSES OF MENU_GUI FRAME
-				totalProfit();		// CALL TO TOTAL PROFIT WINDOW
-				new Menu_GUI();		// CREATES NEW MENU GUI WINDOW
+				frame.dispose();		// DISPOSES OF MENU_GUI FRAME
+				menuNum = 4;			// ASSIGNS MENU NUMBER TO PRINT CUSTOMER LIST MENU NUMBER
+				new Print_ArrayList(custList, menuNum);	// CREATES THE PRINT ARRAYLIST GUI
 			}
 		}
 				
@@ -315,8 +307,8 @@ public class Menu_GUI extends BusGUI implements ActionListener
 			{
 				sortCustAlph = sortAlpha();	// CALL TO SORT ALPHA
 				frame.dispose();			// DISPOSES OF MENU_GUI FRAME
-				printSorted(sortCustAlph);	// CALL TO PRINT SRORTED
-				new Menu_GUI();				// CREATES A NEW MENU GUI WINDOW
+				menuNum = 5;				// ASSIGNS MENU NUMBER TO PRINT CUSTOMER LIST MENU NUMBER
+				new Print_ArrayList(sortCustAlph, menuNum);// CREATES THE PRINT ARRAYLIST GUI
 			}
 		}
 				
@@ -335,8 +327,8 @@ public class Menu_GUI extends BusGUI implements ActionListener
 			{
 				sortCustDt = sortDate();	// CALL TO SORT DATE
 				frame.dispose();			// DISPOSES OF MENU_GUI FRAME
-				printSorted(sortCustDt);	// CALL TO PRINT SORTED
-				new Menu_GUI();				// CREATES A NEW MENU GUI WINDOW
+				menuNum = 6;				// ASSIGNS MENU NUMBER TO PRINT CUSTOMER LIST MENU NUMBER
+				new Print_ArrayList(sortCustDt, menuNum);// CREATES THE PRINT ARRAYLIST GUI
 			}
 		}
 		
@@ -355,8 +347,8 @@ public class Menu_GUI extends BusGUI implements ActionListener
 			{
 				sortCustID = sortID();		// CALL TO SORT ID
 				frame.dispose();			// DISPOSES OF MENU_GUI FRAME
-				printSorted(sortCustID);	// CALL TO PRINT SORTED
-				new Menu_GUI();				// CREATES A NEW MENU GUI WINDOW
+				menuNum = 7;				// ASSIGNS MENU NUMBER TO PRINT CUSTOMER LIST MENU NUMBER
+				new Print_ArrayList(sortCustID, menuNum);// CREATES THE PRINT ARRAYLIST GUI
 			}
 		}
 		
@@ -382,9 +374,9 @@ public class Menu_GUI extends BusGUI implements ActionListener
 			if (confirm == 0)
 			{
 				mergeSortSize(sortCustSz, 0, sortCustSz.size()-1);	// CALL TO SORT SIZE
-				frame.dispose();									// DISPOSES OF MENU_GUI FRAME
-				printSorted(sortCustSz);							// CALL TO PRINT SORTED
-				new Menu_GUI();										// CREATES A NEW MENU GUI WINDOW
+				frame.dispose();		// DISPOSES OF MENU_GUI FRAME
+				menuNum = 8;			// ASSIGNS MENU NUMBER TO PRINT CUSTOMER LIST MENU NUMBER
+				new Print_ArrayList(sortCustSz, menuNum);// CREATES THE PRINT ARRAYLIST GUI
 			}
 		}
 		
@@ -419,7 +411,7 @@ public class Menu_GUI extends BusGUI implements ActionListener
 		Object[] dateArray;			// ALL DATES OF SKI TRIP AS AN ARRAY
 		ArrayList<Object> dateList; // ALL DATES OF SKI TRIP AS AN ARRAYLIST
 		
-		dateList = new ArrayList(); // INSTANIATES ARRAYLIST	
+		dateList = new ArrayList<Object>(); // INSTANIATES ARRAYLIST	
 		dateList.add("");			// ADDS AN EMPTY SPACE IN ARRAYLIST
 		date = "";					// INITIALIZES DATE	
 		
@@ -561,6 +553,10 @@ public class Menu_GUI extends BusGUI implements ActionListener
 		/********************************************************/
 		for(int i = 0; i < custList.size(); i++)
 		{
+			// make the array of objects only contain the customer ID and Name
+			// then fix the output window in which it looks for the customer ID
+			// and name for the customer to output
+			
 			cstInfo2.add(custList.get(i)); // ADDS CUSTOMER TO ARRAYLIST
 		}
 		
@@ -629,85 +625,7 @@ public class Menu_GUI extends BusGUI implements ActionListener
 				JOptionPane.ERROR_MESSAGE);
 	}
 	
-	public static String printArray()
-	/*********************************************************/
-	/* PRECONDITION - NEEDS UPDATE OF ARRAYLIST OF INTEGERS	 */
-	/* POSTCONDITION - GETS UPDATE FOR ARRAYLIST OF INTEGERS */
-	/*********************************************************/
-	{
-		/********************/
-		/* VARIABLE SECTION */
-		/********************/
-		String str;			// USED FOR REUSABLE OUTPUT
-		String cstNum;
-		String cstNm;
-		String cstId;
-		String cstSz;
-		String cstDt;
-		String cstCost;
-		String name;		// USED FOR CUSTOMER NAME 
-		Object date;		// USED FOR CUSTOMER DATE 
-		int size;			// USED FOR CUSTOMER SIZE
-		int id;				// USED FOR CUSTOMER ID
-		int num;			// USED FOR CUSTOMER NUMBER
-		
-		cstNum = "<html><body><div height = '100px' width = '100px' align = 'left'>Customer number \tGroup ID</div></body></html>";
-		cstId = "<html><body><div height = '100px' width = '300px' align = 'right'>Group ID</div></body></html>";
-		cstNm = "<html><body><div width = '100px' align = 'left'>Name</div></body></html>";
-		cstDt = "<html><body><div width = '100px' align = 'left'>Date</div></body></html>";
-		cstSz = "<html><body><div width = '100px' align = 'right'>Size</div></body></html>";
-		cstCost	= "<html><body><div wifht = '100px' align = 'right'>Cost</div></body></html>"; // INITIALIZES THE STRING
-		str =  cstNum + cstId + cstNm + cstDt + cstSz + cstCost + "\n\n";
-		/***********************************************/
-		/* FOR LOOP TO PRINT OUT ARRAYLIST OF CUSTOMER */
-		/***********************************************/
-		for(int i = 0; i < custList.size(); i++)
-		{
-			String section = "";
-			num = i + 1;	// ASSIGNS CUSTOMER NUMBER
-			
-			name = custList.get(i).getName();	// CALL TO GET NAME FROM CUSTOMER	
-			size = custList.get(i).getSize();	// CALL TO GET SIZE FROM CUSTOMER
-			date = custList.get(i).getDate();	// CALL TO GET DATE FROM CUSTOMER
-			id = custList.get(i).getID();		// CALL TO GET ID FROM CUSTOMER
-			
-			/******************************************************/
-			/* IF STATEMENT TO MAKE SINGLE DIGIT AND DOUBLE DIGIT */
-			/* CUSTOMER NUMBER LINE UP WHEN PRINTED				  */	
-			/******************************************************/
-			if(num < 10)
-			{
-				str+= "" + 0 + num + "               ";
-			}
-			
-			/******************************************************/
-			/* ELSE IF STATEMENT TO MAKE SINGLE DIGIT AND DOUBLE  */
-			/* DIGIT CUSTOMER NUMBER LINE UP WHEN PRINTED		  */	
-			/******************************************************/
-			else if(num >=10)
-			{
-				str+= "" + num + "               ";
-			}
-			
-			
-			// to make right/left align in JOPtionPane you have to use
-			// HTML code and assign it to a string
-			str+= " " + id;
-			str+= " " + name;
-			str+= " " + date;
-			str+= " " + size;
-			str+= " $" + custList.get(i).getCost() + "\n";
-			
-			str+= section;
-		}
-		
-		/******************/
-		/* RETURN SECTION */
-		/******************/
-		return str;			// RETURN STR
-	}
-	
-	public static void printCost()
+	public static void printCost(ArrayList<Customer>cust)
 	/********************************************************************/
 	/* PRECONDITION - NEEDS AN WINDOW TO DISPLAY COST FOR EACH CUSTOMER */
 	/* POSTCONDITION - CREATES WINDOW TO DISPLAY COST FOR EACH CUSTOMER */
@@ -718,7 +636,7 @@ public class Menu_GUI extends BusGUI implements ActionListener
 		/********************/
 		String str;			// STRING REPRESENTATION OF CUSTOMER INFORMATION
 		
-		str = printArray();	// CALL TO PRINT ARRAY
+		str = printSortedArray(cust);	// CALL TO PRINT ARRAY
 		
 		/***********************/
 		/* MAKES DIALOG WINDOW */
@@ -1357,30 +1275,6 @@ public class Menu_GUI extends BusGUI implements ActionListener
 				"Total Cost of all Skip Trips"+
 				"\n$"+costdf,
 				"Total Profit",
-				JOptionPane.INFORMATION_MESSAGE);
-	}
-	
-	public static void updateMenu(String hdstr)
-	/*****************************************************************/
-	/* PRECONDITION - NEEDS AN UPDATE WINDOW OF ALL CUSTOMERS 		 */
-	/* POSTCONDITION - CREATES WINDOW TO TELL USER ALL THE CUSTOMERS */
-	/*****************************************************************/
-	{
-		/********************/
-		/* VARIABLE SECTION */
-		/********************/
-		String str;			// USED FOR REUSABLE OUTPUT
-		
-		str = printArray();	// CALL TO PRINT ARRAY
-		
-		/***********************/
-		/* MAKES DIALOG WINDOW */
-		/***********************/ 
-		JOptionPane.showMessageDialog(
-				null,
-				hdstr + "\n"+
-				str,
-				"Customer List",
 				JOptionPane.INFORMATION_MESSAGE);
 	}
 }
