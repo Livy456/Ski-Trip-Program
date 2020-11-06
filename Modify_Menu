@@ -1,6 +1,6 @@
 /******************************************/
 /* USER DESCRIPTION SECTION 			  */
-/* LIVY456				   			  */
+/* LIVY456			   			  */
 /* FINAL PROJECT		   	 			  */
 /* PROGRAM 12							  */
 /* APRIL 9, 2020		   			  	  */
@@ -89,8 +89,8 @@ public class Modify_Menu extends Menu_GUI implements ActionListener
 		/**************************/
 		/* SETS FONT OF THE LABEL */
 		/**************************/
-		info.setFont(font);				// SETS FONT OF INFO LABEL
-		view.setFont(font);				// SETS FONT OF VIEW BUTTON 
+		info.setFont(font);			// SETS FONT OF INFO LABEL
+		view.setFont(font);			// SETS FONT OF VIEW BUTTON 
 		
 		/**************************************/
 		/* SETS FOREGROUND COLOR OF THE LABEL */
@@ -174,6 +174,7 @@ public class Modify_Menu extends Menu_GUI implements ActionListener
 			/************************************************************/
 			if(confirm == 0)
 			{
+				frame.setVisible(false);// HIDES THE FRAME
 				frame.dispose();		// DISPOSES THE REMOVE MENU WINDOW
 				new Menu_GUI();			// CREATES A NEW MENU WINDOW
 			}
@@ -184,6 +185,7 @@ public class Modify_Menu extends Menu_GUI implements ActionListener
 		/*********************************************************/
 		else if (action == "Customer List")
 		{
+			frame.setVisible(false);// HIDES THE FRAME
 			frame.dispose();				// DISPOSES THE REMOVE MENU WINDOW
 			menuNum = 2;					// ASSIGNS MENU NUMBER TO PRINT CUSTOMER LIST MENU NUMBER
 			new Print_ArrayList(custList, menuNum); 	// CREATES THE PRINT ARRAYLIST GUI
@@ -196,6 +198,7 @@ public class Modify_Menu extends Menu_GUI implements ActionListener
 		/*****************************************************/
 		if (action == "Enter")
 		{
+			frame.setVisible(false);// HIDES THE FRAME
 			frame.dispose();	// DISPOSES THE MODIFY MENU WINDOW
 			new Modify();		// CREATES A NEW MODIFY WINDOW
 		}
