@@ -1,6 +1,6 @@
 /******************************************/
 /* USER DESCRIPTION SECTION 			  */
-/* OLIVIA DIAS				   			  */
+/* LIVY456				   			  */
 /* FINAL PROJECT		   	 			  */
 /* PROGRAM 12							  */
 /* APRIL 6, 2020		   			  	  */
@@ -77,8 +77,6 @@ public class Remove_Menu extends Menu_GUI implements ActionListener
 		/* SETS FONT OF THE LABEL */
 		/**************************/
 		info.setFont(font);				// SETS FONT OF INFO LABEL
-		view.setFont(font);				// SETS FONT OF VIEW BUTTON 
-		removeAll.setFont(font);		// SETS FONT OF REMOVE BUTTON
 		
 		/**************************************/
 		/* SETS FOREGROUND COLOR OF THE LABEL */
@@ -92,8 +90,8 @@ public class Remove_Menu extends Menu_GUI implements ActionListener
 		returnB.setBounds(180, 250, 75, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		quitB.setBounds(340, 250, 120, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		info.setBounds(50, 30, 500, 30);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		view.setBounds(160, 80, 150, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		removeAll.setBounds(160, 110, 200, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		view.setBounds(160, 80, 120, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		removeAll.setBounds(160, 115, 170, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		remove.setBounds(50, 80, 100, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		
 		/**********************************************/
@@ -161,6 +159,7 @@ public class Remove_Menu extends Menu_GUI implements ActionListener
 			/************************************************************/
 			if(confirm == 0)
 			{
+				frame.setVisible(false);// HIDES THE FRAME
 				frame.dispose();		// DISPOSES THE REMOVE MENU WINDOW
 				new Menu_GUI();			// CREATES A NEW MENU WINDOW
 			}
@@ -171,6 +170,7 @@ public class Remove_Menu extends Menu_GUI implements ActionListener
 		/*********************************************************/
 		else if (action == "Customer List")
 		{
+			frame.setVisible(false);		// HIDES THE FRAME
 			frame.dispose();				// DISPOSES THE REMOVE MENU WINDOW
 			menuNum = 1;					// ASSIGNS MENU NUMBER TO REMOVE MENU, MENU NUMBER
 			new Print_ArrayList(custList, menuNum);	// CREATES THE PRINT ARRAYLIST GUI
@@ -190,6 +190,7 @@ public class Remove_Menu extends Menu_GUI implements ActionListener
 			{
 				custList.removeAll(custList);	// REMOVES CUSTOMER FROM CUSTLIST
 				updateWindow(message2);	// CALL TO UPDATE WINDOW
+				frame.setVisible(false);// HIDES THE FRAME
 				frame.dispose();		// DISPOSES OF REMOVE WINDOW
 				new Menu_GUI();			// CREATES A NEW MENU WINDOW
 			}
@@ -200,7 +201,7 @@ public class Remove_Menu extends Menu_GUI implements ActionListener
 		/**********************************************************/
 		/* ELSE IF STATEMENT TO CHECK IF ENTER BUTTON WAS PRESSED */	
 		/**********************************************************/
-		if(action == "Enter")
+		if(action.equals("Enter"))
 		{
 			confirm = confirmWindow();	// CALL TO CONFIRM WINDOW
 			
@@ -212,7 +213,7 @@ public class Remove_Menu extends Menu_GUI implements ActionListener
 				/*****************************************************/
 				/* IF STATEMENT TO CHECK IF ENTER BUTTON WAS PRESSED */	
 				/*****************************************************/
-				if(remove.getText() == "")
+				if(remove.getText().equals(""))
 				{
 					errorMessage(error2);	// CALL TO ERROR MESSAGE
 				}
@@ -222,6 +223,7 @@ public class Remove_Menu extends Menu_GUI implements ActionListener
 				/**********************************************************/
 				else if(remove.getText() != "")
 				{
+					frame.setVisible(false);// HIDES THE FRAME
 					frame.dispose();		// DISPOSES THE REMOVE MENU WINDOW
 					new Menu_GUI();			// CREATES A NEW MENU WINDOW
 				}
