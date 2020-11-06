@@ -18,8 +18,7 @@
 import java.awt.*;						// IMPORTS AWT
 import java.awt.event.ActionEvent;		// IMPORTS ACTION EVENT
 import java.awt.event.ActionListener;	// IMPORTS ACTION LISTENER	
-import java.text.DecimalFormat;
-
+import java.text.DecimalFormat;			// IMPORTS DECIMAL FORMAT
 import javax.swing.*;					// IMPORTS SWING
 import java.util.ArrayList;				// IMPORTS ARRAYLIST
 import java.util.Random;				// IMPORTS RANDOM
@@ -218,7 +217,6 @@ public class BusGUI implements ActionListener
 		/* VARIABLE SECTION */
 		/********************/
 		String action; 		// STRING TO REPRESENT WHICH BUTTON WAS PRESSED
-		String str;			// ERROR CHECKING ARRAYLIST
 		String costdf;		// STRING REPRESENTATION OF COST
 		String message5;	// REFUND MESSAGE
 		int confirm; 		// REUSUABLE INT INPUT FOR CONFIRMING AN ACTION
@@ -227,11 +225,11 @@ public class BusGUI implements ActionListener
 		int sum;			// REUSUABLE INT FOR TOTAL SIZE OF GROUP FOR SPECIFIC DATE
 		double cost;		// REUSUABLE DOUBLE FOR COST OF REFUNDS
 		
-		costdf = "";// INITIALIZES AND RESETS COSTDF VALUE
-		cost = 0.0;	// INITIALIZES AND RESETS COST VALUE
-		excess = 0;	// INITIALIZES AND RESETS EXCESS VALUE
-		refund = 0;	// INITIALIZES AND RESETS REFUND VALUE
-		sum = 0;	// INITIALIZES AND RESETS SUM VALUE
+		costdf = "";	// INITIALIZES AND RESETS COSTDF VALUE
+		cost = 0.0;		// INITIALIZES AND RESETS COST VALUE
+		excess = 0;		// INITIALIZES AND RESETS EXCESS VALUE
+		refund = 0;		// INITIALIZES AND RESETS REFUND VALUE
+		sum = 0;		// INITIALIZES AND RESETS SUM VALUE
 		
 		/************************************/
 		/* ASSIGNS BUTTON PRESSED TO ACTION */
@@ -266,6 +264,7 @@ public class BusGUI implements ActionListener
 			/************************************************************/
 			if(confirm == 0)
 			{
+				frame.setVisible(false);// HIDES THE FRAME
 				frame.dispose();		// GETS RID OF THE OLD FRAME
 				new Menu_GUI();			// INSTANTIATES MENU GUI FRAME
 			}
@@ -314,10 +313,9 @@ public class BusGUI implements ActionListener
 					message5= "" + refund + " ski trip members will receive a refund. \n$" + 
 							   costdf + " will be returned.";
 					refundWindow(message5);		// CALL TO REFUND WINDOW
+					frame.setVisible(false);	// HIDES THE FRAME
 					frame.dispose();			// DISPOSES FRAME
 					custList.add(customer);		// ADDS CUSTOMER TO ARRAYLIST
-					str = printArray(custList);
-					System.out.println(str);
 					new Menu_GUI();				// INSTANTIATES A NEW WINDOW
 				}
 				
@@ -347,10 +345,9 @@ public class BusGUI implements ActionListener
 				/************************************************************/
 				if(confirm == 0)
 				{
+					frame.setVisible(false);// HIDES THE FRAME
 					frame.dispose();		// GETS RID OF THE OLD FRAME
 					custList.add(customer);	// ADDS CUSTOMER TO ARRAYLIST
-					str = printArray(custList);
-					System.out.println(str);
 					new Menu_GUI(); 		// INSTANTIATES A NEW FRAME
 				}
 			}
@@ -1010,10 +1007,10 @@ public class BusGUI implements ActionListener
 		/********************/
 		/* VARIABLE SECTION */
 		/********************/
-		Object date;					// DATE OF CURRENT CUSTOMER
-		int grp;						// SIZE OF GROUP FOR SPECIFIC DATE
+		Object date;		// DATE OF CURRENT CUSTOMER
+		int grp;			// SIZE OF GROUP FOR SPECIFIC DATE
 		
-		grp = 0;		// INITIALIZES AND RESETS GRP
+		grp = 0;			// INITIALIZES AND RESETS GRP
 		
 		date = customer.getDate();	// CALL TO GET DATE
 		
@@ -1039,34 +1036,6 @@ public class BusGUI implements ActionListener
 		/* RETURN SECTION */
 		/******************/
 		return grp;			// RETURNS GRP
-	}
-	
-	public static String printArray(ArrayList<Customer> custList)
-	/*********************************************************/
-	/* PRECONDITION - NEEDS UPDATE OF ARRAYLIST OF INTEGERS	 */
-	/* POSTCONDITION - GETS UPDATE FOR ARRAYLIST OF INTEGERS */
-	/*********************************************************/
-	{
-		/********************/
-		/* VARIABLE SECTION */
-		/********************/
-		String str;			// USED FOR REUSABLE OUTPUT
-		
-		str = "";			// INITIALIZES THE STRING
-		
-		/***********************************************/
-		/* FOR LOOP TO PRINT OUT ARRAYLIST OF CUSTOMER */
-		/***********************************************/
-		for(int i = 0; i < custList.size(); i++)
-		{
-			str+= "" + custList.get(i).toString() + "\n";// CREATES A STRING 
-														 // REPRESENTATION OF ARRAYLIST
-		}
-		
-		/******************/
-		/* RETURN SECTION */
-		/******************/
-		return str;			// RETURN STR
 	}
 	
 	public static void refundWindow(String str)
