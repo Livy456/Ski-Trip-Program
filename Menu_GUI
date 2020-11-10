@@ -3,7 +3,7 @@
 /* LIVY456				   			  */
 /* FINAL PROJECT		   	 			  */
 /* PROGRAM 12							  */
-/* MARCH 8, 2020		   			  	  */
+/* OCTOBER 19, 2020		   			  	  */
 /******************************************/
 /******************************************/
 /* THIS IS A PROGRAM TO MAKE AN OBJECT	  */
@@ -19,43 +19,47 @@ import javax.swing.*;					// IMPORTS SWING
 import java.awt.*;						// IMPORTS AWT
 import java.awt.event.ActionEvent;		// IMPORTS ACTION EVENT
 import java.awt.event.ActionListener;	// IMPORTS ACTION LISTENER		
-import java.text.DecimalFormat;			// IMPORTS DECIMAL FORMAT
 import java.util.*;						// IMPORTS ARRAYLIST
 
-public class Menu_GUI extends BusGUI implements ActionListener
-{	
-	final static String heading1 = "Make sure to remember the customer number that you wish to remove.";
-	final static String heading2 = "Make sure to remember the customer number that you wish to modfiy.";
-	final static String error1 = "ERROR!!! Customer number is not on the list!!!";
-	final static String error2 = "ERROR!!! Finish filling in the information!!!";
-	final static String error3 = "ERROR!!! You have no customers to view!!!";
-	
+public class Print_ArrayList extends Menu_GUI implements ActionListener
+{
 	/*****************************/
 	/* INSTANCE VARIABLE SECTION */
 	/*****************************/
-	protected int menuNum;			// MENU WINDOW NUMBER FOR THE PRINT_ARRAYLIST CLASS
-	private JButton insertB;		// CREATES A BUTTON FOR INSERT
-	private JButton removeB;		// CREATES A BUTTON FOR REMOVE
-	private JButton modifyB;		// CREATES A BUTTON TO MODIFY CUSTOMER  
-	private JButton quitB;			// CREATES A BUTTON TO QUIT PROGRAM 
-	private JButton costB;			// CREATES A BUTTON FOR COST OF SKI TRIP 
-	private JButton busDtB;			// CREATES A BUTTON FOR SORTING BY NUM OF BUS FOR SPECIFIC DATE
-	private JButton profitDtB;		// CREATES A BUTTON FOR PROFIT BY DATE
-	private JButton profitB;		// CREATES A BUTTON FOR TOTAL PROFIT 
-	private JButton alphB;			// CREATES A BUTTON FOR SORTING ALPHABETICALLY
-	private JButton numB;			// CREATES A BUTTON FOR SORTING NUMERICALLY
-	private JButton grpB;			// CREATES A BUTTON FOR SORTING BY GROUP SIZE
-	private JButton busAmt;			// CREATES A BUTTON FOR DISPLAYING NUMBER OF BUSES FOR CUSTOMER
-	private JLabel heading;			// CREATES A LABEL FOR HEADING
-	private JLabel changeCust;		// CREATES A LABEL FOR CHANGING CUSTOMER
-	private JLabel cost;			// CREATES A LABEL FOR COST
-	private JLabel print;			// CREATES A LABEL FOR PRINT
+	private JButton next;			// CREATES A JBUTTON
+	private JButton previous;		// CREATES A JBUTTON
+	private JButton quit;			// CREATES A JBUTTON
+	private JButton returnB;		// CREATES A JBUTTON
+	private JButton nextMenu;		// CREATES A JBUTTON
 	private Font font;				// CREATES A FONT
 	private JFrame frame;			// CREATES A JFRAME
 	private Container container;	// CREATES A CONTAINER
-	private static DecimalFormat df = new DecimalFormat("0.00");	// INSTANTIATES DECIMALFORMAT
-	 
-	public Menu_GUI()
+	private JLabel printID;			// CREATES A JLABEL
+	private JLabel printName;		// CREATES A JLABEL
+	private JLabel printcustNum;	// CREATES A JLABEL
+	private JLabel printSize;		// CREATES A JLABEL
+	private JLabel printDate;		// CREATES A JLABEL
+	private JLabel printCost;		// CREATES A JLABEL
+	private JLabel printTotSz;		// CREATES A JLABEL
+	private JLabel printTotCost;	// CREATES A JLABEL
+	private JLabel printBus;		// CREATES A JLABEL
+	private JLabel printRefund;		// CREATES A JLABEL
+	private JLabel printSeats;		// CREATES A JLABEL
+	private JLabel custNum;			// CREATES A JLABEL
+	private JLabel grpID;			// CREATES A JLABEL
+	private JLabel grpSz;			// CREATES A JLABEL
+	private JLabel nm;				// CREATES A JLABEL
+	private JLabel dt;				// CREATES A JLABEL
+	private JLabel cst;				// CREATES A JLABEL
+	private JLabel bus;				// CREATES A JLABEL
+	private JLabel refund;			// CREATES A JLABEL
+	private JLabel seats;			// CREATES A JLABEL
+	private JLabel totalSz;			// CREATES A JLABEL
+	private int num;				// NUMBER OF CUSTOMER PRINTED OUT TO THE SCREEN -1
+	private int size;				// SIZE OF ALL CUSTOMERS WITH SAME DATE
+	ArrayList<JLabel> allCust = new ArrayList<JLabel>();	// CREATES AN ARRAYLIST OF JLABELS
+	
+	public Print_ArrayList(ArrayList<Customer>cust, int menu, int cnt)
 	/************************************************/
 	/* DEFAULT CONSTRUCTOR - IT CREATES A FRAME FOR */
 	/*						 CONTENT PANE			*/
@@ -64,978 +68,849 @@ public class Menu_GUI extends BusGUI implements ActionListener
 		/*************************/
 		/* INSTANTIATION SECTION */
 		/*************************/
-		frame = new JFrame("Ski Trip Menu");				// INSTANTIATES A FRAME
-		insertB = new JButton("Insert");					// INSTANTIATES A JBUTTON
-		removeB = new JButton("Remove");					// INSTANTIATES A JBUTTON 
-		modifyB = new JButton("Modify");					// INSTANTIATES A JBUTTON 
-		quitB = new JButton("Quit Program");				// INSTANTIATES A JBUTTON 
-		costB = new JButton("Display Ski Trips");			// INSTANTIATES A JBUTTON 
-		busDtB = new JButton("Sorting by Bus Date");		// INSTANTIATES A JBUTTON 
-		profitDtB = new JButton("Profit by Date");			// INSTANTIATES A JBUTTON 
-		profitB = new JButton("Total Profit");				// INSTANTIATES A JBUTTON 
-		alphB = new JButton("Sorting Alphabetically");		// INSTANTIATES A JBUTTON 
-		numB = new JButton("Sorting by Group ID");			// INSTANTIATES A JBUTTON 
-		grpB = new JButton("Sorting by Group Size");		// INSTANTIATES A JBUTTON 
-		busAmt = new JButton("Single Customer");			// INSTANTIATES A JBUTTON
-		heading = new JLabel("Ski Trip Main Menu");			// INSTANTIATES A LABEL
-		changeCust = new JLabel("To add, remove, or modify " +
-							   "click one of " +
-							   "the buttons below:");		// INSTANTIATES A LABEL
-		cost = new JLabel("To display cost or profit " +
-						 "of Ski Trip click one of " +
-						 "the buttons below:");				// INSTANTIATES A LABEL
-		print = new JLabel("To print customer info " +
-						  "click one " +
-						  "of the buttons below:");			// INSTANTIATES A LABEL
-		font = new Font("Times New Roman", 
-						Font.BOLD, 15);						// INSTANTIATES FONT 
+		next = new JButton("Next");							// INSTANTIATES A JBUTTON
+		previous = new JButton("Previous");					// INSTANTIATES A JBUTTON
+		quit = new JButton("Quit Program");					// INSTANTIATES A JBUTTON
+		returnB = new JButton("Return");					// INSTANTIATES A JBUTTON
+		nextMenu = new JButton();							// INSTANTIATES A JBUTTON
+		custNum = new JLabel("Customer Number");			// INSTANTIATES A JLABEL
+		grpID = new JLabel("Group ID");						// INSTANTIATES A JLABEL
+		nm = new JLabel("Name");							// INSTANTIATES A JLABEL
+		dt = new JLabel("Date");							// INSTANTIATES A JLABEL
+		grpSz = new JLabel("Group Size");					// INSTANTIATES A JLABEL
+		cst = new JLabel("Cost");							// INSTANTIATES A JLABEL
+		font = new Font("Times New Roman",Font.BOLD,15);	// INSTANTIATES A FONT
+		frame = new JFrame("List of Ski Trip Customers");	// INSTANTIATES A FRAME
 		container = frame.getContentPane();					// CREATES A CONTENT PANE, WHICH  
 															// HOLDS THE OBJECTS ON THE FRAME
-
+		
 		/*************************************/
 		/* CREATES A BLANK JFRAME AND JPANEL */
 		/*************************************/
 		frame.pack();							// SIZE OF THE FRAME
-		frame.setBounds(450, 150, 500, 450);	// SETS X POSITION, Y POSITION, LENGTH, WIDTH FOR FRAME
+		frame.setBounds(390, 140, 890, 550);	// SETS X POSITION, Y POSITION, LENGTH,
+												// AND WIDTH OF THE JFRAME
 		frame.setVisible(true);					// ALLOWS THE JFRAME TO BE VISIBLE
 		container.setLayout(null);				// SETS THE LAYOUT FOR THE JFRAME
-		container.setBackground(Color.BLUE);	// SETS THE BACKGROUND COLOR OF FRAME
-		frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);// ALLOWS THE JFRAME TO BE CLOSED
+		container.setBackground(Color.WHITE);	// SETS THE BACKGROUND COLOR
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);// ALLOWS THE JFRAME TO BE CLOSED
+		
+		/****************************************************************/
+		/*  IF STATEMENT TO CHECK IF MENU NUMBER IS FOR THE REMOVE MENU */
+		/****************************************************************/
+		if (menu == 1)
+		{
+			menuNum = menu;						// ASSIGNS THE MENU NUMBER
+			nextMenu.setText("Remove Menu");	// SETS TEXT TO REMOVE MENU
+			nextMenu.setVisible(true);			// DISPLAYS THE BUTTON
+		}
+		
+		
+		/*********************************************************************/
+		/*  ELSE IF STATEMENT TO CHECK IF MENU NUMBER IS FOR THE MODIFY MENU */
+		/*********************************************************************/
+		else if(menu == 2)
+		{
+			menuNum = menu;						// ASSIGNS THE MENU NUMBER
+			nextMenu.setText("Modify Menu");	// SETS TEXT TO MODIFY MENU
+			nextMenu.setVisible(true);			// DISPLAYS THE BUTTON
+		}
+		
+		/************************************************************************************/
+		/*  ELSE IF STATEMENT TO CHECK IF MENU NUMBER IS FOR THE DISPLAY CUSTOMER LIST MENU */
+		/************************************************************************************/
+		else if(menu == 3)
+		{
+			menuNum = menu;					// ASSIGNS THE MENU NUMBER
+			nextMenu.setText("");			// SETS TEXT TO BLANK
+			nextMenu.setVisible(false);		// HIDES THE BUTTON
+		}
 		
 		/**************************/
 		/* SETS FONT OF THE LABEL */
 		/**************************/
-		heading.setFont(font);		// SETS FONT OF HEADING LABEL
-		changeCust.setFont(font);	// SETS FONT OF CHANGING CUSTOMER LABEL
-		cost.setFont(font);			// SETS FONT OF REMOVE LABEL
-		print.setFont(font);		// SETS FONT OF PRINT LABEL
+		custNum.setFont(font);		// SETS THE FONT OF THE CUSTOMER NUMBER LABEL
+		grpID.setFont(font);		// SETS THE FONT OF THE GROUP ID LABEL	
+		nm.setFont(font);			// SETS THE FONT OF THE NAME LABEL
+		dt.setFont(font);			// SETS THE FONT OF THE DATE LABEL
+		grpSz.setFont(font);		// SETS THE FONT OF THE GROUP SIZE LABEL
+		cst.setFont(font);			// SETS THE FONT OF THE COST LABEL
 		
-		/**************************************/
-		/* SETS FOREGROUND COLOR OF THE LABEL */
-		/**************************************/
-		heading.setForeground(Color.WHITE);		// SETS FOREGROUND COLOR OF HEADING LABEL
-		changeCust.setForeground(Color.WHITE);	// SETS FOREGROUND COLOR OF CHANGING CUSTOMER LABEL
-		cost.setForeground(Color.WHITE);		// SETS FOREGROUND COLOR OF REMOVE LABEL
-		print.setForeground(Color.WHITE);		// SETS FOREGROUND COLOR OF PRINT LABEL
-			
-		/**********************************************/
-		/* SETS BOUNDS FOR BUTTONS, JTEXTFIELD, LABEL */
-		/**********************************************/
-		insertB.setBounds(80, 110, 100, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		removeB.setBounds(190, 110, 100, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		modifyB.setBounds(300, 110, 100, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		costB.setBounds(80, 190, 150, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		profitDtB.setBounds(240, 190, 150, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		profitB.setBounds(80, 220, 150, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		busAmt.setBounds(240, 220, 150, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		busDtB.setBounds(50, 300, 180, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		alphB.setBounds(240, 300, 180, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		numB.setBounds(50, 330, 180, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		grpB.setBounds(240, 330, 180, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		quitB.setBounds(340, 370, 120, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		heading.setBounds(170, 20, 400, 50);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		changeCust.setBounds(20, 70, 500, 50);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		cost.setBounds(20, 150, 500, 50);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		print.setBounds(20, 260, 500, 50);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		/**************************/
+		/* SETS BOUNDS FOR BUTTON */
+		/**************************/
+		next.setBounds(720, 340, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		previous.setBounds(630, 340, 85, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		quit.setBounds(720, 430, 120, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		returnB.setBounds(630, 430, 85, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		nextMenu.setBounds(630, 385, 120, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		custNum.setBounds(20, 10, 150, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		grpID.setBounds(180, 10, 150, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		nm.setBounds(310, 10, 230, 25);			// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		dt.setBounds(550, 10, 90, 25);			// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		grpSz.setBounds(650, 10, 110, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		cst.setBounds(770, 10, 100, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		
 		/**********************************************/
 		/* ADDS LISTENER TO BUTTON TO PERFORM ACTIONS */
 		/**********************************************/
-		insertB.addActionListener(this);	// ADDS ACTIONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED
-		removeB.addActionListener(this);	// ADDS ACTIONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED
-		modifyB.addActionListener(this);	// ADDS ACTIONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED
-		quitB.addActionListener(this);		// ADDS ACITONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED
-		costB.addActionListener(this);		// ADDS ACITONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED
-		busDtB.addActionListener(this);		// ADDS ACITONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED
-		profitDtB.addActionListener(this);	// ADDS ACITONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED
-		profitB.addActionListener(this);	// ADDS ACITONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED
-		alphB.addActionListener(this);		// ADDS ACITONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED
-		numB.addActionListener(this);		// ADDS ACITONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED
-		grpB.addActionListener(this);		// ADDS ACITONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED
-		busAmt.addActionListener(this);		// ADDS ACTIONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED 
+		next.addActionListener(this);		// ADDS ACTIONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED
+		previous.addActionListener(this);	// ADDS ACTIONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED 
+		quit.addActionListener(this);		// ADDS ACTIONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED 
+		returnB.addActionListener(this);	// ADDS ACTIONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED
+		nextMenu.addActionListener(this);	// ADDS ACTIONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED
+
+		int count = 0;		// DECLARES AND INTIALIZES A COUNT TO RESET THE Y-VALUES
+		
+		/***********************************************************************/
+		/* FOR LOOP TO ADD PRINT CUSTOMER NUMBER LABELS TO ARRAYLIST OF LABELS */
+		/***********************************************************************/
+		for(int i=cnt;i<custList.size();i++)
+		{
+			int y = (count * 30) + 30;	// DECLARES Y VARIBALE FOR Y POSITION
+			int custNum = i+1;		// DELCARES CUSTOMER NUMBER
+			
+			/*********************************************************************/
+			/* IF STATEMENT TO CHECK IF CUSTOMER NUMBER IS A SINGLE DIGIT NUMBER */	
+			/*********************************************************************/
+			if(custNum < 10)
+			{
+				printcustNum = new JLabel("0"+custNum);	// INSTANTIATES A NEW PRINT CUSTOMER NUMBER LABEL
+			}
+			
+			/**************************************************************************/
+			/* ELSE IF STATEMENT TO CHECK IF CUSTOMER NUMBER IS A DOUBLE DIGIT NUMBER */	
+			/**************************************************************************/
+			else if(custNum >= 10)
+			{
+				printcustNum = new JLabel(""+custNum);			// INSTANTIATES A NEW PRINT CUSTOMER NUMBER LABEL
+			}
+			
+			printcustNum.setBounds(20, y, 50, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+			printcustNum.setFont(font);	// SETS FONT
+			allCust.add(printcustNum);	// ADDS PRINT CUSTOMER NUMBER LABEL TO ARRAYLIST OF LABELS 
+			
+			/********************************************************************/
+			/* IF STATEMENT TO CHECK IF TEN CUSTOMERS ARE PRINTED TO THE SCREEN */	
+			/********************************************************************/
+			if ((i+1)%10 == 0)
+			{
+				break;		// BREAKS AFTER TEN CUSTOMERS ARE PRINTED TO THE SCREEN
+			}
+			
+			count+=1;
+		}
+		
+		count = 0;	// INITIALIZES COUNT
+
+		
+		/****************************************************************/
+		/* FOR LOOP TO ADD PRINT GROUP ID LABELS TO ARRAYLIST OF LABELS */
+		/****************************************************************/
+		for(int i=cnt;i<custList.size();i++)
+		{
+			int y = (count * 30) + 30;	// DECLARES Y VARIBALE FOR Y POSITION
+			
+			printID = new JLabel(""+cust.get(i).getID());	// INSTANTIATES A NEW PRINT ID LABEL
+			printID.setBounds(180, y, 150, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+			printID.setFont(font);				// SETS FONT
+			allCust.add(printID);				// ADDS PRINT ID LABEL TO ARRAYLIST OF LABELS 
+			
+			/********************************************************************/
+			/* IF STATEMENT TO CHECK IF TEN CUSTOMERS ARE PRINTED TO THE SCREEN */	
+			/********************************************************************/
+			if ((i+1)%10 == 0)
+			{
+				break;		// BREAKS AFTER TEN CUSTOMERS ARE PRINTED TO THE SCREEN
+			}
+			
+			count+=1;
+		}
+		
+		count = 0;	// INITIALIZES COUNT
+		
+		/************************************************************/
+		/* FOR LOOP TO ADD PRINT NAME LABELS TO ARRAYLIST OF LABELS */
+		/************************************************************/
+		for(int i=cnt;i<custList.size();i++)
+		{
+			int y = (count * 30) + 30;	// DECLARES Y VARIBALE FOR Y POSITION
+				
+			printName = new JLabel(""+cust.get(i).getName());// INSTANTIATES A NEW PRINT NAME LABEL
+			printName.setBounds(310, y, 230, 25);// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+			printName.setFont(font);			// SETS FONT
+			allCust.add(printName);				// ADDS PRINT NAME LABEL TO ARRAYLIST OF LABELS
+			
+			/********************************************************************/
+			/* IF STATEMENT TO CHECK IF TEN CUSTOMERS ARE PRINTED TO THE SCREEN */	
+			/********************************************************************/
+			if ((i+1)%10 == 0)
+			{
+				break;		// BREAKS AFTER TEN CUSTOMERS ARE PRINTED TO THE SCREEN
+			}
+			
+			count+=1;
+		}
+		
+		count = 0;	// INITIALIZES COUNT
+		
+		/************************************************************/
+		/* FOR LOOP TO ADD PRINT DATE LABELS TO ARRAYLIST OF LABELS */
+		/************************************************************/
+		for(int i=cnt;i<custList.size();i++)
+		{
+			int y = (count * 30) + 30;	// DECLARES Y VARIBALE FOR Y POSITION
+				
+			printDate = new JLabel(""+cust.get(i).getDate());	// INSTANTIATES A NEW PRINT DATE LABEL
+			printDate.setBounds(550, y, 90, 25);// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+			printDate.setFont(font);			// SETS FONT
+			allCust.add(printDate);				// ADDS PRINT DATE LABEL TO ARRAYLIST OF LABELS 
+			
+			/********************************************************************/
+			/* IF STATEMENT TO CHECK IF TEN CUSTOMERS ARE PRINTED TO THE SCREEN */	
+			/********************************************************************/
+			if ((i+1)%10 == 0)
+			{
+				break;		// BREAKS AFTER TEN CUSTOMERS ARE PRINTED TO THE SCREEN
+			}
+			
+			count+=1;
+		}
+		
+		count = 0;	// INITIALIZES COUNT
+		
+		/************************************************************/
+		/* FOR LOOP TO ADD PRINT SIZE LABELS TO ARRAYLIST OF LABELS */
+		/************************************************************/
+		for(int i=cnt;i<custList.size();i++)
+		{
+			int y = (count * 30) + 30;	// DECLARES Y VARIBALE FOR Y POSITION
+				
+			printSize = new JLabel(""+cust.get(i).getSize());	// INSTANTIATES A NEW PRINT SIZE LABEL
+			printSize.setBounds(650, y, 110, 25);// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+			printSize.setFont(font);			// SETS FONT
+			allCust.add(printSize);				// ADDS PRINT SIZE LABEL TO ARRAYLIST OF LABELS 
+			
+			/********************************************************************/
+			/* IF STATEMENT TO CHECK IF TEN CUSTOMERS ARE PRINTED TO THE SCREEN */	
+			/********************************************************************/
+			if ((i+1)%10 == 0)
+			{
+				break;		// BREAKS AFTER TEN CUSTOMERS ARE PRINTED TO THE SCREEN
+			}
+			
+			count+=1;
+		}
+		
+		count = 0;	// INITIALIZES COUNT
+		
+		/************************************************************/
+		/* FOR LOOP TO ADD PRINT COST LABELS TO ARRAYLIST OF LABELS */
+		/************************************************************/
+		for(int i=cnt;i<custList.size();i++)
+		{
+			int y = (count * 30) + 30;	// DECLARES Y VARIBALE FOR Y POSITION
+				
+			printCost = new JLabel("$"+cust.get(i).getCost());	// INSTANTIATES A NEW PRINT COST LABEL
+			printCost.setBounds(770, y, 100, 25);// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+			printCost.setFont(font);			// SETS FONT
+			allCust.add(printCost);				// ADDS PRINT COST LABEL TO ARRAYLIST OF LABELS 
+			
+			/********************************************************************/
+			/* IF STATEMENT TO CHECK IF TEN CUSTOMERS ARE PRINTED TO THE SCREEN */	
+			/********************************************************************/
+			if ((i+1)%10 == 0)
+			{
+				break;		// BREAKS AFTER TEN CUSTOMERS ARE PRINTED TO THE SCREEN
+			}
+			
+			count+=1;
+		}
+		
+		num = cnt+10; 	// NUMBER OF CUSTOMERS PRINTED TO THE SCREEN
+		
+		/*********************************************************************************/
+		/* IF STATEMENT TO CHECK IF NUMBER OF CUSTOMERS ALREADY PRINTED EXCEEDS CUSTLIST */	
+		/*********************************************************************************/
+		if(num >= custList.size()-1)
+		{
+			next.setVisible(false);		// HIDES THE NEXT BUTTON ONCE ALL THE CUSTOMERS 
+										// HAVE BEEN PRINTED TO THE SCREEN
+		}
+		
+		/*********************************************************************************/
+		/* IF STATEMENT TO CHECK IF CUSTOMER INFORMATION OUTPUT IS STILL ON FIRST SCREEN */	
+		/*********************************************************************************/
+		if(num <=10)
+		{
+			previous.setVisible(false);	// HIDES THE PREVIOUS BUTTON SINCE ONLY TEN CUSTOMERS
+										// HAVE BEEN PRINTED TO THE SCREEN
+		}
 		
 		/*************************/
 		/* ADDS BUTTONS TO FRAME */
 		/*************************/
-		container.add(insertB);			// ADDS INSERT BUTTON TO CONTAINER
-		container.add(removeB);			// ADDS REMOVE BUTTON TO CONTAINER
-		container.add(quitB);			// ADDS QUIT BUTTON TO CONTAINER
-		container.add(modifyB);			// ADDS MODIFY BUTTON TO CONTAINER
-		container.add(costB);			// ADDS COST BUTTON TO CONTAINER
-		container.add(busDtB);			// ADDS BUS BUTTON TO CONTAINER
-		container.add(profitDtB);		// ADDS PROFIT BY DATE BUTTON TO CONTAINER
-		container.add(profitB);			// ADDS TOTAL PROFIT BUTTON TO CONTAINER
-		container.add(alphB);			// ADDS ALPHABETIC SORTING BUTTON TO CONTAINER
-		container.add(numB);			// ADDS NUMERIC SORTING BUTTON TO CONTAINER
-		container.add(grpB);			// ADDS GROUP SIZE SORTING BUTTON TO CONTAINER
-		container.add(busAmt);			// ADDS BUS AMOUNT BUTTON TO CONTAINER
-		container.add(heading);			// ADDS HEADING LABEL TO CONTAINER
-		container.add(changeCust);		// ADDS CHANGING CUSTOMER LABEL TO CONTAINER
-		container.add(cost);			// ADDS COST LABEL TO CONTAINER
-		container.add(print);			// ADDS PRINT LABEL TO CONTAINER
+		container.add(next);		// ADDS NEXT BUTTON TO CONTAINER
+		container.add(previous);	// ADDS PREVIOUS BUTTON TO CONTAINER
+		container.add(quit);		// ADDS QUIT BUTTON TO CONTAINER
+		container.add(returnB);		// ADDS RETURN BUTTON TO CONTAINER
+		container.add(nextMenu);	// ADDS NEXT MENU BUTTON TO CONTAINER
+		container.add(custNum);		// ADDS CUSTOMER NUMBER LABEL TO CONTAINER
+		container.add(grpID);		// ADDS GROUP ID NUMBER LABEL TO CONTAINER
+		container.add(nm);			// ADDS GROUP NAME LABEL TO CONTAINER
+		container.add(grpSz);		// ADDS GROUP SIZE LABEL TO CONTAINER
+		container.add(dt);			// ADDS GROUP DATE LABEL TO CONTAINER
+		container.add(cst);			// ADDS GROUP COST LABEL TO CONTAINER
+		
+		/************************************************/
+		/* ENHANCED FOR LOOP TO ADD LABELS TO CONTAINER */
+		/************************************************/
+		for(JLabel j:allCust)
+		{
+			container.add(j);	// ADDS LABEL TO CONTAINER
+		}
+	}
+	
+	public Print_ArrayList(Customer cust)
+	/************************************************/
+	/* DEFAULT CONSTRUCTOR - IT CREATES A FRAME FOR */
+	/*						 CONTENT PANE			*/
+	/************************************************/
+	{
+		/*************************/
+		/* INSTANTIATION SECTION */
+		/*************************/
+		quit = new JButton("Quit Program");					// INSTANTIATES A JBUTTON
+		returnB = new JButton("Main Menu");					// INSTANTIATES A JBUTTON
+		grpID = new JLabel("Group ID");						// INSTANTIATES A JLABEL
+		nm = new JLabel("Name");							// INSTANTIATES A JLABEL
+		dt = new JLabel("Date");							// INSTANTIATES A JLABEL
+		grpSz = new JLabel("Group Size");					// INSTANTIATES A JLABEL
+		cst = new JLabel("Cost");							// INSTANTIATES A JLABEL
+		printID = new JLabel(""+cust.getID());				// INSTANTIATES A NEW PRINT ID LABEL
+		printName = new JLabel(""+cust.getName());			// INSTANTIATES A NEW PRINT NAME LABEL
+		printDate = new JLabel(""+cust.getDate());			// INSTANTIATES A NEW PRINT DATE LABEL
+		printSize = new JLabel(""+cust.getSize());			// INSTANTIATES A NEW PRINT SIZE LABEL
+		printCost = new JLabel("$"+cust.getCost());			// INSTANTIATES A NEW PRINT COST LABEL
+		font = new Font("Times New Roman",Font.BOLD,15);	// INSTANTIATES A FONT
+		frame = new JFrame("List of Ski Trip Customers");	// INSTANTIATES A FRAME
+		container = frame.getContentPane();					// CREATES A CONTENT PANE, WHICH  
+															// HOLDS THE OBJECTS ON THE FRAME
+		
+		/*************************************/
+		/* CREATES A BLANK JFRAME AND JPANEL */
+		/*************************************/
+		frame.pack();							// SIZE OF THE FRAME
+		frame.setBounds(390, 140, 890, 200);	// SETS X POSITION, Y POSITION, LENGTH,
+												// AND WIDTH OF THE JFRAME
+		frame.setVisible(true);					// ALLOWS THE JFRAME TO BE VISIBLE
+		container.setLayout(null);				// SETS THE LAYOUT FOR THE JFRAME
+		container.setBackground(Color.WHITE);	// SETS THE BACKGROUND COLOR
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);// ALLOWS THE JFRAME TO BE CLOSED
+		
+		/**************************/
+		/* SETS FONT OF THE LABEL */
+		/**************************/
+		grpID.setFont(font);		// SETS THE FONT OF THE GROUP ID LABEL	
+		nm.setFont(font);			// SETS THE FONT OF THE NAME LABEL
+		dt.setFont(font);			// SETS THE FONT OF THE DATE LABEL
+		grpSz.setFont(font);		// SETS THE FONT OF THE GROUP SIZE LABEL
+		cst.setFont(font);			// SETS THE FONT OF THE COST LABEL
+		printID.setFont(font);		// SETS THE FONT OF THE PRINT ID LABEL
+		printName.setFont(font);	// SETS THE FONT OF THE PRINT NAME LABEL
+		printDate.setFont(font);	// SETS THE FONT OF THE PRINT DATE LABEL
+		printSize.setFont(font);	// SETS THE FONT OF THE PRINT SIZE LABEL
+		printCost.setFont(font);	// SETS THE FONT OF THE PRINT COST LABEL
+
+		/**************************/
+		/* SETS BOUNDS FOR BUTTON */
+		/**************************/
+		quit.setBounds(710, 380, 120, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		returnB.setBounds(630, 380, 75, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		grpID.setBounds(20, 10, 150, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		nm.setBounds(180, 10, 230, 25);			// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		dt.setBounds(310, 10, 90, 25);			// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		grpSz.setBounds(550, 10, 110, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		cst.setBounds(650, 10, 100, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		printID.setBounds(180, 40, 150, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		printName.setBounds(310, 40, 230, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		printDate.setBounds(550, 40, 90, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		printSize.setBounds(650, 40, 110, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		printCost.setBounds(770, 40, 100, 25);// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+
+		/**********************************************/
+		/* ADDS LISTENER TO BUTTON TO PERFORM ACTIONS */
+		/**********************************************/
+		next.addActionListener(this);		// ADDS ACTIONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED 
+		quit.addActionListener(this);		// ADDS ACTIONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED 
+		returnB.addActionListener(this);	// ADDS ACTIONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED
+		
+		/*************************/
+		/* ADDS BUTTONS TO FRAME */
+		/*************************/
+		container.add(quit);		// ADDS QUIT BUTTON TO CONTAINER
+		container.add(returnB);		// ADDS RETURN BUTTON TO CONTAINER
+		container.add(nextMenu);	// ADDS NEXT MENU BUTTON TO CONTAINER
+		container.add(custNum);		// ADDS CUSTOMER NUMBER LABEL TO CONTAINER
+		container.add(grpID);		// ADDS GROUP ID NUMBER LABEL TO CONTAINER
+		container.add(nm);			// ADDS GROUP NAME LABEL TO CONTAINER
+		container.add(grpSz);		// ADDS GROUP SIZE LABEL TO CONTAINER
+		container.add(dt);			// ADDS GROUP DATE LABEL TO CONTAINER
+		container.add(cst);			// ADDS GROUP COST LABEL TO CONTAINER
+		container.add(printID);		// ADDS PRINT ID LABEL TO CONTAINER
+		container.add(printName);	// ADDS PRINT NAME LABEL TO CONTAINER	
+		container.add(printDate);	// ADDS PRINT DATE LABEL TO CONTAINER
+		container.add(printSize);	// ADDS PRINT SIZE LABEL TO CONTAINER
+		container.add(printCost);	// ADDS PRINT COST LABEL TO CONTAINER
+	}
+	
+	public Print_ArrayList(int cnt, double cst2, String dt2, int totSz, int b, int rfnd, int sts)
+	/************************************************/
+	/* DEFAULT CONSTRUCTOR - IT CREATES A FRAME FOR */
+	/*						 CONTENT PANE			*/
+	/************************************************/
+	{
+		/*************************/
+		/* INSTANTIATION SECTION */
+		/*************************/
+		next = new JButton("Next");								// INSTANTIATES A JBUTTON
+		previous = new JButton("Previous");						// INSTANTIATES A JBUTTON
+		quit = new JButton("Quit Program");						// INSTANTIATES A JBUTTON
+		returnB = new JButton("Return to Print Date");			// INSTANTIATES A JBUTTON
+		custNum = new JLabel("Customer Number");				// INSTANTIATES A JLABEL
+		grpID = new JLabel("Group ID");							// INSTANTIATES A JLABEL
+		nm = new JLabel("Name");								// INSTANTIATES A JLABEL
+		dt = new JLabel("Date");								// INSTANTIATES A JLABEL
+		grpSz = new JLabel("Group Size");						// INSTANTIATES A JLABEL
+		cst = new JLabel("Cost");								// INSTANTIATES A JLABEL
+		bus = new JLabel("Number of Buses Needed: ");			// INSTANTIATES A JLABEL
+		refund = new JLabel("Number of Refunds Needed: ");		// INSTANTIATES A JLABEL
+		seats = new JLabel("Number of Seats Available: ");		// INSTANTIATES A JLABEL
+		totalSz = new JLabel("Total: ");						// INSTANTIATES A JLABEL
+		printTotSz = new JLabel("" + totSz);					// INSTANTIATES A JLABEL
+		printTotCost = new JLabel("$" + cst2);					// INSTANTIATES A JLABEL
+		printBus = new JLabel("" + b);							// INSTANTIATES A JLABEL
+		printRefund = new JLabel("" + rfnd);					// INSTANTIATES A JLABEL
+		printSeats  = new JLabel("" + sts);						// INSTANTIATES A JLABEL
+		font = new Font("Times New Roman",Font.BOLD,15);		// INSTANTIATES A FONT
+		frame = new JFrame("List of Ski Trip Customers");		// INSTANTIATES A FRAME
+		container = frame.getContentPane();						// CREATES A CONTENT PANE, WHICH  
+																// HOLDS THE OBJECTS ON THE FRAME
+		
+		/*************************************/
+		/* CREATES A BLANK JFRAME AND JPANEL */
+		/*************************************/
+		frame.pack();							// SIZE OF THE FRAME
+		frame.setBounds(370, 100, 900, 650);	// SETS X POSITION, Y POSITION, LENGTH, WIDTH
+												// AND WIDTH OF THE JFRAME
+		frame.setVisible(true);					// ALLOWS THE JFRAME TO BE VISIBLE
+		container.setLayout(null);				// SETS THE LAYOUT FOR THE JFRAME
+		container.setBackground(Color.WHITE);	// SETS THE BACKGROUND COLOR
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);// ALLOWS THE JFRAME TO BE CLOSED
+		
+		/**************************/
+		/* SETS FONT OF THE LABEL */
+		/**************************/
+		custNum.setFont(font);		// SETS THE FONT OF THE CUSTOMER NUMBER LABEL
+		grpID.setFont(font);		// SETS THE FONT OF THE GROUP ID LABEL	
+		nm.setFont(font);			// SETS THE FONT OF THE NAME LABEL
+		dt.setFont(font);			// SETS THE FONT OF THE DATE LABEL
+		grpSz.setFont(font);		// SETS THE FONT OF THE GROUP SIZE LABEL
+		cst.setFont(font);			// SETS THE FONT OF THE COST LABEL
+		totalSz.setFont(font);		// SETS THE FONT OF THE TOTAL SIZE LABEL
+		bus.setFont(font);			// SETS THE FONT OF THE TOTAL BUSES LABEL
+		refund.setFont(font);		// SETS THE FONT OF THE REFUND LABEL
+		seats.setFont(font);		// SETS THE FONT OF THE SEATS LABEL
+		printTotSz.setFont(font);	// SETS THE PRINT TOTAL SIZE LABEL
+		printBus.setFont(font);		// SETS THE PRINT BUSES LABEL
+		printRefund.setFont(font);	// SETS THE PRINT REFUND LABEL
+		printSeats.setFont(font);	// SETS THE PRINT SEATS LABEL
+		printTotCost.setFont(font);	// SETS THE PRINT TOTAL COST LABEL
+		
+		/**************************/
+		/* SETS BOUNDS FOR BUTTON */
+		/**************************/
+		next.setBounds(710, 500, 75, 25);			// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		previous.setBounds(630, 500, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		quit.setBounds(785, 530, 120, 25);			// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		returnB.setBounds(630, 545, 150, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		custNum.setBounds(20, 10, 150, 25);			// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		grpID.setBounds(180, 10, 150, 25);			// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		nm.setBounds(310, 10, 230, 25);				// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		dt.setBounds(550, 10, 90, 25);				// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		grpSz.setBounds(650, 10, 110, 25);			// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		cst.setBounds(770, 10, 100, 25);			// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		totalSz.setBounds(20, 380, 50, 25);			// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		bus.setBounds(20, 410, 200, 25);			// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		refund.setBounds(20, 440, 200, 25);			// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		seats.setBounds(20, 470, 200, 25);			// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		printTotSz.setBounds(650, 380, 100, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		printBus.setBounds(230, 410, 50, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		printRefund.setBounds(230, 440, 50, 25); 	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		printSeats.setBounds(230, 470, 50, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		printTotCost.setBounds(770, 380, 100, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		
+		/**********************************************/
+		/* ADDS LISTENER TO BUTTON TO PERFORM ACTIONS */
+		/**********************************************/
+		next.addActionListener(this);		// ADDS ACTIONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED
+		previous.addActionListener(this);	// ADDS ACTIONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED
+		quit.addActionListener(this);		// ADDS ACTIONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED 
+		returnB.addActionListener(this);	// ADDS ACTIONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED
+
+		/***********************************************************/
+		/* FOR LOOP TO FIND THE NUMBER OF CUSTOMERS WITH SAME DATE */
+		/***********************************************************/
+		for(int j = 0; j < custList.size();j++)
+		{
+			if(custList.get(j).getDate().equals(dt2)) 
+			{
+				size+=1;	// CALCULATES NUMBER OF CUSTOMERS WITH SELECTED DATE
+			}
+		}
+		
+		int count = 0;	// DECLARES AND INITIALIZES COUNT
+		
+		/***********************************************************************/
+		/* FOR LOOP TO ADD PRINT CUSTOMER NUMBER LABELS TO ARRAYLIST OF LABELS */
+		/***********************************************************************/
+		for(int i=cnt;i<size;i++)
+		{
+			int y = (count * 30) + 30;	// DECLARES Y VARIBALE FOR Y POSITION
+			int custNum = i+1;		// DELCARES CUSTOMER NUMBER
+			
+			/*********************************************************************/
+			/* IF STATEMENT TO CHECK IF CUSTOMER NUMBER IS A SINGLE DIGIT NUMBER */	
+			/*********************************************************************/
+			if(custNum < 10)
+			{
+				printcustNum = new JLabel("0"+custNum);	// INSTANTIATES A NEW PRINT CUSTOMER NUMBER LABEL
+			}
+			
+			/**************************************************************************/
+			/* ELSE IF STATEMENT TO CHECK IF CUSTOMER NUMBER IS A DOUBLE DIGIT NUMBER */	
+			/**************************************************************************/
+			else if(custNum >= 10)
+			{
+				printcustNum = new JLabel(""+custNum);			// INSTANTIATES A NEW PRINT CUSTOMER NUMBER LABEL
+			}
+			printcustNum.setBounds(20, y, 50, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+			printcustNum.setFont(font);	// SETS FONT
+			allCust.add(printcustNum);	// ADDS PRINT CUSTOMER NUMBER LABEL TO ARRAYLIST OF LABELS 
+			
+			/********************************************************************/
+			/* IF STATEMENT TO CHECK IF TEN CUSTOMERS ARE PRINTED TO THE SCREEN */	
+			/********************************************************************/
+			if ((i+1)%10 == 0)
+			{
+				break;		// BREAKS AFTER TEN CUSTOMERS ARE PRINTED TO THE SCREEN
+			}
+			
+			count+=1;
+		}
+			
+		count = 0;	// INITIALIZES COUNT
+		
+		/****************************************************************/
+		/* FOR LOOP TO ADD PRINT GROUP ID LABELS TO ARRAYLIST OF LABELS */
+		/****************************************************************/
+		for(int i=0;i<custList.size();i++)
+		{
+			/****************************************************************/
+			/* IF STATEMENT TO CHECK IF SELECTED DATE MATCHES CUSTLIST DATE */
+			/****************************************************************/
+			if(custList.get(i).getDate().equals(dt2))
+			{
+				int y = (count * 30) + 30;	// DECLARES Y VARIBALE FOR Y POSITION
+				
+				printID = new JLabel(""+custList.get(i).getID());	// INSTANTIATES A NEW PRINT ID LABEL
+				printID.setBounds(180, y, 150, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+				printID.setFont(font);				// SETS FONT
+				allCust.add(printID);				// ADDS PRINT ID LABEL TO ARRAYLIST OF LABELS 
+				count+=1; 							// CALCULATES EVERY OCCURENCE OF DATE 
+
+			}
+		}
+		
+		count = 0;	// INITIALIZES COUNT
+
+		/************************************************************/
+		/* FOR LOOP TO ADD PRINT NAME LABELS TO ARRAYLIST OF LABELS */
+		/************************************************************/
+		for(int i=0;i<custList.size();i++)
+		{
+			/****************************************************************/
+			/* IF STATEMENT TO CHECK IF SELECTED DATE MATCHES CUSTLIST DATE */
+			/****************************************************************/
+			if(custList.get(i).getDate().equals(dt2))
+			{
+				int y = (count * 30) + 30;	// DECLARES Y VARIBALE FOR Y POSITION
+				
+				printName = new JLabel(""+custList.get(i).getName());// INSTANTIATES A NEW PRINT NAME LABEL
+				printName.setBounds(310, y, 230, 25);// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+				printName.setFont(font);			// SETS FONT
+				allCust.add(printName);				// ADDS PRINT NAME LABEL TO ARRAYLIST OF LABELS 
+				
+				/********************************************************************/
+				/* IF STATEMENT TO CHECK IF TEN CUSTOMERS ARE PRINTED TO THE SCREEN */	
+				/********************************************************************/
+				if ((i+1)%10 == 0)
+				{
+					break;		// BREAKS AFTER TEN CUSTOMERS ARE PRINTED TO THE SCREEN
+				}
+				
+				count+=1;							// CALCULATES EVERY OCCURENCE OF DATE 
+			}
+		}
+		
+		count = 0;	// INITIALIZES COUNT
+
+		/************************************************************/
+		/* FOR LOOP TO ADD PRINT DATE LABELS TO ARRAYLIST OF LABELS */
+		/************************************************************/
+		for(int i=0;i<custList.size();i++)
+		{
+			/****************************************************************/
+			/* IF STATEMENT TO CHECK IF SELECTED DATE MATCHES CUSTLIST DATE */
+			/****************************************************************/
+			if(custList.get(i).getDate().equals(dt2))
+			{
+				int y = (count * 30) + 30;	// DECLARES Y VARIBALE FOR Y POSITION
+				
+				printDate = new JLabel(""+custList.get(i).getDate());	// INSTANTIATES A NEW PRINT DATE LABEL
+				printDate.setBounds(550, y, 90, 25);// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+				printDate.setFont(font);			// SETS FONT
+				allCust.add(printDate);				// ADDS PRINT DATE LABEL TO ARRAYLIST OF LABELS 
+				
+				/********************************************************************/
+				/* IF STATEMENT TO CHECK IF TEN CUSTOMERS ARE PRINTED TO THE SCREEN */	
+				/********************************************************************/
+				if ((i+1)%10 == 0)
+				{
+					break;		// BREAKS AFTER TEN CUSTOMERS ARE PRINTED TO THE SCREEN
+				}
+				
+				count+=1;							// CALCULATES EVERY OCCURENCE OF DATE 
+			}
+		}
+		
+		count = 0;	// INITIALIZES COUNT
+
+		/************************************************************/
+		/* FOR LOOP TO ADD PRINT SIZE LABELS TO ARRAYLIST OF LABELS */
+		/************************************************************/
+		for(int i=0;i<custList.size();i++)
+		{
+			/****************************************************************/
+			/* IF STATEMENT TO CHECK IF SELECTED DATE MATCHES CUSTLIST DATE */
+			/****************************************************************/
+			if(custList.get(i).getDate().equals(dt2))
+			{
+				int y = (count * 30) + 30;	// DECLARES Y VARIBALE FOR Y POSITION
+				
+				printSize = new JLabel(""+custList.get(i).getSize());	// INSTANTIATES A NEW PRINT SIZE LABEL
+				printSize.setBounds(650, y, 110, 25);// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+				printSize.setFont(font);			// SETS FONT
+				allCust.add(printSize);				// ADDS PRINT SIZE LABEL TO ARRAYLIST OF LABELS 
+				
+				/********************************************************************/
+				/* IF STATEMENT TO CHECK IF TEN CUSTOMERS ARE PRINTED TO THE SCREEN */	
+				/********************************************************************/
+				if ((i+1)%10 == 0)
+				{
+					break;		// BREAKS AFTER TEN CUSTOMERS ARE PRINTED TO THE SCREEN
+				}
+				
+				count+=1;							// CALCULATES EVERY OCCURENCE OF DATE
+			}
+		}
+		
+		count = 0;	// INITIALIZES COUNT
+
+		/************************************************************/
+		/* FOR LOOP TO ADD PRINT COST LABELS TO ARRAYLIST OF LABELS */
+		/************************************************************/
+		for(int i=0;i<custList.size();i++)
+		{
+			/****************************************************************/
+			/* IF STATEMENT TO CHECK IF SELECTED DATE MATCHES CUSTOMER DATE */	
+			/****************************************************************/
+			if(custList.get(i).getDate().equals(dt2))
+			{
+				int y = (count * 30) + 30;	// DECLARES Y VARIBALE FOR Y POSITION
+				
+				printCost = new JLabel("$"+custList.get(i).getCost());	// INSTANTIATES A NEW PRINT COST LABEL
+				printCost.setBounds(770, y, 100, 25);// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+				printCost.setFont(font);			// SETS FONT
+				allCust.add(printCost);				// ADDS PRINT COST LABEL TO ARRAYLIST OF LABELS 
+				
+				/********************************************************************/
+				/* IF STATEMENT TO CHECK IF TEN CUSTOMERS ARE PRINTED TO THE SCREEN */	
+				/********************************************************************/
+				if ((i+1)%10 == 0)
+				{
+					break;		// BREAKS AFTER TEN CUSTOMERS ARE PRINTED TO THE SCREEN
+				}
+				
+				count+=1;							// CALCULATES EVERY OCCURENCE OF DATE
+			}
+		}
+			
+		num = cnt+10; 	// NUMBER OF CUSTOMERS PRINTED TO THE SCREEN
+		
+		/*********************************************************************************/
+		/* IF STATEMENT TO CHECK IF NUMBER OF CUSTOMERS ALREADY PRINTED EXCEEDS CUSTLIST */	
+		/*********************************************************************************/
+		if(num >= (size-1))
+		{
+			next.setVisible(false);		// HIDES THE NEXT BUTTON ONCE ALL THE CUSTOMERS 
+										// HAVE BEEN PRINTED TO THE SCREEN
+		}
+		
+		/*********************************************************************************/
+		/* IF STATEMENT TO CHECK IF CUSTOMER INFORMATION OUTPUT IS STILL ON FIRST SCREEN */	
+		/*********************************************************************************/
+		if(num <=10)
+		{
+			previous.setVisible(false);	// HIDES THE PREVIOUS BUTTON SINCE ONLY TEN CUSTOMERS
+										// HAVE BEEN PRINTED TO THE SCREEN
+		}
+			
+		/*************************/
+		/* ADDS BUTTONS TO FRAME */
+		/*************************/
+		container.add(next);		// ADDS NEXT BUTTON TO CONTAINER
+		container.add(previous);	// ADDS PREVIOUS BUTTON TO CONTAINER
+		container.add(quit);		// ADDS QUIT BUTTON TO CONTAINER
+		container.add(returnB);		// ADDS RETURN BUTTON TO CONTAINER
+		container.add(custNum);		// ADDS CUSTOMER NUMBER LABEL TO CONTAINER
+		container.add(grpID);		// ADDS GROUP ID NUMBER LABEL TO CONTAINER
+		container.add(nm);			// ADDS GROUP NAME LABEL TO CONTAINER
+		container.add(grpSz);		// ADDS GROUP SIZE LABEL TO CONTAINER
+		container.add(dt);			// ADDS GROUP DATE LABEL TO CONTAINER
+		container.add(cst);			// ADDS GROUP COST LABEL TO CONTAINER
+		container.add(printTotSz);	// ADDS TOTAL SIZE FOR SPECIFIC DATE LABEL TO CONTAINER
+		container.add(printTotCost);// ADDS TOTAL COST FOR SPECIFIC DATE LABEL TO CONTAINER
+		container.add(printBus);	// ADDS TOTAL BUSES NEEDED FOR SPECIFIC DATE LABEL TO CONTAINER
+		container.add(printRefund);	// ADDS REFUNDS NEEDED FOR SPECIFIC DATE LABEL TO CONTAINER
+		container.add(printSeats);	// ADDS EXTRA SEATS FOR SPECIFIC DATE LABEL TO CONTAINER
+		container.add(bus);			// ADDS "BUSES NEEDED" LABEL TO CONTAINER
+		container.add(refund);		// ADDS "REFUNDS NEEDED" LABLE TO CONTAINER
+		container.add(seats);		// ADDS "SEATS AVAILABLE" LABEL TO CONTAINER
+		container.add(totalSz);		// ADDS "TOTAL" LABEL TO CONTAINER
+		
+		/************************************************/
+		/* ENHANCED FOR LOOP TO ADD LABELS TO CONTAINER */
+		/************************************************/
+		for(JLabel j:allCust)
+		{
+			container.add(j);	// ADDS LABEL TO CONTAINER
+		}
 	}
 	
 	public void actionPerformed(ActionEvent event)
-	/************************************************/
-	/* PRECONDITION - PROGRAM HAS A BUTTON			*/
-	/* POSTCONDITION - FUNCTION CREATES AN ACTION 	*/
-	/* 				   EVENT FOR BUTTON				*/
-	/************************************************/
+	/******************************************************/
+	/* PRECONDITION - PROGRAM HAS A BUTTON AND TEXT FIELD */
+	/* POSTCONDITION - FUNCTION CREATES AN ACTION 		  */
+	/* 				   EVENT FOR BUTTON AND TEXT FIELD	  */
+	/******************************************************/
 	{
 		/********************/
 		/* VARIABLE SECTION */
 		/********************/
-		ArrayList<Customer> sortCustDt;		// ARRAYLIST OF CUSTLIST SORTED BY SKI TRIP DATE
-		ArrayList<Customer> sortCustAlph;	// ARRAYLIST OF CUSTLIST SORTED ALPHABETICALLY
-		ArrayList<Customer> sortCustSz;		// ARRAYLIST OF CUSTLIST SORTED BY SKI TRIP GROUP SIZE
-		ArrayList<Customer> sortCustID;		// ARRAYLIST OF CUSTLIST SORTED BY SKI TRIP GROUP ID
-		String action; 		// STRING TO REPRESENT WHICH BUTTON WAS PRESSED
-		int confirm; 		// REUSUABLE INT INPUT FOR CONFIRMING AN ACTION
+		String action;		// STRING TO REPRESENT WHICH BUTTON WAS PRESSED
+		int confirm;		// REUSUABLE INT INPUT FOR CONFIRMING AN ACTION
 		
-		action = event.getActionCommand();	// CALL TO GET ACTION COMMAND
-		
+		/************************************/
+		/* ASSIGNS BUTTON PRESSED TO ACTION */
+		/************************************/
+		action = event.getActionCommand();		// CALL TO GET ACTION COMMAND
+	
 		/****************************************************/
 		/* IF STATEMENT TO CHECK IF QUIT BUTTON WAS PRESSED */	
 		/****************************************************/
-		if (action.equals("Quit Program"))
+		if(action.equals("Quit Program"))
 		{
-			confirm = confirmWindow();	// CALL TO CONFIRM WINDOW
+			confirm = confirmWindow();		// CALL TO CONFIRM WINDOW
 			
 			/******************************************************/
 			/* IF STATEMENT TO CONFIRM ACTION OF QUITTING PROGRAM */	
 			/******************************************************/
 			if(confirm == 0)
 			{
-				System.exit(0);			// TERMINATES THE PROGRAM
+				System.exit(0);				// EXITS THE PROGRAM
 			}
 		}
-			
-		/***********************************************************/
-		/* ELSE IF STATEMENT TO CHECK IF INSERT BUTTON WAS PRESSED */	
-		/***********************************************************/
-		else if (action.equals("Insert"))
-		{	
-			frame.dispose();		// DISPOSES OF MENU_GUI FRAME
-			new BusGUI();			// CREATES A NEW BUS GUI MENU	
-		}
-			
-		/***********************************************************/
-		/* ELSE IF STATEMENT TO CHECK IF REMOVE BUTTON WAS PRESSED */	
-		/***********************************************************/
-		else if (action.equals("Remove"))
-		{	
-			frame.dispose();				// DISPOSES OF MENU_GUI FRAME
-			menuNum = 1;					// ASSIGNS MENU NUMBER TO REMOVE MENU, MENU NUMBER
-			new Print_ArrayList(custList, menuNum);	// CREATES THE PRINT ARRAYLIST GUI	
+		
+		/******************************************************/
+		/* IF STATEMENT TO CHECK IF RETURN BUTTON WAS PRESSED */	
+		/******************************************************/
+		if(action.equals("Return"))
+		{
+			container.setVisible(false);	// HIDES THE FRAME
+			frame.dispose();				// DISPOSES THE PRINT ARRAYLIST WINDOW
+			new Menu_GUI();					// MAKES A NEW MENU GUI
 		}
 		
-		/**********************************************************/
-		/*ELSE IF STATEMENT TO CHECK IF MODIFY BUTTON WAS PRESSED */	
-		/**********************************************************/
-		else if (action.equals("Modify"))
+		/***********************************************************/
+		/* IF STATEMENT TO CHECK IF REMOVE MENU BUTTON WAS PRESSED */	
+		/***********************************************************/
+		if(action.equals("Remove Menu"))
 		{
-			frame.dispose();				// DISPOSES OF MENU_GUI FRAME
-			menuNum = 2;					// ASSIGNS MENU NUMBER TO MODIFY MENU NUMBER
-			new Print_ArrayList(custList, menuNum);	// CREATES THE PRINT ARRAYLIST GUI
+			container.setVisible(false);	// HIDES THE FRAME
+			frame.dispose();				// DISPOSES THE PRINT ARRAYLIST WINDOW
+			new Remove_Menu();				// CREATES A REMOVE MENU
+		}                                                                           
+		
+		/***********************************************************/
+		/* IF STATEMENT TO CHECK IF MODIFY MENU BUTTON WAS PRESSED */	
+		/***********************************************************/
+		if(action.equals("Modify Menu"))
+		{
+			container.setVisible(false);	// HIDES THE FRAME
+			frame.dispose();				// DISPOSES THE PRINT ARRAYLIST WINDOW
+			new Modify_Menu();				// CREATES A MODIFY MENU
 		}
+		
+		/*********************************************************/
+		/* IF STATEMENT TO CHECK IF MAIN MENU BUTTON WAS PRESSED */	
+		/*********************************************************/
+		if(action.equals("Main Menu"))
+		{
+			container.setVisible(false);// HIDES THE FRAME
+			frame.dispose();		// DISPOSES THE PRINT ARRAYLIST WINDOW
+			new Menu_GUI();			// CREATES A MENU GUI
+		}
+		
+		/*************************************************************************/
+		/* IF STATEMENT TO CHECK IF RETURN TO PRINT DATE MENU BUTTON WAS PRESSED */	
+		/*************************************************************************/
+		if(action.equals("Return to Print Date"))
+		{
+			container.setVisible(false);	// HIDES THE FRAME
+			frame.dispose();				// DISPOSE THE PRINT ARRAYLIST WINDOW
+			new Print_Date();				// CREATES A PRINT DATE GUI
+		}
+		
+		/****************************************************/
+		/* IF STATEMENT TO CHECK IF NEXT BUTTON WAS PRESSED */	
+		/****************************************************/
+		if(action.equals("Next"))
+		{			
+			frame.setVisible(false);// HIDES THE FRAME
+			frame.dispose();		// GETS RID OF THE OLD FRAME	
+			new Print_ArrayList(custList, menuNum, num);	// INSTANTIATES PRINT ARRAYLIST WINDOW
+		}	
 		
 		/********************************************************/
-		/*ELSE IF STATEMENT TO CHECK IF COST BUTTON WAS PRESSED */	
+		/* IF STATEMENT TO CHECK IF PREVIOUS BUTTON WAS PRESSED */	
 		/********************************************************/
-		else if (action.equals("Display Ski Trips"))
+		if(action.equals("Previous"))
 		{
-			confirm = confirmWindow();		// CALL TO CONFIRM WINDOW
-			
-			/**************************************************************/
-			/* IF STATEMENT TO CONFIRM ACTION OF VIEWING COST OF SKI TRIP */	
-			/**************************************************************/
-			if (confirm == 0)
-			{
-				frame.dispose();		// DISPOSES OF MENU_GUI FRAME
-				menuNum = 3;			// ASSIGNS MENU NUMBER TO PRINT CUSTOMER LIST MENU NUMBER
-				new Print_ArrayList(custList, menuNum);// CREATES THE PRINT ARRAYLIST GUI
-			}
-		}
-		
-		/******************************************************************/
-		/*ELSE IF STATEMENT TO CHECK IF PROFIT BY DATE BUTTON WAS PRESSED */	
-		/******************************************************************/
-		else if (action.equals("Profit by Date"))
-		{
-			confirm = confirmWindow();		// CALL TO CONFIRM WINDOW
-			
-			/************************************************************************/
-			/* IF STATEMENT TO CONFIRM ACTION OF VIEWING PROFIT BY DATE OF SKI TRIP */	
-			/************************************************************************/
-			if (confirm == 0)
-			{
-				frame.dispose();		// DISPOSES OF MENU_GUI FRAME
-				new Print_Date();		// INSTANTIATES PRINT DATE MENU
-			}
-		}
-		
-		/****************************************************************/
-		/*ELSE IF STATEMENT TO CHECK IF TOTAL PROFIT BUTTON WAS PRESSED */	
-		/****************************************************************/
-		else if (action.equals("Total Profit"))
-		{
-			confirm = confirmWindow();		// CALL TO CONFIRM WINDOW
-			
-			/**********************************************************************/
-			/* IF STATEMENT TO CONFIRM ACTION OF VIEWING TOTAL PROFIT OF SKI TRIP */	
-			/**********************************************************************/
-			if (confirm == 0)
-			{
-				frame.dispose();		// DISPOSES OF MENU_GUI FRAME
-				menuNum = 4;			// ASSIGNS MENU NUMBER TO PRINT CUSTOMER LIST MENU NUMBER
-				new Print_ArrayList(custList, menuNum);	// CREATES THE PRINT ARRAYLIST GUI
-			}
-		}
-				
-		/**********************************************************************/
-		/* IF STATEMENT TO CHECK IF SORTING ALPHABETICALLY BUTTON WAS PRESSED */	
-		/**********************************************************************/
-		if (action.equals("Sorting Alphabetically"))
-		{
-			confirm = confirmWindow();					// CALL TO CONFIRM WINDOW
-			sortCustAlph = new ArrayList<Customer>(); 	// INSTANTIATES ARRAYLIST
-			
-			/********************************************************************************/
-			/* IF STATEMENT TO CONFIRM ACTION OF VIEWING SORTING ALPHABETICALLY OF SKI TRIP */	
-			/********************************************************************************/
-			if (confirm == 0)
-			{
-				sortCustAlph = sortAlpha();	// CALL TO SORT ALPHA
-				frame.dispose();			// DISPOSES OF MENU_GUI FRAME
-				menuNum = 5;				// ASSIGNS MENU NUMBER TO PRINT CUSTOMER LIST MENU NUMBER
-				new Print_ArrayList(sortCustAlph, menuNum);// CREATES THE PRINT ARRAYLIST GUI
-			}
-		}
-				
-		/*******************************************************************/
-		/* IF STATEMENT TO CHECK IF SORTING BY BUS DATE BUTTON WAS PRESSED */	
-		/*******************************************************************/
-		if (action.equals("Sorting by Bus Date"))
-		{
-			confirm = confirmWindow();				// CALL TO CONFIRM WINDOW
-			sortCustDt = new ArrayList<Customer>();	// INSTANTIATES ARRAYLIST
-			
-			/*********************************************************************/
-			/* IF STATEMENT TO CONFIRM ACTION OF SORTING BY BUS DATE OF SKI TRIP */	
-			/*********************************************************************/
-			if (confirm == 0)
-			{
-				sortCustDt = sortDate();	// CALL TO SORT DATE
-				frame.dispose();			// DISPOSES OF MENU_GUI FRAME
-				menuNum = 6;				// ASSIGNS MENU NUMBER TO PRINT CUSTOMER LIST MENU NUMBER
-				new Print_ArrayList(sortCustDt, menuNum);// CREATES THE PRINT ARRAYLIST GUI
-			}
-		}
-		
-		/*******************************************************************/
-		/* IF STATEMENT TO CHECK IF SORTING NUMERICALLY BUTTON WAS PRESSED */	
-		/*******************************************************************/
-		if (action.equals("Sorting by Group ID"))
-		{
-			confirm = confirmWindow();				// CALL TO CONFIRM WINDOW
-			sortCustID = new ArrayList<Customer>();	// INSTANTIATES ARRAYLIST
-			
-			/*****************************************************************************/
-			/* IF STATEMENT TO CONFIRM ACTION OF VIEWING SORTING NUMERICALLY OF SKI TRIP */	
-			/*****************************************************************************/
-			if (confirm == 0)
-			{
-				sortCustID = sortID();		// CALL TO SORT ID
-				frame.dispose();			// DISPOSES OF MENU_GUI FRAME
-				menuNum = 7;				// ASSIGNS MENU NUMBER TO PRINT CUSTOMER LIST MENU NUMBER
-				new Print_ArrayList(sortCustID, menuNum);// CREATES THE PRINT ARRAYLIST GUI
-			}
-		}
-		
-		/*********************************************************************/
-		/* IF STATEMENT TO CHECK IF SORTING BY GROUP SIZE BUTTON WAS PRESSED */	
-		/*********************************************************************/
-		if (action.equals("Sorting by Group Size"))
-		{
-			confirm = confirmWindow();				// CALL TO CONFIRM WINDOW
-			sortCustSz = new ArrayList<Customer>();	// INSTANTIATES ARRAYLIST
-			
-			/*****************************************/
-			/* FOR LOOP TO ADD ALL CUSTOMERS TO CUST */
-			/*****************************************/
-			for(int i = 0; i < custList.size(); i++)
-			{
-				sortCustSz.add(custList.get(i));
-			}
-			
-			/*******************************************************************************/
-			/* IF STATEMENT TO CONFIRM ACTION OF VIEWING SORTING BY GROUP SIZE OF SKI TRIP */	
-			/*******************************************************************************/
-			if (confirm == 0)
-			{
-				mergeSortSize(sortCustSz, 0, sortCustSz.size()-1);	// CALL TO SORT SIZE
-				frame.dispose();		// DISPOSES OF MENU_GUI FRAME
-				menuNum = 8;			// ASSIGNS MENU NUMBER TO PRINT CUSTOMER LIST MENU NUMBER
-				new Print_ArrayList(sortCustSz, menuNum);// CREATES THE PRINT ARRAYLIST GUI
-			}
-		}
-		
-		/***************************************************************/
-		/* IF STATEMENT TO CHECK IF NUMBER OF BUSES BUTTON WAS PRESSED */	
-		/***************************************************************/
-		if(action.equals("Single Customer"))
-		{
-			/********************/
-			/* VARIABLE SECTION */
-			/********************/
-			Customer custInfo;	// REUSUABLE VALUE FOR CUSTOMER INFORMATION
-			
-			frame.dispose();				// DISPOSES MENU GUI FRAME
-			custInfo = chooseCustomer();	// CHOOSES SPECIFIC CUSTOMER 
-			new Print_ArrayList(custInfo);	// INSTANTIATE A NEW MENU GUI FRAME
-		}
-	}
-	
-	public static Object[] arrayDate()
-	/**********************************************************************/
-	/* PRECONDITION - NEEDS ARRAY OF ALL DATES ENTERED BY CUSTOMERS 	  */
-	/* POSTCONDITION - RETURNS AN ARRAY OF ALL DATES ENTERED BY CUSTOMERS */
-	/**********************************************************************/
-	{
-		/********************/
-		/* VARIABLE SECTION */
-		/********************/
-		Object date;				// REUSUABLE VALUE FOR DATE OF SKI TRIP
-		Object dt;					// REUSUABLE VALUE FOR ELEMENT IN ARRAYLIST
-		Object[] dateArray;			// ALL DATES OF SKI TRIP AS AN ARRAY
-		ArrayList<Object> dateList; // ALL DATES OF SKI TRIP AS AN ARRAYLIST
-		
-		dateList = new ArrayList<Object>(); // INSTANIATES ARRAYLIST	
-		dateList.add("");			// ADDS AN EMPTY SPACE IN ARRAYLIST
-		date = "";					// INITIALIZES DATE	
-		
-		custList = sortDate();	// CALL TO SORT DATE
-		
-		/**************************************************/
-		/* FOR LOOP TO GO THROUGH EVERY DATE FOR SKI TRIP */
-		/**************************************************/
-		for(int i = 0; i < custList.size(); i++)
-		{
-			date = custList.get(i).getDate();	// CALL TO GET DATE
-			dateList.add(date);		// ADDS UNIQUE DATE TO ARRAYLIST
-			int count = 0;			// NUMBER OF TIMES AN ELEMENT APPEARS IN ARRAYLIST
-			
-			/**************************************************/
-			/* FOR LOOP TO GO THROUGH EVERY DATE FOR SKI TRIP */
-			/**************************************************/
-			for(int j = 0; j < dateList.size(); j++)
-			{
-				dt = dateList.get(j);	// GETS ELEMENT FROM ARRAYLIST
-				
-				/****************************************************************/
-				/* IF STATEMENT TO CHECK IF ELEMENT HAS APPEARED MORE THAN ONCE */	
-				/****************************************************************/
-				if(date.equals(dt))
-				{
-					count++;	// INCREMENTS OCCURENCES OF AN ELEMENT
-				}
-			
-				/*****************************************************/
-				/* IF STATEMENT TO GET RID OF REOCCURENCE OF ELEMENT */	
-				/*****************************************************/
-				if(count >=2)
-				{
-					dateList.remove(j);	// REMOVES ELEMENT THAT REOCCURED
-					j--;				// MAKES SURE INDEX DOES NOT SKIP ELEMENTS
-				}
-			}
-		}
-		
-		dateArray = new Object[dateList.size()];	// INSTANIATES ARRAY AND 
-		dateArray = dateList.toArray();				// CONVERTS ARRAYLIST TO AN ARRAY
-		
-		/******************/
-		/* RETURN SECTION */
-		/******************/
-		return dateArray;		// RETURNS DATE ARRAY	
-	}
-	
-	public int calculateBusTot(Object date)
-	/************************************************************************/
-	/* PRECONDITION - NEEDS TOTAL NUMBER OF BUSES FOR A SPECIFIC DATE 		*/
-	/* POSTCONDITION - CALCULATES TOTAL NUMBER OF BUSES FOR A SPECIFIC DATE */
-	/************************************************************************/
-	{
-		/********************/
-		/* VARIABLE SECTION */
-		/********************/
-		int bus;			// NUMBER OF BUSES NEEDED FOR A SPECIFIC DATE
-		int num;			// NUMBER OF BUSES NEEDED FOR A CUSTOMER
-		
-		bus = 0;			// INITIALIZES BUS
-		num = 0;			// INITIALIZES BUS
-		
-		/*************************************************************/
-		/* FOR LOOP TO CALCULATE NUMBER OF BUSES FOR A SPECIFIC DATE */
-		/*************************************************************/
-		for(int i = 0; i < custList.size(); i++)
-		{
-			Object cDate = custList.get(i).getDate();	// DATE OF CURRENT CUSTOMER
-			
-			/***********************************************/
-			/* IF STATEMENT TO CHECK IF DATES ARE THE SAME */
-			/***********************************************/
-			if(cDate.equals(date))
-			{
-				num = custList.get(i).getBus(); 		// GETS NUMBER OF BUSES 
-				bus+= num;	// TOTALS NUMBER OF BUSES
-			}
-		}
-			
-		/******************/
-		/* RETURN SECTION */
-		/******************/
-		return bus;			// RETURNS BUS
-	}
-	
-	public static double calculateTotCost()
-	/**********************************************************/
-	/* PRECONDITION - NEEDS TOTAL COST OF ALL SKI TRIPS 	  */
-	/* POSTCONDITION - CALCULATES TOTAL COST OF ALL SKI TRIPS */
-	/**********************************************************/
-	{
-		/********************/
-		/* VARIABLE SECTION */
-		/********************/
-		String costi;		// STRING REPRESENTATION OF COST
-		double cost;		// COST OF ALL SKI TRIPS
-		double num;			// COST OF ONE SKI TRIP
-		
-		costi = "";			// INITIALIZES THE STRING FORM OF COST
-		num = 0.00;			// INITIALIZES A SINGLE COST
-		cost = 0.00;		// INITIALIZES TOTAL COST
-		
-		/*****************************************************/
-		/* FOR LOOP TO CALCULATE TOTAL COST OF ALL SKI TRIPS */
-		/*****************************************************/
-		for(int i = 0; i < custList.size(); i++)
-		{
-			costi = custList.get(i).getCost();	// GETS COST OF EACH CUSTOMER
-			num = Double.parseDouble(costi);	// PARSES STRING VALUE TO DOUBLE
-			cost+=num;							// TOTALS COST 
-		}
-		
-		/******************/
-		/* RETURN SECTION */
-		/******************/
-		return cost;		// RETURNS COST	
-	}
-	
-	public Customer chooseCustomer()
-	/*****************************************************************/
-	/* PRECONDITION - NEEDS INPUT DIALOG BOX TO CHOOSE A CUSTOMER 	 */
-	/* POSTCONDITION - CREATES INPUT DIALOG BOX TO CHOOSE A CUSTOMER */
-	/*****************************************************************/
-	{
-		/********************/
-		/* VARIABLE SECTION */
-		/********************/
-		String cstInfo;				// CUSTOMER SELECTED BY USER
-		String id;					// STRING REPRESENTATION OF CUSTOMER ID 
-		int num;					// INTEGER REPRESENTATION OF CUSTOMER ID
-		Object[] custInfo;			// ARRAY OF ALL CUSTOMER INFO
-		ArrayList<String> cstInfo2;	// ARRAYLIST OF ALL CUSTOMER INFO
-		Customer chosen;			// SELECTED CUSTOMER TO OUTPUT INFORMATION
-		
-		chosen = new Customer();	// INSTANTIATES CHOSEN
-		cstInfo2 = new ArrayList<String>();	// INSTANTIATES ARRAYLIST
-		cstInfo2.add("");	// ADDS BLANK SPOT
-		
-		/********************************************************/
-		/* FOR LOOP TO ADD ALL CUSTOMERS TO CUST INFO ARRAYLIST */
-		/********************************************************/
-		for(int i = 0; i < custList.size(); i++)
-		{
-			cstInfo2.add(custList.get(i).getID() + "  " + 
-						 custList.get(i).getName()); // ADDS CUSTOMER ID AND NAME TO ARRAYLIST
-		}
-		
-		custInfo = new Object[custList.size()+1];	// INSTANTIATES ARRAY
-		custInfo = cstInfo2.toArray();	// CONVERTS ARRAYLIST TO AN ARRAY
-		
-		/*****************************/
-		/* MAKES INPUT DIALOG WINDOW */
-		/*****************************/
-		cstInfo = (String)JOptionPane.showInputDialog(
-				new JDialog(),
-				"Select a customer, to see all their information for the ski trip: ",
-				"Select Customer",
-				JOptionPane.QUESTION_MESSAGE,
-				null,
-				custInfo,
-				"");
-		
-		id = cstInfo.substring(0,3);	// ONLY GETS CUSTOMER ID
-		num = Integer.parseInt(id);		// CONVERTS STRING TO INTEGER
-		
-		/**************************************************/
-		/* FOR LOOP TO CHECK CUSTOMER ID OF EACH CUSTOMER */
-		/**************************************************/
-		for(int i = 0; i < custList.size(); i++)
-		{
-			/**********************************************/
-			/* IF STATEMENT TO SEE IF CUSTOMER ID'S MATCH */
-			/**********************************************/
-			if(custList.get(i).getID() == num)
-			{
-				chosen = custList.get(i);	// CALL TO GET CUSTOMER INFORMATION
-			}
-		}
-		
-		/***************/
-		/* RETURN DATE */
-		/***************/
-		return chosen;	// RETURNS CUSTOMER INFO
-	}
-	
-	public static int confirmWindow()
-	/************************************************/
-	/* PRECONDITION - NEEDS CONFIRM DIALOG BOX		*/
-	/* POSTCONDITION - CREATES WINDOW TO CONFIRM IF	*/
-	/* 				   USER WANTS TO CONFIRM ACTION	*/
-	/************************************************/
-	{
-		/********************/
-		/* VARIABLE SECTION */
-		/********************/
-		int num;			// INTEGER ANSWER TO MODIFY PROGRAM
-		
-		/*******************************/
-		/* MAKES CONFIRM DIALOG WINDOW */
-		/*******************************/
-		num = JOptionPane.showConfirmDialog(
-				null,
-				"Do you really want to do this?",
-				"Confirm Window",
-				JOptionPane.YES_NO_OPTION,
-				JOptionPane.QUESTION_MESSAGE);
-		
-		/******************/
-		/* RETURN SECTION */
-		/******************/
-		return num;		// RETURNS NUM
-	}
-	
-	public static void errorMessage(String str)
-	/*********************************************************************/
-	/* PRECONDITION - NEEDS ERROR MESSAGE FOR INPUTS OF NEGATIVE NUMBERS */
-	/* POSTCONDITION - CREATES WIMDOW TO SHOW THE ERROR THE USER MADE 	 */
-	/*********************************************************************/
-	{
-		/******************************/
-		/* MAKES ERROR MESSAGE WINDOW */
-		/******************************/
-		JOptionPane.showMessageDialog(
-				null,
-				str,
-				"Error Message",
-				JOptionPane.ERROR_MESSAGE);
-	}
-	
-	public static ArrayList<Customer> sortAlpha()
-	/***************************************************************************/
-	/* PRECONDITION - NEEDS AN ARRAYLIST OF CUSTOMERS SORTED ALPHABETICALLY	   */
-	/* POSTCONDITION - CREATES AN ARRAYLIST OF CUSTOMERS SORTED ALPHABETICALLY */
-	/***************************************************************************/
-	{
-		/********************/
-		/* VARIABLE SECTION */
-		/********************/
-		ArrayList<Customer> cust;	// SORTED ARRAYLIST OF CUSTOMERS
-		
-		cust = new ArrayList<Customer>();	// INSTANTIATES CUST ARRAYLIST
-		
-		/*****************************************/
-		/* FOR LOOP TO ADD ALL CUSTOMERS TO CUST */
-		/*****************************************/
-		for(int i = 0; i < custList.size(); i++)
-		{
-			cust.add(custList.get(i));	// ADDS CUSTOMER FROM CUSTLIST TO CUST
-		}
-		
-		/*****************************************/
-		/* FOR LOOP TO ADD ALL CUSTOMERS TO CUST */
-		/*****************************************/
-		for(int j = 1; j < cust.size(); j++)
-		{
-			int index; 				// INDEX OF ELEMENT TO LEFT OF CURRENT INDEX
-			String name;			// NAME OF CURRENT CUSTOMER
-			String name2;			// NAME OF CUSTOMER TO THE RIGHT
-			String upName;			// ALL UPPERCASE NAME OF CURRENT CUSTOMER
-			String upName2;			// ALL UPPERCASE NAME OF CUSTOMER TO THE RIGHT
-			Customer customer;		// CURRENT CUSTOMER
-			Customer customer2;		// CUSTOMER TO THE RIGHT
-	
-			index = j-1;
-			name = cust.get(j).getName();
-			name2 = cust.get(index).getName();
-			upName = name.toUpperCase();
-			upName2 = name2.toUpperCase();
-			customer = cust.get(j);
-			customer2 = cust.get(index);
-			
-			/*************************************************************************************/
-			/* WHILE LOOP TO CHECK IF ELEMENTS TO LEFT OF INDEX ARE GREATER THAN CURRENT ELEMENT */
-			/*************************************************************************************/
-			while((index >= 0) && (upName.compareTo(upName2) < 0))
-			{	
-				cust.set(index+1, customer2);	// MOVES COMPARED CUSTOMER TO THE RIGHT
-				index--;	// DECREMENTER
-				
-				/********************************************************/
-				/* IF STATEMENT TO MAKE SURE INDEX IS NOT OUT OF BOUNDS */
-				/********************************************************/
-				if(index >=0)
-				{
-					customer2 = cust.get(index);		// CUSTOMER TO LEFT
-					name2 = customer2.getName();		// NAME OF CUSTOMER TO LEFT
-					upName2 = name2.toUpperCase();		// ALL UPPERCASE NAME OF CUSTOMER TO LEFT
-				}
-			}
-			
-			cust.set(index+1, customer);	// MOVES CURRENT CUSTOMER TO SORTED INDEX
-		}
-		
-		/******************/
-		/* RETURN SECTION */
-		/******************/
-		return cust;
-	}
-	
-	public static ArrayList<Customer> sortDate()
-	/********************************************************************/
-	/* PRECONDITION - NEEDS AN ARRAYLIST OF CUSTOMERS SORTED BY DATE 	*/
-	/* POSTCONDITION - CREATES AN ARRAYLIST OF CUSTOMERS SORTED BY DATE */
-	/********************************************************************/
-	{
-		/********************/
-		/* VARIABLE SECTION */
-		/********************/
-		ArrayList<Customer> cust;	// A COPY OF ARRAYLIST OF CUSTOMERS
-		ArrayList<Customer> sort;	// SORTED ARRAYLIST OF CUSTOMERS BY DATE
-		String monthi;				// STRING REPRESENTATION OF MONTH OF CUSTOMER'S SKI TRIP 
-		String dayi;				// STRING REPRESENTATION OF DAY OF CUSTOMER'S SKI TRIP 
-		String yeari;				// STRING REPRESENTATION OF YEAR OF CUSTOMER'S SKI TRIP 
-		int month;					// INTEGER REPRESENTATION OF MONTH OF CUSTOMER'S SKI TRIP 
-		int day;					// INTEGER REPRESENTATION OF MONTH OF CUSTOMER'S SKI TRIP
-		int year;					// INTEGER REPRESENTATION OF MONTH OF CUSTOMER'S SKI TRIP
-		
-		sort = new ArrayList<Customer>();	// INSTANTIATES SORT
-		cust = new ArrayList<Customer>();	// INSTANTIATES CUST
-		monthi  = "";		// INITIALIZES MONTHI
-		dayi = "";			// INITIALIZES DAYI
-		yeari = "";			// INITIALIZES YEARI
-		
-		/*****************************************/
-		/* FOR LOOP TO ADD ALL CUSTOMERS TO CUST */
-		/*****************************************/
-		for(int i = 0; i < custList.size(); i++)
-		{
-			cust.add(custList.get(i));
-		}
-		
-		Customer customer = cust.get(0);	// ASSIGNS CUSTOMER TO FIRST ELEMENT IN CUST ARRAYLIST
-		
-		/***********************************************************/
-		/* IF STATEMENT TO CHECK IF ARRAYLIST HAS ONLY ONE ELEMENT */
-		/***********************************************************/
-		if(cust.size() == 1)
-		{
-			customer = cust.remove(0);	// REMOVES LAST CUSTOMER FROM CUST
-			sort.add(customer);			// ADDS CLOSEST DATE TO SORT 
-		}
-		
-		/**********************************************/
-		/* FOR LOOP TO ITERATE THROUGH CUST ARRAYLIST */
-		/**********************************************/
-		for(int i = 0; i < cust.size(); i++)
-		{
-			customer = cust.get(i);		// CALL TO GET CUSTOMER FROM CUST ARRAYLIST
-		
-				/*******************************************/
-				/* FOR LOOP TO FIND THE FURTHEST AWAY DATE */
-				/*******************************************/
-				for(int j = 1; j < cust.size(); j++)
-				{					
-					String mnthi = cust.get(j).getMonth();	// GETS MONTH OF ELEMENT TO THE RIGHT
-					String dyi = cust.get(j).getDay();		// GETS DAY OF ELEMENT TO THE RIGHT
-					String yri = cust.get(j).getYear();		// GETS YEAR OF ELEMENT TO THE RIGHT
-					int mnth = Integer.parseInt(mnthi);		// CONVERTS STRING TO AN INT
-					int dy = Integer.parseInt(dyi);			// CONVERTS STRING TO AN INT
-					int yr = Integer.parseInt(yri);			// CONVERTS STRING TO AN INT
-			
-					monthi = customer.getMonth();			// GETS MONTH OF CURRENT CUSTOMER
-					dayi = customer.getDay();				// GETS DAY OF CURRENT CUSTOMER
-					yeari = customer.getYear();				// GETS YEAR OF CURRENT CUSTOMER
-					month = Integer.parseInt(monthi);		// CONVERTS STRING TO AN INT
-					day = Integer.parseInt(dayi);			// CONVERTS STRING TO AN INT
-					year = Integer.parseInt(yeari);			// CONVERTS STRING TO AN INT	
-			
-					/*********************************************************************/
-					/* IF STATEMENT TO CHECK IF CURRENT CUSTOMER HAS A FURTHER AWAY DATE */
-					/*********************************************************************/
-					if(year < yr)
-					{
-						customer = cust.get(j);	// CUSTOMER EQUALS ELEMENT TO RIGHT	
-					}
-			
-					/**************************************************************************/
-					/* ELSE IF STATEMENT TO CHECK IF CURRENT CUSTOMER HAS A FURTHER AWAY DATE */
-					/**************************************************************************/
-					else if((year == yr) && (month < mnth))
-					{
-						customer = cust.get(j);	// CUSTOMER EQUALS ELEMENT TO RIGHT	
-					}
-				
-					/**************************************************************************/
-					/* ELSE IF STATEMENT TO CHECK IF CURRENT CUSTOMER HAS A FURTHER AWAY DATE */
-					/**************************************************************************/
-					else if((year == yr) && (month == mnth) && (day <= dy))
-					{
-						customer = cust.get(j);	// CUSTOMER EQUALS ELEMENT TO RIGHT	
-					}	
-				}
-			
-			sort.add(0, customer);	// ADDS CUSTOMER TO FIRST INDEX OF SORT
-			cust.remove(customer);	// REMOVES CUSTOMER WITH FURTHEST AWAY DATE
-			
-			i--;	// DECREMENTER
-		}
-		
-		/******************/
-		/* RETURN SECTION */
-		/******************/
-		return sort;		// RETURNS CUST
-	}
-	
-	public static ArrayList<Customer> sortID()
-	/************************************************************************/
-	/* PRECONDITION - NEEDS AN ARRAYLIST OF CUSTOMERS SORTED BY GROUP ID 	*/
-	/* POSTCONDITION - CREATES AN ARRAYLIST OF CUSTOMERS SORTED BY GROUP ID */
-	/************************************************************************/
-	{
-		/********************/
-		/* VARIABLE SECTION */
-		/********************/
-		ArrayList<Customer> cust;	// SORTED ARRAYLIST OF CUSTOMERS
-		
-		cust = new ArrayList<Customer>();	// INSTANTIATES CUST ARRAYLIST
-		
-		/*****************************************/
-		/* FOR LOOP TO ADD ALL CUSTOMERS TO CUST */
-		/*****************************************/
-		for(int i = 0; i < custList.size(); i++)
-		{
-			cust.add(custList.get(i));
-		}
-		
-		/**********************************************/
-		/* FOR LOOP TO ITERATE THROUGH CUST ARRAYLIST */
-		/**********************************************/
-		for(int i = 1; i < cust.size(); i++)
-		{
-			int index;			// INDEX OF ELEMENT TO LEFT OF CURRENT INDEX
-			Customer customer;	// CUSTOMER TO LEFT
-			Customer customer2;	// CURRENT CUSTOMER
-			int id;				// ID OF CURRENT CUSTOMER
-			int id2;			// ID OF CUSTOMER TO LEFT
-			
-			index = i - 1;
-			customer2 = cust.get(i);
-			id = cust.get(i).getID();
-			customer = cust.get(index);
-			id2 = cust.get(index).getID();
-			
-			/*************************************************************************************/
-			/* WHILE LOOP TO CHECK IF ELEMENTS TO LEFT OF INDEX ARE GREATER THAN CURRENT ELEMENT */
-			/*************************************************************************************/
-			while((index >= 0) && (id < id2))
-			{
-				cust.set(index+1, customer);	// MOVES COMPARED CUSTOMER TO RIGHT
-				index--;	// DECREMENTER
-				
-				/********************************************************/
-				/* IF STATEMENT TO MAKE SURE INDEX IS NOT OUT OF BOUNDS */
-				/********************************************************/
-				if(index >= 0)
-				{
-					customer = cust.get(index);	// CUSTOMER TO LEFT
-					id2 = customer.getID();		// CALL TO GET ID
-				}
-			}
-			
-			cust.set(index+1, customer2);	// MOVES CURRENT CUSTOMER TO SORTED INDEX
-		}
-		
-		/******************/
-		/* RETURN SECTION */
-		/******************/
-		return cust;		// RETURNS CUST
-	}
-	
-	public static void mergeSize(ArrayList<Customer> cust, int bIndex, int mid, int eIndex)
-	/********************************************************************************/
-	/* PRECONDITION - NEEDS TO MERGE LOWER AND UPPER SUBARRAY INTO ONE ARRAYLIST 	*/
-	/* POSTCONDITION - CREATES A MERGED LOWER AND UPPER SUBARRAY INTO ONE ARRAYLIST */
-	/********************************************************************************/
-	{
-		/********************/
-		/* VARIABLE SECTION */
-		/********************/
-		int len1;					// LENGTH OF THE LOWER SUBARRAY
-		int len2;					// LENGTH OF THE UPPER SUBARRAY
-		int low;					// INDEX OF LOWER SUBARRAY
-		int up;						// INDEX OF UPPER SUBARRAY
-		int main;					// INDEX OF MAIN CUSTOMER ARRAY
-		ArrayList<Customer> lower;	// SUBARRAY OF LOWER PORTION OF CUSTOMER ARRAYLIST
-		ArrayList<Customer> upper;	// SUBARRAY OF UPPER PORTION OF CUSTOMER ARRAYLIST
-		
-		len1 = mid - bIndex + 1;	// INITIALIZES LENGTH OF LOWER ARRAY
-		len2 = eIndex - mid;		// INITIALIZES LENFTH OF UPPER ARRAY
-		
-		/*************************/
-		/* INSTANTIATION SECTION */
-		/*************************/
-		lower = new ArrayList<Customer>(len1);	// INSTANTIATES LOWER ARRAYLIST 
-		upper = new ArrayList<Customer>(len2);	// INSTANTIATES UPPER ARRAYLIST
-		
-		/***********************************************/
-		/* FOR LOOP TO ADD CUSTOMER TO LOWER ARRAYLIST */
-		/***********************************************/
-		for (int i = 0; i < len1; i++)
-		{
-			Customer customer = cust.get(i+ bIndex);	// CUSTOMER FROM CUST ARRAYLIST 
-			lower.add(i, customer);		// ADDS CUSTOMER FROM LOWER PART OF CUST TO LOWER ARRAYLIST
-		}
-		
-		/***********************************************/
-		/* FOR LOOP TO ADD CUSTOMER TO UPPER ARRAYLIST */
-		/***********************************************/
-		for(int j = 0; j < len2; j++)
-		{
-			Customer customer = cust.get(j+ mid+1);		// CUSTOMER FROM CUST ARRAYLIST 
-			upper.add(j, customer);		// ADDS CUSTOMER FROM UPPER PART OF CUST TO UPPER ARRAYLIST
-		}
-		
-		/************************************/
-		/* FOR LOOP TO SORT LOWER ARRAYLIST */
-		/************************************/
-		for(int i = 1; i < lower.size(); i++)
-		{
-			Customer customer = lower.get(i);		// CUSTOMER TO THE RIGHT
-			Customer customer2 = lower.get(i-1);	// CUSTOMER TO THE LEFT
-			
-			/*********************************************************/
-			/* IF STATEMENT TO CHECK IF LOWER ARRAYLIST IS NUMERICAL */
-			/*********************************************************/
-			if(lower.get(i).getSize() < lower.get(i - 1).getSize())
-			{
-				lower.set(i-1, customer);	// MOVES CUSTOMER UP ONE
-				lower.set(i, customer2);	// PUSHES CUSTOMER BACK ONE 
-			}
-		}
-		
-		/************************************/
-		/* FOR LOOP TO SORT UPPER ARRAYLIST */
-		/************************************/
-		for(int j = 1; j < upper.size(); j++)
-		{
-			Customer customer = upper.get(j);		// CUSTOMER TO THE RIGHT
-			Customer customer2 = upper.get(j-1);	// CUSTOMER TO THE LEFT
-			
-			/*********************************************************/
-			/* IF STATEMENT TO CHECK IF UPPER ARRAYLIST IS NUMERICAL */
-			/*********************************************************/
-			if(upper.get(j).getSize() < upper.get(j-1).getSize())
-			{
-				upper.set(j-1, customer);	// MOVES CUSTOMER UP ONE
-				upper.set(j, customer2);	// PUSHES CUSTOMER BACK ONE 
-			}
-		}
-		
-		low = 0;		// LOWER INDEX
-		up = 0;			// UPPER INDEX
-		main = bIndex;	// CUSTOMER LIST INDEX
-
-		/*************************************************/
-		/* WHILE LOOP TO MERGE LOWER AND UPPER ARRAYLIST */
-		/*************************************************/
-		while((low < len1) && (up < len2))
-		{
-			/****************************************************************************************/
-			/* IF STATEMENT TO CHECK IF CUSTOMER'S SIZE IN LOWER IS LESS THAN UPPER CUSTOMER'S SIZE */
-			/****************************************************************************************/
-			if(lower.get(low).getSize() <= upper.get(up).getSize())
-			{
-				cust.set(main, lower.get(low));	// SETS CUST ARRAY TO LESSER CUSTOMER'S SIZE
-				low++;	// INCREASES INDEX OF LOWER SUBARRAYLIST
-			}
-			
-			/******************************************************************************************/
-			/* ELSE STATEMENT TO CHECK IF CUSTOMER'S SIZE IN UPPER IS LESS THAN LOWER CUSTOMER'S SIZE */
-			/******************************************************************************************/
-			else
-			{
-				cust.set(main, upper.get(up));	// SETS CUST ARRAY TO LESSER CUSTOMER'S SIZE
-				up++;	// INCREASES INDEX OF UPPER SUBARRAYLIST
-			}
-			
-			main++;	// INCREASES INDEX OF CUST ARRAYLIST
-		}
-		
-		/*****************************************************************/
-		/* WHILE LOOP TO MERGE REST OF LOWER ARRAYLIST TO CUST ARRAYLIST */
-		/*****************************************************************/
-		while(low < len1)
-		{
-			cust.set(main, lower.get(low));		// SETS CUST ARRAY TO LESSER CUSTOMER'S SIZE
-			low++;		// INCREASES INDEX OF LOWER SUBARRAYLIST
-			main++;		// INCREASES INDEX OF CUST ARRAYLIST
-		}
-			
-		/*****************************************************************/
-		/* WHILE LOOP TO MERGE REST OF UPPER ARRAYLIST TO CUST ARRAYLIST */
-		/*****************************************************************/
-		while (up < len2)
-		{
-			cust.set(main, upper.get(up));		// SETS CUST ARRAY TO LESSER CUSTOMER'S SIZE
-			up++;		// INCREASES INDEX OF UPPER SUBARRAYLIST
-			main++;		// INCREASES INDEX OF CUST ARRAYLIST
-		}
-	}
-	
-	public static void mergeSortSize(ArrayList<Customer> cust, int bIndex, int eIndex)
-	/**********************************************************/
-	/* PRECONDITION - NEEDS TO DIVIDE AN ARRAYLIST INTO TWO   */
-	/* 				  SUBARRAYS, SORT THEM, AND MERGE THEM    */
-	/* POSTCONDITION - CREATES A DIVIDE AN ARRAYLIST INTO TWO */
-	/* 				   SUBARRAYS, SORT THEM, AND MERGE THEM   */
-	/**********************************************************/
-	{
-		/********************/
-		/* VARIABLE SECTION */
-		/********************/
-		int mid;			// FINDS MIDDLE OF CUST ARRAYLIST
-		
-		/***********************************************************/
-		/* IF STATEMENT TO CHECK IF LENGTH OF CUST IS AT LEAST ONE */
-		/***********************************************************/
-		if(eIndex > bIndex)
-		{
-			mid = (bIndex + eIndex) / 2;			// INDEX OF MIDDLE OF CUST ARRAYLIST
-			mergeSortSize(cust, bIndex, mid);		// RECURSIVELY CALLS MERGE SORT SIZE
-			mergeSortSize(cust, mid+1, eIndex);		// RECURSIVELY CALLS MERGE SORT SIZE
-			mergeSize(cust, bIndex, mid, eIndex);	// CALL TO MERGE SIZE
+			num-=20;	// GOES BACK TO THE PREVIOUS TEN CUSTOMERS
+			frame.setVisible(false);	// HIDES THE FRAME
+			frame.dispose();			// GETS RID OF OLD FRAME
+			new Print_ArrayList(custList, menuNum, num);	// INSTANTIATES PRINT ARRAYLIST WINDOW
 		}
 	}
 }
