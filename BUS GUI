@@ -20,6 +20,7 @@ import java.awt.event.ActionEvent;		// IMPORTS ACTION EVENT
 import java.awt.event.ActionListener;	// IMPORTS ACTION LISTENER	
 import java.text.DecimalFormat;			// IMPORTS DECIMAL FORMAT
 import javax.swing.*;					// IMPORTS SWING
+import javax.swing.JFrame;				// IMPORTS JFRAME
 import java.util.ArrayList;				// IMPORTS ARRAYLIST
 import java.util.Random;				// IMPORTS RANDOM
 
@@ -34,7 +35,7 @@ public class BusGUI implements ActionListener
 	final static String heading1= "Input Name";
 	final static String heading2 = "Input Group ID";
 	final static String heading3 = "Input Group Size";
-	final static String error1 = "ERROR!!! Name can not be more than 20 characters!!!";
+	final static String error1 = "ERROR!!! Name can not be more than 30 characters!!!";
 	final static String error3 = "ERROR!!! Number must be greater than 0 and less than or equal to 400!!!";
 	final static String error4 = "ERROR!!! This month can not be chosen with this day!!!";
 	final static String error5 = "ERROR!!! This day can not be chosen with this month!!!";
@@ -118,7 +119,7 @@ public class BusGUI implements ActionListener
 						 "necessary information " +
 						 "into the fields below.");	// INSTANTIATES A LABEL
 		warning = new Label("Name has to be < "+
-							"21 characters.");		// INSTANTIATES A LABEL	
+							"31 characters.");		// INSTANTIATES A LABEL	
 		warning2 = new Label("Group size has to " +
 							 "be between 1 - 400.");// INSTANTIATES A LABEL
 		container = frame.getContentPane();			// CREATES A CONTENT PANE, WHICH  
@@ -128,11 +129,11 @@ public class BusGUI implements ActionListener
 		/* CREATES A BLANK JFRAME */
 		/**************************/
 		frame.pack();							// SIZE OF THE FRAME
-		frame.setBounds(450, 150, 450, 300);	// SETS X POSITION, Y POSITION, LENGTH, 
+		frame.setBounds(450, 150, 500, 400);	// SETS X POSITION, Y POSITION, LENGTH, 
 												// AND WIDTH OF THE JFRAME
 		frame.setVisible(true);					// ALLOWS THE JFRAME TO BE VISIBLE
 		container.setLayout(null);				// SETS THE LAYOUT FOR THE JFRAME
-		container.setBackground(Color.GREEN);	// SETS THE BACKGROUND COLOR
+		container.setBackground(Color.ORANGE);	// SETS THE BACKGROUND COLOR
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);// ALLOWS THE JFRAME TO BE CLOSED
 		
 		/**************************/
@@ -158,9 +159,9 @@ public class BusGUI implements ActionListener
 		/**********************************************/
 		/* SETS BOUNDS FOR BUTTONS, JTEXTFIELD, LABEL */
 		/**********************************************/
-		enterB.setBounds(160, 190, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		quitB.setBounds(320, 190, 110, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		returnB.setBounds(240, 190, 75, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		enterB.setBounds(290, 290, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		quitB.setBounds(370, 325, 110, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		returnB.setBounds(370, 290, 75, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		nameTF.setBounds(80, 80, 100, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		grpSzTF.setBounds(80, 110, 100, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		monthCB.setBounds(80, 140, 100, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
@@ -266,6 +267,7 @@ public class BusGUI implements ActionListener
 			{
 				frame.setVisible(false);// HIDES THE FRAME
 				frame.dispose();		// GETS RID OF THE OLD FRAME
+				//this.frame.dispose();
 				new Menu_GUI();			// INSTANTIATES MENU GUI FRAME
 			}
 		}
@@ -306,6 +308,11 @@ public class BusGUI implements ActionListener
 				/************************************************************/
 				if(confirm == 1)
 				{
+					
+					// MAKE SURE TO DELETE THIS LATER
+					// MEANT FOR DEBUGGING STATEMENT
+					String str="";
+										
 					customer.setSize(excess);	// CALL TO SET SIZE
 					refund = sum - 400;			// CALCULATES NUMBER OF REFUNDED PEOPLE
 					cost = refund * 49.99;		// CALCULATES REFUND COST
@@ -315,6 +322,15 @@ public class BusGUI implements ActionListener
 					refundWindow(message5);		// CALL TO REFUND WINDOW
 					frame.setVisible(false);	// HIDES THE FRAME
 					frame.dispose();			// DISPOSES FRAME
+					
+					// MAKE SURE TO DELTE THIS LATER
+					// DEBUGGING STATEMENT
+					for(int i=0; i<custList.size();i++)
+					{
+						str+= "" + custList.get(i).toString() + "\n";
+					}
+					
+					System.out.println(str);
 					custList.add(customer);		// ADDS CUSTOMER TO ARRAYLIST
 					new Menu_GUI();				// INSTANTIATES A NEW WINDOW
 				}
@@ -345,9 +361,23 @@ public class BusGUI implements ActionListener
 				/************************************************************/
 				if(confirm == 0)
 				{
+					// MAKE SURE TO DELETE THIS LATER
+					// MEANT FOR DEBUGGING STATEMENT
+					String str="";
+					
+					
 					frame.setVisible(false);// HIDES THE FRAME
 					frame.dispose();		// GETS RID OF THE OLD FRAME
 					custList.add(customer);	// ADDS CUSTOMER TO ARRAYLIST
+					
+					// MAKE SURE TO DELTE THIS LATER
+					// DEBUGGING STATEMENT
+					for(int i=0; i<custList.size();i++)
+					{
+						str+= "" + custList.get(i).toString() + "\n";
+					}
+					System.out.println(str);
+					
 					new Menu_GUI(); 		// INSTANTIATES A NEW FRAME
 				}
 			}
@@ -849,16 +879,12 @@ public class BusGUI implements ActionListener
 		/* VARIABLE SECTION */
 		/********************/
 		int i;			// REUSUABLE INTEGER VALUE
-		boolean repeat;	// REUSUABLE BOOLEAN TO SEE IF ANY GROUP ID'S ARE REPEATED
-		
-		repeat = false;	// INITIALIZES REPEAT
-		
+				
 		/*****************************************************/
 		/* DO-WHILE LOOP UNTIL VALUE IS A THREE DIGIT NUMBER */
 		/*****************************************************/
 		do
 		{
-			repeat = false;
 			i = (generator.nextInt(900)) + 100;	// GENERATES A RANDOM INTEGER
 			
 			/**************************************/
@@ -868,16 +894,17 @@ public class BusGUI implements ActionListener
 			{
 				int id = custList.get(j).getID();		// CALL TO GET ID OF CUSTOMER
 				
-				/**************************************************/
-				/* IF STATEMENT TO CHECK FOR SAME GROUP ID VALUES */
-				/**************************************************/
-				if(i == id)
+				/************************************************/
+				/* WHILE LOOP TO CHECK FOR SAME GROUP ID VALUES */
+				/************************************************/
+				while(i == id)
 				{
-					repeat = true;	// REPEATED GROUP ID FOUND
+					i = (generator.nextInt(900)) + 100;	// GENERATES A RANDOM INTEGER				
+					j = 0;
 				}
 			}
 		}
-		while((repeat) && ((i < 100) || (i > 999))); 
+		while((i < 100) || (i > 999)); 
 		
 		customer.setID(i);	// CALL TO SET GROUP ID
 	}
@@ -907,13 +934,13 @@ public class BusGUI implements ActionListener
 			/*******************************/
 			/* IF STATEMENT TO ERROR CHECK */
 			/*******************************/
-			if (name.length() > 20)
+			if (name.length() > 30)
 			{
 				nameTF.setText("");			// CLEARS THE TEXT FIELD
 				errorMessage(error1);		// CALL TO ERROR MESSAGE
 			}
 		}
-		while(name.length() > 20);
+		while(name.length() > 30);
 		
 		customer.setName(name);				// CALL TO SET NAME
 	}
