@@ -22,14 +22,7 @@
 import javax.swing.*;				// IMPORTS SWING
 
 public class Bus_Main 
-{
-	/*****************/
-	/* FINAL SECTION */
-	/*****************/
-	final static String message1 = "Input the name of your Ski trip: ";
-	final static String heading1 = "Input Name of Ski Group";
-	final static String error2 = "ERROR!!! Number must be between 100 and 999";
-	
+{	
 	public static void main(String[]args)
 	{
 		/*******************************/
