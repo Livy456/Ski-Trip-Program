@@ -19,7 +19,6 @@ import javax.swing.*;					// IMPORTS SWING
 import java.awt.*;						// IMPORTS AWT
 import java.awt.event.ActionEvent;		// IMPORTS ACTION EVENT
 import java.awt.event.ActionListener;	// IMPORTS ACTION LISTENER		
-import java.text.DecimalFormat;			// IMPORTS DECIMAL FORMAT
 
 public class Print_Date extends Menu_GUI implements ActionListener
 {
@@ -34,7 +33,6 @@ public class Print_Date extends Menu_GUI implements ActionListener
 	private Font font;					// CREATES A FONT
 	private JFrame frame;				// CREATES A JFRAME
 	private Container container;		// CREATES A CONTAINER
-	private static DecimalFormat df = new DecimalFormat("0.00");	// INSTANTIATES DECIMALFORMAT
 	private Object[] date = arrayDate();// CREATES AN ARRAY FOR DATE
 	
 	public Print_Date()
@@ -116,14 +114,13 @@ public class Print_Date extends Menu_GUI implements ActionListener
 		String action; 		// STRING TO REPRESENT WHICH BUTTON WAS PRESSED
 		Object dt;			// REUSUABLE OBJECT VALUE FOR DATE
 		String dt2;			// STRING REPRESENTATION OF OBJECT VALUE FOR DATE
+		String cost;		// REUSUABLE DOUBLE VALUE FOR COST
 		int confirm; 		// REUSUABLE INT INPUT FOR CONFIRMING AN ACTION
-		double cost;		// REUSUABLE DOUBLE VALUE FOR COST
 		int totSz;			// REUSUABLE INT VALUE FOR SIZE
 		int bus;			// REUSUBALE INT VALUE FOR AMOUNT OF BUSES
 		int refund;			// REUSUABLE INT VALUE FOR NUMBER OF REFUNDS
 		int seats;			// REUSUABLE INT VALUE FOR NUMBER OF AVAILABLE SEATS
 		
-		confirm = 1;		// INITIALIZES CONFIRM
 		action = event.getActionCommand();	// CALL TO GET ACTION COMMAND
 		totSz = 0;			// INITIALIZES TOTAL SIZE
 		bus = 0;			// INITIALIZES TOTAL BUSES
@@ -156,6 +153,7 @@ public class Print_Date extends Menu_GUI implements ActionListener
 			/************************************************************/
 			if(confirm == 0)
 			{
+				frame.setVisible(false);// HIDES THE FRAME
 				frame.dispose();	// DISPOSES OF PRINT_DATE FRAME
 				new Menu_GUI();		// CREATES A NEW MENU GUI WINDOW
 			}
@@ -163,7 +161,7 @@ public class Print_Date extends Menu_GUI implements ActionListener
 		
 		dt = actionPerformedDate();			// CALL TO ACTION PERFORMED DATE
 		dt2 = (String) dt;					// CONVERTS TO STRING
-		cost = calculateDateCost(dt);		// CALL TO CALCULATE DATE COST
+		cost = df.format(calculateDateCost(dt));		// CALL TO CALCULATE DATE COST
 		totSz = calculateDateSize(dt);		// CALL TO CALCULATE DATE SIZE
 		bus = calculateDateBus(dt);			// CALL TO CALCULATE DATE BUS
 		refund = calculateDateRefund(dt);	// CALL TO CALCULATE DATE REFUND
@@ -177,7 +175,7 @@ public class Print_Date extends Menu_GUI implements ActionListener
 			/****************************************************************/
 			/* IF STATEMENT TO CHECK IF MONTH, DAY, AND YEAR WERE FILLED IN */	
 			/****************************************************************/
-			if (dateCB.getSelectedItem() == "")
+			if (dateCB.getSelectedItem().equals(""))
 			{
 				errorMessage(error2);	// CALL TO ERROR MESSAGE
 			}
@@ -187,7 +185,8 @@ public class Print_Date extends Menu_GUI implements ActionListener
 			/*********************************************************************/
 			else if(dateCB.getSelectedItem() != "")
 			{
-				printDate(cost, dt2, totSz, bus, refund, seats);		// CALL TO PRINT DATE COST
+				frame.dispose();		// GETS RID OF FRAME
+				new Print_ArrayList(custList, 0, 5, cost, dt2, totSz, bus, refund, seats);	// NEW PRINT ARRAYLIST
 			}
 		}
 	}
@@ -389,74 +388,6 @@ public class Print_Date extends Menu_GUI implements ActionListener
 		/* RETURN SECTION */
 		/******************/
 		return totSz;		// RETURNS TOTAL SIZE
-	}
-	
-	public void printDate(double cost, String dt, int totSz, int bus, int refund, int seats)
-	/*****************************************************************/
-	/* PRECONDITION - NEEDS TO PRINT OUT TOTAL COST OF ALL SKI TRIPS */ 
-	/* 				  FOR A SPECIFIC DATE 	  						 */
-	/* POSTCONDITION - OUTPUTS TOTAL COST OF ALL SKI TRIPS 			 */
-	/* 				   FOR A SPECIFIC DATE 							 */
-	/*****************************************************************/
-	{
-		/********************/
-		/* VARIABLE SECTION */
-		/********************/
-		String str;			// STRING REPRESENTATION OF ARRAYLIST
-		String costdf;		// STRING REPRESENTATION OF COST
-		
-		str = printDateInfo(dt);		// INITIALIZES STR
-		costdf = df.format(cost);		// FORMATS COST TO TWO DECIMAL PLACES
-		
-		/***********************/
-		/* MAKES DIALOG WINDOW */
-		/***********************/ 
-		JOptionPane.showMessageDialog(
-				null,
-				"Company profit information for the date of " + dt + "\n" + 
-				str + "Total:                                   " + totSz + "            $" + costdf + "\n\n" +
-				"NUMBER OF BUSES NEEDED:         " + bus + "\n" +
-				"NUMBER OF REFUNDS NEEDED:       " + refund + "\n" + 
-				"NUMBER OF SEATS AVAILABLE:      " + seats,
-				"Print Cost for Specific Date",
-				JOptionPane.INFORMATION_MESSAGE);
-	}
-	
-	public String printDateInfo(String dt)
-	/*************************************************************/
-	/* PRECONDITION - NEEDS TO PRINT ARRAYLIST FOR SPECIFIC DATE */
-	/* POSTCONDITION - GETS ARRAYLIST FOR SPECIFIC DATE 		 */
-	/*************************************************************/
-	{
-		/********************/
-		/* VARIABLE SECTION */
-		/********************/
-		String str;			// USED FOR REUSABLE OUTPUT
-		
-		str = "ID          GROUP NAME                  DATE           SIZE              AMOUNT DUE" + "\n";			// INITIALIZES THE STRING
-		
-		/***********************************************/
-		/* FOR LOOP TO PRINT OUT ARRAYLIST OF CUSTOMER */
-		/***********************************************/
-		for (int i = 0; i < custList.size(); i++)
-		{
-			/***********************************************/
-			/* FOR LOOP TO PRINT OUT ARRAYLIST OF CUSTOMER */
-			/***********************************************/
-			if(custList.get(i).getDate().equals(dt))
-			{
-				str += custList.get(i).getID() + "       " 
-					+ custList.get(i).getName() + "      "
-					+ custList.get(i).getDate() + "      "
-					+ custList.get(i).getSize() + "      "
-					+ "$" + custList.get(i).getCost() + "\n";
-			}
-		}
-		
-		/******************/
-		/* RETURN SECTION */
-		/******************/
-		return str;			// RETURNS STR
 	}
 	
 	public static void refundWindow(String str)
