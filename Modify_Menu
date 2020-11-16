@@ -1,6 +1,6 @@
 /******************************************/
 /* USER DESCRIPTION SECTION 			  */
-/* LIVY456				   			  */
+/* OLIVIA DIAS				   			  */
 /* FINAL PROJECT		   	 			  */
 /* PROGRAM 12							  */
 /* APRIL 9, 2020		   			  	  */
@@ -80,7 +80,7 @@ public class Modify_Menu extends Menu_GUI implements ActionListener
 		/* CREATES A BLANK JFRAME */
 		/**************************/
 		frame.pack();							// SIZE OF THE FRAME
-		frame.setBounds(450, 150, 500, 450);	// SETS X POSITION, Y POSITION, LENGTH, WIDTH 
+		frame.setBounds(450, 150, 550, 450);	// SETS X POSITION, Y POSITION, LENGTH, WIDTH 
 		frame.setVisible(true);					// ALLOWS THE JFRAME TO BE VISIBLE
 		container.setLayout(null);				// SETS THE LAYOUT FOR THE JFRAME
 		container.setBackground(Color.YELLOW);	// SETS THE BACKGROUND COLOR
@@ -148,7 +148,7 @@ public class Modify_Menu extends Menu_GUI implements ActionListener
 		/****************************************************/
 		/* IF STATEMENT TO CHECK IF QUIT BUTTON WAS PRESSED */	
 		/****************************************************/
-		if(action == "Quit Program")
+		if(action.equals("Quit Program"))
 		{
 			confirm = confirmWindow();	// CALL TO CONFIRM WINDOW
 			
@@ -164,7 +164,7 @@ public class Modify_Menu extends Menu_GUI implements ActionListener
 		/***********************************************************/
 		/* ELSE IF STATEMENT TO CHECK IF RETURN BUTTON WAS PRESSED */	
 		/***********************************************************/
-		else if (action == "Return")
+		else if (action.equals("Return"))
 		{
 			confirm = confirmWindow();	// CALL TO CONFIRM WINDOW
 			
@@ -182,12 +182,12 @@ public class Modify_Menu extends Menu_GUI implements ActionListener
 		/*********************************************************/
 		/* ELSE IF STATEMENT TO CHECK IF VIEW BUTTON WAS PRESSED */	
 		/*********************************************************/
-		else if (action == "Customer List")
+		else if (action.equals("Customer List"))
 		{
 			frame.setVisible(false);// HIDES THE FRAME
 			frame.dispose();				// DISPOSES THE REMOVE MENU WINDOW
 			menuNum = 2;					// ASSIGNS MENU NUMBER TO PRINT CUSTOMER LIST MENU NUMBER
-			new Print_ArrayList(custList, menuNum); 	// CREATES THE PRINT ARRAYLIST GUI
+			new Print_ArrayList(custList, menuNum, 0); 	// CREATES THE PRINT ARRAYLIST GUI
 		}
 				
 		actionPerformedInt();	// CALL TO ACTION PERFORMED INT
@@ -195,7 +195,7 @@ public class Modify_Menu extends Menu_GUI implements ActionListener
 		/*****************************************************/
 		/* IF STATEMENT TO CHECK IF ENTER BUTTON WAS PRESSED */	
 		/*****************************************************/
-		if (action == "Enter")
+		if (action.equals("Enter"))
 		{
 			frame.setVisible(false);// HIDES THE FRAME
 			frame.dispose();	// DISPOSES THE MODIFY MENU WINDOW
