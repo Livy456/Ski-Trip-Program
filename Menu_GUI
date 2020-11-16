@@ -50,10 +50,10 @@ public class Menu_GUI extends BusGUI implements ActionListener
 	private JLabel cost;			// CREATES A LABEL FOR COST
 	private JLabel print;			// CREATES A LABEL FOR PRINT
 	private Font font;				// CREATES A FONT
-	private JFrame frame;			// CREATES A JFRAME
+	protected JFrame frame;			// CREATES A JFRAME
 	private Container container;	// CREATES A CONTAINER
 	protected static DecimalFormat df = new DecimalFormat("0.00");	// INSTANTIATES DECIMALFORMAT
-	 
+
 	public Menu_GUI()
 	/************************************************/
 	/* DEFAULT CONSTRUCTOR - IT CREATES A FRAME FOR */
@@ -94,7 +94,7 @@ public class Menu_GUI extends BusGUI implements ActionListener
 		/* CREATES A BLANK JFRAME AND JPANEL */
 		/*************************************/
 		frame.pack();							// SIZE OF THE FRAME
-		frame.setBounds(450, 150, 500, 450);	// SETS X POSITION, Y POSITION, LENGTH, WIDTH FOR FRAME
+		frame.setBounds(450, 150, 550, 450);	// SETS X POSITION, Y POSITION, LENGTH, WIDTH FOR FRAME
 		frame.setVisible(true);					// ALLOWS THE JFRAME TO BE VISIBLE
 		container.setLayout(null);				// SETS THE LAYOUT FOR THE JFRAME
 		container.setBackground(Color.BLUE);	// SETS THE BACKGROUND COLOR OF FRAME
@@ -119,21 +119,21 @@ public class Menu_GUI extends BusGUI implements ActionListener
 		/**********************************************/
 		/* SETS BOUNDS FOR BUTTONS, JTEXTFIELD, LABEL */
 		/**********************************************/
-		insertB.setBounds(80, 110, 100, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		removeB.setBounds(190, 110, 100, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		modifyB.setBounds(300, 110, 100, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		costB.setBounds(80, 190, 150, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		profitDtB.setBounds(240, 190, 150, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		profitB.setBounds(150, 220, 150, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		busDtB.setBounds(50, 300, 180, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		alphB.setBounds(240, 300, 180, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		numB.setBounds(50, 330, 180, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		grpB.setBounds(240, 330, 180, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		quitB.setBounds(340, 370, 120, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		heading.setBounds(170, 20, 400, 50);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		changeCust.setBounds(20, 70, 500, 50);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		cost.setBounds(20, 150, 500, 50);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		print.setBounds(20, 260, 500, 50);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		insertB.setBounds(130, 110, 100, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		removeB.setBounds(240, 110, 100, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		modifyB.setBounds(350, 110, 100, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		costB.setBounds(130, 190, 150, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		profitDtB.setBounds(290, 190, 150, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		profitB.setBounds(200, 220, 150, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		busDtB.setBounds(100, 300, 180, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		alphB.setBounds(290, 300, 180, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		numB.setBounds(100, 330, 180, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		grpB.setBounds(290, 330, 180, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		quitB.setBounds(390, 370, 120, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		heading.setBounds(210, 20, 400, 50);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		changeCust.setBounds(70, 70, 500, 50);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		cost.setBounds(60, 150, 500, 50);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		print.setBounds(70, 260, 500, 50);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		
 		/**********************************************/
 		/* ADDS LISTENER TO BUTTON TO PERFORM ACTIONS */
@@ -188,7 +188,8 @@ public class Menu_GUI extends BusGUI implements ActionListener
 		int confirm; 		// REUSUABLE INT INPUT FOR CONFIRMING AN ACTION
 		
 		action = event.getActionCommand();	// CALL TO GET ACTION COMMAND
-		
+		super.frame.dispose();		// DISPOSES OF PARENT GUI WINDOW
+
 		/****************************************************/
 		/* IF STATEMENT TO CHECK IF QUIT BUTTON WAS PRESSED */	
 		/****************************************************/
@@ -211,6 +212,7 @@ public class Menu_GUI extends BusGUI implements ActionListener
 		else if (action.equals("Insert"))
 		{	
 			frame.setVisible(false);// HIDES THE FRAME
+			super.frame.dispose();	// DISPOSES OF PARENT FRAME
 			frame.dispose();		// DISPOSES OF MENU_GUI FRAME
 			new BusGUI();			// CREATES A NEW BUS GUI MENU	
 		}
@@ -220,8 +222,10 @@ public class Menu_GUI extends BusGUI implements ActionListener
 		/***********************************************************/
 		else if (action.equals("Remove"))
 		{	
-			frame.dispose();				// DISPOSES OF MENU_GUI FRAME
-			menuNum = 1;					// ASSIGNS MENU NUMBER TO REMOVE MENU, MENU NUMBER
+			frame.setVisible(false);// HIDES THE FRAME
+			super.frame.dispose();	// DISPOSES OF PARENT FRAME
+			frame.dispose();		// DISPOSES OF MENU_GUI FRAME
+			menuNum = 1;			// ASSIGNS MENU NUMBER TO REMOVE MENU, MENU NUMBER
 			new Print_ArrayList(custList, menuNum, 0);	// CREATES THE PRINT ARRAYLIST GUI	
 		}
 		
@@ -230,8 +234,10 @@ public class Menu_GUI extends BusGUI implements ActionListener
 		/**********************************************************/
 		else if (action.equals("Modify"))
 		{
-			frame.dispose();				// DISPOSES OF MENU_GUI FRAME
-			menuNum = 2;					// ASSIGNS MENU NUMBER TO MODIFY MENU NUMBER
+			frame.setVisible(false);// HIDES THE FRAME
+			super.frame.dispose();	// DISPOSES OF PARENT FRAME
+			frame.dispose();		// DISPOSES OF MENU_GUI FRAME
+			menuNum = 2;			// ASSIGNS MENU NUMBER TO MODIFY MENU NUMBER
 			new Print_ArrayList(custList, menuNum, 0);	// CREATES THE PRINT ARRAYLIST GUI
 		}
 		
@@ -247,6 +253,8 @@ public class Menu_GUI extends BusGUI implements ActionListener
 			/**************************************************************/
 			if (confirm == 0)
 			{
+				frame.setVisible(false);// HIDES THE FRAME
+				super.frame.dispose();	// DISPOSES OF PARENT FRAME
 				frame.dispose();		// DISPOSES OF MENU_GUI FRAME
 				menuNum = 3;			// ASSIGNS MENU NUMBER TO PRINT CUSTOMER LIST MENU NUMBER
 				new Print_ArrayList(custList, menuNum, 0);// CREATES THE PRINT ARRAYLIST GUI
@@ -265,6 +273,8 @@ public class Menu_GUI extends BusGUI implements ActionListener
 			/************************************************************************/
 			if (confirm == 0)
 			{
+				frame.setVisible(false);// HIDES THE FRAME
+				super.frame.dispose();	// DISPOSES OF PARENT FRAME
 				frame.dispose();		// DISPOSES OF MENU_GUI FRAME
 				new Print_Date();		// INSTANTIATES PRINT DATE MENU
 			}
@@ -282,6 +292,8 @@ public class Menu_GUI extends BusGUI implements ActionListener
 			/**********************************************************************/
 			if (confirm == 0)
 			{
+				frame.setVisible(false);// HIDES THE FRAME
+				super.frame.dispose();	// DISPOSES OF PARENT FRAME
 				frame.dispose();		// DISPOSES OF MENU_GUI FRAME
 				menuNum = 4;			// ASSIGNS MENU NUMBER TO PRINT CUSTOMER LIST MENU NUMBER
 				new Print_ArrayList(custList, menuNum, 0);	// CREATES THE PRINT ARRAYLIST GUI
@@ -302,6 +314,8 @@ public class Menu_GUI extends BusGUI implements ActionListener
 			if (confirm == 0)
 			{
 				sortCustAlph = sortAlpha();	// CALL TO SORT ALPHA
+				frame.setVisible(false);// HIDES THE FRAME
+				super.frame.dispose();	// DISPOSES OF PARENT FRAME
 				frame.dispose();			// DISPOSES OF MENU_GUI FRAME
 				menuNum = 3;				// ASSIGNS MENU NUMBER TO PRINT CUSTOMER LIST MENU NUMBER
 				new Print_ArrayList(sortCustAlph, menuNum, 0);// CREATES THE PRINT ARRAYLIST GUI
@@ -322,6 +336,8 @@ public class Menu_GUI extends BusGUI implements ActionListener
 			if (confirm == 0)
 			{
 				sortCustDt = sortDate();	// CALL TO SORT DATE
+				frame.setVisible(false);// HIDES THE FRAME
+				super.frame.dispose();	// DISPOSES OF PARENT FRAME
 				frame.dispose();			// DISPOSES OF MENU_GUI FRAME
 				menuNum = 3;				// ASSIGNS MENU NUMBER TO PRINT CUSTOMER LIST MENU NUMBER
 				new Print_ArrayList(sortCustDt, menuNum, 0);// CREATES THE PRINT ARRAYLIST GUI
@@ -342,6 +358,8 @@ public class Menu_GUI extends BusGUI implements ActionListener
 			if (confirm == 0)
 			{	
 				sortCustID = sortID();		// CALL TO SORT ID
+				frame.setVisible(false);// HIDES THE FRAME
+				super.frame.dispose();	// DISPOSES OF PARENT FRAME
 				frame.dispose();			// DISPOSES OF MENU_GUI FRAME
 				menuNum = 3;				// ASSIGNS MENU NUMBER TO PRINT CUSTOMER LIST MENU NUMBER
 				new Print_ArrayList(sortCustID, menuNum, 0);// CREATES THE PRINT ARRAYLIST GUI
@@ -370,6 +388,8 @@ public class Menu_GUI extends BusGUI implements ActionListener
 			if (confirm == 0)
 			{
 				mergeSortSize(sortCustSz, 0, sortCustSz.size()-1);	// CALL TO SORT SIZE
+				frame.setVisible(false);// HIDES THE FRAME
+				super.frame.dispose();	// DISPOSES OF PARENT FRAME
 				frame.dispose();		// DISPOSES OF MENU_GUI FRAME
 				menuNum = 3;			// ASSIGNS MENU NUMBER TO PRINT CUSTOMER LIST MENU NUMBER
 				new Print_ArrayList(sortCustSz, menuNum, 0);// CREATES THE PRINT ARRAYLIST GUI
