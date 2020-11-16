@@ -55,19 +55,34 @@ public class Print_ArrayList extends Menu_GUI implements ActionListener
 	private JLabel refund;			// CREATES A JLABEL
 	private JLabel seats;			// CREATES A JLABEL
 	private JLabel totalSz;			// CREATES A JLABEL
-	private int num;				// NUMBER OF CUSTOMER PRINTED OUT TO THE SCREEN -1
+	private JLabel printTot;		// CREATES A JLABEL
+	private JLabel totProf;			// CREATES A JLABEL
+	private String total;			// STRING REPRESENTATION OF TOTAL PROFIT FROM ALL CUSTOMERS
+	private int num;				// NUMBER OF CUSTOMER ITERATED THROUGH OUT
+	private int printed;			// NUMBER OF CUSTOMER PRINTED OUT TO THE SCREEN
 	private int size;				// SIZE OF ALL CUSTOMERS WITH SAME DATE
-	ArrayList<JLabel> allCust = new ArrayList<JLabel>();	// CREATES AN ARRAYLIST OF JLABELS
-	
-	public Print_ArrayList(ArrayList<Customer>cust, int menu, int cnt)
+	private String dateCost;		// TOTAL PROFIT FOR A SPECIFIC DATE
+	private String date;			// SPECIFIC SKI TRIP DATE
+	private int totalDateSize;		// TOTAL CUSTOMERS FOR A SPECIFIC DATE
+	private int dateBus;			// TOTAL BUSES NEEDED FOR A SPECIFIC DATE
+	private int dateRefund;			// TOTAL REFUNDS NEEDED FOR A SPECIFIC DATE
+	private int dateSeats;			// TOTAL AVAILABLE SEATS NEEDED FOR A SPECIFIC DATE
+	ArrayList<JLabel> allCust = new ArrayList<JLabel>();		// CREATES AN ARRAYLIST OF JLABELS
+	ArrayList<Customer> customer1;	// CREATES AN ARRAYLIST OF CUSTOMERS
+	ArrayList<Customer> customer2;	// CREATES AN ARRAYLIST OF CUSTOMERS
+
+	public Print_ArrayList(ArrayList<Customer>cust1, int menu, int cnt)
 	/************************************************/
 	/* DEFAULT CONSTRUCTOR - IT CREATES A FRAME FOR */
 	/*						 CONTENT PANE			*/
 	/************************************************/
 	{
+		total = calculateTotCost();	// CALL TO CALCULATE TOTAL COST
+		
 		/*************************/
 		/* INSTANTIATION SECTION */
 		/*************************/
+		customer1 = new ArrayList<Customer>();				// INSTANTIATES A CUSTOMER1
 		next = new JButton("Next");							// INSTANTIATES A JBUTTON
 		previous = new JButton("Previous");					// INSTANTIATES A JBUTTON
 		quit = new JButton("Quit Program");					// INSTANTIATES A JBUTTON
@@ -79,10 +94,14 @@ public class Print_ArrayList extends Menu_GUI implements ActionListener
 		dt = new JLabel("Date");							// INSTANTIATES A JLABEL
 		grpSz = new JLabel("Group Size");					// INSTANTIATES A JLABEL
 		cst = new JLabel("Cost");							// INSTANTIATES A JLABEL
+		printTot = new JLabel("Total: ");					// INSTANTIATES A JLABEL
+		totProf = new JLabel("$" + total);					// INSTANTIATES A JLABEL
 		font = new Font("Times New Roman",Font.BOLD,15);	// INSTANTIATES A FONT
 		frame = new JFrame("List of Ski Trip Customers");	// INSTANTIATES A FRAME
 		container = frame.getContentPane();					// CREATES A CONTENT PANE, WHICH  
 															// HOLDS THE OBJECTS ON THE FRAME
+		customer1 = cust1;	// CUSTOMER 2 REFERENCE THE SAME MEMORY ADDRESS
+
 		
 		/*************************************/
 		/* CREATES A BLANK JFRAME AND JPANEL */
@@ -105,7 +124,6 @@ public class Print_ArrayList extends Menu_GUI implements ActionListener
 			nextMenu.setVisible(true);			// DISPLAYS THE BUTTON
 		}
 		
-		
 		/*********************************************************************/
 		/*  ELSE IF STATEMENT TO CHECK IF MENU NUMBER IS FOR THE MODIFY MENU */
 		/*********************************************************************/
@@ -126,6 +144,22 @@ public class Print_ArrayList extends Menu_GUI implements ActionListener
 			nextMenu.setVisible(false);		// HIDES THE BUTTON
 		}
 		
+		/***********************************************************************************/
+		/*  ELSE IF STATEMENT TO CHECK IF MENU NUMBER IS FOR THE DISPLAY TOTAL PROFIT MENU */
+		/***********************************************************************************/
+		else if(menu == 4)
+		{
+			menuNum = menu;							// ASSIGNS THE MENU NUMBER
+			nextMenu.setText("");					// SETS TEXT TO BLANK
+			nextMenu.setVisible(false);				// HIDES THE BUTTON
+			printTot.setFont(font);					// SETS THE FONT OF THE PRINT PROFIT LABEL
+			totProf.setFont(font);					// SETS THE FONT OF THE TOTAL PROFIT LABEL
+			printTot.setBounds(20, 340, 75, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+			totProf.setBounds(770, 340, 150, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+			container.add(printTot);				// ADDS "TOTAL" TO THE CONTAINER
+			container.add(totProf);					// ADDS THE TOTAL PROFIT TO THE CONTAINER
+		}
+		
 		/**************************/
 		/* SETS FONT OF THE LABEL */
 		/**************************/
@@ -139,11 +173,11 @@ public class Print_ArrayList extends Menu_GUI implements ActionListener
 		/**************************/
 		/* SETS BOUNDS FOR BUTTON */
 		/**************************/
-		next.setBounds(720, 340, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		previous.setBounds(630, 340, 85, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		quit.setBounds(720, 430, 120, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		returnB.setBounds(630, 430, 85, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		nextMenu.setBounds(630, 385, 120, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		next.setBounds(720, 370, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		previous.setBounds(630, 370, 85, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		quit.setBounds(720, 445, 120, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		returnB.setBounds(630, 445, 85, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		nextMenu.setBounds(630, 400, 120, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		custNum.setBounds(20, 10, 150, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		grpID.setBounds(180, 10, 150, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		nm.setBounds(310, 10, 230, 25);			// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
@@ -151,7 +185,7 @@ public class Print_ArrayList extends Menu_GUI implements ActionListener
 		grpSz.setBounds(650, 10, 110, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		cst.setBounds(770, 10, 100, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		
-		/**********************************************/
+	 	/**********************************************/
 		/* ADDS LISTENER TO BUTTON TO PERFORM ACTIONS */
 		/**********************************************/
 		next.addActionListener(this);		// ADDS ACTIONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED
@@ -207,11 +241,11 @@ public class Print_ArrayList extends Menu_GUI implements ActionListener
 		/****************************************************************/
 		/* FOR LOOP TO ADD PRINT GROUP ID LABELS TO ARRAYLIST OF LABELS */
 		/****************************************************************/
-		for(int i=cnt;i<custList.size();i++)
+		for(int i=cnt;i<cust1.size();i++)
 		{
 			int y = (count * 30) + 30;	// DECLARES Y VARIBALE FOR Y POSITION
 			
-			printID = new JLabel(""+cust.get(i).getID());	// INSTANTIATES A NEW PRINT ID LABEL
+			printID = new JLabel(""+cust1.get(i).getID());	// INSTANTIATES A NEW PRINT ID LABEL
 			printID.setBounds(180, y, 150, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 			printID.setFont(font);				// SETS FONT
 			allCust.add(printID);				// ADDS PRINT ID LABEL TO ARRAYLIST OF LABELS 
@@ -232,11 +266,11 @@ public class Print_ArrayList extends Menu_GUI implements ActionListener
 		/************************************************************/
 		/* FOR LOOP TO ADD PRINT NAME LABELS TO ARRAYLIST OF LABELS */
 		/************************************************************/
-		for(int i=cnt;i<custList.size();i++)
+		for(int i=cnt;i<cust1.size();i++)
 		{
 			int y = (count * 30) + 30;	// DECLARES Y VARIBALE FOR Y POSITION
 				
-			printName = new JLabel(""+cust.get(i).getName());// INSTANTIATES A NEW PRINT NAME LABEL
+			printName = new JLabel(""+cust1.get(i).getName());// INSTANTIATES A NEW PRINT NAME LABEL
 			printName.setBounds(310, y, 230, 25);// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 			printName.setFont(font);			// SETS FONT
 			allCust.add(printName);				// ADDS PRINT NAME LABEL TO ARRAYLIST OF LABELS
@@ -257,11 +291,11 @@ public class Print_ArrayList extends Menu_GUI implements ActionListener
 		/************************************************************/
 		/* FOR LOOP TO ADD PRINT DATE LABELS TO ARRAYLIST OF LABELS */
 		/************************************************************/
-		for(int i=cnt;i<custList.size();i++)
+		for(int i=cnt;i<cust1.size();i++)
 		{
 			int y = (count * 30) + 30;	// DECLARES Y VARIBALE FOR Y POSITION
 				
-			printDate = new JLabel(""+cust.get(i).getDate());	// INSTANTIATES A NEW PRINT DATE LABEL
+			printDate = new JLabel(""+cust1.get(i).getDate());	// INSTANTIATES A NEW PRINT DATE LABEL
 			printDate.setBounds(550, y, 90, 25);// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 			printDate.setFont(font);			// SETS FONT
 			allCust.add(printDate);				// ADDS PRINT DATE LABEL TO ARRAYLIST OF LABELS 
@@ -282,11 +316,11 @@ public class Print_ArrayList extends Menu_GUI implements ActionListener
 		/************************************************************/
 		/* FOR LOOP TO ADD PRINT SIZE LABELS TO ARRAYLIST OF LABELS */
 		/************************************************************/
-		for(int i=cnt;i<custList.size();i++)
+		for(int i=cnt;i<cust1.size();i++)
 		{
 			int y = (count * 30) + 30;	// DECLARES Y VARIBALE FOR Y POSITION
 				
-			printSize = new JLabel(""+cust.get(i).getSize());	// INSTANTIATES A NEW PRINT SIZE LABEL
+			printSize = new JLabel(""+cust1.get(i).getSize());	// INSTANTIATES A NEW PRINT SIZE LABEL
 			printSize.setBounds(650, y, 110, 25);// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 			printSize.setFont(font);			// SETS FONT
 			allCust.add(printSize);				// ADDS PRINT SIZE LABEL TO ARRAYLIST OF LABELS 
@@ -307,15 +341,15 @@ public class Print_ArrayList extends Menu_GUI implements ActionListener
 		/************************************************************/
 		/* FOR LOOP TO ADD PRINT COST LABELS TO ARRAYLIST OF LABELS */
 		/************************************************************/
-		for(int i=cnt;i<custList.size();i++)
+		for(int i=cnt;i<cust1.size();i++)
 		{
 			int y = (count * 30) + 30;	// DECLARES Y VARIBALE FOR Y POSITION
 				
-			printCost = new JLabel("$"+cust.get(i).getCost());	// INSTANTIATES A NEW PRINT COST LABEL
+			printCost = new JLabel("$"+cust1.get(i).getCost());	// INSTANTIATES A NEW PRINT COST LABEL
 			printCost.setBounds(770, y, 100, 25);// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 			printCost.setFont(font);			// SETS FONT
 			allCust.add(printCost);				// ADDS PRINT COST LABEL TO ARRAYLIST OF LABELS 
-			
+		
 			/********************************************************************/
 			/* IF STATEMENT TO CHECK IF TEN CUSTOMERS ARE PRINTED TO THE SCREEN */	
 			/********************************************************************/
@@ -332,7 +366,7 @@ public class Print_ArrayList extends Menu_GUI implements ActionListener
 		/*********************************************************************************/
 		/* IF STATEMENT TO CHECK IF NUMBER OF CUSTOMERS ALREADY PRINTED EXCEEDS CUSTLIST */	
 		/*********************************************************************************/
-		if(num >= custList.size()-1)
+		if(num >= cust1.size())
 		{
 			next.setVisible(false);		// HIDES THE NEXT BUTTON ONCE ALL THE CUSTOMERS 
 										// HAVE BEEN PRINTED TO THE SCREEN
@@ -371,108 +405,27 @@ public class Print_ArrayList extends Menu_GUI implements ActionListener
 		}
 	}
 	
-	public Print_ArrayList(Customer cust)
+	public Print_ArrayList(ArrayList<Customer> cust2, int prt, int mnNm, String cst2, String dt2, int totSz, int b, int rfnd, int sts)
 	/************************************************/
 	/* DEFAULT CONSTRUCTOR - IT CREATES A FRAME FOR */
 	/*						 CONTENT PANE			*/
 	/************************************************/
-	{
+	{	
+		/**************************/
+		/* INITIALIZATION SECTION */
+		/**************************/
+		menuNum = mnNm;				// ASSIGNS THE MENU NUMBER FROM PRINT DATE
+		dateCost = cst2;			// INITIALIZES TOTAL COST FOR A SPECIFIC DATE
+		date = dt2;					// INITIALIZES SPECIFIC SKI TRIP DATE
+		totalDateSize = totSz;		// INITIALIZES TOTAL CUSTOMERS FOR A SPECIFIC DATE
+		dateBus = b;				// INITIALIZES TOTAL BUSES NEEDED FOR A SPECIFIC DATE
+		dateRefund = rfnd;			// INITIALIZES TOTAL REFUNDS NEEDED FOR A SPECIFIC DATE
+		dateSeats = sts;			// INITIALIZES TOTAL AVAILABLE SEATS FOR A SPECIFIC DATE
+			
 		/*************************/
 		/* INSTANTIATION SECTION */
 		/*************************/
-		quit = new JButton("Quit Program");					// INSTANTIATES A JBUTTON
-		returnB = new JButton("Main Menu");					// INSTANTIATES A JBUTTON
-		grpID = new JLabel("Group ID");						// INSTANTIATES A JLABEL
-		nm = new JLabel("Name");							// INSTANTIATES A JLABEL
-		dt = new JLabel("Date");							// INSTANTIATES A JLABEL
-		grpSz = new JLabel("Group Size");					// INSTANTIATES A JLABEL
-		cst = new JLabel("Cost");							// INSTANTIATES A JLABEL
-		printID = new JLabel(""+cust.getID());				// INSTANTIATES A NEW PRINT ID LABEL
-		printName = new JLabel(""+cust.getName());			// INSTANTIATES A NEW PRINT NAME LABEL
-		printDate = new JLabel(""+cust.getDate());			// INSTANTIATES A NEW PRINT DATE LABEL
-		printSize = new JLabel(""+cust.getSize());			// INSTANTIATES A NEW PRINT SIZE LABEL
-		printCost = new JLabel("$"+cust.getCost());			// INSTANTIATES A NEW PRINT COST LABEL
-		font = new Font("Times New Roman",Font.BOLD,15);	// INSTANTIATES A FONT
-		frame = new JFrame("List of Ski Trip Customers");	// INSTANTIATES A FRAME
-		container = frame.getContentPane();					// CREATES A CONTENT PANE, WHICH  
-															// HOLDS THE OBJECTS ON THE FRAME
-		
-		/*************************************/
-		/* CREATES A BLANK JFRAME AND JPANEL */
-		/*************************************/
-		frame.pack();							// SIZE OF THE FRAME
-		frame.setBounds(390, 140, 890, 200);	// SETS X POSITION, Y POSITION, LENGTH,
-												// AND WIDTH OF THE JFRAME
-		frame.setVisible(true);					// ALLOWS THE JFRAME TO BE VISIBLE
-		container.setLayout(null);				// SETS THE LAYOUT FOR THE JFRAME
-		container.setBackground(Color.WHITE);	// SETS THE BACKGROUND COLOR
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);// ALLOWS THE JFRAME TO BE CLOSED
-		
-		/**************************/
-		/* SETS FONT OF THE LABEL */
-		/**************************/
-		grpID.setFont(font);		// SETS THE FONT OF THE GROUP ID LABEL	
-		nm.setFont(font);			// SETS THE FONT OF THE NAME LABEL
-		dt.setFont(font);			// SETS THE FONT OF THE DATE LABEL
-		grpSz.setFont(font);		// SETS THE FONT OF THE GROUP SIZE LABEL
-		cst.setFont(font);			// SETS THE FONT OF THE COST LABEL
-		printID.setFont(font);		// SETS THE FONT OF THE PRINT ID LABEL
-		printName.setFont(font);	// SETS THE FONT OF THE PRINT NAME LABEL
-		printDate.setFont(font);	// SETS THE FONT OF THE PRINT DATE LABEL
-		printSize.setFont(font);	// SETS THE FONT OF THE PRINT SIZE LABEL
-		printCost.setFont(font);	// SETS THE FONT OF THE PRINT COST LABEL
-
-		/**************************/
-		/* SETS BOUNDS FOR BUTTON */
-		/**************************/
-		quit.setBounds(710, 380, 120, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		returnB.setBounds(630, 380, 75, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		grpID.setBounds(20, 10, 150, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		nm.setBounds(180, 10, 230, 25);			// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		dt.setBounds(310, 10, 90, 25);			// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		grpSz.setBounds(550, 10, 110, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		cst.setBounds(650, 10, 100, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		printID.setBounds(180, 40, 150, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		printName.setBounds(310, 40, 230, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		printDate.setBounds(550, 40, 90, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		printSize.setBounds(650, 40, 110, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		printCost.setBounds(770, 40, 100, 25);// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-
-		/**********************************************/
-		/* ADDS LISTENER TO BUTTON TO PERFORM ACTIONS */
-		/**********************************************/
-		next.addActionListener(this);		// ADDS ACTIONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED 
-		quit.addActionListener(this);		// ADDS ACTIONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED 
-		returnB.addActionListener(this);	// ADDS ACTIONLISTENER TO MAKE AN EVENT ONCE BUTTON IS PUSHED
-		
-		/*************************/
-		/* ADDS BUTTONS TO FRAME */
-		/*************************/
-		container.add(quit);		// ADDS QUIT BUTTON TO CONTAINER
-		container.add(returnB);		// ADDS RETURN BUTTON TO CONTAINER
-		container.add(nextMenu);	// ADDS NEXT MENU BUTTON TO CONTAINER
-		container.add(custNum);		// ADDS CUSTOMER NUMBER LABEL TO CONTAINER
-		container.add(grpID);		// ADDS GROUP ID NUMBER LABEL TO CONTAINER
-		container.add(nm);			// ADDS GROUP NAME LABEL TO CONTAINER
-		container.add(grpSz);		// ADDS GROUP SIZE LABEL TO CONTAINER
-		container.add(dt);			// ADDS GROUP DATE LABEL TO CONTAINER
-		container.add(cst);			// ADDS GROUP COST LABEL TO CONTAINER
-		container.add(printID);		// ADDS PRINT ID LABEL TO CONTAINER
-		container.add(printName);	// ADDS PRINT NAME LABEL TO CONTAINER	
-		container.add(printDate);	// ADDS PRINT DATE LABEL TO CONTAINER
-		container.add(printSize);	// ADDS PRINT SIZE LABEL TO CONTAINER
-		container.add(printCost);	// ADDS PRINT COST LABEL TO CONTAINER
-	}
-	
-	public Print_ArrayList(int cnt, double cst2, String dt2, int totSz, int b, int rfnd, int sts)
-	/************************************************/
-	/* DEFAULT CONSTRUCTOR - IT CREATES A FRAME FOR */
-	/*						 CONTENT PANE			*/
-	/************************************************/
-	{
-		/*************************/
-		/* INSTANTIATION SECTION */
-		/*************************/
+		customer2 = new ArrayList<Customer>();					// INSTANTIATES AN ARRAYLIST
 		next = new JButton("Next");								// INSTANTIATES A JBUTTON
 		previous = new JButton("Previous");						// INSTANTIATES A JBUTTON
 		quit = new JButton("Quit Program");						// INSTANTIATES A JBUTTON
@@ -488,7 +441,7 @@ public class Print_ArrayList extends Menu_GUI implements ActionListener
 		seats = new JLabel("Number of Seats Available: ");		// INSTANTIATES A JLABEL
 		totalSz = new JLabel("Total: ");						// INSTANTIATES A JLABEL
 		printTotSz = new JLabel("" + totSz);					// INSTANTIATES A JLABEL
-		printTotCost = new JLabel("$" + cst2);					// INSTANTIATES A JLABEL
+		printTotCost = new JLabel("$"+cst2);					// INSTANTIATES A JLABEL
 		printBus = new JLabel("" + b);							// INSTANTIATES A JLABEL
 		printRefund = new JLabel("" + rfnd);					// INSTANTIATES A JLABEL
 		printSeats  = new JLabel("" + sts);						// INSTANTIATES A JLABEL
@@ -496,6 +449,7 @@ public class Print_ArrayList extends Menu_GUI implements ActionListener
 		frame = new JFrame("List of Ski Trip Customers");		// INSTANTIATES A FRAME
 		container = frame.getContentPane();						// CREATES A CONTENT PANE, WHICH  
 																// HOLDS THE OBJECTS ON THE FRAME
+		customer2 = cust2;	// CUSTOMER 2 REFERENCE THE SAME MEMORY ADDRESS
 		
 		/*************************************/
 		/* CREATES A BLANK JFRAME AND JPANEL */
@@ -531,9 +485,9 @@ public class Print_ArrayList extends Menu_GUI implements ActionListener
 		/* SETS BOUNDS FOR BUTTON */
 		/**************************/
 		next.setBounds(710, 500, 75, 25);			// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		previous.setBounds(630, 500, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		quit.setBounds(785, 530, 120, 25);			// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		returnB.setBounds(630, 545, 150, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		previous.setBounds(600, 500, 105, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		quit.setBounds(755, 530, 120, 25);			// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		returnB.setBounds(600, 530, 150, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		custNum.setBounds(20, 10, 150, 25);			// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		grpID.setBounds(180, 10, 150, 25);			// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		nm.setBounds(310, 10, 230, 25);				// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
@@ -561,52 +515,62 @@ public class Print_ArrayList extends Menu_GUI implements ActionListener
 		/***********************************************************/
 		/* FOR LOOP TO FIND THE NUMBER OF CUSTOMERS WITH SAME DATE */
 		/***********************************************************/
-		for(int j = 0; j < custList.size();j++)
+		for(int j = 0; j < cust2.size();j++)
 		{
-			if(custList.get(j).getDate().equals(dt2)) 
+			/**********************************************************/
+			/* IF STATEMENT TO GET NUMBER OF CUSTOMERS WITH SAME DATE */	
+			/**********************************************************/
+			if(cust2.get(j).getDate().equals(dt2)) 
 			{
 				size+=1;	// CALCULATES NUMBER OF CUSTOMERS WITH SELECTED DATE
 			}
 		}
-		
-		int count = 0;	// DECLARES AND INITIALIZES COUNT
-		
+		printed = prt;
+		int count = 0;			// DECLARES AND INITIALIZES COUNT
+		int custNum2 = printed;	// DELCARES CUSTOMER NUMBER
+
 		/***********************************************************************/
 		/* FOR LOOP TO ADD PRINT CUSTOMER NUMBER LABELS TO ARRAYLIST OF LABELS */
 		/***********************************************************************/
-		for(int i=cnt;i<size;i++)
+		for(int i=prt; i<cust2.size();i++)
 		{
-			int y = (count * 30) + 30;	// DECLARES Y VARIBALE FOR Y POSITION
-			int custNum = i+1;		// DELCARES CUSTOMER NUMBER
-			
-			/*********************************************************************/
-			/* IF STATEMENT TO CHECK IF CUSTOMER NUMBER IS A SINGLE DIGIT NUMBER */	
-			/*********************************************************************/
-			if(custNum < 10)
+			/****************************************************************/
+			/* IF STATEMENT TO CHECK IF SELECTED DATE MATCHES CUSTLIST DATE */
+			/****************************************************************/
+			if(cust2.get(i).getDate().equals(dt2))
 			{
-				printcustNum = new JLabel("0"+custNum);	// INSTANTIATES A NEW PRINT CUSTOMER NUMBER LABEL
+				int y = (count * 30) + 30;	// DECLARES Y VARIBALE FOR Y POSITION
+				custNum2+=1;					
+				
+				/*********************************************************************/
+				/* IF STATEMENT TO CHECK IF CUSTOMER NUMBER IS A SINGLE DIGIT NUMBER */	
+				/*********************************************************************/
+				if(custNum2 < 10)
+				{
+					printcustNum = new JLabel("0"+custNum2);	// INSTANTIATES A NEW PRINT CUSTOMER NUMBER LABEL
+				}
+				
+				/**************************************************************************/
+				/* ELSE IF STATEMENT TO CHECK IF CUSTOMER NUMBER IS A DOUBLE DIGIT NUMBER */	
+				/**************************************************************************/
+				else if(custNum2 >= 10)
+				{
+					printcustNum = new JLabel(""+custNum2);			// INSTANTIATES A NEW PRINT CUSTOMER NUMBER LABEL
+				}
+				
+				printcustNum.setBounds(20, y, 50, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+				printcustNum.setFont(font);	// SETS FONT
+				allCust.add(printcustNum);	// ADDS PRINT CUSTOMER NUMBER LABEL TO ARRAYLIST OF LABELS 
+				count+=1;					// CALCULATES EVERY OCCURENCE OF DATE
+
+				/********************************************************************/
+				/* IF STATEMENT TO CHECK IF TEN CUSTOMERS ARE PRINTED TO THE SCREEN */	
+				/********************************************************************/
+				if ((count%10) == 0)
+				{
+					break;		// BREAKS AFTER TEN CUSTOMERS ARE PRINTED TO THE SCREEN
+				}
 			}
-			
-			/**************************************************************************/
-			/* ELSE IF STATEMENT TO CHECK IF CUSTOMER NUMBER IS A DOUBLE DIGIT NUMBER */	
-			/**************************************************************************/
-			else if(custNum >= 10)
-			{
-				printcustNum = new JLabel(""+custNum);			// INSTANTIATES A NEW PRINT CUSTOMER NUMBER LABEL
-			}
-			printcustNum.setBounds(20, y, 50, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-			printcustNum.setFont(font);	// SETS FONT
-			allCust.add(printcustNum);	// ADDS PRINT CUSTOMER NUMBER LABEL TO ARRAYLIST OF LABELS 
-			
-			/********************************************************************/
-			/* IF STATEMENT TO CHECK IF TEN CUSTOMERS ARE PRINTED TO THE SCREEN */	
-			/********************************************************************/
-			if ((i+1)%10 == 0)
-			{
-				break;		// BREAKS AFTER TEN CUSTOMERS ARE PRINTED TO THE SCREEN
-			}
-			
-			count+=1;
 		}
 			
 		count = 0;	// INITIALIZES COUNT
@@ -614,21 +578,28 @@ public class Print_ArrayList extends Menu_GUI implements ActionListener
 		/****************************************************************/
 		/* FOR LOOP TO ADD PRINT GROUP ID LABELS TO ARRAYLIST OF LABELS */
 		/****************************************************************/
-		for(int i=0;i<custList.size();i++)
+		for(int i=prt;i < cust2.size();i++)
 		{
 			/****************************************************************/
 			/* IF STATEMENT TO CHECK IF SELECTED DATE MATCHES CUSTLIST DATE */
 			/****************************************************************/
-			if(custList.get(i).getDate().equals(dt2))
+			if(cust2.get(i).getDate().equals(dt2))
 			{
 				int y = (count * 30) + 30;	// DECLARES Y VARIBALE FOR Y POSITION
 				
-				printID = new JLabel(""+custList.get(i).getID());	// INSTANTIATES A NEW PRINT ID LABEL
+				printID = new JLabel(""+cust2.get(i).getID());	// INSTANTIATES A NEW PRINT ID LABEL
 				printID.setBounds(180, y, 150, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 				printID.setFont(font);				// SETS FONT
 				allCust.add(printID);				// ADDS PRINT ID LABEL TO ARRAYLIST OF LABELS 
-				count+=1; 							// CALCULATES EVERY OCCURENCE OF DATE 
+				count+=1;							// CALCULATES EVERY OCCURENCE OF DATE
 
+				/********************************************************************/
+				/* IF STATEMENT TO CHECK IF TEN CUSTOMERS ARE PRINTED TO THE SCREEN */	
+				/********************************************************************/
+				if ((count%10) == 0)
+				{
+					break;		// BREAKS AFTER TEN CUSTOMERS ARE PRINTED TO THE SCREEN
+				}
 			}
 		}
 		
@@ -637,29 +608,28 @@ public class Print_ArrayList extends Menu_GUI implements ActionListener
 		/************************************************************/
 		/* FOR LOOP TO ADD PRINT NAME LABELS TO ARRAYLIST OF LABELS */
 		/************************************************************/
-		for(int i=0;i<custList.size();i++)
+		for(int i=prt;i < cust2.size();i++)
 		{
 			/****************************************************************/
 			/* IF STATEMENT TO CHECK IF SELECTED DATE MATCHES CUSTLIST DATE */
 			/****************************************************************/
-			if(custList.get(i).getDate().equals(dt2))
+			if(cust2.get(i).getDate().equals(dt2))
 			{
 				int y = (count * 30) + 30;	// DECLARES Y VARIBALE FOR Y POSITION
 				
-				printName = new JLabel(""+custList.get(i).getName());// INSTANTIATES A NEW PRINT NAME LABEL
+				printName = new JLabel(""+cust2.get(i).getName());// INSTANTIATES A NEW PRINT NAME LABEL
 				printName.setBounds(310, y, 230, 25);// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 				printName.setFont(font);			// SETS FONT
 				allCust.add(printName);				// ADDS PRINT NAME LABEL TO ARRAYLIST OF LABELS 
-				
+				count+=1;							// CALCULATES EVERY OCCURENCE OF DATE
+
 				/********************************************************************/
 				/* IF STATEMENT TO CHECK IF TEN CUSTOMERS ARE PRINTED TO THE SCREEN */	
 				/********************************************************************/
-				if ((i+1)%10 == 0)
+				if ((count%10) == 0)
 				{
 					break;		// BREAKS AFTER TEN CUSTOMERS ARE PRINTED TO THE SCREEN
 				}
-				
-				count+=1;							// CALCULATES EVERY OCCURENCE OF DATE 
 			}
 		}
 		
@@ -668,29 +638,28 @@ public class Print_ArrayList extends Menu_GUI implements ActionListener
 		/************************************************************/
 		/* FOR LOOP TO ADD PRINT DATE LABELS TO ARRAYLIST OF LABELS */
 		/************************************************************/
-		for(int i=0;i<custList.size();i++)
+		for(int i=prt;i < cust2.size();i++)
 		{
 			/****************************************************************/
 			/* IF STATEMENT TO CHECK IF SELECTED DATE MATCHES CUSTLIST DATE */
 			/****************************************************************/
-			if(custList.get(i).getDate().equals(dt2))
+			if(cust2.get(i).getDate().equals(dt2))
 			{
 				int y = (count * 30) + 30;	// DECLARES Y VARIBALE FOR Y POSITION
 				
-				printDate = new JLabel(""+custList.get(i).getDate());	// INSTANTIATES A NEW PRINT DATE LABEL
+				printDate = new JLabel(""+cust2.get(i).getDate());	// INSTANTIATES A NEW PRINT DATE LABEL
 				printDate.setBounds(550, y, 90, 25);// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 				printDate.setFont(font);			// SETS FONT
 				allCust.add(printDate);				// ADDS PRINT DATE LABEL TO ARRAYLIST OF LABELS 
-				
+				count+=1;							// CALCULATES EVERY OCCURENCE OF DATE
+
 				/********************************************************************/
 				/* IF STATEMENT TO CHECK IF TEN CUSTOMERS ARE PRINTED TO THE SCREEN */	
 				/********************************************************************/
-				if ((i+1)%10 == 0)
+				if ((count%10) == 0)
 				{
 					break;		// BREAKS AFTER TEN CUSTOMERS ARE PRINTED TO THE SCREEN
 				}
-				
-				count+=1;							// CALCULATES EVERY OCCURENCE OF DATE 
 			}
 		}
 		
@@ -699,69 +668,68 @@ public class Print_ArrayList extends Menu_GUI implements ActionListener
 		/************************************************************/
 		/* FOR LOOP TO ADD PRINT SIZE LABELS TO ARRAYLIST OF LABELS */
 		/************************************************************/
-		for(int i=0;i<custList.size();i++)
+		for(int i=prt;i < cust2.size();i++)
 		{
 			/****************************************************************/
 			/* IF STATEMENT TO CHECK IF SELECTED DATE MATCHES CUSTLIST DATE */
 			/****************************************************************/
-			if(custList.get(i).getDate().equals(dt2))
+			if(cust2.get(i).getDate().equals(dt2))
 			{
 				int y = (count * 30) + 30;	// DECLARES Y VARIBALE FOR Y POSITION
 				
-				printSize = new JLabel(""+custList.get(i).getSize());	// INSTANTIATES A NEW PRINT SIZE LABEL
+				printSize = new JLabel(""+cust2.get(i).getSize());	// INSTANTIATES A NEW PRINT SIZE LABEL
 				printSize.setBounds(650, y, 110, 25);// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-				printSize.setFont(font);			// SETS FONT
-				allCust.add(printSize);				// ADDS PRINT SIZE LABEL TO ARRAYLIST OF LABELS 
-				
+				printSize.setFont(font);	// SETS FONT
+				allCust.add(printSize);		// ADDS PRINT SIZE LABEL TO ARRAYLIST OF LABELS 	
+				count+=1;					// CALCULATES EVERY OCCURENCE OF DATE
+
 				/********************************************************************/
 				/* IF STATEMENT TO CHECK IF TEN CUSTOMERS ARE PRINTED TO THE SCREEN */	
 				/********************************************************************/
-				if ((i+1)%10 == 0)
+				if ((count%10) == 0)
 				{
-					break;		// BREAKS AFTER TEN CUSTOMERS ARE PRINTED TO THE SCREEN
+					break;	// BREAKS AFTER TEN CUSTOMERS ARE PRINTED TO THE SCREEN
 				}
-				
-				count+=1;							// CALCULATES EVERY OCCURENCE OF DATE
 			}
 		}
 		
-		count = 0;	// INITIALIZES COUNT
-
+		count = 0;			// INITIALIZES COUNT
+		
 		/************************************************************/
 		/* FOR LOOP TO ADD PRINT COST LABELS TO ARRAYLIST OF LABELS */
 		/************************************************************/
-		for(int i=0;i<custList.size();i++)
+		for(int i=prt;i < cust2.size();i++)
 		{
+			
 			/****************************************************************/
 			/* IF STATEMENT TO CHECK IF SELECTED DATE MATCHES CUSTOMER DATE */	
 			/****************************************************************/
-			if(custList.get(i).getDate().equals(dt2))
+			if(dt2.equals(cust2.get(i).getDate()))
 			{
 				int y = (count * 30) + 30;	// DECLARES Y VARIBALE FOR Y POSITION
 				
-				printCost = new JLabel("$"+custList.get(i).getCost());	// INSTANTIATES A NEW PRINT COST LABEL
+				printCost = new JLabel("$"+cust2.get(i).getCost());	// INSTANTIATES A NEW PRINT COST LABEL
 				printCost.setBounds(770, y, 100, 25);// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-				printCost.setFont(font);			// SETS FONT
-				allCust.add(printCost);				// ADDS PRINT COST LABEL TO ARRAYLIST OF LABELS 
-				
+				printCost.setFont(font);			 // SETS FONT
+				allCust.add(printCost);				 // ADDS PRINT COST LABEL TO ARRAYLIST OF LABELS 
+				count+=1;							 // CALCULATES EVERY OCCURENCE OF DATE
+
 				/********************************************************************/
 				/* IF STATEMENT TO CHECK IF TEN CUSTOMERS ARE PRINTED TO THE SCREEN */	
 				/********************************************************************/
-				if ((i+1)%10 == 0)
+				if ((count%10) == 0)
 				{
-					break;		// BREAKS AFTER TEN CUSTOMERS ARE PRINTED TO THE SCREEN
+					break;	// BREAKS AFTER TEN CUSTOMERS ARE PRINTED TO THE SCREEN
 				}
-				
-				count+=1;							// CALCULATES EVERY OCCURENCE OF DATE
 			}
 		}
-			
-		num = cnt+10; 	// NUMBER OF CUSTOMERS PRINTED TO THE SCREEN
 		
+		printed += 10;	// NUMBER OF CUSTOMERS PRINTED TO THE SCREEN
+				
 		/*********************************************************************************/
 		/* IF STATEMENT TO CHECK IF NUMBER OF CUSTOMERS ALREADY PRINTED EXCEEDS CUSTLIST */	
 		/*********************************************************************************/
-		if(num >= (size-1))
+		if(printed >= size)
 		{
 			next.setVisible(false);		// HIDES THE NEXT BUTTON ONCE ALL THE CUSTOMERS 
 										// HAVE BEEN PRINTED TO THE SCREEN
@@ -770,10 +738,10 @@ public class Print_ArrayList extends Menu_GUI implements ActionListener
 		/*********************************************************************************/
 		/* IF STATEMENT TO CHECK IF CUSTOMER INFORMATION OUTPUT IS STILL ON FIRST SCREEN */	
 		/*********************************************************************************/
-		if(num <=10)
+		if(printed <=10)
 		{
-			previous.setVisible(false);	// HIDES THE PREVIOUS BUTTON SINCE ONLY TEN CUSTOMERS
-										// HAVE BEEN PRINTED TO THE SCREEN
+			previous.setVisible(false);	// HIDES THE PREVIOUS BUTTON SINCE ONLY 
+										// TEN CUSTOMERS HAVE BEEN PRINTED TO THE SCREEN
 		}
 			
 		/*************************/
@@ -824,7 +792,7 @@ public class Print_ArrayList extends Menu_GUI implements ActionListener
 		/************************************/
 		/* ASSIGNS BUTTON PRESSED TO ACTION */
 		/************************************/
-		action = event.getActionCommand();		// CALL TO GET ACTION COMMAND
+		action = event.getActionCommand();	// CALL TO GET ACTION COMMAND
 	
 		/****************************************************/
 		/* IF STATEMENT TO CHECK IF QUIT BUTTON WAS PRESSED */	
@@ -849,6 +817,7 @@ public class Print_ArrayList extends Menu_GUI implements ActionListener
 		{
 			container.setVisible(false);	// HIDES THE FRAME
 			frame.dispose();				// DISPOSES THE PRINT ARRAYLIST WINDOW
+			super.frame.dispose();			// DISPOSES OF PARENT FRAME
 			new Menu_GUI();					// MAKES A NEW MENU GUI
 		}
 		
@@ -859,6 +828,7 @@ public class Print_ArrayList extends Menu_GUI implements ActionListener
 		{
 			container.setVisible(false);	// HIDES THE FRAME
 			frame.dispose();				// DISPOSES THE PRINT ARRAYLIST WINDOW
+			super.frame.dispose();			// DISPOSES OF PARENT FRAME
 			new Remove_Menu();				// CREATES A REMOVE MENU
 		}                                                                           
 		
@@ -869,6 +839,7 @@ public class Print_ArrayList extends Menu_GUI implements ActionListener
 		{
 			container.setVisible(false);	// HIDES THE FRAME
 			frame.dispose();				// DISPOSES THE PRINT ARRAYLIST WINDOW
+			super.frame.dispose();			// DISPOSES OF PARENT FRAME
 			new Modify_Menu();				// CREATES A MODIFY MENU
 		}
 		
@@ -877,9 +848,10 @@ public class Print_ArrayList extends Menu_GUI implements ActionListener
 		/*********************************************************/
 		if(action.equals("Main Menu"))
 		{
-			container.setVisible(false);// HIDES THE FRAME
-			frame.dispose();		// DISPOSES THE PRINT ARRAYLIST WINDOW
-			new Menu_GUI();			// CREATES A MENU GUI
+			container.setVisible(false);	// HIDES THE FRAME
+			frame.dispose();				// DISPOSES THE PRINT ARRAYLIST WINDOW
+			super.frame.dispose();			// DISPOSES OF PARENT FRAME
+			new Menu_GUI();					// CREATES A MENU GUI
 		}
 		
 		/*************************************************************************/
@@ -889,6 +861,7 @@ public class Print_ArrayList extends Menu_GUI implements ActionListener
 		{
 			container.setVisible(false);	// HIDES THE FRAME
 			frame.dispose();				// DISPOSE THE PRINT ARRAYLIST WINDOW
+			super.frame.dispose();			// DISPOSES OF PARENT FRAME
 			new Print_Date();				// CREATES A PRINT DATE GUI
 		}
 		
@@ -899,7 +872,27 @@ public class Print_ArrayList extends Menu_GUI implements ActionListener
 		{			
 			frame.setVisible(false);// HIDES THE FRAME
 			frame.dispose();		// GETS RID OF THE OLD FRAME	
-			new Print_ArrayList(custList, menuNum, num);	// INSTANTIATES PRINT ARRAYLIST WINDOW
+			super.frame.dispose();	// DISPOSES OF PARENT FRAME
+
+			/********************************************************************/
+			/* IF STATEMENT TO CHECK IF NEXT BUTTON IN ONE OF THE 1ST 4 WINDOWS */	
+			/********************************************************************/
+			if((menuNum == 1) || (menuNum == 2) || (menuNum == 3) 
+			   || (menuNum == 4))
+			{
+				new Print_ArrayList(customer1, menuNum, num);	// INSTANTIATES PRINT 
+																// ARRAYLIST WINDOW
+			}
+			
+			/****************************************************************************************/
+			/* ELSE STATEMENT TO CHECK IF NEXT BUTTON IN THE SECOND DEFAULT CONSTRUCTOR WAS PRESSED */	
+			/****************************************************************************************/
+			else if (menuNum == 5)
+			{
+				new Print_ArrayList(customer2, printed, menuNum, dateCost, 
+									date, totalDateSize, dateBus, dateRefund, 
+									dateSeats);	// INSTANTIATES PRINT ARRAYLIST WINDOW
+			}
 		}	
 		
 		/********************************************************/
@@ -907,10 +900,40 @@ public class Print_ArrayList extends Menu_GUI implements ActionListener
 		/********************************************************/
 		if(action.equals("Previous"))
 		{
-			num-=20;	// GOES BACK TO THE PREVIOUS TEN CUSTOMERS
+			printed-=20;
+			
+			/****************************************************************/
+			/* IF STATEMENT TO MAKE SURE NUM GOES BACK TO PREVIOUS WINDOW'S */
+			/* FIRST CUSTOMER WITH THE SAME SKI TRIP DATE 					*/	
+			/****************************************************************/
+			if(printed < size)
+			{
+				num -= (size-printed);
+			}
+
 			frame.setVisible(false);	// HIDES THE FRAME
+			super.frame.dispose();		// DISPOSES OF PARENT FRAME
 			frame.dispose();			// GETS RID OF OLD FRAME
-			new Print_ArrayList(custList, menuNum, num);	// INSTANTIATES PRINT ARRAYLIST WINDOW
+
+			/************************************************************************/
+			/* IF STATEMENT TO CHECK IF PREVIOUS BUTTON IN ONE OF THE 1ST 4 WINDOWS */	
+			/************************************************************************/
+			if((menuNum == 1) || (menuNum == 2) || (menuNum == 3) 
+			   || (menuNum == 4))
+			{
+				new Print_ArrayList(customer1, menuNum, num);	// INSTANTIATES PRINT 
+																// ARRAYLIST WINDOW
+			}
+			
+			/*****************************************************************************************/
+			/* ELSE STATEMENT TO CHECK IF PREVIOUS BUTTON IN THE 2ND DEFAULT CONSTRUCTOR WAS PRESSED */	
+			/*****************************************************************************************/
+			else if(menuNum == 5)
+			{
+				new Print_ArrayList(customer2, printed, menuNum, dateCost,  
+									date, totalDateSize, dateBus, dateRefund, 
+									dateSeats);	// INSTANTIATES PRINT ARRAYLIST WINDOW
+			}
 		}
 	}
 }
