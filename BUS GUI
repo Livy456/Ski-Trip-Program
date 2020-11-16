@@ -24,7 +24,7 @@ import javax.swing.JFrame;				// IMPORTS JFRAME
 import java.util.ArrayList;				// IMPORTS ARRAYLIST
 import java.util.Random;				// IMPORTS RANDOM
 
-public class BusGUI implements ActionListener 
+public class BusGUI extends JFrame implements ActionListener 
 {		
 	/*****************/
 	/* FINAL SECTION */
@@ -66,7 +66,7 @@ public class BusGUI implements ActionListener
 	private Label welcome;				// CREATES A LABEL TO WELCOME CLIENT
 	protected static Label grpSzL;		// CREATES A LABEL FOR GROUP SIZE
 	protected static Label dateL;		// CREATES A LABEL FOR DATE
-	private JFrame frame;				// CREATES A JFRAME 
+	protected JFrame frame;				// CREATES A JFRAME 
 	private Container container;		// CREATES A CONTAINER
 	private Font font;					// CREATES A FONT FOR LABELS
 	protected static Customer customer;	// CREATES AN INSTANCE OF CUSTOMER
@@ -129,7 +129,7 @@ public class BusGUI implements ActionListener
 		/* CREATES A BLANK JFRAME */
 		/**************************/
 		frame.pack();							// SIZE OF THE FRAME
-		frame.setBounds(450, 150, 500, 400);	// SETS X POSITION, Y POSITION, LENGTH, 
+		frame.setBounds(450, 150, 550, 400);	// SETS X POSITION, Y POSITION, LENGTH, 
 												// AND WIDTH OF THE JFRAME
 		frame.setVisible(true);					// ALLOWS THE JFRAME TO BE VISIBLE
 		container.setLayout(null);				// SETS THE LAYOUT FOR THE JFRAME
@@ -159,21 +159,21 @@ public class BusGUI implements ActionListener
 		/**********************************************/
 		/* SETS BOUNDS FOR BUTTONS, JTEXTFIELD, LABEL */
 		/**********************************************/
-		enterB.setBounds(290, 290, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		quitB.setBounds(370, 325, 110, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		returnB.setBounds(370, 290, 75, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		nameTF.setBounds(80, 80, 100, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		grpSzTF.setBounds(80, 110, 100, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		monthCB.setBounds(80, 140, 100, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		dayCB.setBounds(190, 140, 100, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		yearCB.setBounds(300, 140, 100, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		enterB.setBounds(330, 290, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		quitB.setBounds(410, 325, 110, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		returnB.setBounds(410, 290, 75, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		nameTF.setBounds(80, 80, 130, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		grpSzTF.setBounds(80, 110, 130, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		monthCB.setBounds(80, 140, 130, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		dayCB.setBounds(220, 140, 130, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		yearCB.setBounds(360, 140, 130, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		nameL.setBounds(10, 80, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		grpSzL.setBounds(10, 110, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		dateL.setBounds(10, 140, 75, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		info.setBounds(50, 30, 500, 30);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)				
-		welcome.setBounds(110, 10, 500, 30);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		warning.setBounds(190, 80, 500, 30);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		warning2.setBounds(190, 110, 500, 30);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH) 
+		info.setBounds(95, 30, 500, 30);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)				
+		welcome.setBounds(160, 10, 500, 30);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		warning.setBounds(220, 80, 500, 30);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		warning2.setBounds(220, 110, 500, 30);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH) 
 		
 		/**********************************************/
 		/* ADDS LISTENER TO BUTTON TO PERFORM ACTIONS */
@@ -265,10 +265,10 @@ public class BusGUI implements ActionListener
 			/************************************************************/
 			if(confirm == 0)
 			{
-				frame.setVisible(false);// HIDES THE FRAME
-				frame.dispose();		// GETS RID OF THE OLD FRAME
-				//this.frame.dispose();
-				new Menu_GUI();			// INSTANTIATES MENU GUI FRAME
+				container.setVisible(false);// HIDES THE FRAME
+				super.dispose();	// DISPOSES OF PARENT FRAME
+				frame.dispose();	// GETS RID OF THE OLD FRAME
+				new Menu_GUI();		// INSTANTIATES MENU GUI FRAME
 			}
 		}
 		
@@ -308,10 +308,6 @@ public class BusGUI implements ActionListener
 				/************************************************************/
 				if(confirm == 1)
 				{
-					
-					// MAKE SURE TO DELETE THIS LATER
-					// MEANT FOR DEBUGGING STATEMENT
-					String str="";
 										
 					customer.setSize(excess);	// CALL TO SET SIZE
 					refund = sum - 400;			// CALCULATES NUMBER OF REFUNDED PEOPLE
@@ -320,15 +316,22 @@ public class BusGUI implements ActionListener
 					message5= "" + refund + " ski trip members will receive a refund. \n$" + 
 							   costdf + " will be returned.";
 					refundWindow(message5);		// CALL TO REFUND WINDOW
-					frame.setVisible(false);	// HIDES THE FRAME
-					frame.dispose();			// DISPOSES FRAME
+					container.setVisible(false);	// HIDES THE FRAME
+					frame.dispose();	// DISPOSES FRAME
 					
 					// MAKE SURE TO DELTE THIS LATER
 					// DEBUGGING STATEMENT
+					
+					// MAKE SURE TO DELETE THIS LATER
+					// MEANT FOR DEBUGGING STATEMENT
+					String str="";
 					for(int i=0; i<custList.size();i++)
 					{
 						str+= "" + custList.get(i).toString() + "\n";
 					}
+					// END OF DEBUGGING STATEMENT
+					
+					
 					
 					System.out.println(str);
 					custList.add(customer);		// ADDS CUSTOMER TO ARRAYLIST
@@ -366,7 +369,7 @@ public class BusGUI implements ActionListener
 					String str="";
 					
 					
-					frame.setVisible(false);// HIDES THE FRAME
+					container.setVisible(false);// HIDES THE FRAME
 					frame.dispose();		// GETS RID OF THE OLD FRAME
 					custList.add(customer);	// ADDS CUSTOMER TO ARRAYLIST
 					
@@ -377,6 +380,8 @@ public class BusGUI implements ActionListener
 						str+= "" + custList.get(i).toString() + "\n";
 					}
 					System.out.println(str);
+					// END OF DEBUGGING STATEMENT
+					
 					
 					new Menu_GUI(); 		// INSTANTIATES A NEW FRAME
 				}
@@ -822,6 +827,17 @@ public class BusGUI implements ActionListener
 				yearCB.setSelectedItem(""); // RESETS SELECTED ITEM ON DROP-DOWN LIST
 			}
 			
+			/*****************************************/
+			/* ELSE IF STATEMENT TO ERROR CHECK DATE */
+			/*****************************************/
+			else if((month.equals("10")) && (year.equals("2020")))
+			{
+				errorMessage(error7);		// CALL TO ERROR MESSAGE
+				monthCB.setSelectedItem("");// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				dayCB.setSelectedItem("");	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				yearCB.setSelectedItem(""); // RESETS SELECTED ITEM ON DROP-DOWN LIST
+			}
+			
 			date = "" + month + "/" + day + "/" + year;	
 		}
 		while((month.equals("02")) && (day.equals("29")) && (year.equals("2021")) || 
@@ -860,7 +876,8 @@ public class BusGUI implements ActionListener
 			  (month.equals("06")) && (year.equals("2020")) ||
 			  (month.equals("07")) && (year.equals("2020")) || 
 			  (month.equals("08")) && (year.equals("2020")) ||
-			  (month.equals("09")) && (year.equals("2020")));
+			  (month.equals("09")) && (year.equals("2020")) ||
+			  (month.equals("10")) && (year.equals("2020")));
 		
 		customer.setMonth((String)month);	// CALL TO SET MONTH
 		customer.setDay((String)day);		// CALL TO SET DAY
