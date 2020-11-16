@@ -59,7 +59,7 @@ public class Print_Date extends Menu_GUI implements ActionListener
 		/* CREATES A BLANK JFRAME AND JPANEL */
 		/*************************************/
 		frame.pack();							// SIZE OF THE FRAME
-		frame.setBounds(450, 150, 500, 450);	// SETS X POSITION, Y POSITION, LENGTH, WIDTH FOR FRAME
+		frame.setBounds(450, 150, 550, 450);	// SETS X POSITION, Y POSITION, LENGTH, WIDTH FOR FRAME
 		frame.setVisible(true);					// ALLOWS THE JFRAME TO BE VISIBLE
 		container.setLayout(null);				// SETS THE LAYOUT FOR THE JFRAME
 		container.setBackground(Color.PINK);	// SETS THE BACKGROUND COLOR OF FRAME
@@ -82,7 +82,7 @@ public class Print_Date extends Menu_GUI implements ActionListener
 		quitB.setBounds(340, 270, 120, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		enterB.setBounds(225, 70, 80, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		info.setBounds(40, 30, 500, 30);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		dateCB.setBounds(100, 70, 100, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		dateCB.setBounds(65, 70, 150, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 
 		/**********************************************/
 		/* ADDS LISTENER TO BUTTON TO PERFORM ACTIONS */
@@ -153,19 +153,20 @@ public class Print_Date extends Menu_GUI implements ActionListener
 			/************************************************************/
 			if(confirm == 0)
 			{
-				frame.setVisible(false);// HIDES THE FRAME
-				frame.dispose();	// DISPOSES OF PRINT_DATE FRAME
-				new Menu_GUI();		// CREATES A NEW MENU GUI WINDOW
+				container.setVisible(false);// HIDES THE FRAME
+				frame.dispose();			// DISPOSES OF PRINT_DATE FRAME
+				super.frame.dispose();		// DISPOSES OF PARENT FRAME
+				new Menu_GUI();				// CREATES A NEW MENU GUI WINDOW
 			}
 		}
 		
-		dt = actionPerformedDate();			// CALL TO ACTION PERFORMED DATE
-		dt2 = (String) dt;					// CONVERTS TO STRING
+		dt = actionPerformedDate();						// CALL TO ACTION PERFORMED DATE
+		dt2 = (String) dt;								// CONVERTS TO STRING
 		cost = df.format(calculateDateCost(dt));		// CALL TO CALCULATE DATE COST
-		totSz = calculateDateSize(dt);		// CALL TO CALCULATE DATE SIZE
-		bus = calculateDateBus(dt);			// CALL TO CALCULATE DATE BUS
-		refund = calculateDateRefund(dt);	// CALL TO CALCULATE DATE REFUND
-		seats = calculateDateSeat(dt);		// CALL TO CALCULATE DATE SEAT
+		totSz = calculateDateSize(dt);					// CALL TO CALCULATE DATE SIZE
+		bus = calculateDateBus(dt);						// CALL TO CALCULATE DATE BUS
+		refund = calculateDateRefund(dt);				// CALL TO CALCULATE DATE REFUND
+		seats = calculateDateSeat(dt);					// CALL TO CALCULATE DATE SEAT
 		
 		/*****************************************************/
 		/* IF STATEMENT TO CHECK IF ENTER BUTTON WAS PRESSED */	
@@ -185,7 +186,9 @@ public class Print_Date extends Menu_GUI implements ActionListener
 			/*********************************************************************/
 			else if(dateCB.getSelectedItem() != "")
 			{
+				frame.setVisible(false);// HIDES THE FRAME
 				frame.dispose();		// GETS RID OF FRAME
+				super.frame.dispose();	// DISPOSES OF PARENT FRAME
 				new Print_ArrayList(custList, 0, 5, cost, dt2, totSz, bus, refund, seats);	// NEW PRINT ARRAYLIST
 			}
 		}
