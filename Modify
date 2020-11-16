@@ -58,7 +58,7 @@ public class Modify extends Modify_Menu implements ActionListener
 		/* CREATES A BLANK JFRAME */
 		/**************************/
 		frame.pack();							// SIZE OF THE FRAME
-		frame.setBounds(450, 150, 500, 450);	// SETS X POSITION, Y POSITION, LENGTH, WIDTH 
+		frame.setBounds(450, 150, 550, 450);	// SETS X POSITION, Y POSITION, LENGTH, WIDTH 
 		frame.setVisible(true);					// ALLOWS THE JFRAME TO BE VISIBLE
 		container.setLayout(null);				// SETS THE LAYOUT FOR THE JFRAME
 		container.setBackground(Color.WHITE);	// SETS THE BACKGROUND COLOR
