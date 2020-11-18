@@ -98,7 +98,7 @@ public class Menu_GUI extends BusGUI implements ActionListener
 		frame.setVisible(true);					// ALLOWS THE JFRAME TO BE VISIBLE
 		container.setLayout(null);				// SETS THE LAYOUT FOR THE JFRAME
 		container.setBackground(Color.BLUE);	// SETS THE BACKGROUND COLOR OF FRAME
-		frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);// ALLOWS THE JFRAME TO BE CLOSED
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);// ALLOWS THE JFRAME TO BE CLOSED
 		
 		/**************************/
 		/* SETS FONT OF THE LABEL */
@@ -236,6 +236,7 @@ public class Menu_GUI extends BusGUI implements ActionListener
 		{
 			frame.setVisible(false);// HIDES THE FRAME
 			super.frame.dispose();	// DISPOSES OF PARENT FRAME
+			frame.setEnabled(false);
 			frame.dispose();		// DISPOSES OF MENU_GUI FRAME
 			menuNum = 2;			// ASSIGNS MENU NUMBER TO MODIFY MENU NUMBER
 			new Print_ArrayList(custList, menuNum, 0);	// CREATES THE PRINT ARRAYLIST GUI
