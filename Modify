@@ -1,6 +1,6 @@
 /******************************************/
 /* USER DESCRIPTION SECTION 			  */
-/* LIVY456				   			  */
+/* OLIVIA DIAS				   			  */
 /* FINAL PROJECT		   	 			  */
 /* PROGRAM 12							  */
 /* MAY 11, 2020		   			  	 	  */
@@ -29,13 +29,16 @@ public class Modify extends Modify_Menu implements ActionListener
 	private JLabel warning;						// CREATES A JLABEL FOR INPUT CONSTRAINTS
 	private JLabel warning2;					// CREATES A JLABEL FOR INPUT CONSTRAINTS
 	private static DecimalFormat df = new DecimalFormat("0.00");	// FORMATS TO TWO DECIMAL PLACES
+	private static int custNum;					// INTEGER FOR CUSTOMER NUMBER
 	
-	public Modify()
+	public Modify(int cstNm)
 	/************************************************/
 	/* DEFAULT CONSTRUCTOR - IT CREATES A FRAME FOR */
 	/*						 CONTENT PANE			*/
 	/************************************************/
-	{
+	{	
+		custNum = cstNm;	// INITIALIZES CUSTOMER NUMBER
+		
 		/*************************/
 		/* INSTANTIATION SECTION */
 		/*************************/
@@ -45,7 +48,7 @@ public class Modify extends Modify_Menu implements ActionListener
 		nameTF = new JTextField("" + custList.get(custNum-1).getName());	// INSTANTIATES JTEXTFIELD
 		grpSzTF = new JTextField("" + custList.get(custNum-1).getSize());	// INSTANTIATES JTEXTFIELD
 		warning = new JLabel("Name has to be < "+
-				"21 characters.");					// INSTANTIATES A LABEL	
+				"31 characters.");					// INSTANTIATES A LABEL	
 		warning2 = new JLabel("Group size has to " +
 				 "be between 1 - 400.");			// INSTANTIATES A LABEL
 		confirm = new JButton("Confirm");			// INSTANTIATES JBUTTON
@@ -134,14 +137,17 @@ public class Modify extends Modify_Menu implements ActionListener
 	/* POSTCONDITION - FUNCTION CREATES AN ACTION 	*/
 	/* 				   EVENT FOR BUTTON				*/
 	/************************************************/
-	{
+	{		
 		/********************/
 		/* VARIABLE SECTION */
 		/********************/
 		String action;		// STRING TO REPRESENT WHICH BUTTON WAS PRESSED
 		String costdf;		// STRING REPRESENTATION OF COST
+		String error10;		// ERROR MESSAGE WHEN MINIMUM NUMBER OF CUSTOMER HAS NOT BEEN MET
 		String message4;	// EXCESS MESSAGE
 		String message5;	// REFUND MESSAGE
+		String message6;	// CONFIRM MESSAGE TO CHANGE GROUP SIZE OR SKI TRIP DATE 
+		String message7;	// REFUND MESSAGE WHEN MIN NUMBER OF CUSTOMERS HAS NOT BEEN MET
 		String mth;			// STRING VALUE FOR TRIP MONTH
 		String dy;			// STRING VALUE FOR TRIP DAY
 		String yr;			// STRING VALUE FOR TRIP YEAR
@@ -152,12 +158,15 @@ public class Modify extends Modify_Menu implements ActionListener
 		int sum;			// REUSUABLE INT FOR TOTAL SIZE OF GROUP FOR SPECIFIC DATE 
 		double cost;		// REUSUABLE DOUBLE FOR COST OF REFUNDS
 		
-		costdf = "";							// INITIALIZES COSTDF
+		costdf = "";	// INITIALIZES COSTDF
+		error10 = "";	// INITIALIZES ERROR10 VALUE
 		message4 = "Do you want to pick another " +
 					"date or another group size? \n" +
 					"If you keep this date or " +
 					"group size, then only ";	// CREATES A CONFIRM MESSAGE
-		message5 = "";							// INITIALIZES REFUND MESSAGE
+		message5 = "";	// INITIALIZES REFUND MESSAGE
+		message6 = "";	// INITIALIZES MESSAGE6 VALUE
+		message7 = "";	// INITIALIZES MESSAGE7 VALUE
 		mth = custList.get(custNum-1).getMonth();	// GETS MONTH
 		dy = custList.get(custNum-1).getDay();		// GETS DAY
 		yr = custList.get(custNum-1).getYear();		// GETS YEAR
@@ -222,10 +231,68 @@ public class Modify extends Modify_Menu implements ActionListener
 				errorMessage(error2);
 			}
 			
+			/*********************************************************************/
+			/* ELSE IF STATEMENT TO CHECK IF MIN LIMIT OF CUSTOMERS HAS BEEN MET */	
+			/*********************************************************************/
+			else if (customer.getSize() < 10)
+			{
+				/***********************************************************************/
+				/* IF STATEMENT TO CHECK IF THERE ARE OTHER CUSTOMERS ON SPECIFIC DATE */	
+				/***********************************************************************/
+				if(sum < 10)
+				{
+					error10 = "You do not have enough customers on your ski trip";
+					message6 = "If you keep this date or group size all your " + 
+							   " group members will receive a refund." + "\n" + 
+							   "Do you want to select a new date or new group size?";
+					errorMessage(error10);				// CALL TO ERROR MESSAGE
+					confirm = confirmWindow(message6);	// CALL TO CONFIRM WINDOW
+					
+					/****************************************************************/
+					/* IF STATEMENT TO CONFIRM ACTION OF REDOING CUSTOMER DATE/SIZE */	
+					/****************************************************************/
+					if (confirm == 0)
+					{
+						monthCB.setSelectedItem("");	// CALL TO GET SELECTED ITEM
+						dayCB.setSelectedItem("");		// CALL TO GET SELECTED ITEM
+						yearCB.setSelectedItem("");		// CALL TO GET SELECTED ITEM
+						grpSzTF.setText("");			// CALL TO SET TEXT
+					}
+					
+					/*****************************************************************/
+					/* ELSE IF STATEMENT TO CONFIRM ACTION OF ENTERING CUSTOMER INFO */	
+					/*****************************************************************/
+					else if (confirm == 1)
+					{
+						/***********************************************************************/
+						/* IF STATEMENT TO CHECK IF MESSAGE SHOULD REFER TO MULTIPLE CUSTOMERS */
+						/***********************************************************************/
+						if(customer.getSize() > 1)
+						{
+							message7 = "Your " + customer.getSize() + " group members will receive a " + 
+									   " $" + customer.getCost() + " refund.";
+						}
+						
+						/***************************************************************************/
+						/* ELSE IF STATEMENT TO CHECK IF MESSAGE SHOULD REFER TO SINGULAR CUSTOMER */
+						/***************************************************************************/
+						else if (customer.getSize() == 1)
+						{
+							message7 = "Your " + customer.getSize() + " group member will receive a " + 
+									   " $" + customer.getCost() + " refund.";
+						}
+						
+						refundWindow(message7);		// CALL TO REFUND MESSAGE
+						new Menu_GUI();		// INSTANTIATES MENU GUI WINDOW
+						frame.dispose();	// CALL TO DISPOSE
+					}
+				}
+			}
+			
 			/*********************************************************/
 			/* ELSE IF STATEMENT TO CHECK IF CUSTOMER MAX IS REACHED */	
 			/*********************************************************/
-			if(sum > 400)
+			else if(sum > 400)
 			{
 				excess = custList.get(custNum-1).getSize() - (sum-400);	// NUMBER OF AVAILABLE SPOTS LEFT
 				errorMessage(error8);						// CALL TO ERROR MESSAGE
@@ -275,8 +342,8 @@ public class Modify extends Modify_Menu implements ActionListener
 				/*******************************************************************/
 				if(confirm == 0)
 				{
-					frame.dispose();	// GETS RID OF FRAME
-					new Menu_GUI();		// NEW MENU FRAME IS INSTANTIATED
+					frame.dispose();		// GETS RID OF FRAME
+					new Menu_GUI();			// NEW MENU FRAME IS INSTANTIATED
 				}
 			}
 		}
@@ -702,7 +769,7 @@ public class Modify extends Modify_Menu implements ActionListener
 			/*****************************************/
 			/* ELSE IF STATEMENT TO ERROR CHECK DATE */
 			/*****************************************/
-			else if((month.equals("06")) && (day.equals("01")) && (year.equals("2020")))
+			else if((month.equals("06")) && (year.equals("2020")))
 			{
 				errorMessage(error7);			// CALL TO ERROR MESSAGE
 				monthCB.setSelectedItem(mth);	// RESETS SELECTED ITEM ON DROP-DOWN LIST
@@ -713,7 +780,7 @@ public class Modify extends Modify_Menu implements ActionListener
 			/*****************************************/
 			/* ELSE IF STATEMENT TO ERROR CHECK DATE */
 			/*****************************************/
-			else if((month.equals("06")) && (day.equals("02")) && (year.equals("2020")))
+			else if((month.equals("07")) && (year.equals("2020")))
 			{
 				errorMessage(error7);			// CALL TO ERROR MESSAGE
 				monthCB.setSelectedItem(mth);	// RESETS SELECTED ITEM ON DROP-DOWN LIST
@@ -724,7 +791,7 @@ public class Modify extends Modify_Menu implements ActionListener
 			/*****************************************/
 			/* ELSE IF STATEMENT TO ERROR CHECK DATE */
 			/*****************************************/
-			else if((month.equals("06")) && (day.equals("03")) && (year.equals("2020")))
+			else if((month.equals("08")) && (year.equals("2020")))
 			{
 				errorMessage(error7);			// CALL TO ERROR MESSAGE
 				monthCB.setSelectedItem(mth);	// RESETS SELECTED ITEM ON DROP-DOWN LIST
@@ -735,7 +802,7 @@ public class Modify extends Modify_Menu implements ActionListener
 			/*****************************************/
 			/* ELSE IF STATEMENT TO ERROR CHECK DATE */
 			/*****************************************/
-			else if((month.equals("06")) && (day.equals("04")) && (year.equals("2020")))
+			else if((month.equals("09")) && (year.equals("2020")))
 			{
 				errorMessage(error7);			// CALL TO ERROR MESSAGE
 				monthCB.setSelectedItem(mth);	// RESETS SELECTED ITEM ON DROP-DOWN LIST
@@ -746,7 +813,7 @@ public class Modify extends Modify_Menu implements ActionListener
 			/*****************************************/
 			/* ELSE IF STATEMENT TO ERROR CHECK DATE */
 			/*****************************************/
-			else if((month.equals("06")) && (day.equals("05")) && (year.equals("2020")))
+			else if((month.equals("10")) && (year.equals("2020")))
 			{
 				errorMessage(error7);			// CALL TO ERROR MESSAGE
 				monthCB.setSelectedItem(mth);	// RESETS SELECTED ITEM ON DROP-DOWN LIST
@@ -757,7 +824,7 @@ public class Modify extends Modify_Menu implements ActionListener
 			/*****************************************/
 			/* ELSE IF STATEMENT TO ERROR CHECK DATE */
 			/*****************************************/
-			else if((month.equals("06")) && (day.equals("06")) && (year.equals("2020")))
+			else if((month.equals("11")) && (day.equals("01")) && (year.equals("2020")))
 			{
 				errorMessage(error7);			// CALL TO ERROR MESSAGE
 				monthCB.setSelectedItem(mth);	// RESETS SELECTED ITEM ON DROP-DOWN LIST
@@ -768,7 +835,7 @@ public class Modify extends Modify_Menu implements ActionListener
 			/*****************************************/
 			/* ELSE IF STATEMENT TO ERROR CHECK DATE */
 			/*****************************************/
-			else if((month.equals("06")) && (day.equals("07")) && (year.equals("2020")))
+			else if((month.equals("11")) && (day.equals("02")) && (year.equals("2020")))
 			{
 				errorMessage(error7);			// CALL TO ERROR MESSAGE
 				monthCB.setSelectedItem(mth);	// RESETS SELECTED ITEM ON DROP-DOWN LIST
@@ -779,7 +846,7 @@ public class Modify extends Modify_Menu implements ActionListener
 			/*****************************************/
 			/* ELSE IF STATEMENT TO ERROR CHECK DATE */
 			/*****************************************/
-			else if((month.equals("06")) && (day.equals("08")) && (year.equals("2020")))
+			else if((month.equals("11")) && (day.equals("03")) && (year.equals("2020")))
 			{
 				errorMessage(error7);			// CALL TO ERROR MESSAGE
 				monthCB.setSelectedItem(mth);	// RESETS SELECTED ITEM ON DROP-DOWN LIST
@@ -790,7 +857,7 @@ public class Modify extends Modify_Menu implements ActionListener
 			/*****************************************/
 			/* ELSE IF STATEMENT TO ERROR CHECK DATE */
 			/*****************************************/
-			else if((month.equals("06")) && (day.equals("09")) && (year.equals("2020")))
+			else if((month.equals("11")) && (day.equals("04")) && (year.equals("2020")))
 			{
 				errorMessage(error7);			// CALL TO ERROR MESSAGE
 				monthCB.setSelectedItem(mth);	// RESETS SELECTED ITEM ON DROP-DOWN LIST
@@ -801,7 +868,7 @@ public class Modify extends Modify_Menu implements ActionListener
 			/*****************************************/
 			/* ELSE IF STATEMENT TO ERROR CHECK DATE */
 			/*****************************************/
-			else if((month.equals("06")) && (day.equals("10")) && (year.equals("2020")))
+			else if((month.equals("11")) && (day.equals("05")) && (year.equals("2020")))
 			{
 				errorMessage(error7);			// CALL TO ERROR MESSAGE
 				monthCB.setSelectedItem(mth);	// RESETS SELECTED ITEM ON DROP-DOWN LIST
@@ -812,7 +879,194 @@ public class Modify extends Modify_Menu implements ActionListener
 			/*****************************************/
 			/* ELSE IF STATEMENT TO ERROR CHECK DATE */
 			/*****************************************/
-			else if((month.equals("06")) && (day.equals("11")) && (year.equals("2020")))
+			else if((month.equals("11")) && (day.equals("06")) && (year.equals("2020")))
+			{
+				errorMessage(error7);			// CALL TO ERROR MESSAGE
+				monthCB.setSelectedItem(mth);	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				dayCB.setSelectedItem(dy);		// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				yearCB.setSelectedItem(yr); 	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+			}
+			
+			/*****************************************/
+			/* ELSE IF STATEMENT TO ERROR CHECK DATE */
+			/*****************************************/
+			else if((month.equals("11")) && (day.equals("07")) && (year.equals("2020")))
+			{
+				errorMessage(error7);			// CALL TO ERROR MESSAGE
+				monthCB.setSelectedItem(mth);	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				dayCB.setSelectedItem(dy);		// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				yearCB.setSelectedItem(yr); 	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+			}
+			
+			/*****************************************/
+			/* ELSE IF STATEMENT TO ERROR CHECK DATE */
+			/*****************************************/
+			else if((month.equals("11")) && (day.equals("08")) && (year.equals("2020")))
+			{
+				errorMessage(error7);			// CALL TO ERROR MESSAGE
+				monthCB.setSelectedItem(mth);	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				dayCB.setSelectedItem(dy);		// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				yearCB.setSelectedItem(yr); 	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+			}
+			
+			/*****************************************/
+			/* ELSE IF STATEMENT TO ERROR CHECK DATE */
+			/*****************************************/
+			else if((month.equals("11")) && (day.equals("09")) && (year.equals("2020")))
+			{
+				errorMessage(error7);			// CALL TO ERROR MESSAGE
+				monthCB.setSelectedItem(mth);	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				dayCB.setSelectedItem(dy);		// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				yearCB.setSelectedItem(yr); 	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+			}
+			
+			/*****************************************/
+			/* ELSE IF STATEMENT TO ERROR CHECK DATE */
+			/*****************************************/
+			else if((month.equals("11")) && (day.equals("10")) && (year.equals("2020")))
+			{
+				errorMessage(error7);			// CALL TO ERROR MESSAGE
+				monthCB.setSelectedItem(mth);	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				dayCB.setSelectedItem(dy);		// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				yearCB.setSelectedItem(yr); 	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+			}
+			
+			/*****************************************/
+			/* ELSE IF STATEMENT TO ERROR CHECK DATE */
+			/*****************************************/
+			else if((month.equals("11")) && (day.equals("11")) && (year.equals("2020")))
+			{
+				errorMessage(error7);			// CALL TO ERROR MESSAGE
+				monthCB.setSelectedItem(mth);	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				dayCB.setSelectedItem(dy);		// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				yearCB.setSelectedItem(yr); 	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+			}
+			
+			/*****************************************/
+			/* ELSE IF STATEMENT TO ERROR CHECK DATE */
+			/*****************************************/
+			else if((month.equals("11")) && (day.equals("12")) && (year.equals("2020")))
+			{
+				errorMessage(error7);			// CALL TO ERROR MESSAGE
+				monthCB.setSelectedItem(mth);	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				dayCB.setSelectedItem(dy);		// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				yearCB.setSelectedItem(yr); 	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+			}
+			
+			/*****************************************/
+			/* ELSE IF STATEMENT TO ERROR CHECK DATE */
+			/*****************************************/
+			else if((month.equals("11")) && (day.equals("13")) && (year.equals("2020")))
+			{
+				errorMessage(error7);			// CALL TO ERROR MESSAGE
+				monthCB.setSelectedItem(mth);	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				dayCB.setSelectedItem(dy);		// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				yearCB.setSelectedItem(yr); 	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+			}
+			
+			/*****************************************/
+			/* ELSE IF STATEMENT TO ERROR CHECK DATE */
+			/*****************************************/
+			else if((month.equals("11")) && (day.equals("14")) && (year.equals("2020")))
+			{
+				errorMessage(error7);			// CALL TO ERROR MESSAGE
+				monthCB.setSelectedItem(mth);	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				dayCB.setSelectedItem(dy);		// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				yearCB.setSelectedItem(yr); 	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+			}
+			
+			/*****************************************/
+			/* ELSE IF STATEMENT TO ERROR CHECK DATE */
+			/*****************************************/
+			else if((month.equals("11")) && (day.equals("15")) && (year.equals("2020")))
+			{
+				errorMessage(error7);			// CALL TO ERROR MESSAGE
+				monthCB.setSelectedItem(mth);	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				dayCB.setSelectedItem(dy);		// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				yearCB.setSelectedItem(yr); 	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+			}
+			
+			/*****************************************/
+			/* ELSE IF STATEMENT TO ERROR CHECK DATE */
+			/*****************************************/
+			else if((month.equals("11")) && (day.equals("16")) && (year.equals("2020")))
+			{
+				errorMessage(error7);			// CALL TO ERROR MESSAGE
+				monthCB.setSelectedItem(mth);	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				dayCB.setSelectedItem(dy);		// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				yearCB.setSelectedItem(yr); 	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+			}
+			
+			/*****************************************/
+			/* ELSE IF STATEMENT TO ERROR CHECK DATE */
+			/*****************************************/
+			else if((month.equals("11")) && (day.equals("17")) && (year.equals("2020")))
+			{
+				errorMessage(error7);			// CALL TO ERROR MESSAGE
+				monthCB.setSelectedItem(mth);	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				dayCB.setSelectedItem(dy);		// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				yearCB.setSelectedItem(yr); 	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+			}
+			
+			/*****************************************/
+			/* ELSE IF STATEMENT TO ERROR CHECK DATE */
+			/*****************************************/
+			else if((month.equals("11")) && (day.equals("18")) && (year.equals("2020")))
+			{
+				errorMessage(error7);			// CALL TO ERROR MESSAGE
+				monthCB.setSelectedItem(mth);	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				dayCB.setSelectedItem(dy);		// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				yearCB.setSelectedItem(yr); 	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+			}
+			
+			/*****************************************/
+			/* ELSE IF STATEMENT TO ERROR CHECK DATE */
+			/*****************************************/
+			else if((month.equals("11")) && (day.equals("19")) && (year.equals("2020")))
+			{
+				errorMessage(error7);			// CALL TO ERROR MESSAGE
+				monthCB.setSelectedItem(mth);	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				dayCB.setSelectedItem(dy);		// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				yearCB.setSelectedItem(yr); 	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+			}
+			
+			/*****************************************/
+			/* ELSE IF STATEMENT TO ERROR CHECK DATE */
+			/*****************************************/
+			else if((month.equals("11")) && (day.equals("20")) && (year.equals("2020")))
+			{
+				errorMessage(error7);			// CALL TO ERROR MESSAGE
+				monthCB.setSelectedItem(mth);	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				dayCB.setSelectedItem(dy);		// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				yearCB.setSelectedItem(yr); 	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+			}
+			
+			/*****************************************/
+			/* ELSE IF STATEMENT TO ERROR CHECK DATE */
+			/*****************************************/
+			else if((month.equals("11")) && (day.equals("21")) && (year.equals("2020")))
+			{
+				errorMessage(error7);			// CALL TO ERROR MESSAGE
+				monthCB.setSelectedItem(mth);	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				dayCB.setSelectedItem(dy);		// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				yearCB.setSelectedItem(yr); 	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+			}
+			
+			/*****************************************/
+			/* ELSE IF STATEMENT TO ERROR CHECK DATE */
+			/*****************************************/
+			else if((month.equals("11")) && (day.equals("22")) && (year.equals("2020")))
+			{
+				errorMessage(error7);			// CALL TO ERROR MESSAGE
+				monthCB.setSelectedItem(mth);	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				dayCB.setSelectedItem(dy);		// RESETS SELECTED ITEM ON DROP-DOWN LIST
+				yearCB.setSelectedItem(yr); 	// RESETS SELECTED ITEM ON DROP-DOWN LIST
+			}
+			
+			/*****************************************/
+			/* ELSE IF STATEMENT TO ERROR CHECK DATE */
+			/*****************************************/
+			else if((month.equals("11")) && (day.equals("23")) && (year.equals("2020")))
 			{
 				errorMessage(error7);			// CALL TO ERROR MESSAGE
 				monthCB.setSelectedItem(mth);	// RESETS SELECTED ITEM ON DROP-DOWN LIST
@@ -855,17 +1109,34 @@ public class Modify extends Modify_Menu implements ActionListener
 			  (month.equals("03")) && (year.equals("2020")) ||
 			  (month.equals("04")) && (year.equals("2020")) ||
 			  (month.equals("05")) && (year.equals("2020")) ||
-			  (month.equals("06")) && (day.equals("01")) && (year.equals("2020")) ||
-			  (month.equals("06")) && (day.equals("02")) && (year.equals("2020")) ||
-			  (month.equals("06")) && (day.equals("03")) && (year.equals("2020")) || 
-			  (month.equals("06")) && (day.equals("04")) && (year.equals("2020")) ||
-			  (month.equals("06")) && (day.equals("05")) && (year.equals("2020")) ||
-			  (month.equals("06")) && (day.equals("06")) && (year.equals("2020")) ||
-			  (month.equals("06")) && (day.equals("07")) && (year.equals("2020")) ||
-			  (month.equals("06")) && (day.equals("08")) && (year.equals("2020")) ||
-			  (month.equals("06")) && (day.equals("09")) && (year.equals("2020")) ||
-			  (month.equals("06")) && (day.equals("10")) && (year.equals("2020")) ||
-			  (month.equals("06")) && (day.equals("11")) && (year.equals("2020")));
+			  (month.equals("06")) && (year.equals("2020")) ||
+			  (month.equals("07")) && (year.equals("2020")) ||
+			  (month.equals("08")) && (year.equals("2020")) ||
+			  (month.equals("09")) && (year.equals("2020")) ||
+			  (month.equals("10")) && (year.equals("2020")) ||
+			  (month.equals("11")) && (day.equals("01")) && (year.equals("2020")) ||
+			  (month.equals("11")) && (day.equals("02")) && (year.equals("2020")) ||
+			  (month.equals("11")) && (day.equals("03")) && (year.equals("2020")) || 
+			  (month.equals("11")) && (day.equals("04")) && (year.equals("2020")) ||
+			  (month.equals("11")) && (day.equals("05")) && (year.equals("2020")) ||
+			  (month.equals("11")) && (day.equals("06")) && (year.equals("2020")) ||
+			  (month.equals("11")) && (day.equals("07")) && (year.equals("2020")) ||
+			  (month.equals("11")) && (day.equals("08")) && (year.equals("2020")) ||
+			  (month.equals("11")) && (day.equals("09")) && (year.equals("2020")) ||
+			  (month.equals("11")) && (day.equals("10")) && (year.equals("2020")) ||
+			  (month.equals("11")) && (day.equals("11")) && (year.equals("2020")) ||
+			  (month.equals("11")) && (day.equals("12")) && (year.equals("2020")) ||
+			  (month.equals("11")) && (day.equals("13")) && (year.equals("2020")) ||
+			  (month.equals("11")) && (day.equals("14")) && (year.equals("2020")) ||
+			  (month.equals("11")) && (day.equals("15")) && (year.equals("2020")) ||
+			  (month.equals("11")) && (day.equals("16")) && (year.equals("2020")) ||
+			  (month.equals("11")) && (day.equals("17")) && (year.equals("2020")) ||
+			  (month.equals("11")) && (day.equals("18")) && (year.equals("2020")) ||
+			  (month.equals("11")) && (day.equals("19")) && (year.equals("2020")) ||
+			  (month.equals("11")) && (day.equals("20")) && (year.equals("2020")) ||
+			  (month.equals("11")) && (day.equals("21")) && (year.equals("2020")) ||
+			  (month.equals("11")) && (day.equals("22")) && (year.equals("2020")) ||
+			  (month.equals("11")) && (day.equals("23")) && (year.equals("2020")));
 		
 		custList.get(custNum-1).setMonth((String)month);	// CALL TO SET MONTH
 		custList.get(custNum-1).setDay((String)day);		// CALL TO SET DAY
@@ -902,13 +1173,13 @@ public class Modify extends Modify_Menu implements ActionListener
 			/*******************************/
 			/* IF STATEMENT TO ERROR CHECK */
 			/*******************************/
-			if (name.length() > 20)
+			if (name.length() > 30)
 			{
 				nameTF.setText(nm);		// CLEARS THE TEXT FIELD
-				errorMessage(error1);	// CALL TO ERROR MESSAGE
+				errorMessage(error4);	// CALL TO ERROR MESSAGE
 			}
 		}
-		while(name.length() > 20);
+		while(name.length() > 30);
 		
 		custList.get(custNum - 1).setName(name);	// CALL TO SET NAME
 	}
