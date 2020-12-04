@@ -1,6 +1,6 @@
 /******************************************/
 /* USER DESCRIPTION SECTION 			  */
-/* LIVY456				   			  */
+/* OLIVIA DIAS				   			  */
 /* FINAL PROJECT		   	 			  */
 /* PROGRAM 12							  */
 /* OCTOBER 19, 2020		   			  	  */
@@ -319,9 +319,27 @@ public class Print_ArrayList extends Menu_GUI implements ActionListener
 		for(int i=cnt;i<cust1.size();i++)
 		{
 			int y = (count * 30) + 30;	// DECLARES Y VARIBALE FOR Y POSITION
+			int x = 700;				// DECLARES X VARIABLE FOR X POSITION
+			String len = "" + cust1.get(i).getSize();
+			
+			/*****************************************************************/
+			/* IF STATEMENT TO CHECK IF GROUP COST IS LESS THAN THREE DIGITS */
+			/*****************************************************************/
+			if(len.length() < 3)
+			{
+				x+= 7 + (3%len.length());	// CALCULATES HOW MUCH TO SHIFT X-VALUE BY
 				
+				/*********************************************************/
+				/* IF STATEMENT TO CHECK IF GROUP COST IS ONLY ONE DIGIT */
+				/*********************************************************/
+				if (len.length() == 1)
+				{
+					x+=10;		// MOVES X-COORDINATE OVER TO RIGHT BY 7
+				}
+			}
+			
 			printSize = new JLabel(""+cust1.get(i).getSize());	// INSTANTIATES A NEW PRINT SIZE LABEL
-			printSize.setBounds(650, y, 110, 25);// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+			printSize.setBounds(x, y, 110, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 			printSize.setFont(font);			// SETS FONT
 			allCust.add(printSize);				// ADDS PRINT SIZE LABEL TO ARRAYLIST OF LABELS 
 			
@@ -344,11 +362,29 @@ public class Print_ArrayList extends Menu_GUI implements ActionListener
 		for(int i=cnt;i<cust1.size();i++)
 		{
 			int y = (count * 30) + 30;	// DECLARES Y VARIBALE FOR Y POSITION
+			int x = 780;				// DECLARES X VARIABLE FOR X POSITION
+			String len = "" + cust1.get(i).getCost();	// STRING REPRESENTATION OF COST
+			
+			/*****************************************************************/
+			/* IF STATEMENT TO CHECK IF GROUP COST IS LESS THAN SEVEN DIGITS */
+			/*****************************************************************/
+			if(len.length() < 7)
+			{
+				x+= 7 + (7%len.length());	// CALCULATES HOW MUCH TO SHIFT X-VALUE BY
 				
+				/***********************************************************/
+				/* IF STATEMENT TO CHECK IF GROUP COST IS ONLY FOUR DIGITS */
+				/***********************************************************/
+				if (len.length() == 4)
+				{
+					x+=20;		// MOVES X-COORDINATE OVER TO RIGHT BY 7
+				}
+			}
+			
 			printCost = new JLabel("$"+cust1.get(i).getCost());	// INSTANTIATES A NEW PRINT COST LABEL
-			printCost.setBounds(770, y, 100, 25);// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-			printCost.setFont(font);			// SETS FONT
-			allCust.add(printCost);				// ADDS PRINT COST LABEL TO ARRAYLIST OF LABELS 
+			printCost.setBounds(x, y, 100, 25);	 // SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+			printCost.setFont(font);			 // SETS FONT
+			allCust.add(printCost);				 // ADDS PRINT COST LABEL TO ARRAYLIST OF LABELS 
 		
 			/********************************************************************/
 			/* IF STATEMENT TO CHECK IF TEN CUSTOMERS ARE PRINTED TO THE SCREEN */	
@@ -676,9 +712,27 @@ public class Print_ArrayList extends Menu_GUI implements ActionListener
 			if(cust2.get(i).getDate().equals(dt2))
 			{
 				int y = (count * 30) + 30;	// DECLARES Y VARIBALE FOR Y POSITION
+				int x = 700;				// DECLARES X VARIABLE FOR X POSITION
+				String len = "" + cust2.get(i).getSize();	// STRING REPRESENTATION OF GROUP SIZE
+				
+				/*****************************************************************/
+				/* IF STATEMENT TO CHECK IF GROUP SIZE IS LESS THAN THREE DIGITS */
+				/*****************************************************************/
+				if(len.length() < 3)
+				{
+					x += 7 + (3% len.length());	// CALCULATES HOW MUCH TO SHIFT X-VALUE BY
+					
+					/*********************************************************/
+					/* IF STATEMENT TO CHECK IF GROUP COST IS ONLY ONE DIGIT */
+					/*********************************************************/
+					if (len.length() == 1)
+					{
+						x+=10;		// MOVES X-COORDINATE OVER TO RIGHT BY 7
+					}
+				}
 				
 				printSize = new JLabel(""+cust2.get(i).getSize());	// INSTANTIATES A NEW PRINT SIZE LABEL
-				printSize.setBounds(650, y, 110, 25);// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+				printSize.setBounds(x, y, 110, 25);// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 				printSize.setFont(font);	// SETS FONT
 				allCust.add(printSize);		// ADDS PRINT SIZE LABEL TO ARRAYLIST OF LABELS 	
 				count+=1;					// CALCULATES EVERY OCCURENCE OF DATE
@@ -707,9 +761,27 @@ public class Print_ArrayList extends Menu_GUI implements ActionListener
 			if(dt2.equals(cust2.get(i).getDate()))
 			{
 				int y = (count * 30) + 30;	// DECLARES Y VARIBALE FOR Y POSITION
+				int x = 780;				// DECLARES X VARIABLE FOR X POSITION
+				String len = "" + cust2.get(i).getCost();	// STRING REPRESENTATION OF SKI TRIP COST
+				
+				/*****************************************************************/
+				/* IF STATEMENT TO CHECK IF GROUP COST IS LESS THAN SEVEN DIGITS */
+				/*****************************************************************/
+				if(len.length()< 7)
+				{
+					x+= 7 + (7%len.length());	// CALCULATES HOW MUCH TO SHIFT X-VALUE BY
+					
+					/***********************************************************/
+					/* IF STATEMENT TO CHECK IF GROUP COST IS ONLY FOUR DIGITS */
+					/***********************************************************/
+					if (len.length() == 4)
+					{
+						x+=20;		// MOVES X-COORDINATE OVER TO RIGHT BY 7
+					}
+				}
 				
 				printCost = new JLabel("$"+cust2.get(i).getCost());	// INSTANTIATES A NEW PRINT COST LABEL
-				printCost.setBounds(770, y, 100, 25);// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+				printCost.setBounds(x, y, 100, 25);	 // SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 				printCost.setFont(font);			 // SETS FONT
 				allCust.add(printCost);				 // ADDS PRINT COST LABEL TO ARRAYLIST OF LABELS 
 				count+=1;							 // CALCULATES EVERY OCCURENCE OF DATE
@@ -817,7 +889,6 @@ public class Print_ArrayList extends Menu_GUI implements ActionListener
 		{
 			container.setVisible(false);	// HIDES THE FRAME
 			frame.dispose();				// DISPOSES THE PRINT ARRAYLIST WINDOW
-			super.frame.dispose();			// DISPOSES OF PARENT FRAME
 			new Menu_GUI();					// MAKES A NEW MENU GUI
 		}
 		
@@ -828,7 +899,6 @@ public class Print_ArrayList extends Menu_GUI implements ActionListener
 		{
 			container.setVisible(false);	// HIDES THE FRAME
 			frame.dispose();				// DISPOSES THE PRINT ARRAYLIST WINDOW
-			super.frame.dispose();			// DISPOSES OF PARENT FRAME
 			new Remove_Menu();				// CREATES A REMOVE MENU
 		}                                                                           
 		
@@ -839,7 +909,6 @@ public class Print_ArrayList extends Menu_GUI implements ActionListener
 		{
 			container.setVisible(false);	// HIDES THE FRAME
 			frame.dispose();				// DISPOSES THE PRINT ARRAYLIST WINDOW
-			super.frame.dispose();			// DISPOSES OF PARENT FRAME
 			new Modify_Menu();				// CREATES A MODIFY MENU
 		}
 		
@@ -850,7 +919,6 @@ public class Print_ArrayList extends Menu_GUI implements ActionListener
 		{
 			container.setVisible(false);	// HIDES THE FRAME
 			frame.dispose();				// DISPOSES THE PRINT ARRAYLIST WINDOW
-			super.frame.dispose();			// DISPOSES OF PARENT FRAME
 			new Menu_GUI();					// CREATES A MENU GUI
 		}
 		
@@ -861,7 +929,6 @@ public class Print_ArrayList extends Menu_GUI implements ActionListener
 		{
 			container.setVisible(false);	// HIDES THE FRAME
 			frame.dispose();				// DISPOSE THE PRINT ARRAYLIST WINDOW
-			super.frame.dispose();			// DISPOSES OF PARENT FRAME
 			new Print_Date();				// CREATES A PRINT DATE GUI
 		}
 		
@@ -872,7 +939,6 @@ public class Print_ArrayList extends Menu_GUI implements ActionListener
 		{			
 			frame.setVisible(false);// HIDES THE FRAME
 			frame.dispose();		// GETS RID OF THE OLD FRAME	
-			super.frame.dispose();	// DISPOSES OF PARENT FRAME
 
 			/********************************************************************/
 			/* IF STATEMENT TO CHECK IF NEXT BUTTON IN ONE OF THE 1ST 4 WINDOWS */	
@@ -912,7 +978,6 @@ public class Print_ArrayList extends Menu_GUI implements ActionListener
 			}
 
 			frame.setVisible(false);	// HIDES THE FRAME
-			super.frame.dispose();		// DISPOSES OF PARENT FRAME
 			frame.dispose();			// GETS RID OF OLD FRAME
 
 			/************************************************************************/
@@ -930,6 +995,7 @@ public class Print_ArrayList extends Menu_GUI implements ActionListener
 			/*****************************************************************************************/
 			else if(menuNum == 5)
 			{
+				
 				new Print_ArrayList(customer2, printed, menuNum, dateCost,  
 									date, totalDateSize, dateBus, dateRefund, 
 									dateSeats);	// INSTANTIATES PRINT ARRAYLIST WINDOW
