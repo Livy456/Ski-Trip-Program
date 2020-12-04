@@ -358,6 +358,25 @@ public class BusGUI extends JFrame implements ActionListener
 						frame.dispose();	// CALL TO DISPOSE
 					}
 				}
+				
+				/****************************************************************************/
+				/* ELSE IF STATEMENT TO CHECK IF THERE ARE OTHER CUSTOMERS ON SPECIFIC DATE */	
+				/****************************************************************************/
+				else if (sum > 10)
+				{
+					message6 = "Are you sure want to do this?";
+					confirm = confirmWindow(message6);	// CALL TO CONFIRM WINDOW
+					
+					/************************************************************/
+					/* IF STATEMENT TO CONFIRM ACTION OF ENTERING CUSTOMER INFO */	
+					/************************************************************/
+					if(confirm == 0)
+					{
+						custList.add(customer);	// ADDS CUSTOMER TO CUSTOMER LIST
+						new Menu_GUI();			// INSTANTIATES MENU GUI WINDOW
+						frame.dispose();		// CALL TO DISPOSE
+					}
+				}
 			}
 			
 			/**********************************************************************/
@@ -383,7 +402,6 @@ public class BusGUI extends JFrame implements ActionListener
 							   costdf + " will be returned.";
 					refundWindow(message5);		// CALL TO REFUND WINDOW
 					frame.setVisible(false);	// HIDES THE FRAME
-					//frame.dispose();	// DISPOSES FRAME
 					
 					// MAKE SURE TO DELTE THIS LATER
 					// DEBUGGING STATEMENT
@@ -450,6 +468,7 @@ public class BusGUI extends JFrame implements ActionListener
 					
 					
 					new Menu_GUI(); 		// INSTANTIATES A NEW FRAME
+					frame.dispose(); 		// CALL TO DISPOSE
 				}
 			}
 		}
