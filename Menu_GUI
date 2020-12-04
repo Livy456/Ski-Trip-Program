@@ -236,6 +236,7 @@ public class Menu_GUI extends BusGUI implements ActionListener
 			if(custList.size() == 0)
 			{
 				errorMessage(error4);	// CALL TO ERROR MESSAGE
+				new Menu_GUI();			// INSTANTIATES MENU GUI WINDOW
 			}
 			
 			/********************************************************************/
@@ -263,6 +264,7 @@ public class Menu_GUI extends BusGUI implements ActionListener
 			if(custList.size() == 0)
 			{
 				errorMessage(error5);	// CALL TO ERROR MESSAGE
+				new Menu_GUI();			// INSTANTIATES MENU GUI WINDOW
 			}
 			
 			/********************************************************************/
@@ -297,6 +299,7 @@ public class Menu_GUI extends BusGUI implements ActionListener
 				if(custList.size() == 0)
 				{
 					errorMessage(error5);	// CALL TO ERROR MESSAGE
+					new Menu_GUI();			// INSTANTIATES MENU GUI WINDOW
 				}
 				
 				/********************************************************************/
@@ -331,6 +334,7 @@ public class Menu_GUI extends BusGUI implements ActionListener
 				if(custList.size() == 0)
 				{
 					errorMessage(error3);	// CALL TO ERROR MESSAGE
+					new Menu_GUI();			// INSTANTIATES MENU GUI WINDOW
 				}
 				
 				/********************************************************************/
@@ -356,9 +360,9 @@ public class Menu_GUI extends BusGUI implements ActionListener
 			/**********************************************************************/
 			if (confirm == 0)
 			{
-				frame.setVisible(false);// HIDES THE FRAME
-				super.frame.dispose();	// DISPOSES OF BUSGUI FRAME
-				menuNum = 4;			// ASSIGNS MENU NUMBER TO PRINT CUSTOMER LIST MENU NUMBER
+				frame.setVisible(false);	// HIDES THE FRAME
+				super.frame.dispose();		// DISPOSES OF BUSGUI FRAME
+				menuNum = 4;				// ASSIGNS MENU NUMBER TO PRINT CUSTOMER LIST MENU NUMBER
 				
 				/***************************************************************/
 				/* IF STATEMENT TO CHECK IF THERE'S CUSTOMERS ON CUSTOMER LIST */	
@@ -366,6 +370,7 @@ public class Menu_GUI extends BusGUI implements ActionListener
 				if(custList.size() == 0)
 				{
 					errorMessage(error3);	// CALL TO ERROR MESSAGE
+					new Menu_GUI();			// INSTANTIATES MENU GUI WINDOW
 				}
 				
 				/********************************************************************/
@@ -403,6 +408,7 @@ public class Menu_GUI extends BusGUI implements ActionListener
 				if(custList.size() == 0)
 				{
 					errorMessage(error3);	// CALL TO ERROR MESSAGE
+					new Menu_GUI();			// INSTANTIATES MENU GUI WINDOW
 				}
 				
 				/********************************************************************/
@@ -440,6 +446,7 @@ public class Menu_GUI extends BusGUI implements ActionListener
 				if(custList.size() == 0)
 				{
 					errorMessage(error3);	// CALL TO ERROR MESSAGE
+					new Menu_GUI();			// INSTANTIATES MENU GUI WINDOW
 				}
 				
 				/********************************************************************/
@@ -477,6 +484,7 @@ public class Menu_GUI extends BusGUI implements ActionListener
 				if(custList.size() == 0)
 				{
 					errorMessage(error3);	// CALL TO ERROR MESSAGE
+					new Menu_GUI();			// INSTANTIATES MENU GUI WINDOW
 				}
 				
 				/********************************************************************/
@@ -498,13 +506,7 @@ public class Menu_GUI extends BusGUI implements ActionListener
 			confirm = confirmWindow();				// CALL TO CONFIRM WINDOW
 			sortCustSz = new ArrayList<Customer>();	// INSTANTIATES ARRAYLIST
 
-			/*****************************************/
-			/* FOR LOOP TO ADD ALL CUSTOMERS TO CUST */
-			/*****************************************/
-			for(int i = 0; i < custList.size(); i++)
-			{
-				sortCustSz.add(custList.get(i));
-			}
+			sortCustSz = custList;	// POINTS TO THE SAME REFERENCE IN MEMORY ADDRESS
 			
 			/*******************************************************************************/
 			/* IF STATEMENT TO CONFIRM ACTION OF VIEWING SORTING BY GROUP SIZE OF SKI TRIP */	
@@ -522,6 +524,7 @@ public class Menu_GUI extends BusGUI implements ActionListener
 				if(custList.size() == 0)
 				{
 					errorMessage(error3);	// CALL TO ERROR MESSAGE
+					new Menu_GUI();			// INSTANTIATES MENU GUI WINDOW
 				}
 				
 				/********************************************************************/
