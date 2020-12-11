@@ -1,6 +1,6 @@
 /******************************************/
 /* USER DESCRIPTION SECTION 			  */
-/* OLIVIA DIAS				   			  */
+/* LIVY456				   			  */
 /* FINAL PROJECT		   	 			  */
 /* PROGRAM 12							  */
 /* MARCH 8, 2020		   			  	  */
@@ -16,6 +16,7 @@
 /* IMPORT SECTION */
 /******************/
 import javax.swing.*;					// IMPORTS SWING
+import javax.swing.JFrame.*;
 import java.awt.*;						// IMPORTS AWT
 import java.awt.event.ActionEvent;		// IMPORTS ACTION EVENT
 import java.awt.event.ActionListener;	// IMPORTS ACTION LISTENER		
@@ -55,7 +56,7 @@ public class Menu_GUI extends BusGUI implements ActionListener
 	private JLabel cost;			// CREATES A LABEL FOR COST
 	private JLabel print;			// CREATES A LABEL FOR PRINT
 	private Font font;				// CREATES A FONT
-	protected JFrame frame;			// CREATES A JFRAME
+	protected JFrame frame;	// CREATES A JFRAME
 	private Container container;	// CREATES A CONTAINER
 	protected static DecimalFormat df = new DecimalFormat("0.00");	// INSTANTIATES DECIMALFORMAT
 
@@ -182,6 +183,13 @@ public class Menu_GUI extends BusGUI implements ActionListener
 	/* 				   EVENT FOR BUTTON				*/
 	/************************************************/
 	{
+		// If I want to get rid of the parent windows popping up I could make
+		// multiple Menu_GUI constructors that can have a integer parameter
+		// that would correlate to a menu number and that menu number would 
+		// be used in an if statement to determine if the program should 
+		// construct the window in a certain manner.
+		
+		
 		/********************/
 		/* VARIABLE SECTION */
 		/********************/
@@ -244,8 +252,8 @@ public class Menu_GUI extends BusGUI implements ActionListener
 			/********************************************************************/
 			else if(custList.size() !=0)
 			{
-				new Print_ArrayList(custList, menuNum, 0);	// CREATES THE PRINT ARRAYLIST GUI
 				frame.dispose();	// DISPOSES OF MENU_GUI FRAME
+				new Print_ArrayList(custList, menuNum, 0);	// CREATES THE PRINT ARRAYLIST GUI
 			}
 		}
 		
@@ -298,7 +306,7 @@ public class Menu_GUI extends BusGUI implements ActionListener
 				/***************************************************************/
 				if(custList.size() == 0)
 				{
-					errorMessage(error5);	// CALL TO ERROR MESSAGE
+					errorMessage(error3);	// CALL TO ERROR MESSAGE
 					new Menu_GUI();			// INSTANTIATES MENU GUI WINDOW
 				}
 				
@@ -308,7 +316,7 @@ public class Menu_GUI extends BusGUI implements ActionListener
 				else if(custList.size() !=0)
 				{
 					new Print_ArrayList(custList, menuNum, 0);	// CREATES THE PRINT ARRAYLIST GUI
-					frame.dispose();	// DISPOSES OF MENU_GUI FRAME
+					frame.dispose();			// DISPOSES OF MENU_GUI FRAME
 				}
 			}
 		}
@@ -342,8 +350,8 @@ public class Menu_GUI extends BusGUI implements ActionListener
 				/********************************************************************/
 				else if(custList.size() !=0)
 				{
-					new Print_Date();		// INSTANTIATES PRINT DATE MENU
-					frame.dispose();	// DISPOSES OF MENU_GUI FRAME
+					new Print_Date();			// INSTANTIATES PRINT DATE MENU
+					frame.dispose();			// DISPOSES OF MENU_GUI FRAME
 				}
 			}
 		}
@@ -397,11 +405,6 @@ public class Menu_GUI extends BusGUI implements ActionListener
 			/********************************************************************************/
 			if (confirm == 0)
 			{
-				sortCustAlph = sortAlpha();	// CALL TO SORT ALPHA
-				frame.setVisible(false);	// HIDES THE FRAME
-				super.frame.dispose();		// DISPOSES OF BUSGUI FRAME
-				menuNum = 3;				// ASSIGNS MENU NUMBER TO PRINT CUSTOMER LIST MENU NUMBER
-				
 				/***************************************************************/
 				/* IF STATEMENT TO CHECK IF THERE'S CUSTOMERS ON CUSTOMER LIST */	
 				/***************************************************************/
@@ -416,6 +419,10 @@ public class Menu_GUI extends BusGUI implements ActionListener
 				/********************************************************************/
 				else if(custList.size() !=0)
 				{
+					sortCustAlph = sortAlpha();	// CALL TO SORT ALPHA
+					frame.setVisible(false);	// HIDES THE FRAME
+					super.frame.dispose();		// DISPOSES OF BUSGUI FRAME
+					menuNum = 3;				// ASSIGNS MENU NUMBER TO PRINT CUSTOMER LIST MENU NUMBER
 					new Print_ArrayList(sortCustAlph, menuNum, 0);// CREATES THE PRINT ARRAYLIST GUI
 					frame.dispose();	// DISPOSES OF MENU_GUI FRAME
 				}
@@ -434,12 +441,7 @@ public class Menu_GUI extends BusGUI implements ActionListener
 			/* IF STATEMENT TO CONFIRM ACTION OF SORTING BY BUS DATE OF SKI TRIP */	
 			/*********************************************************************/
 			if (confirm == 0)
-			{
-				sortCustDt = sortDate();	// CALL TO SORT DATE
-				frame.setVisible(false);	// HIDES THE FRAME
-				super.frame.dispose();		// DISPOSES OF BUSGUI FRAME
-				menuNum = 3;				// ASSIGNS MENU NUMBER TO PRINT CUSTOMER LIST MENU NUMBER
-				
+			{	
 				/***************************************************************/
 				/* IF STATEMENT TO CHECK IF THERE'S CUSTOMERS ON CUSTOMER LIST */	
 				/***************************************************************/
@@ -454,6 +456,10 @@ public class Menu_GUI extends BusGUI implements ActionListener
 				/********************************************************************/
 				else if(custList.size() !=0)
 				{
+					sortCustDt = sortDate();	// CALL TO SORT DATE
+					frame.setVisible(false);	// HIDES THE FRAME
+					super.frame.dispose();		// DISPOSES OF BUSGUI FRAME
+					menuNum = 3;				// ASSIGNS MENU NUMBER TO PRINT CUSTOMER LIST MENU NUMBER
 					new Print_ArrayList(sortCustDt, menuNum, 0);// CREATES THE PRINT ARRAYLIST GUI
 					frame.dispose();	// DISPOSES OF MENU_GUI FRAME
 				}
@@ -472,12 +478,7 @@ public class Menu_GUI extends BusGUI implements ActionListener
 			/* IF STATEMENT TO CONFIRM ACTION OF VIEWING SORTING NUMERICALLY OF SKI TRIP */	
 			/*****************************************************************************/
 			if (confirm == 0)
-			{	
-				sortCustID = sortID();		// CALL TO SORT ID
-				frame.setVisible(false);	// HIDES THE FRAME
-				super.frame.dispose();		// DISPOSES OF BUSGUI FRAME
-				menuNum = 3;				// ASSIGNS MENU NUMBER TO PRINT CUSTOMER LIST MENU NUMBER
-				
+			{					
 				/***************************************************************/
 				/* IF STATEMENT TO CHECK IF THERE'S CUSTOMERS ON CUSTOMER LIST */	
 				/***************************************************************/
@@ -492,6 +493,10 @@ public class Menu_GUI extends BusGUI implements ActionListener
 				/********************************************************************/
 				else if(custList.size() !=0)
 				{
+					sortCustID = sortID();		// CALL TO SORT ID
+					frame.setVisible(false);	// HIDES THE FRAME
+					super.frame.dispose();		// DISPOSES OF BUSGUI FRAME
+					menuNum = 3;				// ASSIGNS MENU NUMBER TO PRINT CUSTOMER LIST MENU NUMBER
 					new Print_ArrayList(sortCustID, menuNum, 0);// CREATES THE PRINT ARRAYLIST GUI
 					frame.dispose();	// DISPOSES OF MENU_GUI FRAME
 				}
@@ -512,12 +517,7 @@ public class Menu_GUI extends BusGUI implements ActionListener
 			/* IF STATEMENT TO CONFIRM ACTION OF VIEWING SORTING BY GROUP SIZE OF SKI TRIP */	
 			/*******************************************************************************/
 			if (confirm == 0)
-			{
-				mergeSortSize(sortCustSz, 0, sortCustSz.size()-1);	// CALL TO SORT SIZE
-				frame.setVisible(false);// HIDES THE FRAME
-				super.frame.dispose();	// DISPOSES OF BUSGUI FRAME
-				menuNum = 3;			// ASSIGNS MENU NUMBER TO PRINT CUSTOMER LIST MENU NUMBER
-				
+			{	
 				/***************************************************************/
 				/* IF STATEMENT TO CHECK IF THERE'S CUSTOMERS ON CUSTOMER LIST */	
 				/***************************************************************/
@@ -532,6 +532,10 @@ public class Menu_GUI extends BusGUI implements ActionListener
 				/********************************************************************/
 				else if(custList.size() !=0)
 				{
+					mergeSortSize(sortCustSz, 0, sortCustSz.size()-1);	// CALL TO SORT SIZE
+					frame.setVisible(false);// HIDES THE FRAME
+					super.frame.dispose();	// DISPOSES OF BUSGUI FRAME
+					menuNum = 3;			// ASSIGNS MENU NUMBER TO PRINT CUSTOMER LIST MENU NUMBER
 					new Print_ArrayList(sortCustSz, menuNum, 0);// CREATES THE PRINT ARRAYLIST GUI
 					frame.dispose();	// DISPOSES OF MENU_GUI FRAME
 				}
