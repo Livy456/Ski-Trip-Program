@@ -1,6 +1,6 @@
 /******************************************/
 /* USER DESCRIPTION SECTION 			  */
-/* OLIVIA DIAS				   			  */
+/* LIVY456				   			  */
 /* FINAL PROJECT		   	 			  */
 /* PROGRAM 12							  */
 /* MARCH 2, 2020		   			  	  */
@@ -52,7 +52,7 @@ public class BusGUI extends JFrame implements ActionListener
 							  "date or another group size? \n" +
 			   				  "If you keep this date or " +
 							  "group size, then ";	// CREATES A CONFIRM MESSAGE
-	protected int startID;				// STARTING ID FROM CUSTOMER FILE
+	private int startID;				// STARTING ID FROM CUSTOMER FILE
 	private JButton enterB;				// CREATES A BUTTON FOR ENTERING INFORMATION FOR PROGRAM	
 	private JButton quitB;				// CREATES A BUTTON TO QUIT PROGRAM 
 	private JButton returnB;			// CREATES A BUTTON TO RETURN TO MAIN SKI TRIP MENU
@@ -352,6 +352,7 @@ public class BusGUI extends JFrame implements ActionListener
 		String message7;	// REFUND MESSAGE WHEN MIN NUMBER OF CUSTOMERS HAS NOT BEEN MET
 		int confirm; 		// REUSUABLE INT INPUT FOR CONFIRMING AN ACTION
 		int excess;			// REUSUABLE INT FOR SKI TRIP MEMBERS THAT ARE ABLE TO GO ON TRIP
+		int id;				// REUSUABLE INT FOR GROUP ID
 		int refund;			// REUSUABLE INT FOR CUSTOMER REFUNDS
 		int sum;			// REUSUABLE INT FOR TOTAL SIZE OF GROUP FOR SPECIFIC DATE
 		double cost;		// REUSUABLE DOUBLE FOR COST OF REFUNDS
@@ -360,6 +361,7 @@ public class BusGUI extends JFrame implements ActionListener
 		message7 = "";	// INITIALIZES AND RESETS MESSAGE7 VALUE
 		cost = 0.0;		// INITIALIZES AND RESETS COST VALUE
 		excess = 0;		// INITIALIZES AND RESETS EXCESS VALUE
+		id = 0;			// INITIALIZES AND RESETS ID VALUE
 		refund = 0;		// INITIALIZES AND RESETS REFUND VALUE
 		sum = 0;		// INITIALIZES AND RESETS SUM VALUE
 		
@@ -402,23 +404,21 @@ public class BusGUI extends JFrame implements ActionListener
 			if(confirm == 0)
 			{
 				frame.setVisible(false);// HIDES THE FRAME
-				//super.dispose();	// DISPOSES OF PARENT FRAME
 				frame.dispose();	// GETS RID OF THE OLD FRAME
 				new Menu_GUI();		// INSTANTIATES MENU GUI FRAME
 			}
 		}
 		
-		actionPerformedName(event);		// CALL TO ACTION PERFORMED FOR NAME
-		actionPerformedSize(event);		// CALL TO ACTION PERFORMED FOR GROUP SIZE
-		actionPerformedDate(event);		// CALL TO ACTION PERFORMED FOR DATE
-		actionPerformedID(event);		// CALL TO ACTION PERFORMED FOR GROUP ID
-		sum = maxSize();				// CALL TO MAX SIZE
+		actionPerformedName(event);				// CALL TO ACTION PERFORMED FOR NAME
+		actionPerformedSize(event);				// CALL TO ACTION PERFORMED FOR GROUP SIZE
+		id = actionPerformedID(event, startID);	// CALL TO ACTION PERFORMED FOR GROUP ID
+		actionPerformedDate(event);				// CALL TO ACTION PERFORMED FOR DATE
+		sum = maxSize();						// CALL TO MAX SIZE
+		
 		//need to make a function that writes in the data on the new customer
-		// if read in file information is a yes then 
-		// set the customer to the next beginning ID number, which
-		// will be written into the copy of the file
-		// make sure to set the next customer to the next randomly generated
-		// ID number
+		// need to close the file after writing to it
+		// should I make a copy of the file when using the program or
+		// should I delete the lines in the file that I add
 		
 		/**********************************************************/
 		/* ELSE IF STATEMENT TO CHECK IF ENTER BUTTON WAS PRESSED */	
@@ -487,8 +487,15 @@ public class BusGUI extends JFrame implements ActionListener
 						}
 						
 						refundWindow(message7);		// CALL TO REFUND MESSAGE
-						new Menu_GUI();		// INSTANTIATES MENU GUI WINDOW
-						frame.dispose();	// CALL TO DISPOSE
+						startID = id;				// ASSIGNS NEXT RANDOM ID NUMBER TO STARTING ID
+						
+						//DEBUGGING STATEMENT
+						System.out.println("This is the new starting ID #: " + startID);
+						//END OF DEBUGGING STATEMENT
+						
+						
+						new Menu_GUI();				// INSTANTIATES MENU GUI WINDOW
+						frame.dispose();			// CALL TO DISPOSE
 					}
 				}
 				
@@ -506,6 +513,16 @@ public class BusGUI extends JFrame implements ActionListener
 					if(confirm == 0)
 					{
 						custList.add(customer);	// ADDS CUSTOMER TO CUSTOMER LIST
+						startID = id;			// ASSIGNS NEXT RANDOM ID NUMBER TO STARTING ID
+						
+						
+						
+						//DEBUGGING STATEMENT
+						System.out.println("This is the new starting ID #: " + startID);
+						//END OF DEBUGGING STATEMENT
+						
+						
+						
 						new Menu_GUI();			// INSTANTIATES MENU GUI WINDOW
 						frame.dispose();		// CALL TO DISPOSE
 					}
@@ -562,12 +579,18 @@ public class BusGUI extends JFrame implements ActionListener
 					{
 						str+= "" + custList.get(i).toString() + "\n";
 					}
-					// END OF DEBUGGING STATEMENT
-					
-					
 					
 					System.out.println(str);
+
+					// END OF DEBUGGING STATEMENT					
+					
 					custList.add(customer);		// ADDS CUSTOMER TO ARRAYLIST
+					startID = id;	// ASSIGNS NEXT RANDOM ID NUMBER TO STARTING ID
+					
+					//DEBUGGING STATEMENT
+					System.out.println("This is the new starting ID #: " + startID);
+					//END OF DEBUGGING STATEMENT
+					
 					new Menu_GUI();		// INSTANTIATES A NEW WINDOW
 					frame.dispose();	// CALL TO DISPOSE
 				}
@@ -603,8 +626,10 @@ public class BusGUI extends JFrame implements ActionListener
 					String str="";
 					
 					frame.setVisible(false);// HIDES THE FRAME
-					//frame.dispose();		// GETS RID OF THE OLD FRAME
 					custList.add(customer);	// ADDS CUSTOMER TO ARRAYLIST
+					startID = id;			// ASSIGNS NEXT RANDOM ID NUMBER TO STARTING ID
+
+					
 					
 					// MAKE SURE TO DELTE THIS LATER
 					// DEBUGGING STATEMENT
@@ -614,6 +639,8 @@ public class BusGUI extends JFrame implements ActionListener
 					}
 					System.out.println(str);
 					// END OF DEBUGGING STATEMENT
+					
+					
 					
 					
 					new Menu_GUI(); 		// INSTANTIATES A NEW FRAME
@@ -1131,7 +1158,7 @@ public class BusGUI extends JFrame implements ActionListener
 		customer.setDate(date);				// CALL TO SET DATE
 	}
 	
-	public void actionPerformedID(ActionEvent event)
+	public int actionPerformedID(ActionEvent event, int num)
 	/*****************************************************/
 	/* PRECONDITION - PROGRAM HAS A TEXT FIELD FOR NAME  */
 	/* POSTCONDITION - FUNCTION CREATES AN ACTION EVENT  */
@@ -1168,11 +1195,11 @@ public class BusGUI extends JFrame implements ActionListener
 			}
 		}
 		while((i < 100) || (i > 999)); 
-		
+		System.out.println("ID Section");
 		/****************************************************/
 		/* IF STATEMENT TO CHECK IF FILE ARRAYLIST IS EMPTY */
 		/****************************************************/
-		if(startID == 0)
+		if(num == 0)
 		{
 			customer.setID(i);	// CALL TO SET ID TO RANDOM NUMBER
 		}
@@ -1180,12 +1207,15 @@ public class BusGUI extends JFrame implements ActionListener
 		/*************************************************************/
 		/* ELSE IF STATEMENT TO CHECK IF FILE ARRAYLIST IS NOT EMPTY */
 		/*************************************************************/
-		else if (startID != 0)
+		else if (num != 0)
 		{
-			customer.setID(startID);	// CALL TO SET ID TO STARTING ID NUMBER FROM FILE
+			customer.setID(num);	// CALL TO SET ID TO STARTING ID NUMBER FROM FILE
 		}
 		
-		startID = i;	// ASSIGNS THE NEW STARTING ID NUMBER TO A NEW RANDOM ID NUMBER
+		/******************/
+		/* RETURN SECTION */
+		/******************/
+		return i;	// ASSIGNS THE NEW STARTING ID NUMBER TO A NEW RANDOM ID NUMBER
 	}
 	
 	public void actionPerformedName(ActionEvent event)
@@ -1220,7 +1250,8 @@ public class BusGUI extends JFrame implements ActionListener
 			}
 		}
 		while(name.length() > 30);
-		
+		System.out.println("Name Section");
+
 		customer.setName(name);				// CALL TO SET NAME
 	}
 	
@@ -1255,7 +1286,8 @@ public class BusGUI extends JFrame implements ActionListener
 			}
 		}
 		while((grpSz <= 0) || (grpSz > 400));
-		
+		System.out.println("Size Section");
+
 		customer.setSize(grpSz);		// CALL TO SET SIZE
 	}
 	
