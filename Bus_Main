@@ -1,6 +1,6 @@
 /******************************************/
 /* USER DESCRIPTION SECTION 			  */
-/* OLIVIA DIAS				   			  */
+/* LIVY456				   			  */
 /* FINAL PROJECT 		   	  			  */
 /* PROGRAM 12							  */
 /* FEBRUARY 10, 2020		   			  */
@@ -39,6 +39,7 @@ public class Bus_Main
 		/* VARIABLE SECTION */
 		/********************/
 		int confirm;					// INTEGER ANSWER TO CONFIRM READING IN FILE INTO PROGRAM
+		int startID;					// BEGINNING ID NUMBER FOR NEXT CUSTOMER
 		ArrayList <Customer> cstList;	// AN ARRAYLIST OF CUSTOMERS
 		ArrayList<String> fileList;		// AN ARRAYLIST FOR ALL CUSTOMERS ON THE FILE
 		Customer customer;				// A CUSTOMER FOR THE SKI TRIP
@@ -68,7 +69,7 @@ public class Bus_Main
 			/***************************************************************/
 			try 
 			{
-				file  = new File("E:\\Bus Program\\src\\customerData");	// INSTANTIATES FILE
+				file  = new File("E:\\Bus Program\\src\\customerData_Copy");	// INSTANTIATES FILE
 				in = new Scanner(file);									// INSTANITATES SCANNER
 
 				/************************************************************/
@@ -91,8 +92,8 @@ public class Bus_Main
 				error.printStackTrace();	// CALL TO PRINT STACK TRACE
 			}
 			
-			int startID = Integer.parseInt(fileList.get(0));	// STARTING ID NUMBER FOR NEXT CUSTOMER
-
+			startID = Integer.parseInt(fileList.get(0));	// STARTING ID NUMBER FOR NEXT CUSTOMER
+			
 			/**************************************************************************/
 			/* FOR LOOP TO ITERATE THROUGH FILE ARRAYLIST TO SET CUSTOMER TO CUSTOMER */
 			/* DATA FROM FILE ARRAYLIST THEN ADD CUSTOMER TO CUSTOMER ARRAYLIST 	  */
@@ -158,9 +159,7 @@ public class Bus_Main
 				}
 				cstList.add(customer = new Customer(name, month, day, 
 							year, date, id, size));	// ADDS CUSTOMER WITH DATA FROM FILE
-				
 			}
-	
 			new BusGUI(cstList, startID);	// INSTANTIATES BUS GUI
 		}
 		
