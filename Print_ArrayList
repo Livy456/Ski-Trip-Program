@@ -107,8 +107,7 @@ public class Print_ArrayList extends Menu_GUI implements ActionListener
 		/* CREATES A BLANK JFRAME AND JPANEL */
 		/*************************************/
 		frame.pack();							// SIZE OF THE FRAME
-		frame.setBounds(300, 140, 1010, 550);	// SETS X POSITION, Y POSITION, LENGTH, WIDTH
-												// AND WIDTH OF THE JFRAME
+		frame.setBounds(300, 140, 1010, 550);	// SETS X POSITION, Y POSITION, LENGTH, WIDTH OF JFRAME
 		frame.setVisible(true);					// ALLOWS THE JFRAME TO BE VISIBLE
 		container.setLayout(null);				// SETS THE LAYOUT FOR THE JFRAME
 		container.setBackground(Color.WHITE);	// SETS THE BACKGROUND COLOR
@@ -491,8 +490,7 @@ public class Print_ArrayList extends Menu_GUI implements ActionListener
 		/* CREATES A BLANK JFRAME AND JPANEL */
 		/*************************************/
 		frame.pack();							// SIZE OF THE FRAME
-		frame.setBounds(370, 100, 900, 650);	// SETS X POSITION, Y POSITION, LENGTH, WIDTH
-												// AND WIDTH OF THE JFRAME
+		frame.setBounds(300, 80, 1010, 610);	// SETS X POSITION, Y POSITION, LENGTH, WIDTH												// AND WIDTH OF THE JFRAME
 		frame.setVisible(true);					// ALLOWS THE JFRAME TO BE VISIBLE
 		container.setLayout(null);				// SETS THE LAYOUT FOR THE JFRAME
 		container.setBackground(Color.WHITE);	// SETS THE BACKGROUND COLOR
@@ -534,11 +532,11 @@ public class Print_ArrayList extends Menu_GUI implements ActionListener
 		bus.setBounds(20, 410, 200, 25);			// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		refund.setBounds(20, 440, 200, 25);			// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		seats.setBounds(20, 470, 200, 25);			// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		printTotSz.setBounds(650, 380, 100, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		printTotSz.setBounds(795, 380, 100, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		printBus.setBounds(230, 410, 50, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		printRefund.setBounds(230, 440, 50, 25); 	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		printSeats.setBounds(230, 470, 50, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		printTotCost.setBounds(770, 380, 100, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		printTotCost.setBounds(900, 380, 100, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		
 		/**********************************************/
 		/* ADDS LISTENER TO BUTTON TO PERFORM ACTIONS */
