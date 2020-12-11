@@ -38,15 +38,18 @@ public class Bus_Main
 		/********************/
 		/* VARIABLE SECTION */
 		/********************/
-		int confirm;				// INTEGER ANSWER TO CONFIRM READING IN FILE INTO PROGRAM
-		File file;					// DECLARES A NEW FILE CLASS
-		ArrayList<String> flList;	// AN ARRAYLIST FOR ALL CUSTOMERS ON THE FILE
-		Scanner in;					// USED TO READ IN THE FILE TO PROGRAM
+		int confirm;					// INTEGER ANSWER TO CONFIRM READING IN FILE INTO PROGRAM
+		ArrayList <Customer> cstList;	// AN ARRAYLIST OF CUSTOMERS
+		ArrayList<String> fileList;		// AN ARRAYLIST FOR ALL CUSTOMERS ON THE FILE
+		Customer customer;				// A CUSTOMER FOR THE SKI TRIP
+		File file;						// DECLARES A NEW FILE CLASS
+		Scanner in;						// USED TO READ IN THE FILE TO PROGRAM
 		
 		/*************************/
 		/* INSTANTIATION SECTION */
 		/*************************/
-		flList = new ArrayList<String>();		// INSTANTIATES ARRAYLIST 
+		cstList = new ArrayList<Customer>();	// INSTANTIATES ARRAYLIST OF CUSTOMERS
+		fileList = new ArrayList<String>();		// INSTANTIATES ARRAYLIST 
 		
 		/*******************************/
 		/* PROGRAM DESCRIPTION SECTION */
@@ -74,7 +77,7 @@ public class Bus_Main
 				while(in.hasNextLine())
 				{
 					String data = in.nextLine();	// READS IN THE NEXT LINE OF CUSTOMER DATA
-					flList.add(data);				// ADDS CUSTOMER DATA FROM TEXT FILE
+					fileList.add(data);				// ADDS CUSTOMER DATA FROM TEXT FILE
 				}
 				in.close();		// CLOSES THE FILE
 			}
@@ -88,25 +91,92 @@ public class Bus_Main
 				error.printStackTrace();	// CALL TO PRINT STACK TRACE
 			}
 			
+			int startID = Integer.parseInt(fileList.get(0));	// STARTING ID NUMBER FOR NEXT CUSTOMER
+
+			/**************************************************************************/
+			/* FOR LOOP TO ITERATE THROUGH FILE ARRAYLIST TO SET CUSTOMER TO CUSTOMER */
+			/* DATA FROM FILE ARRAYLIST THEN ADD CUSTOMER TO CUSTOMER ARRAYLIST 	  */
+			/**************************************************************************/
+			for(int i = 1; i < fileList.size(); i++)
+			{
+				int id = Integer.parseInt(fileList.get(i));			// ID NUMBER FROM DATA FILE
+				String name = fileList.get(i+=1);					// GROUP NAME FROM DATA FILE
+				int size = Integer.parseInt(fileList.get(i+=1));	// GROUP SIZE FROM DATA FILE
+				String date = fileList.get(i+=1);					// SKI TRIP DATE FROM DATA FILE
+				String month = "";		// DECLARES AND INITIALIZES MONTH
+				String day = "";		// DECLARES AND INITIALIZES DAY
+				String year = "";		// DECLARES AND INITIALIZES YEAR
+				int slash = 0;			// DECLARES AND INITIALIZES NUMBER OF FORWARD SLASHES
+				String str2 = "";		// DECLARES AND INITIALIZES STR2
+				
+				/************************************************************/
+				/* FOR LOOP TO GET THE MONTH, DAY, AND YEAR OF THE SKI TRIP */
+				/************************************************************/
+				for(int j = 0; j < date.length();j++)
+				{					
+					/*****************************************************************/
+					/* IF STATEMENT TO CHECK IF LOOP HAS REACHED THE FORWARD SLASHES */
+					/*****************************************************************/
+					if(date.substring(j,(j+1)).equals("/"))
+					{
+						slash+=1;
+						
+						/***************************************************************/
+						/* IF STATEMENT TO CHECK IF ONE FORWARD SLASH HAS BEEN REACHED */
+						/***************************************************************/
+						if(slash == 1)
+						{
+							month = str2;
+							str2 = "";	// RESETS THE STRING
+						}
+						
+						/***********************************************************************/
+						/* ELSE IF STATEMENT TO CHECK IF TWO FORWARD SLASHES HAVE BEEN REACHED */
+						/***********************************************************************/
+						else if (slash == 2)
+						{
+							day = str2;
+							str2 = "";	// RESETS THE STRING
+						}
+					}
+					
+					/*******************************************************************/
+					/* ELSE IF STATEMENT TO CHECK IF NO FORWARD SLASH HAS BEEN REACHED */
+					/*******************************************************************/
+					else if(date.substring(j, j+1) != ("/"))
+					{
+						str2+=date.substring(j, j+1);	// CALL TO SUBSTRING
+						
+						/***********************************************************/
+						/* IF STATEMENT TO CHECK IF STRING EQUALS LENGTH OF A YEAR */
+						/***********************************************************/
+						if(str2.length() == 4)
+						{
+							year = str2;
+						}
+					}
+				}
+				cstList.add(customer = new Customer(name, month, day, 
+							year, date, id, size));	// ADDS CUSTOMER WITH DATA FROM FILE
+				
+			}
 			
 			
+			System.out.println("\n" + "Printing out the customer list" + "\n");
 			
 			
 			// DEBUGGING STATEMENT
-			String str = "";
-			for(int i =0; i<flList.size();i++)
+			String str;
+			str = "";
+			for(int i =0; i<cstList.size();i++)
 			{
-				str+= ""+ flList.get(i)+"\n";
+				str+= ""+ cstList.get(i)+"\n";
 			}
 			System.out.println(str);
 			
 			// END OF DEBUGGING STATEMENT
 			
-			
-			
-			
-			
-			new BusGUI(flList);	// INSTANTIATES BUS GUI
+			new BusGUI(cstList, startID);	// INSTANTIATES BUS GUI
 		}
 		
 		/******************************************************************/
