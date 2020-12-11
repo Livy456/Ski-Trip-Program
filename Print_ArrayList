@@ -1,6 +1,6 @@
 /******************************************/
 /* USER DESCRIPTION SECTION 			  */
-/* OLIVIA DIAS				   			  */
+/* LIVY456				   			  */
 /* FINAL PROJECT		   	 			  */
 /* PROGRAM 12							  */
 /* OCTOBER 19, 2020		   			  	  */
@@ -107,7 +107,7 @@ public class Print_ArrayList extends Menu_GUI implements ActionListener
 		/* CREATES A BLANK JFRAME AND JPANEL */
 		/*************************************/
 		frame.pack();							// SIZE OF THE FRAME
-		frame.setBounds(390, 140, 890, 550);	// SETS X POSITION, Y POSITION, LENGTH,
+		frame.setBounds(300, 140, 1010, 550);	// SETS X POSITION, Y POSITION, LENGTH, WIDTH
 												// AND WIDTH OF THE JFRAME
 		frame.setVisible(true);					// ALLOWS THE JFRAME TO BE VISIBLE
 		container.setLayout(null);				// SETS THE LAYOUT FOR THE JFRAME
@@ -180,10 +180,10 @@ public class Print_ArrayList extends Menu_GUI implements ActionListener
 		nextMenu.setBounds(630, 400, 120, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		custNum.setBounds(20, 10, 150, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		grpID.setBounds(180, 10, 150, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		nm.setBounds(310, 10, 230, 25);			// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		dt.setBounds(550, 10, 90, 25);			// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		grpSz.setBounds(650, 10, 110, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		cst.setBounds(770, 10, 100, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		nm.setBounds(310, 10, 300, 25);			// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		dt.setBounds(620, 10, 90, 25);			// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		grpSz.setBounds(750, 10, 110, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		cst.setBounds(870, 10, 100, 25);		// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		
 	 	/**********************************************/
 		/* ADDS LISTENER TO BUTTON TO PERFORM ACTIONS */
@@ -271,9 +271,9 @@ public class Print_ArrayList extends Menu_GUI implements ActionListener
 			int y = (count * 30) + 30;	// DECLARES Y VARIBALE FOR Y POSITION
 				
 			printName = new JLabel(""+cust1.get(i).getName());// INSTANTIATES A NEW PRINT NAME LABEL
-			printName.setBounds(310, y, 230, 25);// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-			printName.setFont(font);			// SETS FONT
-			allCust.add(printName);				// ADDS PRINT NAME LABEL TO ARRAYLIST OF LABELS
+			printName.setBounds(310, y, 300, 25);	// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+			printName.setFont(font);				// SETS FONT
+			allCust.add(printName);					// ADDS PRINT NAME LABEL TO ARRAYLIST OF LABELS
 			
 			/********************************************************************/
 			/* IF STATEMENT TO CHECK IF TEN CUSTOMERS ARE PRINTED TO THE SCREEN */	
@@ -296,7 +296,7 @@ public class Print_ArrayList extends Menu_GUI implements ActionListener
 			int y = (count * 30) + 30;	// DECLARES Y VARIBALE FOR Y POSITION
 				
 			printDate = new JLabel(""+cust1.get(i).getDate());	// INSTANTIATES A NEW PRINT DATE LABEL
-			printDate.setBounds(550, y, 90, 25);// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+			printDate.setBounds(620, y, 90, 25);// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 			printDate.setFont(font);			// SETS FONT
 			allCust.add(printDate);				// ADDS PRINT DATE LABEL TO ARRAYLIST OF LABELS 
 			
@@ -319,7 +319,7 @@ public class Print_ArrayList extends Menu_GUI implements ActionListener
 		for(int i=cnt;i<cust1.size();i++)
 		{
 			int y = (count * 30) + 30;	// DECLARES Y VARIBALE FOR Y POSITION
-			int x = 700;				// DECLARES X VARIABLE FOR X POSITION
+			int x = 795;				// DECLARES X VARIABLE FOR X POSITION
 			String len = "" + cust1.get(i).getSize();
 			
 			/*****************************************************************/
@@ -362,22 +362,22 @@ public class Print_ArrayList extends Menu_GUI implements ActionListener
 		for(int i=cnt;i<cust1.size();i++)
 		{
 			int y = (count * 30) + 30;	// DECLARES Y VARIBALE FOR Y POSITION
-			int x = 780;				// DECLARES X VARIABLE FOR X POSITION
+			int x = 900;				// DECLARES X VARIABLE FOR X POSITION
 			String len = "" + cust1.get(i).getCost();	// STRING REPRESENTATION OF COST
 			
 			/*****************************************************************/
-			/* IF STATEMENT TO CHECK IF GROUP COST IS LESS THAN SEVEN DIGITS */
+			/* IF STATEMENT TO CHECK IF GROUP COST IS LESS THAN EIGHT DIGITS */
 			/*****************************************************************/
-			if(len.length() < 7)
+			if(len.length() < 8)
 			{
-				x+= 7 + (7%len.length());	// CALCULATES HOW MUCH TO SHIFT X-VALUE BY
+				x+= 8 + (8%len.length());	// CALCULATES HOW MUCH TO SHIFT X-COORDINTATE BY
 				
 				/***********************************************************/
 				/* IF STATEMENT TO CHECK IF GROUP COST IS ONLY FOUR DIGITS */
 				/***********************************************************/
-				if (len.length() == 4)
+				if (len.length() == 5)
 				{
-					x+=20;		// MOVES X-COORDINATE OVER TO RIGHT BY 7
+					x+=20;		// SHIFTS X-COORDINATE OVER TO RIGHT BY 20
 				}
 			}
 			
@@ -527,9 +527,9 @@ public class Print_ArrayList extends Menu_GUI implements ActionListener
 		custNum.setBounds(20, 10, 150, 25);			// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		grpID.setBounds(180, 10, 150, 25);			// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		nm.setBounds(310, 10, 230, 25);				// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		dt.setBounds(550, 10, 90, 25);				// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		grpSz.setBounds(650, 10, 110, 25);			// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
-		cst.setBounds(770, 10, 100, 25);			// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		dt.setBounds(620, 10, 90, 25);				// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		grpSz.setBounds(750, 10, 110, 25);			// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+		cst.setBounds(870, 10, 100, 25);			// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		totalSz.setBounds(20, 380, 50, 25);			// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		bus.setBounds(20, 410, 200, 25);			// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 		refund.setBounds(20, 440, 200, 25);			// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
@@ -684,7 +684,7 @@ public class Print_ArrayList extends Menu_GUI implements ActionListener
 				int y = (count * 30) + 30;	// DECLARES Y VARIBALE FOR Y POSITION
 				
 				printDate = new JLabel(""+cust2.get(i).getDate());	// INSTANTIATES A NEW PRINT DATE LABEL
-				printDate.setBounds(550, y, 90, 25);// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
+				printDate.setBounds(620, y, 90, 25);// SETS (X POSITION, Y POSITION, LENGTH, WIDTH)
 				printDate.setFont(font);			// SETS FONT
 				allCust.add(printDate);				// ADDS PRINT DATE LABEL TO ARRAYLIST OF LABELS 
 				count+=1;							// CALCULATES EVERY OCCURENCE OF DATE
@@ -712,7 +712,7 @@ public class Print_ArrayList extends Menu_GUI implements ActionListener
 			if(cust2.get(i).getDate().equals(dt2))
 			{
 				int y = (count * 30) + 30;	// DECLARES Y VARIBALE FOR Y POSITION
-				int x = 700;				// DECLARES X VARIABLE FOR X POSITION
+				int x = 795;				// DECLARES X VARIABLE FOR X POSITION
 				String len = "" + cust2.get(i).getSize();	// STRING REPRESENTATION OF GROUP SIZE
 				
 				/*****************************************************************/
@@ -761,22 +761,30 @@ public class Print_ArrayList extends Menu_GUI implements ActionListener
 			if(dt2.equals(cust2.get(i).getDate()))
 			{
 				int y = (count * 30) + 30;	// DECLARES Y VARIBALE FOR Y POSITION
-				int x = 780;				// DECLARES X VARIABLE FOR X POSITION
+				int x = 900;				// DECLARES X VARIABLE FOR X POSITION
 				String len = "" + cust2.get(i).getCost();	// STRING REPRESENTATION OF SKI TRIP COST
 				
 				/*****************************************************************/
-				/* IF STATEMENT TO CHECK IF GROUP COST IS LESS THAN SEVEN DIGITS */
+				/* IF STATEMENT TO CHECK IF GROUP COST IS LESS THAN EIGHT DIGITS */
 				/*****************************************************************/
-				if(len.length()< 7)
+				if(len.length() < 8)
 				{
-					x+= 7 + (7%len.length());	// CALCULATES HOW MUCH TO SHIFT X-VALUE BY
+					x+= 8 + (8%len.length());	// CALCULATES HOW MUCH TO SHIFT X-VALUE BY
 					
 					/***********************************************************/
 					/* IF STATEMENT TO CHECK IF GROUP COST IS ONLY FOUR DIGITS */
 					/***********************************************************/
-					if (len.length() == 4)
+					if (len.length() == 5)
 					{
 						x+=20;		// MOVES X-COORDINATE OVER TO RIGHT BY 7
+					}
+					
+					/***********************************************************/
+					/* IF STATEMENT TO CHECK IF GROUP COST IS ONLY FOUR DIGITS */
+					/***********************************************************/
+					else if (len.length() == 6)
+					{
+						x+=10;		// MOVES X-COORDINATE OVER TO RIGHT BY 7
 					}
 				}
 				
