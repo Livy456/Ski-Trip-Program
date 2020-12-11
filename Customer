@@ -41,7 +41,7 @@ public class Customer implements Ski_Interface
 	/* VARIABLE VALUES TO AN EMPTY STRING AND ZERO 	  */
 	/**************************************************/
 	{
-		name = "Customer Object doesn't work";			// INITIALIZES NAME TO AN EMPTY STRING
+		name = "Customer Object doesn't work";	// INITIALIZES NAME TO AN EMPTY STRING
 		month = "";			// INITIALIZES MONTH TO AN EMPTY STRING
 		day = "";			// INITIALIZES DAY TO AN EMPTY STRING
 		year = "";			// INITIALIZES YEAR TO AN EMPTY STRING
@@ -244,13 +244,11 @@ public class Customer implements Ski_Interface
 		/* IF STATEMENT TO CALCULATE REMAINING SEATS */	
 		/*********************************************/
 		if (grpsize % 20 != 0)
-		{
-			remainder = grpsize % 20; 	// CALCULATES REMAINING SEATS 
-			
+		{			
 			/***************************************************/
 			/* IF STATEMENT TO CALCULATE IF ALL BUSES ARE FULL */	
 			/***************************************************/
-			if (remainder > 10)
+			if ((grpsize % 20) > 10)
 			{	
 				bus+=1;		// ADDS ANOTHER BUS FOR THE TEN OR MORE SKIERS
 			}
@@ -296,23 +294,23 @@ public class Customer implements Ski_Interface
 		/* CALCULATES COST OF THE SKI TRIP */
 		/***********************************/
 		
-		remainder = getRemain();	// CALL TO GET REMAIN
+		//remainder = getRemain();	// CALL TO GET REMAIN
 		
 		/***************************************************/
 		/* IF STATEMENT TO CALCULATE IF REFUNDS ARE NEEDED */	
 		/***************************************************/
-		if (remainder >= 10)
-		{
-			cost = 49.99 * grpsize;	// CALCULATES COST WITHOUT REFUNDS
-		}
+		//if (remainder >= 10)
+		//{
+		cost = 49.99 * grpsize;	// CALCULATES COST WITHOUT REFUNDS
+		//}
 		
 		/*****************************************************/
 		/* ELSE STATEMENT TO CALCULATE IF REFUNDS ARE NEEDED */	
 		/*****************************************************/
-		else
-		{
-			cost = 49.99 * (grpsize - remainder);	// CALCULATES COST WITH REFUNDS
-		}
+		//else
+		//{
+		//	cost = 49.99 * (grpsize - remainder);	// CALCULATES COST WITH REFUNDS
+		//}
 				
 		costdf = df.format(cost);	// FORMATS COST TO TWO DECIMAL PLACES
 	
