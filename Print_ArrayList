@@ -1,6 +1,6 @@
 /******************************************/
 /* USER DESCRIPTION SECTION 			  */
-/* LIVY456				   			  */
+/* OLIVIA DIAS				   			  */
 /* FINAL PROJECT		   	 			  */
 /* PROGRAM 12							  */
 /* OCTOBER 19, 2020		   			  	  */
@@ -107,7 +107,7 @@ public class Print_ArrayList extends Menu_GUI implements ActionListener
 		/* CREATES A BLANK JFRAME AND JPANEL */
 		/*************************************/
 		frame.pack();							// SIZE OF THE FRAME
-		frame.setBounds(300, 140, 1010, 550);	// SETS X POSITION, Y POSITION, LENGTH, WIDTH OF JFRAME
+		frame.setBounds(200, 140, 1010, 550);	// SETS X POSITION, Y POSITION, LENGTH, WIDTH OF JFRAME
 		frame.setVisible(true);					// ALLOWS THE JFRAME TO BE VISIBLE
 		container.setLayout(null);				// SETS THE LAYOUT FOR THE JFRAME
 		container.setBackground(Color.WHITE);	// SETS THE BACKGROUND COLOR
