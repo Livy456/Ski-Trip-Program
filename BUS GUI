@@ -1,6 +1,6 @@
 /******************************************/
 /* USER DESCRIPTION SECTION 			  */
-/* OLIVIA DIAS				   			  */
+/* LIVY456				   			  */
 /* FINAL PROJECT		   	 			  */
 /* PROGRAM 12							  */
 /* MARCH 2, 2020		   			  	  */
@@ -378,11 +378,6 @@ public class BusGUI extends JFrame implements ActionListener
 		id = 0;			// INITIALIZES AND RESETS ID VALUE
 		refund = 0;		// INITIALIZES AND RESETS REFUND VALUE
 		sum = 0;		// INITIALIZES AND RESETS SUM VALUE
-		
-		// CHECK IF FILELIST IS NULL
-		// IF NULL THEN JUST DO THE REGULAR PROGRAM
-		// IF FILELIST HAS CUSTOMER DATA INSIDE THEN EXTRACT THE DATA TO THE PROGRAM
-		// AND ALLOW THE PROGRAM TO BE WRITTEN
 		
 		/************************************/
 		/* ASSIGNS BUTTON PRESSED TO ACTION */
