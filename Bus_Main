@@ -1,6 +1,6 @@
 /******************************************/
 /* USER DESCRIPTION SECTION 			  */
-/* LIVY456				   			  */
+/* OLIVIA DIAS				   			  */
 /* FINAL PROJECT 		   	  			  */
 /* PROGRAM 12							  */
 /* FEBRUARY 10, 2020		   			  */
@@ -24,7 +24,7 @@ import java.util.*;						// IMPORTS ARRAYLIST
 import java.io.	File;					// IMPORTS FILE
 import java.io.FileNotFoundException;	// IMPORTS FILE NOT FOUND EXCEPTION TO HANDLE ERRORS
 
-public class Bus_Main 
+public class Bus 
 {	
 	/*****************/
 	/* FINAL SECTION */
@@ -42,7 +42,6 @@ public class Bus_Main
 		int startID;					// BEGINNING ID NUMBER FOR NEXT CUSTOMER
 		ArrayList <Customer> cstList;	// AN ARRAYLIST OF CUSTOMERS
 		ArrayList<String> fileList;		// AN ARRAYLIST FOR ALL CUSTOMERS ON THE FILE
-		Customer customer;				// A CUSTOMER FOR THE SKI TRIP
 		File file;						// DECLARES A NEW FILE CLASS
 		Scanner in;						// USED TO READ IN THE FILE TO PROGRAM
 		
@@ -83,9 +82,9 @@ public class Bus_Main
 				in.close();		// CLOSES THE FILE
 			}
 			
-			/******************************************************************/
-			/* CATCHES THE PROGRAM IF THERE IS NO PROGRAM SO IT DOES NOT BOMB */
-			/******************************************************************/
+			/***************************************************************/
+			/* CATCHES THE PROGRAM IF THERE IS NO FILE SO IT DOES NOT BOMB */
+			/***************************************************************/
 			catch (FileNotFoundException error)
 			{
 				System.out.println("Error Occured");
@@ -157,9 +156,10 @@ public class Bus_Main
 						}
 					}
 				}
-				cstList.add(customer = new Customer(name, month, day, 
-							year, date, id, size));	// ADDS CUSTOMER WITH DATA FROM FILE
+				cstList.add(new Customer(name, month, day, 
+							year, date, id, size));	 // ADDS CUSTOMER WITH DATA FROM FILE
 			}
+			
 			new BusGUI(cstList, startID);	// INSTANTIATES BUS GUI
 		}
 		
