@@ -378,6 +378,14 @@ public class Print_ArrayList extends Menu_GUI implements ActionListener
 				{
 					x+=20;		// SHIFTS X-COORDINATE OVER TO RIGHT BY 20
 				}
+				
+				/***********************************************************/
+				/* IF STATEMENT TO CHECK IF GROUP COST IS ONLY FOUR DIGITS */
+				/***********************************************************/
+				if (len.length() == 6)
+				{
+					x+=7;		// SHIFTS X-COORDINATE OVER TO RIGHT BY 20
+				}
 			}
 			
 			printCost = new JLabel("$"+cust1.get(i).getCost());	// INSTANTIATES A NEW PRINT COST LABEL
@@ -884,6 +892,13 @@ public class Print_ArrayList extends Menu_GUI implements ActionListener
 			/******************************************************/
 			if(confirm == 0)
 			{
+				/*******************************************/
+				/* IF STATEMENT TO CHECK IF THERE'S A FILE */	
+				/*******************************************/
+				if(fileList.size() > 0)
+				{
+					returnFile(ogID);		// CALL TO RETURN FILE TO ORIGINAL STATE					
+				}
 				System.exit(0);				// EXITS THE PROGRAM
 			}
 		}
