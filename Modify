@@ -19,6 +19,8 @@ import javax.swing.*;					// IMPORTS SWING
 import java.awt.*;						// IMPORTS AWT
 import java.awt.event.ActionEvent;		// IMPORTS ACTION EVENT
 import java.awt.event.ActionListener;	// IMPORTS ACTION LISTENER
+import java.io.FileWriter;
+import java.io.IOException;
 import java.text.DecimalFormat;			// IMPORTS DECIMAL FORMAT
 
 public class Modify extends Modify_Menu implements ActionListener
@@ -189,6 +191,13 @@ public class Modify extends Modify_Menu implements ActionListener
 			/******************************************************/
 			if(confirm == 0)
 			{
+				/*******************************************/
+				/* IF STATEMENT TO CHECK IF THERE'S A FILE */	
+				/*******************************************/
+				if(fileList.size() > 0)
+				{
+					returnFile(ogID);		// CALL TO RETURN FILE TO ORIGINAL STATE					
+				}
 				System.exit(0);			// TERMINATES THE PROGRAM
 			}
 		}
@@ -205,8 +214,8 @@ public class Modify extends Modify_Menu implements ActionListener
 			/************************************************************/
 			if(confirm == 0)
 			{
-				frame.dispose();		// DISPOSES THE REMOVE MENU WINDOW
 				new Modify_Menu();		// CREATES A NEW MENU WINDOW
+				frame.dispose();		// GETS RID OF FRAME
 			}
 		}
 		
@@ -283,8 +292,16 @@ public class Modify extends Modify_Menu implements ActionListener
 						}
 						
 						refundWindow(message7);		// CALL TO REFUND MESSAGE
+						
+						/*******************************************/
+						/* IF STATEMENT TO CHECK IF THERE'S A FILE */	
+						/*******************************************/
+						if(fileList.size() > 0)
+						{
+							writeFile();	// CALL TO WRITE FILE
+						}
 						new Menu_GUI();		// INSTANTIATES MENU GUI WINDOW
-						frame.dispose();	// CALL TO DISPOSE
+						frame.dispose();	// GETS RID OF FRAME
 					}
 				}
 				
@@ -301,9 +318,15 @@ public class Modify extends Modify_Menu implements ActionListener
 					/************************************************************/
 					if(confirm == 0)
 					{
-						custList.add(customer);	// ADDS CUSTOMER TO CUSTOMER LIST
+						/*******************************************/
+						/* IF STATEMENT TO CHECK IF THERE'S A FILE */	
+						/*******************************************/
+						if(fileList.size() > 0)
+						{
+							writeFile();	// CALL TO WRITE FILE
+						}
 						new Menu_GUI();			// INSTANTIATES MENU GUI WINDOW
-						frame.dispose();		// CALL TO DISPOSE
+						frame.dispose();		// GETS RID OF FRAME
 					}
 				}
 			}
@@ -357,8 +380,16 @@ public class Modify extends Modify_Menu implements ActionListener
 							   costdf + " will be returned.";
 					refundWindow(message5);		// CALL TO REFUND WINDOW
 					custList.get(custNum-1).setSize(excess);	// CALL TO GET CUSTOMER AND SET SIZE
-					frame.dispose();			// CALL TO DISPOSE WINDOW
-					new Menu_GUI();				// INSTANTIATES MENU GUI CLASS
+					
+					/*******************************************/
+					/* IF STATEMENT TO CHECK IF THERE'S A FILE */	
+					/*******************************************/
+					if(fileList.size() > 0)
+					{
+						writeFile();	// CALL TO WRITE FILE
+					}
+					new Menu_GUI();			// INSTANTIATES MENU GUI CLASS
+					frame.dispose();		// GETS RID OF FRAME
 				}
 			}
 			
@@ -377,8 +408,15 @@ public class Modify extends Modify_Menu implements ActionListener
 				/*******************************************************************/
 				if(confirm == 0)
 				{
-					frame.dispose();		// GETS RID OF FRAME
+					/*******************************************/
+					/* IF STATEMENT TO CHECK IF THERE'S A FILE */	
+					/*******************************************/
+					if(fileList.size() > 0)
+					{
+						writeFile();	// CALL TO WRITE FILE
+					}
 					new Menu_GUI();			// NEW MENU FRAME IS INSTANTIATED
+					frame.dispose();		// GETS RID OF FRAME
 				}
 			}
 		}
@@ -1050,5 +1088,54 @@ public class Modify extends Modify_Menu implements ActionListener
 				str,
 				"Refund Window",
 				JOptionPane.INFORMATION_MESSAGE);
+	}
+	
+	public void writeFile()
+	/****************************************************************/
+	/* PRECONDITION - NEEDS TO WRITE NEW CUSTOMER DATA TO TEXT FILE	*/
+	/* POSTCONDITION - WRITES NEW CUSTOMER DATA TO TEXT FILE 		*/
+	/****************************************************************/
+	{
+		/********************/
+		/* VARIABLE SECTION */
+		/********************/
+		String str;			// STRING REPRESENTATION OF THE FILE LIST
+		
+		str = "";	// INITIALIZES STR
+		
+		str += "" + ogID + "\n";	// ADDS THE ORIGINAL STARTING ID NUMBER TO FILE 
+
+		/*******************************************************/
+		/* FOR LOOP TO MAKE A STRING OF THE ORIGINAL DATA FILE */
+		/*******************************************************/
+		for(int i = 0; i < custList.size(); i++)
+		{
+			str+= "" + custList.get(i).getID() + "\n" +
+					 "" + custList.get(i).getName() + "\n" +
+					 "" + custList.get(i).getSize() + "\n" +
+					 "" + custList.get(i).getDate() + "\n";
+		}
+		str += "" + startID;
+		
+		/************************************************/
+		/* TRIES TO WRITE TO THE FILE NEW CUSTOMER DATA */
+		/************************************************/
+		try
+		{
+			FileWriter writer = new FileWriter("E:\\Bus Program\\src\\customerData_Copy");	// INSTANTIATES FILE WRITER
+			writer.write(str);	// WRITES TO FILE
+			writer.close();		// CLOSES THE FILE
+			System.out.println("Wrote to the file");
+			System.out.println("Modify Section of the Write to file");
+		}
+		
+		/******************************************************/
+		/* CATCHES THE PROGRAM IF IT CANNOT WRITE TO THE FILE */
+		/******************************************************/
+		catch(IOException e)
+		{
+			System.out.println("Did not write to file");
+			e.printStackTrace();	// PRINTS STACK TRACK ERROR
+ 		}
 	}
 }
