@@ -1,6 +1,6 @@
 /******************************************/
 /* USER DESCRIPTION SECTION 			  */
-/* LIVY456 				   			  */
+/* OLIVIA DIAS				   			  */
 /* FINAL PROJECT 		   	  			  */
 /* PROGRAM 12							  */
 /* FEBRUARY 10, 2020		   			  */
@@ -24,7 +24,7 @@ import java.util.*;						// IMPORTS ARRAYLIST
 import java.io.	File;					// IMPORTS FILE
 import java.io.FileNotFoundException;	// IMPORTS FILE NOT FOUND EXCEPTION TO HANDLE ERRORS
 
-public class Bus 
+public class Bus_Main 
 {	
 	/*****************/
 	/* FINAL SECTION */
@@ -40,8 +40,9 @@ public class Bus
 		/********************/
 		int confirm;					// INTEGER ANSWER TO CONFIRM READING IN FILE INTO PROGRAM
 		int startID;					// BEGINNING ID NUMBER FOR NEXT CUSTOMER
-		ArrayList <Customer> cstList;	// AN ARRAYLIST OF CUSTOMERS
-		ArrayList<String> fileList;		// AN ARRAYLIST FOR ALL CUSTOMERS ON THE FILE
+		ArrayList <Customer> cstList;	// AN ARRAYLIST OF CUSTOMERS, THAT WILL BE MODIFIED
+		ArrayList <String> fileList;	// AN ARRAYLIST FOR ALL CUSTOMERS ON THE FILE
+		ArrayList <Customer> ogList;	// AN ARRAYLIST TO KEEP ORIGINAL CUSTOMERS ON THE FILE  	
 		File file;						// DECLARES A NEW FILE CLASS
 		Scanner in;						// USED TO READ IN THE FILE TO PROGRAM
 		
@@ -50,6 +51,7 @@ public class Bus
 		/*************************/
 		cstList = new ArrayList<Customer>();	// INSTANTIATES ARRAYLIST OF CUSTOMERS
 		fileList = new ArrayList<String>();		// INSTANTIATES ARRAYLIST 
+		ogList = new ArrayList<Customer>();		
 		
 		/*******************************/
 		/* PROGRAM DESCRIPTION SECTION */
@@ -158,9 +160,11 @@ public class Bus
 				}
 				cstList.add(new Customer(name, month, day, 
 							year, date, id, size));	 // ADDS CUSTOMER WITH DATA FROM FILE
+				ogList.add(new Customer(name, month, day, 
+						   year, date, id, size));	 // ADDS CUSTOMER WITH DATA FROM FILE
 			}
 			
-			new BusGUI(cstList, startID);	// INSTANTIATES BUS GUI
+			new BusGUI(cstList, ogList, startID);	// INSTANTIATES BUS GUI
 		}
 		
 		/******************************************************************/
