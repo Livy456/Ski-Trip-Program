@@ -49,7 +49,7 @@ public class Remove_Menu extends Menu_GUI implements ActionListener
 	/* DEFAULT CONSTRUCTOR - IT CREATES A FRAME FOR */
 	/*						 CONTENT PANE			*/
 	/************************************************/
-	{
+	{		
 		/*************************/
 		/* INSTANTIATION SECTION */
 		/*************************/
@@ -75,7 +75,7 @@ public class Remove_Menu extends Menu_GUI implements ActionListener
 		frame.setVisible(true);					// ALLOWS THE JFRAME TO BE VISIBLE
 		container.setLayout(null);				// SETS THE LAYOUT FOR THE JFRAME
 		container.setBackground(Color.RED);	// SETS THE BACKGROUND COLOR
-		frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);// ALLOWS THE JFRAME TO BE CLOSED
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);// ALLOWS THE JFRAME TO BE CLOSED
 	
 		/**************************/
 		/* SETS FONT OF THE LABEL */
@@ -149,6 +149,13 @@ public class Remove_Menu extends Menu_GUI implements ActionListener
 			/******************************************************/
 			if(confirm == 0)
 			{
+				/*******************************************/
+				/* IF STATEMENT TO CHECK IF THERE'S A FILE */	
+				/*******************************************/
+				if(fileList.size() > 0)
+				{
+					returnFile(ogID);		// CALL TO RETURN FILE TO ORIGINAL STATE					
+				}
 				System.exit(0);			// TERMINATES THE PROGRAM
 			}
 		}
@@ -165,9 +172,9 @@ public class Remove_Menu extends Menu_GUI implements ActionListener
 			/************************************************************/
 			if(confirm == 0)
 			{
-				container.setVisible(false);// HIDES THE FRAME
-				frame.dispose();			// DISPOSES THE REMOVE MENU WINDOW
-				new Menu_GUI();				// CREATES A NEW MENU WINDOW
+				container.setVisible(false);	// HIDES THE FRAME
+				frame.dispose();				// DISPOSES THE REMOVE MENU WINDOW
+				new Menu_GUI();					// CREATES A NEW MENU WINDOW
 			}
 		}
 		
@@ -197,6 +204,14 @@ public class Remove_Menu extends Menu_GUI implements ActionListener
 				custList.removeAll(custList);		// REMOVES CUSTOMER FROM CUSTLIST
 				updateWindow(message2, heading1);	// CALL TO UPDATE WINDOW
 				container.setVisible(false);		// HIDES THE FRAME
+				
+				/*******************************************/
+				/* IF STATEMENT TO CHECK IF THERE'S A FILE */	
+				/*******************************************/
+				if(fileList.size() > 0)
+				{
+					writeFile(startID, ogID);	// CALL TO WRITE FILE
+				}
 				frame.dispose();					// DISPOSES OF REMOVE WINDOW
 				new Menu_GUI();						// CREATES A NEW MENU WINDOW
 			}
@@ -218,9 +233,9 @@ public class Remove_Menu extends Menu_GUI implements ActionListener
 					  "    $" + custList.get(removeNum-1).getCost();
 			confirm = confirmWindow(message4);	// CALL TO CONFIRM WINDOW
 			
-			/************************************************************/
-			/* IF STATEMENT TO CONFIRM ACTION OF RETURNING TO MAIN MENU */	
-			/************************************************************/
+			/*******************************************************/
+			/* IF STATEMENT TO CONFIRM ACTION OF REMOVING CUSTOMER */	
+			/*******************************************************/
 			if(confirm == 0)
 			{	
 				/*****************************************************/
@@ -230,16 +245,34 @@ public class Remove_Menu extends Menu_GUI implements ActionListener
 				{
 					errorMessage(error2);	// CALL TO ERROR MESSAGE
 				}
+				
 				/**********************************************************/
 				/* ELSE IF STATEMENT TO CHECK IF ENTER BUTTON WAS PRESSED */	
 				/**********************************************************/
 				else if(remove.getText() != "")
 				{					
+					custList.remove(removeNum-1);		// CALL TO REMOVE CUSTOMER FROM ARRAY LIST
 					updateWindow(message3, heading2);	// CALL TO UPDATE WINDOW
 					frame.setVisible(false);			// HIDES THE FRAME
+					
+					/*******************************************/
+					/* IF STATEMENT TO CHECK IF THERE'S A FILE */	
+					/*******************************************/
+					if(fileList.size() > 0)
+					{
+						writeFile(startID, ogID);	// CALL TO WRITE FILE
+					}
 					frame.dispose();					// DISPOSES THE REMOVE MENU WINDOW
 					new Menu_GUI();						// CREATES A NEW MENU WINDOW
 				}
+			}
+			
+			/************************************************************/
+			/* ELSE IF STATEMENT TO CONFIRM ACTION OF REMOVING CUSTOMER */	
+			/************************************************************/
+			else if(confirm == 1)
+			{
+				 remove.setText("");	// EMPTYS THE TEXT FIELD
 			}
 		}
 	}
@@ -293,8 +326,6 @@ public class Remove_Menu extends Menu_GUI implements ActionListener
 				  "     " + custList.get(removeNum-1).getSize() + 
 				  "    $" + custList.get(removeNum-1).getCost() + "\n"
 				  + "has been removed";
-		
-		custList.remove(num-1);		// CALL TO REMOVE CUSTOMER FROM ARRAY LIST
 	}
 	
 	public static int confirmWindow(String str)
