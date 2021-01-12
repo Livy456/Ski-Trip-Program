@@ -1,6 +1,6 @@
 /******************************************/
 /* USER DESCRIPTION SECTION 			  */
-/* LIVY456				   			  */
+/* OLIVIA DIAS				   			  */
 /* FINAL PROJECT		   	 			  */
 /* PROGRAM 12							  */
 /* APRIL 9, 2020		   			  	  */
@@ -51,7 +51,7 @@ public class Modify_Menu extends Menu_GUI implements ActionListener
 	protected JFrame frame;					// CREATES A JFRAME 
 	protected static Container container;	// CREATES A CONTAINER
 	protected Font font;					// CREATES A FONT
-	protected static int custNum;			// INTEGER VALUE FOR CUSTOMER NUMBER
+	private int custNum;			// INTEGER VALUE FOR CUSTOMER NUMBER
 	
 	public Modify_Menu()
 	/************************************************/
@@ -157,7 +157,8 @@ public class Modify_Menu extends Menu_GUI implements ActionListener
 			/******************************************************/
 			if(confirm == 0)
 			{
-				System.exit(0);			// TERMINATES THE PROGRAM
+				returnFile(ogID);	// CALL TO RETURN FILE TO ORIGINAL STATE
+				System.exit(0);		// TERMINATES THE PROGRAM
 			}
 		}
 		
@@ -174,8 +175,9 @@ public class Modify_Menu extends Menu_GUI implements ActionListener
 			if(confirm == 0)
 			{
 				frame.setVisible(false);// HIDES THE FRAME
-				frame.dispose();		// DISPOSES THE REMOVE MENU WINDOW
+				super.frame.dispose();	// DISPOSES THE MENU_GUI FRAME
 				new Menu_GUI();			// CREATES A NEW MENU WINDOW
+				frame.dispose();		// DISPOSES THE REMOVE MENU WINDOW
 			}
 		}
 		
@@ -185,8 +187,8 @@ public class Modify_Menu extends Menu_GUI implements ActionListener
 		else if (action.equals("Customer List"))
 		{
 			frame.setVisible(false);// HIDES THE FRAME
-			frame.dispose();				// DISPOSES THE REMOVE MENU WINDOW
-			menuNum = 2;					// ASSIGNS MENU NUMBER TO PRINT CUSTOMER LIST MENU NUMBER
+			frame.dispose();		// DISPOSES THE REMOVE MENU WINDOW
+			menuNum = 2;			// ASSIGNS MENU NUMBER TO PRINT CUSTOMER LIST MENU NUMBER
 			new Print_ArrayList(custList, menuNum, 0); 	// CREATES THE PRINT ARRAYLIST GUI
 		}
 				
@@ -197,9 +199,10 @@ public class Modify_Menu extends Menu_GUI implements ActionListener
 		/*****************************************************/
 		if (action.equals("Enter"))
 		{
-			frame.setVisible(false);// HIDES THE FRAME
-			frame.dispose();	// DISPOSES THE MODIFY MENU WINDOW
-			new Modify();		// CREATES A NEW MODIFY WINDOW
+			frame.setVisible(false);	// HIDES THE FRAME
+			new Modify(custNum);		// CREATES A NEW MODIFY WINDOW
+			frame.dispose();			// DISPOSES THE MODIFY MENU WINDOW
+
 		}
 	}
 	
