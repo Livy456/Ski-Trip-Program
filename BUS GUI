@@ -1,6 +1,6 @@
 /******************************************/
 /* USER DESCRIPTION SECTION 			  */
-/* LIVY456				   			  */
+/* OLIVIA DIAS				   			  */
 /* FINAL PROJECT		   	 			  */
 /* PROGRAM 12							  */
 /* MARCH 2, 2020		   			  	  */
@@ -53,8 +53,8 @@ public class BusGUI extends JFrame implements ActionListener
 							  "date or another group size? \n" +
 			   				  "If you keep this date or " +
 							  "group size, then ";	// CREATES A CONFIRM MESSAGE
-	private int startID;				// STARTING ID FROM CUSTOMER FILE
-	private int ogID;					// ORIGIAL START ID FROM CUSTOMER FILE
+	protected int startID;				// STARTING ID FROM CUSTOMER FILE
+	protected int ogID;					// ORIGIAL START ID FROM CUSTOMER FILE
 	private JButton enterB;				// CREATES A BUTTON FOR ENTERING INFORMATION FOR PROGRAM	
 	private JButton quitB;				// CREATES A BUTTON TO QUIT PROGRAM 
 	private JButton returnB;			// CREATES A BUTTON TO RETURN TO MAIN SKI TRIP MENU
@@ -99,8 +99,6 @@ public class BusGUI extends JFrame implements ActionListener
 	/*						 CONTENT PANE			*/
 	/************************************************/
 	{		
-		startID = 0;
-		
 		/*************************/
 		/* INSTANTIATION SECTION */
 		/*************************/
@@ -214,26 +212,16 @@ public class BusGUI extends JFrame implements ActionListener
 		container.add(warning2);	// ADDS WARNING LABEL TO CONTAINER
 	}
 	
-	public BusGUI(ArrayList<Customer> list, int strID)
+	public BusGUI(ArrayList<Customer> list, ArrayList<Customer> oglist, int strID)
 	/************************************************/
 	/* DEFAULT CONSTRUCTOR - IT CREATES A FRAME FOR */
 	/*						 CONTENT PANE			*/
 	/************************************************/
 	{		
-		custList = list;	// FILELIST REFERENCES THE SAME MEMORY ADDRESS AS PARAMETERS
+		custList = list;	// CUSTOMER LIST REFERENCES THE SAME MEMORY ADDRESS AS LIST
 		ogID = strID;		// ORIGINAL STARTING IF IN CUSTOMER FILE
 		startID = strID;	// STARTING ID FOR NEXT CUSTOMER
-		
-		/*************************************************/
-		/* FOR LOOP TO MAKE A COPY OF THE DATA ARRAYLIST */
-		/*************************************************/
-		for(int i = 0; i < list.size(); i++)
-		{
-			fileList.add(new Customer(list.get(i).getName(),
-						 list.get(i).getMonth(), list.get(i).getDay(),
-						 list.get(i).getYear(), list.get(i).getDate(),
-						 list.get(i).getID(), list.get(i).getSize() ));	// ADDS COPY OF CUSTOMER
-		}
+		fileList = oglist;	// FILE LIST REFERENCES THE SAME MEMORY ADDRESS AS OGLIST
 		
 		/*************************/
 		/* INSTANTIATION SECTION */
@@ -379,6 +367,11 @@ public class BusGUI extends JFrame implements ActionListener
 		refund = 0;		// INITIALIZES AND RESETS REFUND VALUE
 		sum = 0;		// INITIALIZES AND RESETS SUM VALUE
 		
+		// CHECK IF FILELIST IS NULL
+		// IF NULL THEN JUST DO THE REGULAR PROGRAM
+		// IF FILELIST HAS CUSTOMER DATA INSIDE THEN EXTRACT THE DATA TO THE PROGRAM
+		// AND ALLOW THE PROGRAM TO BE WRITTEN
+		
 		/************************************/
 		/* ASSIGNS BUTTON PRESSED TO ACTION */
 		/************************************/
@@ -401,7 +394,7 @@ public class BusGUI extends JFrame implements ActionListener
 				/*******************************************/
 				if(fileList.size() > 0)
 				{
-					returnFile();		// CALL TO RETURN FILE TO ORIGINAL STATE					
+					returnFile(ogID);		// CALL TO RETURN FILE TO ORIGINAL STATE					
 
 				}
 				System.exit(0);			// TERMINATES THE PROGRAM
@@ -501,6 +494,13 @@ public class BusGUI extends JFrame implements ActionListener
 						refundWindow(message7);		// CALL TO REFUND MESSAGE
 						startID = id;				// ASSIGNS NEXT RANDOM ID NUMBER TO STARTING ID
 						
+						/*******************************************/
+						/* IF STATEMENT TO CHECK IF THERE'S A FILE */	
+						/*******************************************/
+						if(fileList.size() > 0)
+						{
+							writeFile(id, ogID);	// CALL TO WRITE FILE
+						}
 						//DEBUGGING STATEMENT
 						System.out.println("This is the new starting ID #: " + startID);
 						//END OF DEBUGGING STATEMENT
@@ -532,7 +532,7 @@ public class BusGUI extends JFrame implements ActionListener
 						/*******************************************/
 						if(fileList.size() > 0)
 						{
-							writeFile();	// CALL TO WRITE FILE
+							writeFile(id, ogID);	// CALL TO WRITE FILE
 						}
 						
 						//DEBUGGING STATEMENT
@@ -610,7 +610,7 @@ public class BusGUI extends JFrame implements ActionListener
 					/*******************************************/
 					if(fileList.size() > 0)
 					{
-						writeFile();	// CALL TO WRITE FILE
+						writeFile(id, ogID);	// CALL TO WRITE FILE
 					}
 					
 					//DEBUGGING STATEMENT
@@ -660,7 +660,7 @@ public class BusGUI extends JFrame implements ActionListener
 					/*******************************************/
 					if(fileList.size() > 0)
 					{
-						writeFile();	// CALL TO WRITE FILE
+						writeFile(id, ogID);	// CALL TO WRITE FILE
 					}
 					
 					// MAKE SURE TO DELTE THIS LATER
@@ -1422,7 +1422,7 @@ public class BusGUI extends JFrame implements ActionListener
 				JOptionPane.INFORMATION_MESSAGE);
 	}
 	
-	public void returnFile()
+	public void returnFile(int n)
 	/**************************************************************/
 	/* PRECONDITION - NEEDS ORIGINAL CUSTOMER DATA ON TEXT FILE	  */
 	/* POSTCONDITION - WRITES ORIGINAL CUSTOMER DATA TO TEXT FILE */
@@ -1434,8 +1434,8 @@ public class BusGUI extends JFrame implements ActionListener
 		String str;			// STRING REPRESENTATION OF THE FILE LIST
 		
 		str = "";	// INITIALIZES STR
-		
-		str += "" + ogID;	// ADDS THE ORIGINAL STARTING ID NUMBER TO FILE 
+		ogID = n;
+		str += "" + ogID + "\n";	// ADDS THE ORIGINAL STARTING ID NUMBER TO FILE 
 
 		/*******************************************************/
 		/* FOR LOOP TO MAKE A STRING OF THE ORIGINAL DATA FILE */
@@ -1445,7 +1445,15 @@ public class BusGUI extends JFrame implements ActionListener
 			str+= "" + fileList.get(i).getID() + "\n" +
 					 "" + fileList.get(i).getName() + "\n" +
 					 "" + fileList.get(i).getSize() + "\n" +
-					 "" + fileList.get(i).getDate() + "\n";
+					 "" + fileList.get(i).getDate();
+			
+			/***************************************************************************************/
+			/* IF STATEMENT TO MAKE SURE THAT THE LAST ELEMENT IN FILE IS NOT A NEW LINE CHARACTER */
+			/***************************************************************************************/
+			if(i < fileList.size()-1)
+			{
+				str+= "\n";
+			}
 		}
 		
 		/************************************************/
@@ -1454,8 +1462,8 @@ public class BusGUI extends JFrame implements ActionListener
 		try
 		{
 			FileWriter writer = new FileWriter("E:\\Bus Program\\src\\customerData_Copy");	// INSTANTIATES FILE WRITER
-			writer.write(str);	// WRITES TO FILE
-			writer.close();		// CLOSES THE FILE
+			writer.write(""+str);	// WRITES TO FILE
+			writer.close();			// CLOSES THE FILE
 			System.out.println("Wrote original customer data the file");
 		}
 		
@@ -1469,24 +1477,42 @@ public class BusGUI extends JFrame implements ActionListener
  		}
 	}
 	
-	public void writeFile()
+	public void writeFile(int id, int n)
 	/****************************************************************/
 	/* PRECONDITION - NEEDS TO WRITE NEW CUSTOMER DATA TO TEXT FILE	*/
 	/* POSTCONDITION - WRITES NEW CUSTOMER DATA TO TEXT FILE 		*/
 	/****************************************************************/
 	{
+		/********************/
+		/* VARIABLE SECTION */
+		/********************/
+		String str;			// STRING REPRESENTATION OF THE FILE LIST
+		
+		ogID = n;
+		startID = id;
+		str = "";	// INITIALIZES STR
+		
+		str += "" + ogID + "\n";	// ADDS THE ORIGINAL STARTING ID NUMBER TO FILE
+		/*******************************************************/
+		/* FOR LOOP TO MAKE A STRING OF THE ORIGINAL DATA FILE */
+		/*******************************************************/
+		for(int i=0; i < custList.size(); i++)
+		{
+			str+= "" + custList.get(i).getID() + "\n" +
+					 "" + custList.get(i).getName() + "\n" +
+					 "" + custList.get(i).getSize() + "\n" +
+					 "" + custList.get(i).getDate() + "\n";
+		}
+		str += "" + startID;	// ADDS THE ORIGINAL STARTING ID NUMBER TO FILE
+
 		/************************************************/
 		/* TRIES TO WRITE TO THE FILE NEW CUSTOMER DATA */
 		/************************************************/
 		try
 		{
 			FileWriter writer = new FileWriter("E:\\Bus Program\\src\\customerData_Copy");	// INSTANTIATES FILE WRITER
-			writer.write("" + customer.getID() + "\n" +
-						 "" + customer.getName() + "\n" +
-						 "" + customer.getSize() + "\n" +
-						 "" + customer.getDate() + "\n"+
-						 "" + startID);	// WRITES TO FILE
-			writer.close();				// CLOSES THE FILE
+			writer.write("" + str);	// WRITES TO FILE
+			writer.close();			// CLOSES THE FILE
 			System.out.println("Wrote to the file");
 		}
 		
