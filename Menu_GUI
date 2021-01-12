@@ -16,7 +16,6 @@
 /* IMPORT SECTION */
 /******************/
 import javax.swing.*;					// IMPORTS SWING
-import javax.swing.JFrame.*;
 import java.awt.*;						// IMPORTS AWT
 import java.awt.event.ActionEvent;		// IMPORTS ACTION EVENT
 import java.awt.event.ActionListener;	// IMPORTS ACTION LISTENER		
@@ -214,7 +213,8 @@ public class Menu_GUI extends BusGUI implements ActionListener
 			/******************************************************/
 			if(confirm == 0)
 			{
-				System.exit(0);			// TERMINATES THE PROGRAM
+				returnFile(ogID);		// CALL TO RETURN FILE TO ORIGINAL STATE						
+				System.exit(0);		// TERMINATES THE PROGRAM
 			}
 		}
 			
@@ -225,8 +225,8 @@ public class Menu_GUI extends BusGUI implements ActionListener
 		{	
 			frame.setVisible(false);// HIDES THE FRAME
 			super.frame.dispose();	// DISPOSES OF MENU_GUI FRAME
+			frame.dispose();		// CALL TO DISPOSE
 			new BusGUI();			// CREATES A NEW BUS GUI MENU	
-			frame.dispose();		// DISPOSES OF MENU_GUI FRAME
 		}
 			
 		/***********************************************************/
@@ -280,8 +280,8 @@ public class Menu_GUI extends BusGUI implements ActionListener
 			/********************************************************************/
 			else if(custList.size() !=0)
 			{
+				frame.dispose();		// CALL TO DISPOSE
 				new Print_ArrayList(custList, menuNum, 0);	// CREATES THE PRINT ARRAYLIST GUI
-				frame.dispose();	// DISPOSES OF MENU_GUI FRAME
 			}
 		}
 		
@@ -315,8 +315,8 @@ public class Menu_GUI extends BusGUI implements ActionListener
 				/********************************************************************/
 				else if(custList.size() !=0)
 				{
+					frame.dispose();		// CALL TO DISPOSE
 					new Print_ArrayList(custList, menuNum, 0);	// CREATES THE PRINT ARRAYLIST GUI
-					frame.dispose();			// DISPOSES OF MENU_GUI FRAME
 				}
 			}
 		}
@@ -350,8 +350,8 @@ public class Menu_GUI extends BusGUI implements ActionListener
 				/********************************************************************/
 				else if(custList.size() !=0)
 				{
+					frame.dispose();		// CALL TO DISPOSE
 					new Print_Date();			// INSTANTIATES PRINT DATE MENU
-					frame.dispose();			// DISPOSES OF MENU_GUI FRAME
 				}
 			}
 		}
