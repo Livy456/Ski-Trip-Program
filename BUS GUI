@@ -1,6 +1,6 @@
 /******************************************/
 /* USER DESCRIPTION SECTION 			  */
-/* LIVY456				   			  */
+/* OLIVIA DIAS				   			  */
 /* FINAL PROJECT		   	 			  */
 /* PROGRAM 12							  */
 /* MARCH 2, 2020		   			  	  */
@@ -367,11 +367,6 @@ public class BusGUI extends JFrame implements ActionListener
 		refund = 0;		// INITIALIZES AND RESETS REFUND VALUE
 		sum = 0;		// INITIALIZES AND RESETS SUM VALUE
 		
-		// CHECK IF FILELIST IS NULL
-		// IF NULL THEN JUST DO THE REGULAR PROGRAM
-		// IF FILELIST HAS CUSTOMER DATA INSIDE THEN EXTRACT THE DATA TO THE PROGRAM
-		// AND ALLOW THE PROGRAM TO BE WRITTEN
-		
 		/************************************/
 		/* ASSIGNS BUTTON PRESSED TO ACTION */
 		/************************************/
@@ -395,7 +390,6 @@ public class BusGUI extends JFrame implements ActionListener
 				if(fileList.size() > 0)
 				{
 					returnFile(ogID);		// CALL TO RETURN FILE TO ORIGINAL STATE					
-
 				}
 				System.exit(0);			// TERMINATES THE PROGRAM
 			}
@@ -501,10 +495,6 @@ public class BusGUI extends JFrame implements ActionListener
 						{
 							writeFile(id, ogID);	// CALL TO WRITE FILE
 						}
-						//DEBUGGING STATEMENT
-						System.out.println("This is the new starting ID #: " + startID);
-						//END OF DEBUGGING STATEMENT
-						
 						
 						new Menu_GUI();				// INSTANTIATES MENU GUI WINDOW
 						frame.dispose();			// CALL TO DISPOSE
@@ -534,12 +524,6 @@ public class BusGUI extends JFrame implements ActionListener
 						{
 							writeFile(id, ogID);	// CALL TO WRITE FILE
 						}
-						
-						//DEBUGGING STATEMENT
-						System.out.println("This is the new starting ID #: " + startID);
-						//END OF DEBUGGING STATEMENT
-						
-						
 						
 						new Menu_GUI();			// INSTANTIATES MENU GUI WINDOW
 						frame.dispose();		// CALL TO DISPOSE
@@ -586,22 +570,6 @@ public class BusGUI extends JFrame implements ActionListener
 							   costdf + " will be returned.";
 					refundWindow(message5);		// CALL TO REFUND WINDOW
 					frame.setVisible(false);	// HIDES THE FRAME
-					
-					// MAKE SURE TO DELTE THIS LATER
-					// DEBUGGING STATEMENT
-					
-					// MAKE SURE TO DELETE THIS LATER
-					// MEANT FOR DEBUGGING STATEMENT
-					String str="";
-					for(int i=0; i<custList.size();i++)
-					{
-						str+= "" + custList.get(i).toString() + "\n";
-					}
-					
-					System.out.println(str);
-
-					// END OF DEBUGGING STATEMENT					
-					
 					custList.add(customer);		// ADDS CUSTOMER TO ARRAYLIST
 					startID = id;	// ASSIGNS NEXT RANDOM ID NUMBER TO STARTING ID
 					
@@ -612,10 +580,6 @@ public class BusGUI extends JFrame implements ActionListener
 					{
 						writeFile(id, ogID);	// CALL TO WRITE FILE
 					}
-					
-					//DEBUGGING STATEMENT
-					System.out.println("This is the new starting ID #: " + startID);
-					//END OF DEBUGGING STATEMENT
 					
 					new Menu_GUI();		// INSTANTIATES A NEW WINDOW
 					frame.dispose();	// CALL TO DISPOSE
@@ -647,10 +611,6 @@ public class BusGUI extends JFrame implements ActionListener
 				/************************************************************/
 				if(confirm == 0)
 				{
-					// MAKE SURE TO DELETE THIS LATER
-					// MEANT FOR DEBUGGING STATEMENT
-					String str="";
-					
 					frame.setVisible(false);// HIDES THE FRAME
 					custList.add(customer);	// ADDS CUSTOMER TO ARRAYLIST
 					startID = id;			// ASSIGNS NEXT RANDOM ID NUMBER TO STARTING ID
@@ -662,18 +622,6 @@ public class BusGUI extends JFrame implements ActionListener
 					{
 						writeFile(id, ogID);	// CALL TO WRITE FILE
 					}
-					
-					// MAKE SURE TO DELTE THIS LATER
-					// DEBUGGING STATEMENT
-					for(int i=0; i<custList.size();i++)
-					{
-						str+= "" + custList.get(i).toString() + "\n";
-					}
-					System.out.println(str);
-					// END OF DEBUGGING STATEMENT
-					
-					
-					
 					
 					new Menu_GUI(); 		// INSTANTIATES A NEW FRAME
 					frame.dispose(); 		// CALL TO DISPOSE
