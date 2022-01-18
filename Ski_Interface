@@ -33,3 +33,4 @@ public interface Ski_Interface
 	public double getRefund();
 	public String toString();
 }
+vim: syntax=java
