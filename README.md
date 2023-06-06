@@ -1,6 +1,6 @@
 # Ski-Trip-Program
 This is my high school Final Project.
-This program is a program to schedule a ski trip.
+This application schedules a ski trip.
 The user will input the name of their ski group, 
 the date, and the number of people 
 going in their group. The program will output the 
